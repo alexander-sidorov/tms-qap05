@@ -1,0 +1,50 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[requires]
+python_version = "3.9"
+
+[dev-packages]
+
+[packages]
+atomicwrites = { version = "*", sys_platform = "== 'win32'" }
+black = "==21.12b0"
+coverage = { extras = ["toml"], version = "*" }
+devtools = { extras = ["pygments"], version = "*" }
+dlint = "*"
+flake8 = "*"
+flake8-annotations-complexity = "*"
+flake8-bandit = "*"
+flake8-black = "*"
+flake8-broken-line = "*"
+flake8-bugbear = "*"
+flake8-builtins = "*"
+flake8-cognitive-complexity = "*"
+flake8-comprehensions = "*"
+flake8-dashboard = "*"
+flake8-debugger = "*"
+flake8-eradicate = "*"
+flake8-executable = "*"
+flake8-expression-complexity = "*"
+flake8-fixme = "*"
+flake8-isort = "*"
+flake8-multiline-containers = "*"
+flake8-mutable = "*"
+flake8-pep3101 = "*"
+flake8-print = "*"
+flake8-printf-formatting = "*"
+flake8-simplify = "*"
+flake8-variables-names = "*"
+ipython = "*"
+isort = "*"
+mypy = "*"
+numpy = "*"
+pep8-naming = "*"
+pylint = "*"
+pytest = "*"
+pytest-asyncio = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+python-dotenv = "*"

@@ -1,0 +1,17 @@
+*.bak
+*.log
+*.py[cod]
+*~
+.coverage
+.DS_Store
+.env
+.idea/
+.pytest_cache/
+.secrets.*
+.venv/
+__pycache__/
+config/.secrets/
+coverage.xml
+db.sqlite3
+htmlcov/
+venv/

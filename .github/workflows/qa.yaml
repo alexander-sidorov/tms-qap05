@@ -1,0 +1,48 @@
+name: QA
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+env:
+  PIPENV_VENV_IN_PROJECT: "1"
+
+jobs:
+  qa:
+    strategy:
+      matrix:
+        os:
+          - "macos-latest"
+          - "ubuntu-latest"
+          - "windows-latest"
+        python-version:
+          - "3.9"
+          - "3.10"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: pull code from repo
+        uses: actions/checkout@v2
+      - name: validate contributors
+        run: ./validate_contributors.sh
+      - name: set up runtime
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: 'x64'
+      - name: cache runtime
+        id: cache-runtime
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: cache-runtime-${{ matrix.os }}-${{ env.pythonLocation }}-${{ hashFiles('Pipfile.lock') }}
+      - name: install pipenv
+        if: ${{ !steps.cache-runtime.outputs.cache-hit }}
+        run: pip install pipenv
+      - name: install python packages
+        if: ${{ !steps.cache-runtime.outputs.cache-hit }}
+        run: make venv-deploy-all
+      - name: qa
+        run: make qa

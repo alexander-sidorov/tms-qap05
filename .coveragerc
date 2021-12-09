@@ -1,0 +1,17 @@
+[run]
+branch = True
+relative_files = True
+source = hw
+
+
+[report]
+fail_under = 50
+skip_covered = False
+skip_empty = True
+sort = -Cover
+
+
+[html]
+skip_covered = False
+skip_empty = True
+title = QAP-05

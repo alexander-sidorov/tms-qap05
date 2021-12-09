@@ -1,0 +1,10 @@
+[flake8]
+ignore = S101,B101
+max_cognitive_complexity = 12
+exclude =
+    .github
+    .mypy_cache
+    .pytest_cache
+    .run
+    .venv
+    htmlcov
