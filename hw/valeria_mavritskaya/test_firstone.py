@@ -1,2 +1,2 @@
-def test_firstone() -> None:
+def test_firstone2() -> None:
     pass
