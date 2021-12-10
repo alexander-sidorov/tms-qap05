@@ -32,16 +32,18 @@ assert_names() {
   dir_names=$(ls -d hw/* | sed -e 's/hw\///g')
   github_names=(
     "alexander_sidorov"
-    "andrei_9325"
+    "andrei_bondar"
     "andrey_yelin"
+    "denis_asipenko"
     "kirill_tobolich"
     "maksim_ptitski"
+    "maria_saganovich"
     "nikita_pakhomov"
     "sasha_yaroshevich"
     "siarhei_apanel"
     "tatsiana_kukharskaya"
     "vadim_maletski"
-    "valeria_mavritskaya"
+    "valeriya_mavritskaya"
     "vlad_yancharski"
     "yaroslav_belaychuk"
   )
