@@ -1,2 +1,2 @@
-def test_firstone23() -> None:
-    pass
+def test_example() -> None:
+    assert True, "not True"
