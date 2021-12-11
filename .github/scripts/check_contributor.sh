@@ -83,15 +83,16 @@ fi
 
 workdir="hw/${workdir}/"
 
-#for f in "$@"; do
-#  ok=$(echo "${f}" | grep "^${workdir}")
-#  if [[ -z "${ok}" ]]; then
-#    echo "file $f is outside ${contributor}'s working directory ${workdir}"
-#    exit 1
-#  fi
-#done
+for f in "$@"; do
+  ok=$(echo "${f}" | grep "^${workdir}")
+  if [[ -z "${ok}" ]]; then
+    echo "file $f is outside ${contributor}'s working directory ${workdir}"
+    exit 1
+  fi
+done
 
 pr_ok=$(echo "${pr}" | grep "^${name} - Lesson \\d\+")
+echo "${pr_ok}"
 if [[ -z "${pr_ok}" ]]; then
   echo "Malformed pull request title: '${pr}'"
   echo "Pull request title MUST be in form '<first name> <last name> - Lesson <number>'"
