@@ -91,9 +91,9 @@ for f in "$@"; do
   fi
 done
 
-echo "${pr}"
-echo "${name}"
-pr_ok=$(echo "${pr}" | grep "^${name} - Lesson \\d\+")
+gr="^${name} - Lesson \\\\d\+"
+echo "${gr}"
+pr_ok=$(echo "${pr}" | grep "${gr}")
 echo "${pr_ok}"
 if [[ -z "${pr_ok}" ]]; then
   echo "Malformed pull request title: '${pr}'"
