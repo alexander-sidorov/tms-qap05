@@ -91,6 +91,8 @@ for f in "$@"; do
   fi
 done
 
+echo "${pr}"
+echo "${name}"
 pr_ok=$(echo "${pr}" | grep "^${name} - Lesson \\d\+")
 echo "${pr_ok}"
 if [[ -z "${pr_ok}" ]]; then
