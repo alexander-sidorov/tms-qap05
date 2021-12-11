@@ -11,8 +11,8 @@ jobs:
   contributing:
     runs-on: "ubuntu-latest"
     steps:
-#      - name: pull code from repo
-#        uses: actions/checkout@v2
+      - name: pull code from repo
+        uses: actions/checkout@v2
       - name: get diff
         id: get-diff
         uses: technote-space/get-diff-action@v5
