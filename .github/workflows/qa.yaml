@@ -34,7 +34,7 @@ jobs:
       - name: fail if
         if: steps.xxx.outputs.diff
         run: |
-          core.setFailed(${{steps.xxx.outputs.diff}})
+          core.setFailed("${{steps.xxx.outputs.diff}}")
 #      - name: validate contributors
 #        run: ./validate_contributors.sh
 #      - name: set up runtime
