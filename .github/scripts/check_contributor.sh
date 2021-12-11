@@ -89,6 +89,7 @@ workdir="hw/${workdir}/"
 
 pr_ok=$(echo "${pr}" | grep "^${name} - Lesson \\d\+")
 if [[ -z "${pr_ok}" ]]; then
+  echo "Malformed pull request title: '${pr}'"
   echo "Pull request title MUST be in form '<first name> <last name> - Lesson <number>'"
   exit 1
 fi
