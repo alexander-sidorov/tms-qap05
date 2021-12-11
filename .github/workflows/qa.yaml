@@ -30,9 +30,9 @@ jobs:
         run: echo "github=${{ toJSON(github) }}"
       - name: check contributor diff
         uses: technote-space/get-diff-action@v5
-        with:
-          PATTERNS: |
-            hw/${{ github.actor }}/*
+#        with:
+#          PATTERNS: |
+#            hw/${{ github.actor }}/*
       - name: fail if
         if: env.GIT_DIFF
         run: |
