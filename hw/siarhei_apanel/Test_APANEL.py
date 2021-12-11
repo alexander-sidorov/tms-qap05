@@ -1,4 +1,2 @@
-def yarik(n):
-    if n>5:
-        n+=1
-    return n
+def test_example() -> None:
+    assert True, "not True"
