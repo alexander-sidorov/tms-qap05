@@ -1,10 +1,10 @@
 name: QA
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+#  push:
+#    branches:
+#      - main
+#  pull_request:
   workflow_dispatch:
 
 env:
@@ -25,28 +25,22 @@ jobs:
     steps:
       - name: pull code from repo
         uses: actions/checkout@v2
-      - name: get diff
-        id: get-diff
-        uses: technote-space/get-diff-action@v5
-      - name: check contributor
-        if: ${{ github.actor != 'alexander-sidorov' }}
-        run: .github/scripts/check_contributor.sh ${{ github.actor }} ${{steps.get-diff.outputs.diff}}
-#      - name: set up runtime
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: ${{ matrix.python-version }}
-#          architecture: 'x64'
-#      - name: cache runtime
-#        id: cache-runtime
-#        uses: actions/cache@v2
-#        with:
-#          path: ${{ env.pythonLocation }}
-#          key: cache-runtime-${{ matrix.os }}-${{ env.pythonLocation }}-${{ hashFiles('Pipfile.lock') }}
-#      - name: install pipenv
-#        if: ${{ !steps.cache-runtime.outputs.cache-hit }}
-#        run: pip install pipenv
-#      - name: install python packages
-#        if: ${{ !steps.cache-runtime.outputs.cache-hit }}
-#        run: make venv-deploy-all
-#      - name: qa
-#        run: make qa
+      - name: set up runtime
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: 'x64'
+      - name: cache runtime
+        id: cache-runtime
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: cache-runtime-${{ matrix.os }}-${{ env.pythonLocation }}-${{ hashFiles('Pipfile.lock') }}
+      - name: install pipenv
+        if: ${{ !steps.cache-runtime.outputs.cache-hit }}
+        run: pip install pipenv
+      - name: install python packages
+        if: ${{ !steps.cache-runtime.outputs.cache-hit }}
+        run: make venv-deploy-all
+      - name: qa
+        run: make qa

@@ -1,0 +1,21 @@
+name: Contributing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  contributing:
+    runs-on: "ubuntu-latest"
+    steps:
+#      - name: pull code from repo
+#        uses: actions/checkout@v2
+      - name: get diff
+        id: get-diff
+        uses: technote-space/get-diff-action@v5
+      - name: check contributor
+        if: ${{ github.actor != 'alexander-sidorov' }}
+        run: .github/scripts/check_contributor.sh ${{ github.actor }} ${{steps.get-diff.outputs.diff}}
