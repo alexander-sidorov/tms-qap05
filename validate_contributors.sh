@@ -66,13 +66,25 @@ assert_names() {
   done
 }
 
+get_contributor_dir() {
+  contributor=$1;
+  case "${contributor}" in
+    "alexander-sidorov")
+      echo "alexander_sidorov";;
+  esac
+  return 1;
+}
+
 # ---------------------------------------------------------
 
 rm -rf hw/__pycache__
 
 # checks
 
-assert_names || abort "MESS WITH CONTRIBUTORS NAMES"
+#assert_names || abort "MESS WITH CONTRIBUTORS NAMES"
+
+get_contributor_dir "alexander-sidorov"
+
 
 # ---------------------------------------------------------
 trap : 0
