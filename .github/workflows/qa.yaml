@@ -29,9 +29,8 @@ jobs:
         id: get-diff
         uses: technote-space/get-diff-action@v5
       - name: check contributor
+        if: ${{ github.actor != 'alexander-sidorov' }}
         run: .github/scripts/check_contributor.sh ${{ github.actor }} ${{steps.get-diff.outputs.diff}}
-#      - name: validate contributors
-#        run: ./validate_contributors.sh
 #      - name: set up runtime
 #        uses: actions/setup-python@v2
 #        with:
