@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: pull code from repo
         uses: actions/checkout@v2
+      - name: debug
+        run: echo "github=${{ toJSON(github) }}"
       - name: validate contributors
         run: ./validate_contributors.sh
       - name: set up runtime
