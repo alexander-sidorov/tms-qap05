@@ -14,5 +14,5 @@ jobs:
         id: get-diff
         uses: technote-space/get-diff-action@v5
       - name: check contributor
-        if: ${{ github.actor != 'alexander-sidorov' }}
+#        if: ${{ github.actor != 'alexander-sidorov' }}
         run: .github/scripts/check_contributor.sh ${{ github.actor }} ${{ github.event.pull_request.title }} ${{steps.get-diff.outputs.diff}}
