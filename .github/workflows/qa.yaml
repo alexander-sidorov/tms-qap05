@@ -25,15 +25,15 @@ jobs:
     steps:
       - name: pull code from repo
         uses: actions/checkout@v2
-      - name: debug
-        if: ${{ github.event_name == 'pull_request' && github.base_ref == 'main' }}
-        run: echo "github=${{ toJSON(github) }}"
+#      - name: debug
+#        if: ${{ github.event_name == 'pull_request' && github.base_ref == 'main' }}
+#        run: echo "github=${{ toJSON(github) }}"
       - name: check contributor diff
         id: xxx
         uses: technote-space/get-diff-action@v5
         with:
           PATTERNS: |
-            !hw/${{ github.actor }}
+            !hw/${{ github.actor }}/*
       - name: fail if
         if: steps.xxx.outputs.diff
         run: |
