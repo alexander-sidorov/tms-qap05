@@ -6,6 +6,7 @@
 .DS_Store
 .env
 .idea/
+.mypy_cache/
 .pytest_cache/
 .secrets.*
 .venv/
