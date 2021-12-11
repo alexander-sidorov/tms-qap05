@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 contributor=$1
+shift 1
 workdir=
 
 case "${contributor}" in
@@ -52,7 +53,16 @@ case "${contributor}" in
 esac
 
 if [[ -z ${workdir} ]]; then
+  echo "unknown contributor ${contributor}"
   exit 1
-else
-  echo "hw/${workdir}/"
 fi
+
+workdir="hw/${workdir}/"
+
+for f in "$@"; do
+  ok=$(echo "${f}" | grep "^${workdir}")
+  if [[ -z "${ok}" ]]; then
+    echo "file $f is outside ${contributor}'s working directory ${workdir}"
+    exit 1
+  fi
+done

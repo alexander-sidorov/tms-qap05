@@ -25,16 +25,11 @@ jobs:
     steps:
       - name: pull code from repo
         uses: actions/checkout@v2
-#      - name: debug
-#        if: ${{ github.event_name == 'pull_request' && github.base_ref == 'main' }}
-#        run: echo "github=${{ toJSON(github) }}"
       - name: get diff
-        id: xxx
+        id: get-diff
         uses: technote-space/get-diff-action@v5
-      - name: fail if
-        if: steps.xxx.outputs.diff
-        run: |
-          core.setFailed("${{steps.xxx.outputs.diff}}")
+      - name: check contributor
+        run: .github/scripts/check_contributor.sh ${{ github.actor }} ${{steps.get-diff.outputs.diff}}
 #      - name: validate contributors
 #        run: ./validate_contributors.sh
 #      - name: set up runtime
