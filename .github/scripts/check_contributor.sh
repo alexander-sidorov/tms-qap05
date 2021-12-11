@@ -10,6 +10,10 @@ workdir=
 name=
 
 case "${contributor}" in
+"tgrx")
+  workdir="tgrx"
+  name="TG RX"
+  ;;
 "alexander-sidorov")
   workdir="alexander_sidorov"
   name="Alexander Sidorov"
