@@ -28,6 +28,15 @@ jobs:
       - name: debug
         if: ${{ github.event_name == 'pull_request' && github.base_ref == 'main' }}
         run: echo "github=${{ toJSON(github) }}"
+      - name: check contributor diff
+        uses: technote-space/get-diff-action@v5
+        with:
+          PATTERNS: |
+            !hw/${{ github.actor }}/*
+      - name: fail if
+        if: env.GIT_DIFF
+        run: |
+          core.setFailed('do not touch! ${{ env.GIT_DIFF }}')
 #      - name: validate contributors
 #        run: ./validate_contributors.sh
 #      - name: set up runtime
