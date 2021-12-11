@@ -32,7 +32,7 @@ jobs:
         uses: technote-space/get-diff-action@v5
         with:
           PATTERNS: |
-            !hw/${{ github.actor }}/*
+            hw/${{ github.actor }}/*
       - name: fail if
         if: env.GIT_DIFF
         run: |
