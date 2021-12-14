@@ -1,6 +1,7 @@
 *.bak
 *.log
 *.py[cod]
+*.swp
 *~
 .coverage
 .DS_Store
