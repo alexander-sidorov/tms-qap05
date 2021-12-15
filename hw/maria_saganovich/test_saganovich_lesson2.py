@@ -9,3 +9,4 @@ def test_example() -> None:
     assert "South" + "Korea"
     assert "Busan" == "Busan"
     assert a != 3
+    assert b - a = 1
