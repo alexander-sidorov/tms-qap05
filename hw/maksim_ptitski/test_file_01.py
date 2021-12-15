@@ -1,5 +1,5 @@
 def test_example() -> None:
-    assert True, "not True"
+	assert True, "not True"
 	assert 1 + 1 == 2
 	assert 2 / 2 == 1
 	assert 2 - 1 == 1
