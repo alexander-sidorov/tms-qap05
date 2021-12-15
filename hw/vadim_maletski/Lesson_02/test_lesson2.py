@@ -6,6 +6,3 @@ def test_example() -> None:
     d = 5
     c = a + b
     assert c == d, True
-
-
-
