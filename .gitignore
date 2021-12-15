@@ -1,11 +1,13 @@
 *.bak
 *.log
 *.py[cod]
+*.swp
 *~
 .DS_Store
 .coverage
 .env
 .idea/
+.mypy_cache/
 .pytest_cache/
 .secrets.*
 .venv/
