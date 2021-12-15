@@ -4,5 +4,5 @@ def test_example() -> None:
     assert True == True
     assert False == 0
     assert "22" == True
-    assert "2" + "2" = "22"
+    assert "2" + "2" == "22"
 
