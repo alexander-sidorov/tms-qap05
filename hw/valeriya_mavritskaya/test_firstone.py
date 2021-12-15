@@ -3,6 +3,6 @@ def test_example() -> None:
     assert 1 + 2 == 3
     assert True == True
     assert False == 0
-    assert "22" == True
+    assert "22" == "22"
     assert "2" + "2" == "22"
 
