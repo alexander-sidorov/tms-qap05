@@ -3,4 +3,4 @@ def yarik(a):
         print('Yarik RainMan')
     else:
         print('Yarik CoolMan')
-print(yarik(7))
+yarik(7)
