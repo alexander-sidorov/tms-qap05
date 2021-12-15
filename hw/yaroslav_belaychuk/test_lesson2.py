@@ -1,7 +1,5 @@
-a = 2
-b = 4
-c = 6
-if a + b == c:
-    print('True')
-else:
-    print('False')
+num1 = 2
+num2 = 4
+num3 = 6
+assert num1 + num2 == num3, 'True'
+ 
