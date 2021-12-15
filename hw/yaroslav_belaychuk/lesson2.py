@@ -4,4 +4,4 @@ c = 6
 if a + b == c:
     print('True')
 else:
-    print('False')    
+    print('False')
