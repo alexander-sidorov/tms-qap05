@@ -1,6 +1,6 @@
 def test_example() -> None:
     assert True, "not True"
-    assert (100 + 2) == 102
+    assert (100 + 2 == 102)
     num1  = 3
     num2 = 5
     result = num1 if num1 > num2 else num2

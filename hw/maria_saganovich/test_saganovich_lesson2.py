@@ -6,7 +6,7 @@ def test_example() -> None:
     assert result != 0
     assert (10 // 3 > 3)
     assert (100 / 2 == 50)
-    assert (10 ** 10 != 1)0
+    assert (10 ** 10 != 10)
     assert "Busan" == "Busan"
     assert num1 != 3
     assert (num1 - num2 == 5)
