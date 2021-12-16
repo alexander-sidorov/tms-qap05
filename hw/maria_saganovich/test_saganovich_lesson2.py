@@ -6,7 +6,7 @@ def test_example() -> None:
     num4 = 10 / 3
     num5 = 10
     str1 = "Busan"
-    result = num1 % num2
+    result = 7 % 2
     assert result != 0
     assert num4 > 3
     assert num5 ** 10 != 10
