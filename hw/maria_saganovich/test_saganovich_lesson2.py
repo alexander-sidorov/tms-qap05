@@ -8,8 +8,8 @@ def test_example() -> None:
     assert 100 / 2
     assert 10 ** 10
     assert "Busan" == "Busan"
-    assert a != 3
-    assert b - a = 1
+    assert num1 != 3
+    assert num1 - num2 = 5
     num3 = 3
     num3 *=3
     assert num3 != 5
