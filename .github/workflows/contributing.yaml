@@ -2,11 +2,6 @@ name: Contributing
 
 on:
   pull_request:
-  workflow_dispatch:
-    inputs:
-      bypassToken:
-        description: 'Bypass token (ask Alexander)'
-        required: true
 
 jobs:
   contributing:
