@@ -21,11 +21,7 @@ jobs:
         id: by
         env:
           CONTRIBUTING_BYPASS_TOKEN: ${{ secrets.CONTRIBUTING_BYPASS_TOKEN }}
-        if: >
-          ${{
-            github.event_name == 'workflow_dispatch'
-            && github.event.inputs.bypassToken == env.CONTRIBUTING_BYPASS_TOKEN
-          }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.bypassToken == env.CONTRIBUTING_BYPASS_TOKEN }}
         run: |
           echo github.event_name="${{ github.event_name }}"
           echo github.event.inputs.bypassToken="${{ github.event.inputs.bypassToken }}"
