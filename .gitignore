@@ -3,8 +3,8 @@
 *.py[cod]
 *.swp
 *~
-.coverage
 .DS_Store
+.coverage
 .env
 .idea/
 .mypy_cache/
@@ -17,3 +17,4 @@ coverage.xml
 db.sqlite3
 htmlcov/
 venv/
+zsh-syntax-highlighting/
