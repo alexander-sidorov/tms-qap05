@@ -18,8 +18,10 @@ jobs:
         id: get-diff
         uses: technote-space/get-diff-action@v5
       - name: '🍻 The contributor does his/her job well.'
-        if: ${{ github.event.inputs.bypassToken != secrets.CONTRIBUTING_BYPASS_TOKEN }}
-        run: |
+        env:
+          CONTRIBUTING_BYPASS_TOKEN: ${{ secrets.CONTRIBUTING_BYPASS_TOKEN }}
+        if: ${{ github.event.inputs.bypassToken != env.CONTRIBUTING_BYPASS_TOKEN }}
+        run: >
           .github/scripts/check_contributor.sh
           '${{ github.event.pull_request.user.login }}'
           '${{ github.event.pull_request.title }}'
