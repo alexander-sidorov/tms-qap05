@@ -9,7 +9,7 @@ def test_example() -> None:
     assert 10 ** 10
     assert "Busan" == "Busan"
     assert num1 != 3
-    assert num1 - num2 = 5
+    assert num1 - num2 == 5
     num3 = 3
     num3 *=3
     assert num3 != 5
