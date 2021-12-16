@@ -83,11 +83,29 @@ fi
 
 workdir="hw/${workdir}/"
 
-for f in "$@"; do
-  ok=$(echo "${f}" | grep "^${workdir}")
-  if [[ -z "${ok}" ]]; then
-    echo "file $f is outside ${contributor}'s working directory ${workdir}"
-    exit 1
+allowed_files=(
+  .gitignore
+)
+
+for file in "$@"; do
+  file_in_hw=$(echo "${file}" | grep "^${workdir}")
+
+  if [[ -z "${file_in_hw}" ]]; then
+    ok=
+
+    for allowed_file in ${allowed_files[*]}; do
+      if [[ "${file}" == "${allowed_file}" ]]; then
+        ok="ok"
+        break
+      fi
+    done
+
+    if [[ -z "${ok}" ]]; then
+      echo "file $file is not acceptable:"
+      echo -e "    it is outside ${contributor}'s working directory '${workdir}'"
+      echo -e "    and is not one of allowed: ${allowed_files[*]}"
+      exit 1
+    fi
   fi
 done
 
