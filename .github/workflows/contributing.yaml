@@ -3,6 +3,10 @@ name: Contributing
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      bypassToken:
+        description: "Bypass token (ask Alexander)"
+        required: false
 
 jobs:
   contributing:
@@ -14,5 +18,9 @@ jobs:
         id: get-diff
         uses: technote-space/get-diff-action@v5
       - name: '🍻 The contributor does his/her job well.'
-        if: ${{ github.event.pull_request.user.login != 'alexander-sidorov' }}
-        run: .github/scripts/check_contributor.sh ${{ github.event.pull_request.user.login }} '${{ github.event.pull_request.title }}' ${{steps.get-diff.outputs.diff}}
+        if: ${{ github.event.inputs.bypassToken != secrets.CONTRIBUTING_BYPASS_TOKEN }}
+        run: |
+          .github/scripts/check_contributor.sh
+          '${{ github.event.pull_request.user.login }}'
+          '${{ github.event.pull_request.title }}'
+          ${{steps.get-diff.outputs.diff}}
