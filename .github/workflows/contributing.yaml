@@ -2,17 +2,25 @@ name: Contributing
 
 on:
   pull_request:
-  workflow_dispatch:
 
 jobs:
   contributing:
-    runs-on: "ubuntu-latest"
+    runs-on: 'ubuntu-latest'
     steps:
       - name: '🧱 The code is pulled from the repository.'
         uses: actions/checkout@v2
       - name: '📊 The diff is calculated.'
         id: get-diff
         uses: technote-space/get-diff-action@v5
+      - name: '🇧🇾 It is not up to laws sometimes'
+        id: by
+        if: ${{ github.actor == 'alexander-sidorov' }}
+        run: |
+          echo "::set-output name=law::by"
       - name: '🍻 The contributor does his/her job well.'
-        if: ${{ github.event.pull_request.user.login != 'alexander-sidorov' }}
-        run: .github/scripts/check_contributor.sh ${{ github.event.pull_request.user.login }} '${{ github.event.pull_request.title }}' ${{steps.get-diff.outputs.diff}}
+        if: ${{ steps.by.outputs.law != 'by' }}
+        run: >
+          .github/scripts/check_contributor.sh
+          '${{ github.event.pull_request.user.login }}'
+          '${{ github.event.pull_request.title }}'
+          ${{steps.get-diff.outputs.diff}}
