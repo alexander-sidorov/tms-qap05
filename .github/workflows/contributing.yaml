@@ -19,13 +19,8 @@ jobs:
         uses: technote-space/get-diff-action@v5
       - name: '🇧🇾 It is not up to laws sometimes'
         id: by
-        env:
-          CONTRIBUTING_BYPASS_TOKEN: ${{ secrets.CONTRIBUTING_BYPASS_TOKEN }}
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.bypassToken == env.CONTRIBUTING_BYPASS_TOKEN }}
+        if: ${{ github.actor == 'alexander-sidorov' }}
         run: |
-          echo github.event_name="${{ github.event_name }}"
-          echo github.event.inputs.bypassToken="${{ github.event.inputs.bypassToken }}"
-          echo env.CONTRIBUTING_BYPASS_TOKEN="${{ env.CONTRIBUTING_BYPASS_TOKEN }}"
           echo "::set-output name=law::by"
       - name: '🍻 The contributor does his/her job well.'
         if: ${{ steps.by.outputs.law != 'by' }}
