@@ -5,12 +5,12 @@ on:
   workflow_dispatch:
     inputs:
       bypassToken:
-        description: "Bypass token (ask Alexander)"
-        required: false
+        description: 'Bypass token (ask Alexander)'
+        required: true
 
 jobs:
   contributing:
-    runs-on: "ubuntu-latest"
+    runs-on: 'ubuntu-latest'
     steps:
       - name: '🧱 The code is pulled from the repository.'
         uses: actions/checkout@v2
@@ -26,7 +26,11 @@ jobs:
             github.event_name == 'workflow_dispatch'
             && github.event.inputs.bypassToken == env.CONTRIBUTING_BYPASS_TOKEN
           }}
-        run: echo "::set-output name=law::by"
+        run: |
+          echo github.event_name="${{ github.event_name }}"
+          echo github.event.inputs.bypassToken="${{ github.event.inputs.bypassToken }}"
+          echo env.CONTRIBUTING_BYPASS_TOKEN="${{ env.CONTRIBUTING_BYPASS_TOKEN }}"
+          echo "::set-output name=law::by"
       - name: '🍻 The contributor does his/her job well.'
         if: ${{ steps.by.outputs.law != 'by' }}
         run: >
