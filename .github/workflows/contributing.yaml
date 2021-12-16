@@ -17,7 +17,8 @@ jobs:
       - name: '📊 The diff is calculated.'
         id: get-diff
         uses: technote-space/get-diff-action@v5
-      - name: 'sfdfdf'
+      - name: '🇧🇾 It is not up to laws sometimes'
+        id: by
         env:
           CONTRIBUTING_BYPASS_TOKEN: ${{ secrets.CONTRIBUTING_BYPASS_TOKEN }}
         if: >
@@ -25,9 +26,9 @@ jobs:
             github.event_name == 'workflow_dispatch'
             && github.event.inputs.bypassToken == env.CONTRIBUTING_BYPASS_TOKEN
           }}
-        run: |
-          exit 0
+        run: echo "::set-output name=law::by"
       - name: '🍻 The contributor does his/her job well.'
+        if: ${{ steps.by.outputs.law != 'by' }}
         run: >
           .github/scripts/check_contributor.sh
           '${{ github.event.pull_request.user.login }}'
