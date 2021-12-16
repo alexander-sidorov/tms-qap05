@@ -9,9 +9,9 @@ def test_example() -> None:
     result = num1 % num2
     assert result != 0
     assert num4 > 3
-    assert (num5 ** 10 != 10)
+    assert num5 ** 10 != 10
     assert str1 == "Busan"
     assert num1 != 3
-    assert (num1 - num2 == 5)
-    num3 *=3
+    assert num1 - num2 == 5
+    num3 *= 3
     assert num3 != 5
