@@ -7,5 +7,5 @@ def test_example() -> None:
     assert result != 1
     str1 = "South"
     str2 = "Korea"
-    assert (str1 + " " + str2) == "South Korea"
-    assert str[1:4] == "out"
+    assert (str1 + " " + str2 == "South Korea")
+    assert str1[1:4] == "out"
