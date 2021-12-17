@@ -1,5 +1,5 @@
 def f() -> None:
-    4
+    4  # noqa: B018
 
 
 def g() -> int:
@@ -7,5 +7,5 @@ def g() -> int:
 
 
 def test_function():
-    assert f() is None
+    assert f() is None  # type: ignore
     assert g() == 4
