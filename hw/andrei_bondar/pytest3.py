@@ -1,6 +1,11 @@
-def f():
-    4
+def f() -> None:
+    4 # noqa: B018
 
 
-def test_dsfds():
-    assert print() is None
+    def g() -> int:
+    return 4
+
+
+def test_dsfds() -> None:
+    assert f() is None # type: ignore
+    assert g() == 4
