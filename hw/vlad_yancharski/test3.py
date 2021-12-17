@@ -1,5 +1,6 @@
 def f() -> None:
-	5
+    5
+
 
 def test_f() -> None:
-	assert f() is None #type: ignore
+    assert f() is None  # type: ignore
