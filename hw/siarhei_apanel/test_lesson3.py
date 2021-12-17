@@ -5,4 +5,5 @@ def yarik():
 
 
 def f():
-    yarik == 4
+    yarik !=5
+
