@@ -5,5 +5,5 @@ def g() -> int:
     return 4
 
 def f() -> None:
-    assert f() is None #type: ignore
+    assert f() is None # type: ignore
     assert g() == 4
