@@ -1,0 +1,14 @@
+README.md
+setup.cfg
+setup.py
+flake8_variables_names/__init__.py
+flake8_variables_names/ast_helpers.py
+flake8_variables_names/checker.py
+flake8_variables_names/list_helpers.py
+flake8_variables_names.egg-info/PKG-INFO
+flake8_variables_names.egg-info/SOURCES.txt
+flake8_variables_names.egg-info/dependency_links.txt
+flake8_variables_names.egg-info/entry_points.txt
+flake8_variables_names.egg-info/not-zip-safe
+flake8_variables_names.egg-info/requires.txt
+flake8_variables_names.egg-info/top_level.txt

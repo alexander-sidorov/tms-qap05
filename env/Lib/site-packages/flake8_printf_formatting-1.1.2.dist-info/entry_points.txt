@@ -1,0 +1,3 @@
+[flake8.extension]
+MOD = flake8_printf_formatting:Plugin
+

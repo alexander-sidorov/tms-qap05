@@ -1,0 +1,108 @@
+Metadata-Version: 2.1
+Name: flake8-dashboard
+Version: 0.1.4
+Summary: Generate different reports of flake8 violations
+Home-page: https://aperezhortal.github.io/flake8-dashboard/
+Author: Andres Perez Hortal
+License: Apache Software License 2.0
+Keywords: flake8 dashboard html
+Platform: UNKNOWN
+Classifier: Framework :: Flake8
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.6
+Requires-Dist: setuptools
+Requires-Dist: plotly
+Requires-Dist: beautifulsoup4
+Requires-Dist: jsmin
+Requires-Dist: jinja2
+Requires-Dist: pip (>=9.0.1)
+Requires-Dist: bump2version
+Requires-Dist: wheel (==0.29.0)
+Requires-Dist: tox (>=2.6.0)
+Requires-Dist: requests
+Requires-Dist: pandas
+Requires-Dist: flake8
+Requires-Dist: astroid (>=2.2.5)
+
+================
+flake8-dashboard
+================
+
+A flake8 plugin to generate a responsive HTML dashboard summarizing all the flake8 violations.
+The resulting dashboard has an easy-to-read format across a variety of devices and web
+browsers.
+
+Installation
+============
+
+If flake8 is not installed, run:
+
+.. code-block:: bash
+
+   $ pip install flake8
+
+Finally, to install the latest release of the plugin from the
+Python Package Index, run:
+
+.. code-block:: bash
+
+   $ pip install flake8-dashboard
+
+Alternatively, to install the latest development version (master branch), run:
+
+.. code-block:: bash
+
+   $ pip install git+https://github.com/aperezhortal/flake8-dashboard
+
+Usage
+=====
+
+Run flake8 with the ``--format=dashboard`` option to create a nice-looking
+dashboard.
+
+Options:
+
+- ``--outputdir=<output_dir>``: Directory to save the HTML output
+  ("./flake8_dashboard" by default).
+- ``--debug``: Write additional debugging information as csv format
+  (flake8 violations and aggregations).
+- ``--title=<title>``: Set the dashboard's title. No title by default.
+
+Simple usage example:
+
+.. code-block:: bash
+
+   $ flake8 --format=dashboard --outputdir=flake-report --title="My dashboard"
+
+
+Demo
+~~~~
+
+`Check a demo here! <https://aperezhortal.github.io/flake8-dashboard/example_dashboard/index.html>`_
+
+
+Credits
+=======
+
+- This package was created using the `flake8-html`_ package as a template.
+
+- The dashboard html page was created using the
+  `light-bootstrap-dashboard`_ template by `Creative Tim`_.
+
+- The interactive plots are created using `Plotly Python`_ .
+
+.. _light-bootstrap-dashboard: https://demos.creative-tim.com/light-bootstrap-dashboard/
+.. _`Creative Tim`: https://www.creative-tim.com/
+.. _`Plotly Python`: https://plot.ly/python/
+.. _flake8-html: https://github.com/lordmauve/flake8-html
+
+
+
+
+
+
