@@ -1,7 +1,11 @@
-def yarik():
-    y = 5
-    b = y - 1
+def f() -> None:
+    4  # noqa: B018
 
 
-def f():
-    yarik !=5
+def g() -> int:
+    return 4
+
+
+def test_func() -> None:
+    assert f() is None  # type: ignore
+    assert g() == 4
