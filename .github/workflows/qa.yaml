@@ -41,6 +41,6 @@ jobs:
         run: pip install pipenv
       - name: '🔋 The dependencies are installed.'
         if: ${{ !steps.cache-runtime.outputs.cache-hit }}
-        run: make venv-deploy-all
+        run: make venv-dev
       - name: '🍺 The code passes all QA checks'
         run: make qa
