@@ -1,6 +1,6 @@
-def f() -> None:
+def g() -> None:
     4  # noqa: B018
 
 
 def test_ui() -> None:
-    assert f() is None  # type: ignore
+    assert g() is None  # type: ignore
