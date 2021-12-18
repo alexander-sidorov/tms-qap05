@@ -8,4 +8,3 @@ def g() -> int:
 
 def f() -> None:
     assert f() is None  # type: ignore
-    assert g() == 4
