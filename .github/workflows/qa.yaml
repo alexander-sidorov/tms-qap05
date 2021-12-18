@@ -35,7 +35,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.pythonLocation }}
-          key: cache-runtime-${{ matrix.os }}-${{ env.pythonLocation }}-${{ hashFiles('Pipfile.lock') }}
+          key: cache-runtime-${{ matrix.os }}-${{ env.pythonLocation }}-${{ hashFiles('Pipfile') }}
       - name: '🪛 Pipenv is installed.'
         if: ${{ !steps.cache-runtime.outputs.cache-hit }}
         run: pip install pipenv
