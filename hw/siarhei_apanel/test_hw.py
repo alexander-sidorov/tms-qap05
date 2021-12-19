@@ -18,5 +18,4 @@ def func(a1, back, call):
         return "Нет корней"
 
 xs = 0
-if xs == 0:
-    xs == func(1, 2, 1)
+xs == func(1, 2, 1) + 2
