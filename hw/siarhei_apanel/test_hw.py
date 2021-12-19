@@ -1,8 +1,4 @@
-a1 = 1
-back = 2
-cill = 1
-
-def func(a1, back, cill):
+def func(a1: float, back: float, cill: float) -> float:
     if a1 == 0:
         return "Нет корней"
     disk = back ** 2 - 4 * a1 * cill
@@ -17,4 +13,6 @@ def func(a1, back, cill):
     else:
         return "Нет корней"
 
+def test() -> None:
+    func(1, 2, 1) == -1.0
 
