@@ -1,3 +1,7 @@
+a1 = 1
+back = 1
+call = 1
+
 def f(a1, back, call):
     if a1 == 0:
         return "Нет корней"
