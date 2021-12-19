@@ -16,3 +16,5 @@ def f(a1, back, call):
         return xone
     else:
         return "Нет корней"
+
+assert f(1, 1, 1) == 'Нет корней'
