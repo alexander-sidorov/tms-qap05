@@ -1,11 +1,11 @@
 import math
 
 
-def func1() -> True:
+def func1() -> bool:
     return True
 
 
-def func2() -> False:
+def func2() -> bool:
     return False
 
 
