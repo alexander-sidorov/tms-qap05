@@ -1,5 +1,5 @@
 a1 = 1
-back = 1
+back = 2
 call = 1
 
 def func(a1, back, call):
@@ -17,6 +17,5 @@ def func(a1, back, call):
     else:
         return "Нет корней"
 
-xs = ""
-if func(1, 1, 1) == "Нет корней":
-    xs == "True"
+xs = 0
+print(func(1, 2, 1))
