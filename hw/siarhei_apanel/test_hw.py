@@ -17,4 +17,4 @@ def func(a1, back, call):
     else:
         return "Нет корней"
 
-assert func(1, 1, 1) == 'Нет корней'
+assert func(1, 1, 1) != "Нет корней", "True"
