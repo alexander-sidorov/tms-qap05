@@ -13,5 +13,6 @@ def func(a1: float, back: float, cill: float) -> list:
     else:
         return [None]
 
+
 def test() -> None:
-    func(1, 2, 1) == [-1.0]
+    assert func(1, 2, 1) == [-1.0]
