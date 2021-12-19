@@ -2,7 +2,7 @@ a1 = 1
 back = 1
 call = 1
 
-def f(a1, back, call):
+def func(a1, back, call):
     if a1 == 0:
         return "Нет корней"
     disk = back ** 2 - 4 * a1 * call
@@ -17,4 +17,4 @@ def f(a1, back, call):
     else:
         return "Нет корней"
 
-assert f(1, 1, 1) == 'Нет корней'
+assert func(1, 1, 1) == 'Нет корней'
