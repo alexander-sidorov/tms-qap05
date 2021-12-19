@@ -21,7 +21,7 @@ def func5() -> str:
     return ""
 
 
-def quadratic_equation(var_a, var_b, var_c) -> list:
+def quadratic_equation(var_a, var_b, var_c) -> list: # type: ignore
     discriminant = var_b ** 2 - 4 * var_a * var_c
     x1 = (-var_b + math.sqrt(discriminant)) / (2 * var_a)
     x2 = (-var_b - math.sqrt(discriminant)) / (2 * var_a)
@@ -44,7 +44,7 @@ def test_functions() -> None:
     )
     assert func1() is True
     assert func2() is False
-    assert func3() is None
+    assert func3() is None # type: ignore
     assert func4() < 0
     assert func5() == ""
     assert result_with_x1 == 0
