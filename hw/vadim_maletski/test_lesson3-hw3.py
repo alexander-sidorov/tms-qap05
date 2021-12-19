@@ -24,7 +24,7 @@ def func5() -> str:
     return str1
 
 
-def kv_ur(num1, num2, num3) -> list:
+def kv_ur(num1: float, num2: float, num3: float) -> list:
     dis = round((num2 ** 2 - 4 * num1 * num3), 2)
 
     if dis >= 0:
