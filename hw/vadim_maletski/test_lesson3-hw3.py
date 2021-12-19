@@ -9,8 +9,7 @@ def func2() -> bool:
 
 
 def func3() -> None:
-    num = None
-    return num
+    pass
 
 
 def func4() -> int:
@@ -37,9 +36,6 @@ def kv_ur(num1, num2, num3):
         x2 = None
 
     return x1, x2
-
-
-kv_ur(1, 1, 1)
 
 
 def test() -> None:
