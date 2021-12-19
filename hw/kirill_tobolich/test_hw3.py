@@ -28,7 +28,9 @@ def quadratic_equation(var_a, var_b, var_c) -> list:  # type: ignore
         x2 = (-var_b - math.sqrt(discriminant)) / (2 * var_a)
     else:
         x1 = (-var_b + (discriminant ** 0.5)) / (2 * var_a)
+        x1 = round(x1.real, 2) + round(x1.imag, 2) * 1j
         x2 = (-var_b - (discriminant ** 0.5)) / (2 * var_a)
+        x2 = round(x2.real, 2) + round(x2.imag, 2) * 1j
     return [x1, x2]
 
 
@@ -39,8 +41,5 @@ def test_functions() -> None:
     assert func4() < 0
     assert func5() == ""
     assert quadratic_equation(2, 7, 3) == [-0.5, -3]
-    assert quadratic_equation(1, 1, 1) == [
-        (-0.49999999999999994 + 0.8660254037844386j),
-        (-0.5 - 0.8660254037844386j),
-    ]
+    assert quadratic_equation(1, 1, 1) == [(-0.5 + 0.87j), (-0.5 - 0.87j)]
     assert quadratic_equation(1, 2, 1) == [-1, -1]
