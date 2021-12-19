@@ -17,5 +17,4 @@ def func(a1, back, cill):
     else:
         return "Нет корней"
 
-func(a1, back, cill) + 1
 
