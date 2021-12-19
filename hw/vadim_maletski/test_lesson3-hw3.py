@@ -35,14 +35,14 @@ def kv_ur(num1, num2, num3) -> list:
         x1 = None
         x2 = None
 
-    return x1, x2
+    return [x1, x2]
 
 
 def test() -> None:
     assert func1() is True
     assert func2() is False
-    assert func3() is None
+    assert func3() is None  # type: ignore
     assert func4() < 0
     assert func5() == ""
-    assert kv_ur(1, 2, 1) == (-1.0, -1.0)
-    assert kv_ur(1, 1, 1) == (None, None)
+    assert kv_ur(1, 2, 1) == [-1.0, -1.0]
+    assert kv_ur(1, 1, 1) == [None, None]
