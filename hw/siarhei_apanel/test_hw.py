@@ -1,11 +1,11 @@
 a1 = 1
 back = 2
-call = 1
+cill = 1
 
-def func(a1, back, call):
+def func(a1, back, cill):
     if a1 == 0:
         return "Нет корней"
-    disk = back ** 2 - 4 * a1 * call
+    disk = back ** 2 - 4 * a1 * cill
     sqrt = disk ** (0.5)
     if disk > 0:
         x1 = (-back + sqrt) / 2 * a1
@@ -18,4 +18,4 @@ def func(a1, back, call):
         return "Нет корней"
 
 xs = 0
-xs == func(1, 2, 1) + 2
+
