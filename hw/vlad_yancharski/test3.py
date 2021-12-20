@@ -1,5 +1,5 @@
 def f() -> None:
-    5 # noqa: B018
+    5  # noqa: B018
 
 
 def test_f() -> None:
