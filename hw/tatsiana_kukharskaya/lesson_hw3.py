@@ -1,5 +1,5 @@
 def avr1() -> bool:
-    return True 
+    return True
 
 
 def avr2() -> bool:
