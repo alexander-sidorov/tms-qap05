@@ -19,8 +19,8 @@ def s() -> str:
 
 
 def denis() -> None:
-    assert func() is True
-    assert funct() is False
-    assert fun() is None  # type: ignore
-    assert fu() < 0
-    assert f() == ""
+    assert d() is True
+    assert e() is False
+    assert n() is None  # type: ignore
+    assert i() < 0
+    assert s() == ""
