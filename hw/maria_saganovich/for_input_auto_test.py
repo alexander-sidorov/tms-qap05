@@ -4,8 +4,8 @@ input_values = []
 print_values = []
 
 
-def mock_input(s):
-    print_values.append(s)
+def mock_input(s1):
+    print_values.append(s1)
     return input_values.pop(0)
 
 
@@ -16,7 +16,7 @@ def mock_input_output_start():
     print_values = []
 
     builtins.input = mock_input
-    builtins.print = lambda s: print_values.append(s)
+    builtins.print = lambda s1: print_values.append(s1)
 
 
 def get_display_output():

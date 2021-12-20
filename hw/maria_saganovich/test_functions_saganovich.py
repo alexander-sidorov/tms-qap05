@@ -1,34 +1,28 @@
-def a() -> int:
+def func1() -> bool:
     num1 = 1
-    if num1 % 2 == 0:
-        return True
-    else:
-        return False
+    return bool(num1 % 2 == 0)
 
 
-def b() -> int:
+def func2() -> bool:
     num2 = 8
-    if num2 % 2 == 0:
-        return True
-    else:
-        return False
+    return bool(num2 % 2 == 0)
 
 
-def c() -> None:
+def func3() -> None:
     return
 
 
-def f() -> int:
+def func4() -> list:
     array1 = [-5, 3, 20, 0, -99]
-    x = 0
+    x1 = 0
     result = []
     for number in array1:
-        if number < x:
+        if number < x1:
             result.append(number)
     return result
 
 
-def e() -> str:
+def func5() -> list:
     array2 = ["Seoul", "Jeju", "Oslo", ""]
     result2 = []
     for word in array2:

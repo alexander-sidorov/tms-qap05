@@ -1,5 +1,4 @@
-from for_input_auto_test import get_display_output
-from for_input_auto_test import set_keyboard_input
+from for_input_auto_test import get_display_output, set_keyboard_input
 from quadratic_equation import quadratic_equation
 
 
