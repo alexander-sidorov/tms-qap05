@@ -1,4 +1,4 @@
-def a():
+def a() -> int:
     num1 = 1
     if num1 % 2 == 0:
         return True
@@ -6,10 +6,7 @@ def a():
         return False
 
 
-a()
-
-
-def b():
+def b() -> int:
     num2 = 8
     if num2 % 2 == 0:
         return True
@@ -17,17 +14,11 @@ def b():
         return False
 
 
-b()
-
-
-def c():
+def c() -> None:
     return
 
 
-c()
-
-
-def f():
+def f() -> int:
     array1 = [-5, 3, 20, 0, -99]
     x = 0
     result = []
@@ -37,16 +28,10 @@ def f():
     return result
 
 
-f()
-
-
-def e():
+def e() -> str:
     array2 = ["Seoul", "Jeju", "Oslo", ""]
     result2 = []
     for word in array2:
         if word == "":
             result2.append(word)
     return result2
-
-
-e()
