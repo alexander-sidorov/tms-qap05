@@ -1,4 +1,5 @@
 import cmath
+
 import numpy as np
 
 
@@ -51,4 +52,4 @@ def test() -> None:
     assert func5() == ""
     assert kv_ur(1, -2, -3) == [3.0, -1.0]
     assert kv_ur(1, 2, 1) == [-1.0, -1.0]
-    assert kv_ur(1, 1, 1) == [(-1+1j), (-1-1j)]
+    assert kv_ur(1, 1, 1) == [(-1 + 1j), (-1 - 1j)]
