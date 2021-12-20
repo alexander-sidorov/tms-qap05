@@ -1,5 +1,3 @@
-
-
 def a():
     num1 = 1
     if num1 % 2 == 0:
@@ -43,10 +41,10 @@ f()
 
 
 def e():
-    array2 = ["Seoul", "Jeju", "Oslo", '']
+    array2 = ["Seoul", "Jeju", "Oslo", ""]
     result2 = []
     for word in array2:
-        if word == '':
+        if word == "":
             result2.append(word)
     return result2
 
