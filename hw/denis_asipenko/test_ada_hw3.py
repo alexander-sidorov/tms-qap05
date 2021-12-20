@@ -7,7 +7,7 @@ def e() -> bool:
 
 
 def n() -> int:
-    return -2
+    return -1
 
 
 def i() -> None:
