@@ -1,5 +1,5 @@
 def f() -> None:
-    4  # noga: B018
+    4  # noqa
 
 
 def g() -> int:
