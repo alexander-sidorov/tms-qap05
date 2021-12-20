@@ -1,20 +1,20 @@
-def a():
+def a() -> bool:
     return True
 
 
-def b():
+def b() -> bool:
     return False
 
 
-def c():
+def c() -> null:
     return None
 
 
-def d():
+def d() -> int:
     return -1
 
 
-def e():
+def e() -> str:
     return ""
 
 
