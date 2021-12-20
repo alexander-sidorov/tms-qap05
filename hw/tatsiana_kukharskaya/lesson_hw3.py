@@ -1,25 +1,20 @@
-def avr1() -> True:
-    k = 21
-    p = 3
-    a = k - p
-    return a 
+def avr1() -> bool:
+    return True 
 
 
-def avr2() -> False:
-    i = 0
-    return i
+def avr2() -> bool:
+    return False
 
 
 def kim() -> int:
-    p = -8
-    return p
+    return -8
 
 
 def k() -> None:
     x = 3
     y = x
     r = y - x
-    return r
+    return None
 
 
 def den() -> str:
