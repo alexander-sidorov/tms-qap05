@@ -1,3 +1,7 @@
+import cmath
+import numpy as np
+
+
 def func1() -> bool:
     python = True
     return python
@@ -26,14 +30,15 @@ def func5() -> str:
 
 
 def kv_ur(num1: float, num2: float, num3: float) -> list:
-    dis = abs(round((num2 ** 2 - 4 * num1 * num3), 2))
+    dis = round((num2 ** 2 - 4 * num1 * num3), 2)
 
-    if num1 == 0:
-        x1 = x2 = num3 / num2
-
-    else:
+    if dis >= 0:
         x1 = round(((-num2 + dis ** 0.5) / 2 * num1), 2)
         x2 = round(((-num2 - dis ** 0.5) / 2 * num1), 2)
+
+    else:
+        x1 = np.round(-num2 + cmath.sqrt(dis) / 2 * num1)
+        x2 = np.round(-num2 - cmath.sqrt(dis) / 2 * num1)
 
     return [x1, x2]
 
@@ -46,4 +51,4 @@ def test() -> None:
     assert func5() == ""
     assert kv_ur(1, -2, -3) == [3.0, -1.0]
     assert kv_ur(1, 2, 1) == [-1.0, -1.0]
-    assert kv_ur(1, 1, 1) == [0.37, -1.37]
+    assert kv_ur(1, 1, 1) == [(-1+1j), (-1-1j)]
