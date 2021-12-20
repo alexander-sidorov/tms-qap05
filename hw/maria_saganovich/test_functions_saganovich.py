@@ -1,3 +1,5 @@
+
+
 def a():
     num1 = 1
     if num1 % 2 == 0:
@@ -6,7 +8,7 @@ def a():
         return False
 
 
-print(a())
+a()
 
 
 def b():
@@ -17,23 +19,36 @@ def b():
         return False
 
 
-print(b())
+b()
 
 
 def c():
     return
 
 
-print(c())
+c()
 
 
 def f():
-    for i in range(-10, 10):
-        if i < 0:
-            print(i)
-        else:
-            print("i >= 0")
-            break
+    array1 = [-5, 3, 20, 0, -99]
+    x = 0
+    result = []
+    for number in array1:
+        if number < x:
+            result.append(number)
+    return result
 
 
-print(f())
+f()
+
+
+def e():
+    array2 = ["Seoul", "Jeju", "Oslo", '']
+    result2 = []
+    for word in array2:
+        if word == '':
+            result2.append(word)
+    return result2
+
+
+e()

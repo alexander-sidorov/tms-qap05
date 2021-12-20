@@ -92,4 +92,5 @@ def check_user_input(name):
     return val
 
 
-quadratic_equation()
+# if __name__ == "__main__":
+#     quadratic_equation()
