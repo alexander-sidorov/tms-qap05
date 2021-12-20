@@ -1,8 +1,8 @@
-def func() -> True:
+def func() -> bool:
     return True
 
 
-def funct() -> False:
+def funct() -> bool:
     return False
 
 
@@ -19,8 +19,8 @@ def f() -> str:
 
 
 def test_home3() -> None:
-    assert func() is True  # type: ignore
-    assert funct() is False  # type: ignore
+    assert func() is True
+    assert funct() is False
     assert fun() is None  # type: ignore
     assert fu() < 0
     assert f() == ""
