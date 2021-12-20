@@ -1,21 +1,32 @@
-import math
-
-
 def avr1() -> bool:
-    return True
+    k = 21 / 3
+    return k 
 
 
 def avr2() -> bool:
-    return False
+    i = 0
+    return i
 
 
 def kim() -> int:
-    return -8
+    p = -8
+    return p
 
 
 def k() -> None:
-    pass
+    x = 3
+    y = x
+    r = y - x
+    return r
 
 
 def den() -> str:
     return ""
+
+
+def alle() -> None:
+    assert def avr1() is True
+    assert def avr2() is False
+    assert def kim() < 0
+    assert def k() is None
+    assert def den() == ""
