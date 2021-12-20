@@ -2,15 +2,9 @@ def func(a1: float, back: float, cill: float) -> list:
     disk = back ** 2 - 4 * a1 * cill
     sqrt = disk ** 0.5
 
-    if disk >= 0:
-        x1 = (-back + sqrt) / 2 * a1
-        x2 = (-back - sqrt) / 2 * a1
-        return [x1, x2]
-    else:
-        x1 = (-back + sqrt) / 2 * a1
-        x2 = (-back - sqrt) / 2 * a1
-
-        return [x1, x2]
+    x1 = (-back + sqrt) / 2 * a1
+    x2 = (-back - sqrt) / 2 * a1
+    return [x1, x2]
 
 
 def test() -> None:
