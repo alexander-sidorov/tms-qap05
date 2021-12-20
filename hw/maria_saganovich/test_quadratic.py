@@ -1,5 +1,5 @@
-from for_input_auto_test import get_display_output, set_keyboard_input
-from quadratic_equation import quadratic_equation
+from hw.maria_saganovich.for_input_auto_test import get_display_output, set_keyboard_input
+from hw.maria_saganovich.quadratic_equation import quadratic_equation
 
 
 def test1():
@@ -15,8 +15,8 @@ def test1():
         "a = ",
         "b = ",
         "c = ",
-        "Discriminant:\nD = 24.0",
-        "We have the next roots: \nx1 = 1.4 \nx2 = -3.4",
+        "Discriminant: D = 24.0",
+        "We got the next roots: x1 = 1.4, x2 = -3.4",
         "Recalculate the equation? Enter your answer: y/n",
         "Answer: ",
         "See you next time.",

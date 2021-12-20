@@ -15,7 +15,7 @@ def quadratic_equation():
     c1 = check_user_input("c")
 
     discriminant = b1 ** 2 - 4 * a1 * c1
-    print("Discriminant:\nD = %.1f" % discriminant)  # noqa: S001, MOD001
+    print("Discriminant: D = %.1f" % discriminant)  # noqa: S001, MOD001
 
     if discriminant > 0:
         x1 = (-b1 + math.sqrt(discriminant)) / (2 * a1)
