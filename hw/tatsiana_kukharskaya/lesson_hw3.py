@@ -27,8 +27,8 @@ def den() -> str:
 
 
 def alle() -> None:
-    assert def avr1() is True
-    assert def avr2() is False
-    assert def kim() < 0
-    assert def k() is None
-    assert def den() == ""
+    assert avr1() is True
+    assert avr2() is False
+    assert kim() < 0
+    assert k() is None
+    assert den() == ""
