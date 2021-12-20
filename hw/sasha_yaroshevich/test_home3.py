@@ -1,8 +1,8 @@
-def func() -> True:
+def func():
     return True
 
 
-def funct() -> False:
+def funct():
     return False
 
 
