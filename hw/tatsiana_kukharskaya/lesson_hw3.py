@@ -11,10 +11,7 @@ def kim() -> int:
 
 
 def k() -> None:
-    x = 3
-    y = x
-    r = y - x
-    return r
+    7
 
 
 def den() -> str:
