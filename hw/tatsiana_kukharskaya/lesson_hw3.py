@@ -14,7 +14,7 @@ def k() -> None:
     x = 3
     y = x
     r = y - x
-    return None
+    return r
 
 
 def den() -> str:
