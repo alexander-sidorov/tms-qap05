@@ -7,7 +7,7 @@ def func2() -> bool:
 
 
 def func3() -> None:
-    pass
+    return None
 
 
 def func4() -> int:
