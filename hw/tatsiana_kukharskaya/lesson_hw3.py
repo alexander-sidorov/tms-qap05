@@ -1,7 +1,7 @@
 def avr1() -> bool:
     k = 21
     p = 3
-    a = k / p
+    a = k - p
     return a 
 
 
