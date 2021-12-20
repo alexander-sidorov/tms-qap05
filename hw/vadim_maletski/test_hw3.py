@@ -33,8 +33,10 @@ def kv_ur(num1, num2, num3) -> list:  # type: ignore
         x2 = round(((-num2 - dis ** 0.5) / (2 * num1)), 2)
 
     else:
-        x1 = (-num2 + dis ** 0.5) / (2 * num1)
-        x2 = (-num2 - dis ** 0.5) / (2 * num1)
+        x1 = ((-num2 + dis ** 0.5) / (2 * num1))
+        x1 = round(x1.real, 2) + round(x1.imag, 2) * 1j
+        x2 = ((-num2 - dis ** 0.5) / (2 * num1))
+        x2 = round(x2.real, 2) + round(x2.imag, 2) * 1j
 
     return [x1, x2]
 
@@ -47,7 +49,4 @@ def test() -> None:
     assert func5() == ""
     assert kv_ur(1, -2, -3) == [3.0, -1.0]
     assert kv_ur(1, 2, 1) == [-1.0, -1.0]
-    assert kv_ur(1, 1, 1) == [
-        (-0.49999999999999994 + 0.8660254037844386j),
-        (-0.5 - 0.8660254037844386j),
-    ]
+    assert kv_ur(1, 1, 1) == [(-0.5 + 0.87j), (-0.5 - 0.87j)]
