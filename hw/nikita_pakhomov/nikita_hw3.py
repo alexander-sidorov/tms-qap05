@@ -6,7 +6,7 @@ def b() -> bool:
     return False
 
 
-def c() -> NoneType:
+def c() -> None:
     return None
 
 
