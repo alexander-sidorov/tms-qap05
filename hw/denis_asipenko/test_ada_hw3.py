@@ -7,7 +7,7 @@ def e() -> bool:
 
 
 def n() -> int:
-    return -26
+    return -2
 
 
 def i() -> None:
@@ -19,8 +19,8 @@ def s() -> str:
 
 
 def denis() -> None:
-    assert d(" + ")
-    assert e(5 - 5 == 1)
+    assert d() is True
+    assert e() is False
     assert n() < 0
     assert i() is None  # type: ignore
     assert s() == ""
