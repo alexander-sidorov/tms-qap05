@@ -29,3 +29,11 @@ def func5() -> list:
         if word == "":
             result2.append(word)
     return result2
+
+
+def test_functions() -> None:
+    assert func1() is False
+    assert func2() is True
+    assert func3() is None
+    assert func4() == [-5, -99]
+    assert func5() == ['']

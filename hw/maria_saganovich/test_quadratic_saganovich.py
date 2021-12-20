@@ -23,3 +23,7 @@ def quadratic_equation() -> list:
             result1.append([x4])
 
     return result1
+
+
+def test_quadratic_equation() -> None:
+    assert quadratic_equation() == [[2.5, 0.0], [1.224744871391589, -1.224744871391589], [False]]
