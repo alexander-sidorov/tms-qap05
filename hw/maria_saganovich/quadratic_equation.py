@@ -15,19 +15,19 @@ def quadratic_equation():
     c1 = check_user_input("c")
 
     discriminant = b1 ** 2 - 4 * a1 * c1
-    print("Discriminant:\nD = %.1f" % discriminant)  # noqa: S001
+    print("Discriminant:\nD = %.1f" % discriminant)  # noqa: S001, MOD001
 
     if discriminant > 0:
         x1 = (-b1 + math.sqrt(discriminant)) / (2 * a1)
         x2 = (-b1 - math.sqrt(discriminant)) / (2 * a1)
         print(
-            "We have the next roots: \nx1 = %.1f \nx2 = %.1f"
-            % (x1, x2)  # noqa: S001
+            "We got the next roots: x1 = %.1f, x2 = %.1f"  # noqa: S001, MOD001
+            % (x1, x2)  # noqa: S001, MOD001
         )
 
     elif discriminant == 0:
         x3 = -b1 / (2 * a1)
-        print("We have the next root:\nx = %.1f" % x3)  # noqa: S001
+        print("We have the next root:\nx = %.1f" % x3)  # noqa: S001, MOD001
 
     else:
         print("We have the next roots: \nNo roots")

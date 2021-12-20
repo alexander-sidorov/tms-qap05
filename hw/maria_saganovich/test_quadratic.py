@@ -19,5 +19,5 @@ def test1():
         "We have the next roots: \nx1 = 1.4 \nx2 = -3.4",
         "Recalculate the equation? Enter your answer: y/n",
         "Answer: ",
-        "See you next time."
+        "See you next time.",
     ]
