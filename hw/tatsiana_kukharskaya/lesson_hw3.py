@@ -1,11 +1,11 @@
-def avr1() -> bool:
+def avr1() -> True:
     k = 21
     p = 3
     a = k - p
     return a 
 
 
-def avr2() -> bool:
+def avr2() -> False:
     i = 0
     return i
 
