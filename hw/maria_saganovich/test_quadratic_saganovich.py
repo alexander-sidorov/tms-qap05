@@ -26,4 +26,8 @@ def quadratic_equation() -> list:
 
 
 def test_quadratic_equation() -> None:
-    assert quadratic_equation() == [[2.5, 0.0], [1.224744871391589, -1.224744871391589], [False]]
+    assert quadratic_equation() == [
+        [2.5, 0.0],
+        [1.224744871391589, -1.224744871391589],
+        [False],
+    ]
