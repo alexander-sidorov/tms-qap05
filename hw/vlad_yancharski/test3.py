@@ -1,5 +1,5 @@
 def f() -> None:
-    5
+    5 # type: ignore
 
 
 def test_f() -> None:
