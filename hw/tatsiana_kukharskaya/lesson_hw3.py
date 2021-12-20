@@ -1,2 +1,6 @@
 def avr() -> True:
-    assert bool(5)
+     bool(5)
+
+
+def k() -> True:
+    assert avr() is True
