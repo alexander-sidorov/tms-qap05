@@ -57,6 +57,3 @@ def check_user_input(name):
                 val1 = check_user_input(name)
                 break
     return val1
-
-
-quadratic_equation()
