@@ -1,3 +1,5 @@
+**/.venv/
+**/venv/
 *.bak
 *.log
 *.py[cod]
@@ -10,11 +12,10 @@
 .mypy_cache/
 .pytest_cache/
 .secrets.*
-.venv/
+Pipfile.lock
 __pycache__/
 config/.secrets/
 coverage.xml
 db.sqlite3
 htmlcov/
-venv/
 zsh-syntax-highlighting/
