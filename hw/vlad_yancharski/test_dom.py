@@ -17,9 +17,10 @@ def f4() -> int:
 def f5() -> str:
     return ""
 
+
 def x() -> None:
-	assert f1() is True
-	assert f2() is False
-	assert f3() is None  # type: ignore
-	assert f4() < 0
-	assert f5() == ""
+    assert f1() is True
+    assert f2() is False
+    assert f3() is None  # type: ignore
+    assert f4() < 0
+    assert f5() == ""
