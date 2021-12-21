@@ -1,4 +1,4 @@
-def fnc(num1:float, num2:float, num3:float) -> list:
+def fnc(num1: float, num2: float, num3: float) -> list:
     dsk = num2 ** 2 - 4 * num1 * num3
     kordsk = dsk ** 0.5
     if dsk > 0:
@@ -10,7 +10,9 @@ def fnc(num1:float, num2:float, num3:float) -> list:
         return [x3]
     else:
         return [None]
+
+
 def test_f() -> None:
-    assert fnc(1,4,9) == [-1]
-    assert fnc(1,1,1)
-    assert fnc(1,2,1)
+    assert fnc(1, 4, 9) == [-1]
+    assert fnc(1, 1, 1)
+    assert fnc(1, 2, 1)
