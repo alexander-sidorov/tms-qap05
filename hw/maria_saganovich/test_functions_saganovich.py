@@ -16,7 +16,7 @@ def func4() -> int:
     return -100
 
 
-def func5() -> str:
+def func_5() -> str:
     return ""
 
 
@@ -25,4 +25,4 @@ def test_functions() -> None:
     assert func2() is True
     assert func3() is None  # type: ignore
     assert func4() == -100
-    assert func5() == ""
+    assert func_5() == ""
