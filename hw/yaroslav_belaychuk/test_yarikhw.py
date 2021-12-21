@@ -14,5 +14,5 @@ def fnc(num1: float, num2: float, num3: float) -> list:
 
 def test_f() -> None:
     assert fnc(1, 4, 9) == [0, -1]
-    assert fnc(1, 1, 1)
-    assert fnc(1, 2, 1)
+    assert fnc(1, 1, 1) == [0, -1]
+    assert fnc(1, 2, 1) == [0, -1]
