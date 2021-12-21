@@ -24,5 +24,5 @@ def test_functions() -> None:
     assert func1() is False
     assert func2() is True
     assert func3() is None  # type: ignore
-    assert func4() == [-5, -99]
+    assert func4() == -100
     assert func5() == [""]
