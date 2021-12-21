@@ -12,23 +12,12 @@ def func3() -> None:
     return
 
 
-def func4() -> list:
-    array1 = [-5, 3, 20, 0, -99]
-    x1 = 0
-    result = []
-    for number in array1:
-        if number < x1:
-            result.append(number)
-    return result
+def func4() -> int:
+    return -100
 
 
-def func5() -> list:
-    array2 = ["Seoul", "Jeju", "Oslo", ""]
-    result2 = []
-    for word in array2:
-        if word == "":
-            result2.append(word)
-    return result2
+def func5() -> str:
+    return ''
 
 
 def test_functions() -> None:
