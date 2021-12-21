@@ -17,7 +17,7 @@ def func4() -> int:
 
 
 def func5() -> str:
-    return ''
+    return ""
 
 
 def test_functions() -> None:
