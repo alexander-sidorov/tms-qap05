@@ -1,7 +1,7 @@
-from hwrefakt import f
-from hwrefakt import g
+from test_refakt import far
+from test_refakt import gar
 
 
 def test_func() -> None:
-    assert f() is None  # type: ignore
-    assert g() == 4
+    assert far() is None  # type: ignore
+    assert gar() == 4

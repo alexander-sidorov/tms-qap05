@@ -1,4 +1,4 @@
-from hwrefakt import func
+from test_refakt import func
 
 
 def test() -> None:

@@ -7,9 +7,9 @@ def func(a1: float, back: float, cill: float) -> list:
     return [x1, x2]
 
 
-def f() -> None:
+def far() -> None:
     4  # noqa: B018
 
 
-def g() -> int:
+def gar() -> int:
     return 4
