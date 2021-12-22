@@ -1,5 +1,5 @@
-from test_refakt import far
-from test_refakt import gar
+from refakt import far
+from refakt import gar
 
 
 def test_func() -> None:

@@ -1,4 +1,4 @@
-from test_refakt import func
+from refakt import func
 
 
 def test() -> None:
