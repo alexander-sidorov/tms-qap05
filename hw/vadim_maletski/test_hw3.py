@@ -1,11 +1,9 @@
-from hw.vadim_maletski.test_testlesson4 import (
-    func1,
-    func2,
-    func3,
-    func4,
-    func5,
-    kv_ur,
-)
+from hw.vadim_maletski.test_testlesson4 import func1
+from hw.vadim_maletski.test_testlesson4 import func2
+from hw.vadim_maletski.test_testlesson4 import func3
+from hw.vadim_maletski.test_testlesson4 import func4
+from hw.vadim_maletski.test_testlesson4 import func5
+from hw.vadim_maletski.test_testlesson4 import kv_ur
 
 
 def test() -> None:
