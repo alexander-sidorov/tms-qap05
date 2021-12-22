@@ -1,4 +1,4 @@
-from hw.tatsiana_kukharskaya.hw3 import avr1, avr2, den, kim, k
+from hw.tatsiana_kukharskaya.hw3 import avr1, avr2, den, k, kim
 
 
 def alle() -> None:
