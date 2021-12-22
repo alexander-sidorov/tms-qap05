@@ -1,10 +1,4 @@
-def func(a1: float, back: float, cill: float) -> list:
-    disk = back ** 2 - 4 * a1 * cill
-    sqrt = disk ** 0.5
-
-    x1 = (-back + sqrt) / 2 * a1
-    x2 = (-back - sqrt) / 2 * a1
-    return [x1, x2]
+from hwrefakt import func
 
 
 def test() -> None:
@@ -13,9 +7,3 @@ def test() -> None:
         (-0.49999999999999994 + 0.8660254037844386j),
         (-0.5 - 0.8660254037844386j),
     ]
-<<<<<<< HEAD
-
-
-print(func(1.0, 1.0, 1.0))
-=======
->>>>>>> main
