@@ -1,4 +1,9 @@
-from hw.kirill_tobolich.lesson3_hw import func1, func2, func3, func4, func5, quadratic_equation
+from hw.kirill_tobolich.lesson3_hw import func1
+from hw.kirill_tobolich.lesson3_hw import func2
+from hw.kirill_tobolich.lesson3_hw import func3
+from hw.kirill_tobolich.lesson3_hw import func4
+from hw.kirill_tobolich.lesson3_hw import func5
+from hw.kirill_tobolich.lesson3_hw import quadratic_equation
 
 
 def test_functions() -> None:

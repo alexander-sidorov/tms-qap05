@@ -1,4 +1,5 @@
-from hw.kirill_tobolich.lesson3 import f, g
+from hw.kirill_tobolich.lesson3 import f
+from hw.kirill_tobolich.lesson3 import g
 
 
 def test_function() -> None:
