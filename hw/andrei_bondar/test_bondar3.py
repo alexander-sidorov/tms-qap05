@@ -1,4 +1,5 @@
-from hw.andrei_bondar.test_bondar32 import f, g
+from hw.andrei_bondar.test_bondar32 import f
+from hw.andrei_bondar.test_bondar32 import g
 
 
 def test_rwfwfw() -> None:

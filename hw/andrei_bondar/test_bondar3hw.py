@@ -1,4 +1,8 @@
-from hw.andrei_bondar.test_bondar32hw import a, b, c, d, e
+from hw.andrei_bondar.test_bondar32hw import a
+from hw.andrei_bondar.test_bondar32hw import b
+from hw.andrei_bondar.test_bondar32hw import c
+from hw.andrei_bondar.test_bondar32hw import d
+from hw.andrei_bondar.test_bondar32hw import e
 
 
 def test() -> None:
