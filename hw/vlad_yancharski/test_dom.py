@@ -1,4 +1,8 @@
-from hw.vlad_yancharski.func_dom import f1, f2, f3, f4, f5
+from hw.vlad_yancharski.func_dom import f1
+from hw.vlad_yancharski.func_dom import f2
+from hw.vlad_yancharski.func_dom import f3
+from hw.vlad_yancharski.func_dom import f4
+from hw.vlad_yancharski.func_dom import f5
 
 
 def test_12() -> None:
