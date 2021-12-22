@@ -1,9 +1,4 @@
-def f() -> None:
-    4  # noqa: B018
-
-
-def g() -> int:
-    return 4
+from hw.andrei_bondar.test_bondar32 import f, g
 
 
 def test_rwfwfw() -> None:

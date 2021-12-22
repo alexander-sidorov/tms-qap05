@@ -1,21 +1,4 @@
-def a() -> bool:
-    return True
-
-
-def b() -> bool:
-    return False
-
-
-def c() -> None:
-    return
-
-
-def d() -> int:
-    return -1
-
-
-def e() -> str:
-    return ""
+from hw.andrei_bondar.test_bondar32hw import a, b, c, d, e
 
 
 def test() -> None:
