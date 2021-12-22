@@ -1,4 +1,4 @@
-def a() -> bool:
+def test_a() -> bool:
     return True
 
 
