@@ -1,5 +1,4 @@
-def g() -> None:
-    4  # noqa: B018
+from hw.tatsiana_kukharskaya.lesson3 import g
 
 
 def test_ui() -> None:
