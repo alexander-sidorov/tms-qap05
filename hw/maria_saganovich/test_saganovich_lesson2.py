@@ -1,4 +1,7 @@
-from hw.maria_saganovich.function_lesson2 import func1, func2, func3, func4
+from hw.maria_saganovich.function_lesson2 import func1
+from hw.maria_saganovich.function_lesson2 import func2
+from hw.maria_saganovich.function_lesson2 import func3
+from hw.maria_saganovich.function_lesson2 import func4
 
 
 def test_example() -> None:

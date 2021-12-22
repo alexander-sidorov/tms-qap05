@@ -1,4 +1,5 @@
-from hw.maria_saganovich.lesson3 import func1, func2
+from hw.maria_saganovich.lesson3 import func1
+from hw.maria_saganovich.lesson3 import func2
 
 
 def test_1() -> None:

@@ -1,4 +1,8 @@
-from hw.maria_saganovich.functions_hw import func1, func2, func3, func4, func_5
+from hw.maria_saganovich.functions_hw import func1
+from hw.maria_saganovich.functions_hw import func2
+from hw.maria_saganovich.functions_hw import func3
+from hw.maria_saganovich.functions_hw import func4
+from hw.maria_saganovich.functions_hw import func_5
 
 
 def test_functions() -> None:
