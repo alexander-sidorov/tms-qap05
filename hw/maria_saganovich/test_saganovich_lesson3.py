@@ -1,10 +1,6 @@
+from hw.maria_saganovich.lesson3 import func1, func2
+
+
 def test_1() -> None:
-    4  # noqa: B018
-
-
-def g() -> int:
-    return 4
-
-
-def f() -> None:
-    assert f() is None  # type: ignore
+    assert func1() is None  # type: ignore
+    assert func2() == 4
