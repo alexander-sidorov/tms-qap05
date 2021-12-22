@@ -1,24 +1,11 @@
-def d() -> bool:
-    return True
+from hw.denis_asipenko.func_da_hw import d
+from hw.denis_asipenko.func_da_hw import e
+from hw.denis_asipenko.func_da_hw import i
+from hw.denis_asipenko.func_da_hw import n
+from hw.denis_asipenko.func_da_hw import s
 
 
-def e() -> bool:
-    return False
-
-
-def n() -> None:
-    return
-
-
-def i() -> int:
-    return -1
-
-
-def s() -> str:
-    return ""
-
-
-def denis() -> None:
+def test_denis() -> None:
     assert d() is True
     assert e() is False
     assert n() is None  # type: ignore
