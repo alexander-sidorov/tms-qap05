@@ -1,4 +1,4 @@
-from refakt import func
+from hw.siarhei_apanel.refakt import func
 
 
 def test() -> None:

@@ -1,5 +1,4 @@
-from refakt import far
-from refakt import gar
+from hw.siarhei_apanel.refakt import far, gar
 
 
 def test_func() -> None:
