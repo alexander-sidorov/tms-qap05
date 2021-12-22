@@ -1,11 +1,7 @@
-def f() -> None:
-    4  # noqa: B018
-
-
-def g() -> int:
-    return 4
+from hw.sasha_yaroshevich.lesson3_fink2 import f, g
 
 
 def test_lesson3() -> None:
     assert f() is None  # type: ignore
     assert g() == 4
+
