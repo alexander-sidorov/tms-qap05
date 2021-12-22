@@ -1,7 +1,7 @@
 def func1() -> int:
     num1 = 7
     num2 = 2
-    result1 = num1 % num2
+    result1 = num1 % num2  # noqa: S001
     return result1
 
 
