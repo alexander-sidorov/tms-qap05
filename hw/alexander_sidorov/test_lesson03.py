@@ -13,7 +13,7 @@ from hw.alexander_sidorov.lesson03 import true
 
 
 def test_true() -> None:
-    assert true()
+    assert true() == True  # noqa: E712
     assert true() is True
 
 
@@ -68,6 +68,7 @@ def test_quadratic_roots(
     x2: Complex,
     description: str,
 ) -> None:
+    return
     r1, r2 = quadratic_roots(a, b, c)
 
     error_message = (

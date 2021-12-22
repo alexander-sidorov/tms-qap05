@@ -1,8 +1,9 @@
+from typing import Any
 from typing import Tuple
 from typing import Union
 
 
-def true() -> bool:
+def true() -> Any:
     return True
 
 
