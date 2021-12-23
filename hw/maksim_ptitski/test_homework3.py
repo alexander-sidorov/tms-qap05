@@ -1,21 +1,8 @@
-def func1() -> bool:
-    return True
-
-
-def func2() -> bool:
-    return False
-
-
-def func3() -> None:
-    return None
-
-
-def func4() -> int:
-    return -8
-
-
-def func5() -> str:
-    return ""
+from hw.maksim_ptitski.lesson3 import func1
+from hw.maksim_ptitski.lesson3 import func2
+from hw.maksim_ptitski.lesson3 import func3
+from hw.maksim_ptitski.lesson3 import func4
+from hw.maksim_ptitski.lesson3 import func5
 
 
 def test_function() -> None:
