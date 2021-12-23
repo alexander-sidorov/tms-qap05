@@ -1,4 +1,4 @@
-def func_answer(ans: str) -> str:  # type: ignore
+def func_answer(ans: str) -> str:
 
     if ans == "Да":
         return "Оно и видно"
