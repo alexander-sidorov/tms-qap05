@@ -1,4 +1,4 @@
-from hw.vadim_maletski.test_hw4func import func_answer
+from hw.vadim_maletski.func import func_answer
 
 
 def test() -> None:
