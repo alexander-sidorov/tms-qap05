@@ -1,12 +1,12 @@
 # Выбирете ответ на предложенный вопрос и вызовете фунцию
+# "Знаете, что такое пассивная агрессия?"
 from hw.siarhei_apanel.refakt import vopros
 
-question = "Знаете, что такое пассивная агрессия?"
-
-answerYES = "Да"  # noqa N816
-answerNO = "Нет"  # noqa N816
+answer = {"YES": "Да", "NO": "Нет"}  # noqa N816
+unknown = "Не знаю"  # noqa N816
 
 
 def test() -> None:
-    assert vopros(question, answerYES) == "Оно и видно!"
-    assert vopros(question, answerNO) == "А могли бы и знать!"
+    assert vopros(answer["YES"]) == "Оно и видно!"
+    assert vopros(answer["NO"]) == "А могли бы и знать!"
+    assert vopros(unknown) == "Несоответствующее значение"
