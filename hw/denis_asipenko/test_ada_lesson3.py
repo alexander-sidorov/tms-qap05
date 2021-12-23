@@ -1,9 +1,5 @@
-def f() -> None:
-    4  # noqa: B018
-
-
-def g() -> int:
-    return 4
+from hw.denis_asipenko.func_ada_lesson3 import f
+from hw.denis_asipenko.func_ada_lesson3 import g
 
 
 def test_ada_lesson3() -> None:
