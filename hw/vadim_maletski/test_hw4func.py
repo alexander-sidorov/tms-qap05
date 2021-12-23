@@ -1,9 +1,9 @@
-from random import random
+from random import random  # noqa: DUO101
 
 
 def func_answer() -> int:
 
-    ran = random()
+    ran = random()  # noqa: S311
     if ran < 0.5:
         r1 = 1
         return r1
