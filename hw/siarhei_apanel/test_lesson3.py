@@ -1,11 +1,7 @@
-def f() -> None:
-    4  # noqa: B018
-
-
-def g() -> int:
-    return 4
+from hw.siarhei_apanel.refakt import far
+from hw.siarhei_apanel.refakt import gar
 
 
 def test_func() -> None:
-    assert f() is None  # type: ignore
-    assert g() == 4
+    assert far() is None  # type: ignore
+    assert gar() == 4
