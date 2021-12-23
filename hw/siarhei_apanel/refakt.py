@@ -13,3 +13,12 @@ def far() -> None:
 
 def gar() -> int:
     return 4
+
+
+def vopros(question: str, self) -> str:
+    if self == "Да":
+        return "Оно и видно!"
+    elif self == "Нет":
+        return "А могли бы и знать!"
+    else:
+        return "Несоответствующее значение"
