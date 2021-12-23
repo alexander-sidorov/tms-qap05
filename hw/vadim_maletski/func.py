@@ -1,12 +1,7 @@
-from random import random  # noqa: DUO102
+def func_answer(ans: str) -> str:
 
+    if ans == "Да":
+        return "Оно и видно"
 
-def func_answer() -> float:
-
-    ran = random()  # noqa: S311
-    if ran < 0.5:
-        r1 = 1
-        return r1
-    else:
-        r2 = 0
-        return r2
+    if ans == "Нет":
+        return "А могли бы знать"
