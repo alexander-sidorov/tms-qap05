@@ -2,14 +2,14 @@ from cmath import isnan
 
 import pytest
 
-from hw.alexander_sidorov.lesson03 import Complex
-from hw.alexander_sidorov.lesson03 import empty_text
-from hw.alexander_sidorov.lesson03 import false
-from hw.alexander_sidorov.lesson03 import nan
-from hw.alexander_sidorov.lesson03 import negative
-from hw.alexander_sidorov.lesson03 import none
-from hw.alexander_sidorov.lesson03 import quadratic_roots
-from hw.alexander_sidorov.lesson03 import true
+from hw.alexander_sidorov.lesson03.homework import Complex
+from hw.alexander_sidorov.lesson03.homework import empty_text
+from hw.alexander_sidorov.lesson03.homework import false
+from hw.alexander_sidorov.lesson03.homework import nan
+from hw.alexander_sidorov.lesson03.homework import negative
+from hw.alexander_sidorov.lesson03.homework import none
+from hw.alexander_sidorov.lesson03.homework import quadratic_roots
+from hw.alexander_sidorov.lesson03.homework import true
 
 
 def test_true() -> None:
@@ -68,7 +68,6 @@ def test_quadratic_roots(
     x2: Complex,
     description: str,
 ) -> None:
-    return
     r1, r2 = quadratic_roots(a, b, c)
 
     error_message = (
@@ -86,5 +85,6 @@ def test_quadratic_roots(
 
     ok1 = (x1 == pytest.approx(r1)) or (isnan(x1) and isnan(r1))
     ok2 = (x2 == pytest.approx(r2)) or (isnan(x2) and isnan(r2))
+    ok = ok1 and ok2
 
-    assert ok1 and ok2, error_message
+    assert ok, error_message

@@ -50,7 +50,7 @@ def quadratic_roots(
         else:
             x1 = x2 = -c / b
     else:
-        d = (b ** 2 + 4 * a * c) ** 0.5  # noqa: VNE001
+        d = (b ** 2 - 4 * a * c) ** 0.5  # noqa: VNE001
         a2 = 2 * a
         x1 = (-b + d) / a2
         x2 = (-b - d) / a2
