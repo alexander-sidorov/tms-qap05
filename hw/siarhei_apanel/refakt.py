@@ -15,7 +15,7 @@ def gar() -> int:
     return 4
 
 
-def vopros(question: str, self) -> str:
+def vopros(question: str, self: str) -> str:
     if self == "Да":
         return "Оно и видно!"
     elif self == "Нет":
