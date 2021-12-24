@@ -1,10 +1,10 @@
-def func_answer(ans: str) -> str:
+def func_answer(ans: bool) -> str:
 
-    if ans == "Да":
+    if ans:
         return "Оно и видно"
-
-    elif ans == "Нет":
+    else:
         return "А могли бы знать"
 
-    else:
-        return "Ответьте 'Да' или 'Нет'"
+
+if __name__ == "__main__":
+    func_answer(True)
