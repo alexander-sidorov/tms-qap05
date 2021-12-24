@@ -25,8 +25,7 @@ def quadratic_equation() -> Any:
         x1 = (-b1 + math.sqrt(discriminant)) / (2 * a1)
         x2 = (-b1 - math.sqrt(discriminant)) / (2 * a1)
         print(  # noqa: S001, MOD001, T001
-            "We got the next roots: x1 = %.1f, x2 = %.1f"  # noqa: S001, MOD001, T001
-            % (x1, x2)  # noqa: S001, MOD001, T001
+            f"We got the next roots: x1 = {x1:.1f}, x2 = {x2:.1f}"
         )
         return [x1, x2]
     elif discriminant == 0:
