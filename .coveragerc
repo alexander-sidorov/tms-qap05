@@ -5,10 +5,10 @@ source = hw
 
 
 [report]
-fail_under = 50
+fail_under = 90
 skip_covered = False
 skip_empty = True
-sort = -Cover
+sort = Cover
 
 
 [html]
