@@ -8,3 +8,7 @@ def aggression(know: bool) -> str:
 def test_f() -> None:
     assert aggression(True) == "но и видно"
     assert aggression(False) == " мог бы и знать"
+
+
+if __name__ == "__main__":
+    aggression(True)
