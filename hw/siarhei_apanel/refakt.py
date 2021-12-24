@@ -20,6 +20,6 @@ def aggression(known: bool) -> str:
     else:
         return "А могли бы и знать!"
 
+
 if __name__ == "__main__":
     aggression(True)
-
