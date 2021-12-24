@@ -1,4 +1,4 @@
-from hw.yaroslav_belaychuk.test_yarikhw import fnc
+from hw.yaroslav_belaychuk.yarikhw import fnc
 
 
 def test_f() -> None:

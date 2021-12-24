@@ -1,9 +1,4 @@
-def f() -> None:
-    4  # noqa: B018
-
-
-def g() -> int:
-    return 4
+from hw.yaroslav_belaychuk.yarik04 import f, g
 
 
 def test_func() -> None:
