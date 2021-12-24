@@ -7,4 +7,5 @@ def aggression(know: bool) -> str:
     return result
 
 
-if __name__ == "__main__":
+(aggression(True))
+(aggression(False))
