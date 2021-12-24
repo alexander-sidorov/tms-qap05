@@ -19,4 +19,3 @@ def aggression(known: bool) -> str:
         return "Оно и видно!"
     else:
         return "А могли бы и знать!"
-

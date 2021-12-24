@@ -1,6 +1,6 @@
 # Выбирете ответ на предложенный вопрос и вызовете фунцию
 # "Знаете, что такое пассивная агрессия?"
-from refakt import aggression
+from hw.siarhei_apanel.refakt import aggression
 
 
 def test() -> None:
