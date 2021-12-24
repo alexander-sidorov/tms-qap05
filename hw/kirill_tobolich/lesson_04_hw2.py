@@ -4,6 +4,3 @@ def aggression(know: bool) -> str:
     else:
         result = "А могли бы знать"
     return result
-
-
-
