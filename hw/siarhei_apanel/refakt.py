@@ -19,3 +19,7 @@ def aggression(known: bool) -> str:
         return "Оно и видно!"
     else:
         return "А могли бы и знать!"
+
+if __name__ == "__main__":
+    aggression(True)
+
