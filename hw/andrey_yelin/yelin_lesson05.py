@@ -5,7 +5,3 @@ def aggression(know: bool) -> str:
         result = "а мог бы и знать"
 
     return result
-
-
-if __name__ == "__main__":
-    print(aggression(True))
