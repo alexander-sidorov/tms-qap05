@@ -7,5 +7,6 @@ def aggression(know: bool) -> str:
     return result
 
 
-(aggression(True))
-(aggression(False))
+if __name__ == '__main__':
+    aggression(True)
+    aggression(False)
