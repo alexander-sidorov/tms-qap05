@@ -1,18 +1,18 @@
-def a() -> bool:
+def a():
     return True
 
 
-def b() -> bool:
+def b():
     return False
 
 
-def c() -> None:
-    return
+def c():
+    return None
 
 
-def d() -> int:
-    return -1
+def d():
+    return -1312
 
 
-def e() -> str:
+def e():
     return ""
