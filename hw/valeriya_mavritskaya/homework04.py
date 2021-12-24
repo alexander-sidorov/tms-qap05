@@ -8,4 +8,3 @@ def aggression(know: bool) -> str:
 
 
 if __name__ == "__main__":
-    print(aggression(True))
