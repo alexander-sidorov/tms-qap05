@@ -1,10 +1,10 @@
 def aggression(know: bool) -> str:
-    if know:
-        r = 'uuu'
+    if know:  # noqa: SIM108
+        result = "hhh"
     else:
-        r = 'ggg'
-    return
+        result = "ggg"
+    return result
 
-if __name__ == '__main__':
-    print(aggression(True))
-    print(aggression(False))
+
+if __name__ == "__main__":
+    aggression(True)
