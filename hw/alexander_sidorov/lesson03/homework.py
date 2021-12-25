@@ -61,4 +61,5 @@ def quadratic_roots(
     return x1, x2
 
 
-quadratic_roots(1, 2, 3)
+if __name__ == "__main__":
+    quadratic_roots(1, 2, 3)
