@@ -8,4 +8,4 @@ def aggression(know: bool) -> str:
 
 
 if __name__ == "__main__":
-    assert aggression(False) == "а мог бы и знать"
+    aggression(True)
