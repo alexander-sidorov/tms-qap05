@@ -1,14 +1,6 @@
-def aggression(know: bool) -> str:
-    if know:
-        return "но и видно"
-    else:
-        return " мог бы и знать"
+from hw.yaroslav_belaychuk.lesson05 import aggression
 
 
-def test_f() -> None:
+def test_() -> None:
     assert aggression(True) == "но и видно"
     assert aggression(False) == " мог бы и знать"
-
-
-if __name__ == "__main__":
-    aggression(True)
