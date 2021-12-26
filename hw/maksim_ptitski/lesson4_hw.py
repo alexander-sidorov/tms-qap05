@@ -1,5 +1,6 @@
-def passive_aggression(answer: str) -> str:
-    if answer == "YES":
-        return "Оно и видно"
+def aggression(know: bool) -> str:
+    if know:
+        result = "Оно и видно"
     else:
-        return "А могли бы знать"
+        result = "А могли бы знать"
+    return result
