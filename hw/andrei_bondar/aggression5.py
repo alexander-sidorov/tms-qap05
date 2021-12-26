@@ -6,6 +6,6 @@ def aggression(know: bool) -> str:
 
     return result
 
-1
+
 if __name__ == "__main__":
     aggression(True)
