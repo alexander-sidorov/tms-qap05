@@ -7,7 +7,7 @@ def b() -> bool:
 
 
 def c() -> None:
-    return
+    return None
 
 
 def d() -> int:

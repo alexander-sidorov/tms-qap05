@@ -24,6 +24,7 @@ def aggression(known: bool) -> str:
         return "А могли бы и знать!"
 
 
+<<<<<<< HEAD
 def korteg(spisok: list) -> tuple:
     return (spisok[0], spisok[-1])
 
@@ -58,5 +59,7 @@ def krypto(cod: str, key: str) -> str:
     return " ".join(ind)
 
 
+=======
+>>>>>>> main
 if __name__ == "__main__":
     aggression(True)
