@@ -8,7 +8,7 @@ from hw.vadim_maletski.func5 import level6
 
 def test() -> None:
 
-    assert level1([4, 6, 7, 8.5, "Hello"]) == (4, "Hello")
+    assert level1([2, 6, 7, 8.5, "Hello"]) == (2, "Hello")
     assert level2("Hello Python") == "Python Hello"
     assert level3([True, 4, 6, 7, 8.5, "Hello"]) == [True, 4, 6, 7]
     assert level4("68 Hello 4 8 9 2") == "6W8W WHWeWlWlWoW W4W W8W W9W W2W"

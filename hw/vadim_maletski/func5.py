@@ -11,7 +11,7 @@ def level2(p1: str) -> str:
 
 
 def level3(p1: list) -> list:
-    index = p1.index(7)
+    index = p1.index(6)
     p3 = p1[0 : (index + 1)]  # noqa: E203
     return p3
 
