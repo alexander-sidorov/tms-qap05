@@ -14,10 +14,12 @@ def gar() -> int:
     return 4
 
 
-def vopros(answer: str) -> str:
-    if answer == "Да":
+def aggression(known: bool) -> str:
+    if known:
         return "Оно и видно!"
-    elif answer == "Нет":
-        return "А могли бы и знать!"
     else:
-        return "Несоответствующее значение"
+        return "А могли бы и знать!"
+
+
+if __name__ == "__main__":
+    aggression(True)
