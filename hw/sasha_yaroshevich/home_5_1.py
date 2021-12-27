@@ -12,3 +12,6 @@ def fun(sort_coll, p2):
 def fu(stroka, stroka_one):
     new = list(stroka)
     s = 'stroka_one'.join(new)
+
+def f(p1):
+
