@@ -1,4 +1,4 @@
-from hw.maksim_ptitski.lesson4_hw import aggression
+from hw.kirill_tobolich.lesson_04_hw2 import aggression
 
 
 def test_example() -> None:
