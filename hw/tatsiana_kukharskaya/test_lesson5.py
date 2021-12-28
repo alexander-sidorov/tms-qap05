@@ -1,10 +1,4 @@
-import operator
-
-
-def just_do_it1(me: list) -> tuple:
-    working = operator.itemgetter(0, -1)
-    f = working(me)
-    return tuple(f)
+from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it1
 
 
 def just_do_it1() -> None:
@@ -12,9 +6,7 @@ def just_do_it1() -> None:
     assert just_do_it1(me) == ("Help", "Please")
 
 
-def just_do_it2(wichtig: str) -> str:
-    just_for_u = wichtig.rsplit()
-    return f"{just_fo_u[1]} {just_fo_u[0]}"
+from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it2
 
 
 def just_do_it2() -> None:
@@ -22,10 +14,7 @@ def just_do_it2() -> None:
     assert just_do_it2(just) == "It's true"
 
 
-def just_do_it3(nejki: list, nejki2: str) -> list:
-
-    nechto1 = nechto(None, nejki.index(nejki2) + 1)
-    return nejki[nechto1]
+from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it3
 
 
 def just_do_it3() -> None:
@@ -34,25 +23,19 @@ def just_do_it3() -> None:
     assert just_do_it3(nechto3, nejki2) == ["It's", "so", "wonderfull"]
 
 
-def just_do_it4(string_1: str, string_2: str) -> str:
-    string_res = ""
-    for a in string_1:
-        string_res += a
-        string_res += string_2
-    return string_res
+from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it4
 
 
 def just_do_it4() -> None:
     string_for_test = "Tatsin Vsses"
-    char_for_test = a
+    char_for_test = "a"
     assert (
-        just_do_it4(string_for_test, char_for_test)
-        == "Taatasaiana Vasasaeasa"  # noqa: W503
+            just_do_it4(string_for_test, char_for_test)
+            == "Taatasaiana Vasasaeasa"  # noqa: W503
     )
 
 
-def just_do_it5(string: str) -> str:
-    return string.title()
+from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it5
 
 
 def just_do_it5() -> None:
