@@ -16,7 +16,7 @@ def test_hw_5() -> None:
     assert combine_result(list_for_test, object_for_test) == [1, 3, 5, 9]
     assert (
         separated_string(string_for_test, char_for_test)
-        == "Moaokosoiomo oPotoiotosokoio"  # noqa: W503
+        == "Moaokosoiomo oPotoiotosokoi"  # noqa: W503
     )
     assert (
         string_with_capitalized_letters(text_for_test)
