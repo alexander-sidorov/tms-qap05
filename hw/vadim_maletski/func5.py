@@ -4,9 +4,9 @@ def level1(p1: list) -> tuple:
 
 
 def level2(p1: str) -> str:
-    p2 = p1.split(" ")
+    p2 = p1.split()
     p2.reverse()
-    p3 = " ".join(map(str, p2))
+    p3 = " ".join(p2)
     return p3
 
 
@@ -16,15 +16,10 @@ def level3(p1: list) -> list:
     return p3
 
 
-def level4(p1: str) -> str:
-    num = len(p1)
-    p2 = []
-    i = 0
-    while i < num:
-        p2.append(str(p1[i]) + "W")
-        i += 1
-    p3 = "".join(map(str, p2))
-    return p3
+def level4(p1: str, p2: str) -> str:
+    p3 = list(p1)
+    p4 = p2.join(p3)
+    return p4
 
 
 def level5(p1: str) -> str:

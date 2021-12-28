@@ -11,7 +11,7 @@ def test() -> None:
     assert level1([2, 6, 7, 8.5, "Hello"]) == (2, "Hello")
     assert level2("Hello Python") == "Python Hello"
     assert level3([True, 4, 6, 7, 8.5, "Hello"]) == [True, 4, 6]
-    assert level4("68 Hello 4 8 9 2") == "6W8W WHWeWlWlWoW W4W W8W W9W W2W"
+    assert level4("68 Hello 4 8 9 2", "W") == "6W8W WHWeWlWlWoW W4W W8W W9W W2"
     assert level5("heLLo mY   python  vEr 3.10") == "Hello My Python Ver 3.10"
     assert (
         level6(
