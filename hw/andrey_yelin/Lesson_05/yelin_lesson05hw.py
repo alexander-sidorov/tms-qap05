@@ -1,14 +1,12 @@
 from typing import Any
 
-col01 = [1, 2, 3, 4, 5, 6, 7]
-col02 = "tuda suda"
+
+def first_last_elements(collection: Any) -> tuple:
+    return (min(collection)), (max(collection))
 
 
-def first_last_elements(collection: col01) -> tuple:
-    return (min(col01)), (max(col01))
-
-
-def swapped_words(collection: col02) -> str:
+def swapped_words(string: str) -> str:
+    col02 = string
     return f"{col02[-4:]} {col02[:4]}"
 
 
