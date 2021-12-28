@@ -16,6 +16,6 @@ def test_example05() -> None:
     assert slice_of_col03(col01, some_object) == [1, 2, 3, 4, 5, 6]
     assert (
         string_combination(string01, string02)
-        == "FjOjRj jtjhjej jgjljojrjyj jojfj jtjhjej jEjmjpjejrjojr"
+        == "FjOjRj jtjhjej jgjljojrjyj jojfj jtjhjej jEjmjpjejrjojr"  # noqa: W503
     )
     assert titled_string(string02) == "For The Glory Of The Emperor"
