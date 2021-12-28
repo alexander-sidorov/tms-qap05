@@ -16,7 +16,8 @@ def lvl_3(collection3: Any, object3: Any) -> Any:
 
 
 def lvl_4(some_string: str, symbol: str) -> str:
-    return "".join(x + symbol for x in some_string)
+    new_string = "".join(x + symbol for x in some_string)
+    return new_string[0:-1]
 
 
 def lvl_5(string_to_be_capitalized: str) -> str:

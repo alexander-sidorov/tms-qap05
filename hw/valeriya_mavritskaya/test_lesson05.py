@@ -24,7 +24,7 @@ def test_lvl_3() -> None:
 def test_lvl_4() -> None:
     some_string = "val"
     symbol = "*"
-    assert lvl_4(some_string, symbol) == "v*a*l*"
+    assert lvl_4(some_string, symbol) == "v*a*l"
 
 
 def test_lvl_5() -> None:
