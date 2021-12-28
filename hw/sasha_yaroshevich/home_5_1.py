@@ -10,7 +10,7 @@ def func(stroka_two_words) -> str:
 
 def fun(sort_coll, p2) -> list:
     limit = sort_coll.index(p2)
-    return sort_coll[0 : limit + 1]
+    return sort_coll[0: limit + 1]
 
 
 def fu(stroka, stroka_one) -> str:
@@ -19,5 +19,5 @@ def fu(stroka, stroka_one) -> str:
     return stroka_s
 
 
-def f(stroka_pr) -> str:  # noqa: E203
+def f(stroka_pr) -> str:
     return stroka_pr.title()
