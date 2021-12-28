@@ -1,5 +1,6 @@
 from hw.nikita_pakhomov.nlesson3.lesoon5hw import lwl1
 from hw.nikita_pakhomov.nlesson3.lesoon5hw import lwl3
+from hw.nikita_pakhomov.nlesson3.lesoon5hw import lwl5
 from hw.nikita_pakhomov.nlesson3.lesoon5hw import strok
 
 
@@ -25,3 +26,11 @@ def test_lwl3() -> None:
 
 if __name__ == "__main__":
     lwl3([1, 2, 3, 4, 5], 2)
+
+
+def test_lwl5() -> None:
+    assert lwl5("xxx xxx") == "Xxx Xxx"
+
+
+if __name__ == "__main__":
+    lwl5("xxx xxx")

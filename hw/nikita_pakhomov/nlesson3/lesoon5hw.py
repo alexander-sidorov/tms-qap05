@@ -14,3 +14,8 @@ def lwl1(p1: tuple) -> tuple:
 def lwl3(p1: list, p2: int) -> list:
     cpisok = p1[:p2]
     return cpisok
+
+
+def lwl5(p1: str) -> str:
+    otvet = p1.title()
+    return otvet
