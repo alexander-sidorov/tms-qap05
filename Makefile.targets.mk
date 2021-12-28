@@ -27,7 +27,6 @@ tests:
 coverage:
 	$(call log, calculating coverage)
 	coverage html
-	coverage xml
 
 
 code-typing:
