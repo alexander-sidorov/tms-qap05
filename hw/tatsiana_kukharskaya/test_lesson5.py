@@ -30,8 +30,8 @@ def just_do_it4() -> None:
     string_for_test = "Tatsin Vsses"
     char_for_test = "a"
     assert (
-            just_do_it4(string_for_test, char_for_test)
-            == "Taatasaiana Vasasaeasa"  # noqa: W503
+        just_do_it4(string_for_test, char_for_test)
+        == "Taatasaiana Vasasaeasa"  # noqa: W503
     )
 
 
