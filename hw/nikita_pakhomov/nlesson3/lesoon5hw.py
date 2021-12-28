@@ -9,3 +9,8 @@ def strok(abc: str) -> str:
 def lwl1(p1: tuple) -> tuple:
     krt = (p1[0], p1[-1])
     return krt
+
+
+def lwl3(p1: list, p2: int) -> list:
+    cpisok = p1[:p2]
+    return cpisok
