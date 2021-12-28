@@ -1,5 +1,5 @@
 def level1(p1: list) -> tuple:
-    p2 = tuple((p1[0], p1[-1]))  # noqa: C409
+    p2 = (p1[0], p1[-1])
     return p2
 
 
@@ -10,8 +10,8 @@ def level2(p1: str) -> str:
     return p3
 
 
-def level3(p1: list) -> list:
-    index = p1.index(6)
+def level3(p1: list, p2: int) -> list:
+    index = p1.index(p2)
     p3 = p1[0 : (index + 1)]  # noqa: E203
     return p3
 
