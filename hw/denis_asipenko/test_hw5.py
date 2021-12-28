@@ -1,8 +1,8 @@
-from hw.denis_asipenko.func_hw5 import task_1
-from hw.denis_asipenko.func_hw5 import task_2
-from hw.denis_asipenko.func_hw5 import task_3
-from hw.denis_asipenko.func_hw5 import task_4
-from hw.denis_asipenko.func_hw5 import task_5
+from hw.denis_asipenko.funct_hw5 import task_1
+from hw.denis_asipenko.funct_hw5 import task_2
+from hw.denis_asipenko.funct_hw5 import task_3
+from hw.denis_asipenko.funct_hw5 import task_4
+from hw.denis_asipenko.funct_hw5 import task_5
 
 
 def test_myhw5() -> None:
@@ -16,6 +16,6 @@ def test_myhw5() -> None:
     assert task_3(test_list, test_object) == [5, 8, 13, 26]
     assert (
         task_4(test_symbol, test_text)
-        == "KsEsEsPs scsaslsms sasnsds scsosdses spsystshsosns."
-    )
+        == "KsEsEsPs scsaslsms sasnsds scsosdses spsystshsosns."  # noqa: W503
+    )  # noqa:W503
     assert task_5(test_text) == "Keep Calm And Code Python."  # noqa: E501,W503
