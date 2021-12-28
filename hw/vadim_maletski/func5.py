@@ -10,7 +10,7 @@ def level2(p1: str) -> str:
     return p3
 
 
-def level3(p1: list, p2: any) -> list:
+def level3(p1: list, p2: any) -> list:  # type: ignore
     index = p1.index(p2)
     p3 = p1[0 : (index + 1)]  # noqa: E203
     return p3
