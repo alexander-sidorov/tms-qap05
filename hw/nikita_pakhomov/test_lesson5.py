@@ -7,4 +7,4 @@ def test_aggression() -> None:
 
 
 if __name__ == "__main__":
-    aggression(True)
+    1

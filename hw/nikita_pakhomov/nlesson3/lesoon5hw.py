@@ -11,7 +11,7 @@ def lwl1(p1: tuple) -> tuple:
     return krt
 
 
-def lwl3(p1: list, p2: int) -> list:
+def lwl3(p1: list, p2) -> list:
     cpisok = p1[:p2]
     return cpisok
 

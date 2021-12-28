@@ -8,29 +8,15 @@ def test_strok() -> None:
     assert strok("111 222") == "222 111"
 
 
-if __name__ == "__main__":
-    strok("111 222")
-
-
 def test_lwl1() -> None:
     assert lwl1((1, 2, 3, 4)) == (1, 4)
 
 
-if __name__ == "__main__":
-    lwl1((1, 4))
-
-
 def test_lwl3() -> None:
     assert lwl3([1, 2, 3, 4, 5], 2) == [1, 2]
-
-
-if __name__ == "__main__":
-    lwl3([1, 2, 3, 4, 5], 2)
+    assert lwl3("abcdef", "d") == "abcd"
+    assert lwl3(("x", "y", "z"), "y") == ("x", "y")
 
 
 def test_lwl5() -> None:
     assert lwl5("xxx xxx") == "Xxx Xxx"
-
-
-if __name__ == "__main__":
-    lwl5("xxx xxx")
