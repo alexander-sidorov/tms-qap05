@@ -18,11 +18,7 @@ def combine_result(collection: Any, object_1: Any) -> Any:
 
 
 def separated_string(string_1: str, string_2: str) -> str:
-    string_result = ""
-    for i in string_1:
-        string_result += i
-        string_result += string_2
-    return string_result
+    return string_2.join(string_1) + string_2
 
 
 def string_with_capitalized_letters(string: str) -> str:
