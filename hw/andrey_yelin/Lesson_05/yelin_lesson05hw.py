@@ -12,7 +12,7 @@ def swapped_words(collection: col02) -> str:
     return f"{col02[-4:]} {col02[:4]}"
 
 
-def slice_of_col03(collection: Any, some_object: Any) -> list:
+def slice_of_col03(collection: Any, some_object: Any) -> Any:
     index = collection.index(some_object)
     return collection[: index + 1]
 
