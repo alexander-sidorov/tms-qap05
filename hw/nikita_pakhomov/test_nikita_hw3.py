@@ -1,7 +1,3 @@
-def test_a() -> bool:
-    return True
-
-
 def b() -> bool:
     return False
 
