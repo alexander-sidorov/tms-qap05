@@ -11,7 +11,7 @@ def func(stroka_two_words: str) -> str:
     return " ".join(new_b)
 
 
-def fun(sort_coll: Any, p2: str) -> list:
+def fun(sort_coll: Any, p2: int) -> list:
     limit = sort_coll.index(p2)
     return sort_coll[0 : limit + 1]  # noqa: E203
 
