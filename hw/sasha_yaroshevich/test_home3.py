@@ -1,21 +1,8 @@
-def func() -> bool:
-    return True
-
-
-def funct() -> bool:
-    return False
-
-
-def fun() -> None:
-    pass
-
-
-def fu() -> int:
-    return -4
-
-
-def f() -> str:
-    return ""
+from hw.sasha_yaroshevich.home3_funk import f
+from hw.sasha_yaroshevich.home3_funk import fu
+from hw.sasha_yaroshevich.home3_funk import fun
+from hw.sasha_yaroshevich.home3_funk import func
+from hw.sasha_yaroshevich.home3_funk import funct
 
 
 def test_home3() -> None:
