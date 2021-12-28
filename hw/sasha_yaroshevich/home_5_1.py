@@ -10,13 +10,13 @@ def func(stroka_two_words) -> str:
 
 def fun(sort_coll, p2) -> list:
     limit = sort_coll.index(p2)
-    return sort_coll[0: limit + 1]
+    return sort_coll[0 : limit + 1]  # noqa: E203
 
 
 def fu(stroka, stroka_one) -> str:
     new_stroka = list(stroka)
     stroka_s = stroka_one.join(new_stroka)
-    return stroka_s
+    return stroka_s + stroka_one
 
 
 def f(stroka_pr) -> str:
