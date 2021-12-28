@@ -5,12 +5,14 @@ def just_do_it() -> None:
     me = ["Help", "Me", "Please"]
     assert just_do_it1(me) == ("Help", "Please")
 
+
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it2
 
 
 def just_do_it() -> None:
     just_for_test = "true It's"
     assert just_do_it2(just_for_test) == "It's true"
+
 
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it3
 
