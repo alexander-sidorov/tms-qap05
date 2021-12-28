@@ -39,7 +39,8 @@ def srez(spisk: list, another: Any) -> list:
 
 
 def stroki(stroka: str, stroka2: str) -> str:
-    return "".join(lit + stroka2 for lit in stroka)
+    strk = "".join(lit + stroka2 for lit in stroka if lit[-1])
+    return strk[:-1]
 
 
 def zaglav(stroka: str) -> str:
@@ -48,11 +49,4 @@ def zaglav(stroka: str) -> str:
 
 def krypto(cod: str, key: str) -> str:
     alphavit = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    ind = []
-    for i1 in cod:
-        if i1 == " ":
-            ind.append(i1)
-        else:
-            ind.append(alphavit[key.find(i1)])
-
-    return " ".join(ind)
+    return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
