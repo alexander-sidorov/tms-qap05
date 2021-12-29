@@ -16,8 +16,8 @@ def test_just_do() -> None:
     assert just_do_it1(me) == ("Help", "Please")
     assert just_do_it2(just_for_test) == "It's true"
     assert just_do_it3(nechto3, nejki2) == [
-        "It's",
-        "so",
+        "It's",  # noqa: E203
+        "so",  # noqa: E203
         "wonderfull",  # noqa: E203
     ]
     assert (
