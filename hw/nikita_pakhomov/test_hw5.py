@@ -13,7 +13,7 @@ def test_lwl1() -> None:
 
 
 def test_lwl3() -> None:
-    assert lwl3([1, 2, 3, 4, 5], 2) == [1, 2]
+    assert lwl3(([1, 2, 3, 4, 5]), 2) == [1, 2]
     assert lwl3("abcdef", "d") == "abcd"
     assert lwl3(("x", "y", "z"), "y") == ("x", "y")
 
