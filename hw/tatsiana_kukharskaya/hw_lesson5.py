@@ -19,9 +19,9 @@ def just_do_it3(nejki: list, nejki2: str) -> list:
 
 
 def just_do_it4(string_1: str, string_2: str) -> str:
-    string_res = ""
-    for a in string_1:
-    return string_res
+    string_neu = list(string_1)
+    string_pl = string_2.join(string_neu)
+    return string_pl + string_2
 
 
 def just_do_it5(string: str) -> str:
