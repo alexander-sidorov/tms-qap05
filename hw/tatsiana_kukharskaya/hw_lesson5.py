@@ -9,7 +9,7 @@ def just_do_it2(wichtig: str) -> str:
 
 def just_do_it3(nejki: list, nejki2: str) -> list:
     nechto = nejki.index(nejki2)
-    return nejki[0 : nechto + 1]
+    return nejki[: nechto + 1]
 
 
 def just_do_it4(string_1: str, string_2: str) -> str:
