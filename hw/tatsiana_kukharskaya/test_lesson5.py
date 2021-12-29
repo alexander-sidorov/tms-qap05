@@ -1,4 +1,3 @@
-import operator
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it1
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_iit1
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it2
@@ -16,7 +15,6 @@ def just_do_it() -> None:
     char_for_test = "a"
     for_test = "Do YoU like apple ?"  # noqa: E501
     assert just_do_it1(me) == ("Help", "Please")
-    assert just_do_iit1(me) == ("Help", "Please")
     assert just_do_it2(just_for_test) == "It's true"
     assert just_do_it3(nechto3, nejki2) == ["It's", "so", "wonderfull"]
     assert (
@@ -24,4 +22,3 @@ def just_do_it() -> None:
         == "Taatasaiana Vasasaeasa"  # noqa: W503
     )
     assert just_do_it5(for_test) == "Do You Like Apple ?"  # noqa: E501,W503
-

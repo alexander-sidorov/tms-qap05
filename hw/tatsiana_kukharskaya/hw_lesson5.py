@@ -2,12 +2,6 @@ def just_do_it1(me: list) -> tuple:
     return (me[0], me[-1])
 
 
-def just_do_iit1(me: list) -> tuple:
-    working = operator.itemgetter(0, -1)
-    f = working(me)
-    return tuple(f)
-
-
 def just_do_it2(wichtig: str) -> str:
     k = wichtig.rsplit()
     return f"{k[1]} {k[0]}"
