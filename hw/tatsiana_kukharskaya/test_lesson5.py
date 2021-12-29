@@ -12,7 +12,7 @@ def test_just_do() -> None:
     nejki2 = nechto3[2]
     string_for_test = "Tatsin Vsses"
     char_for_test = "a"
-    for_test = "Do YoU like apple ?"  # noqa: E501
+    for_test = "Do YoU like apple ?"
     assert just_do_it1(me) == ("Help", "Please")
     assert just_do_it2(just_for_test) == "It's true"
     assert just_do_it3(nechto3, nejki2) == [
@@ -24,4 +24,4 @@ def test_just_do() -> None:
         just_do_it4(string_for_test, char_for_test)
         == "Taaatasaiana aVasasaeasa"  # noqa: W503
     )
-    assert just_do_it5(for_test) == "Do You Like Apple ?"  # noqa: E501,W503
+    assert just_do_it5(for_test) == "Do You Like Apple ?"
