@@ -11,7 +11,7 @@ def string(b1: str) -> str:
     return new_word
 
 
-def collection(c1: list, c2: Any) -> Any:  # type:  ignore
+def collection(c1: list, c2: Any) -> Any:
     c1.append(c2)
     return c1
 
