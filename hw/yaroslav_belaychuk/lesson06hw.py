@@ -4,9 +4,8 @@ def cortage(a1: list) -> tuple:
 
 def string(b1: str) -> str:
     b1 = b1.split()
-    b1 = b1[::-1]
-    b1 = b1[0] + " " + b1[1]
-    return b1
+    new_word = b1[1] + " " + b1[0]
+    return new_word
 
 
 def collection(c1: list, c2: any) -> list:  # type:  ignore
