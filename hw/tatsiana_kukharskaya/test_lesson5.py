@@ -1,3 +1,4 @@
+import operator
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it1
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_iit1
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it2
