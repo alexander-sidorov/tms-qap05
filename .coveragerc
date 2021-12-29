@@ -1,5 +1,12 @@
 [run]
 branch = True
+omit =
+    hw/siarhei_apanel/refakt.py
+    hw/siarhei_apanel/test.py
+    hw/siarhei_apanel/Test_APANEL.py
+    hw/vlad_yancharski/func_3.py
+    hw/vlad_yancharski/test.py
+    hw/vlad_yancharski/test3.py
 relative_files = True
 source = hw
 
