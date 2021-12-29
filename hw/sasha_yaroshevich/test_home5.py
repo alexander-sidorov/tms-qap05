@@ -16,5 +16,5 @@ def test_home_5_1() -> None:
     assert funct(funct_coll) == (1, 10)
     assert func(func_stroka) == "world Hello"
     assert fun(fun_1, fun_2) == [1, 2, 3, 4, 5]
-    assert fu(fu_1, fu_2) == "a2b2c2d2e2f2"
+    assert fu(fu_1, fu_2) == "a2b2c2d2e2f"
     assert f(f_last) == "Abc Vbd   Fdsg Wrwr"

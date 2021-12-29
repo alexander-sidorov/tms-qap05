@@ -19,7 +19,7 @@ def fun(sort_coll: Any, p2: int) -> Any:
 def fu(stroka: str, stroka_one: str) -> str:
     new_stroka = list(stroka)
     stroka_s = stroka_one.join(new_stroka)
-    return stroka_s + stroka_one
+    return stroka_s
 
 
 def f(stroka_pr: str) -> str:
