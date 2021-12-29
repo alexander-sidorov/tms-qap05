@@ -24,3 +24,4 @@ def just_do_it() -> None:
         == "Taatasaiana Vasasaeasa"  # noqa: W503
     )
     assert just_do_it5(for_test) == "Do You Like Apple ?"  # noqa: E501,W503
+
