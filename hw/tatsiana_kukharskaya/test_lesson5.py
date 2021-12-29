@@ -5,7 +5,7 @@ from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it4
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it5
 
 
-def just_do_it() -> None:
+def test_just_do_it() -> None:
     me = ["Help", "Me", "Please"]
     just_for_test = "true It's"
     nechto3 = ["It's", "so", "wonderfull", "for", "me"]
