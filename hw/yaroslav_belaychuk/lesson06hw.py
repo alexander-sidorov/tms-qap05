@@ -3,8 +3,8 @@ def cortage(a1: list) -> tuple:
 
 
 def string(b1: str) -> str:
-    b1 = b1.split()
-    new_word = b1[1] + " " + b1[0]
+    b2 = b1.split()
+    new_word = b2[1] + " " + b2[0]
     return new_word
 
 
