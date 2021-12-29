@@ -11,7 +11,14 @@ def lwl1(p1: tuple) -> tuple:
     return krt
 
 
-def lwl3(p1: list, p2) -> list:
+from typing import Any
+from typing import Sequence
+
+
+def lwl3(
+    p1: Sequence,
+    p2: Any,
+) -> Sequence:
     cpisok = p1[:p2]
     return cpisok
 
