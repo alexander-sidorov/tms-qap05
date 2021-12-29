@@ -11,16 +11,18 @@ from hw.siarhei_apanel.refakt import zaglav
 
 
 def test_example() -> None:  # noqa: W503
-    cod = "VD DzgS PwFl DzgS SDK ZFz HD"
-    key = "FTZHfrcwtoRgQzDaspdlKiPvSYLekVCqhJbyEnmMBAOIxuXjWUNG"  # noqa: E501
+    co = "VD DzgS PwFl DzgS SDK ZFz HD"
+    ke = "FTZHfrcwtoRgQzDaspdlKiPvSYLekVCqhJbyEnmMBAOIxuXjWUNG"  # noqa: E501
     assert korteg([1, 3.0, "re", 8]) == (1, 8)
+    assert korteg([1]) == (1, 1)
+    assert korteg([]) == ()
     assert newwords("asfN dB12") == "dB12 asfN"
+    assert newwords("asfNdB12") == "asfNdB12"
     assert srez([2, 14, "b", "h"], "r") == [2, 14, "b", "h", "r"]
     assert stroki("a4N67;i", "V") == "aV4VNV6V7V;Vi"
-    assert zaglav("HI nub  hI   PrO") == "Hi Nub  Hi   Pro"
-    assert (
-        krypto(cod, key) == "Do only what only you can do"  # noqa: W503, E501
-    )  # noqa: W503, E501
+    assert stroki("a4N67;i", "") == "a4N67;i"
+    assert zaglav("") == "No Value"
+    assert krypto(co, ke) == "Do only what only you can do"  # noqa: W503, E501
     assert far() is None  # type: ignore
     assert gar() == 4
     assert aggression(True) == "Оно и видно!"

@@ -25,12 +25,16 @@ def aggression(known: bool) -> str:
 
 
 def korteg(spisok: list) -> tuple:
+    if spisok == []:
+        return ()
     return (spisok[0], spisok[-1])
 
 
 def newwords(words: str) -> str:
+    if " " not in words:
+        return words
     words1 = words.split()
-    return words1[1] + " " + words1[0]
+    return f"{words1[1]} {words1[0]}"
 
 
 def srez(spisk: list, another: Any) -> list:
@@ -39,14 +43,23 @@ def srez(spisk: list, another: Any) -> list:
 
 
 def stroki(stroka: str, stroka2: str) -> str:
+    if stroka2 == "":
+        return stroka
     strk = "".join(lit + stroka2 for lit in stroka if lit[-1])
     return strk[:-1]
 
 
 def zaglav(stroka: str) -> str:
+    if stroka == "":
+        return "No Value"
     return stroka.title()
 
 
 def krypto(cod: str, key: str) -> str:
     alphavit = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
+
+
+if __name__ == "__main__":
+    aggression(True)
+    aggression(False)
