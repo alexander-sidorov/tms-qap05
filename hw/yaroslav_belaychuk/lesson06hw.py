@@ -1,3 +1,6 @@
+from typing import Any
+
+
 def cortage(a1: list) -> tuple:
     return a1[0], a1[-1]
 
@@ -8,7 +11,7 @@ def string(b1: str) -> str:
     return new_word
 
 
-def collection(c1: list, c2: any) -> list:  # type:  ignore
+def collection(c1: list, c2: Any) -> list:  # type:  ignore
     c1.append(c2)
     return c1
 
