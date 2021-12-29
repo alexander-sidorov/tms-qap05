@@ -13,7 +13,7 @@ from hw.siarhei_apanel.refakt import zaglav
 def test_example() -> None:  # noqa: W503
     co = "VD DzgS PwFl DzgS SDK ZFz HD"
     ke = "FTZHfrcwtoRgQzDaspdlKiPvSYLekVCqhJbyEnmMBAOIxuXjWUNG"  # noqa: E501
-    assert korteg([1, 3.0, "re", 8]) == (1, 8)
+    assert korteg([1, 3.0, "rer", 8]) == (1, 8)
     assert korteg([1]) == (1, 1)
     assert korteg([]) == ()
     assert newwords("asfN dB12") == "dB12 asfN"
