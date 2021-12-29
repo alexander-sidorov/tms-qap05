@@ -20,8 +20,5 @@ def test_just_do() -> None:
         "so",
         "wonderfull",
     ]
-    assert (
-        just_do_it4(string_for_test, char_for_test)
-        == "Taaatasaiana aVasasaeasa"  # noqa: W503
-    )
+    assert just_do_it4(string_for_test, char_for_test) == "Taaatasaiana aVasasaeasa"
     assert just_do_it5(for_test) == "Do You Like Apple ?"
