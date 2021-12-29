@@ -16,7 +16,5 @@ def just_do_it() -> None:
     assert just_do_it1(me) == ("Help", "Please")
     assert just_do_it2(just_for_test) == "It's true"
     assert just_do_it3(nechto3, nejki2) == ["It's", "so", "wonderfull"]  # noqa: E203
-    assert (
-        just_do_it4(string_for_test, char_for_test)
-        == "Taatasaiana Vasasaeasa"  # noqa: W503
+    assert just_do_it4(string_for_test, char_for_test) == "Taatasaiana Vasasaeasa"  # noqa: W503
     assert just_do_it5(for_test) == "Do You Like Apple ?"  # noqa: E501,W503
