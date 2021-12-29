@@ -5,7 +5,7 @@ from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it4
 from hw.tatsiana_kukharskaya.hw_lesson5 import just_do_it5
 
 
-def test_just_do_it() -> None:
+def test_just_do() -> None:
     me = ["Help", "Me", "Please"]
     just_for_test = "true It's"
     nechto3 = ["It's", "so", "wonderfull", "for", "me"]
@@ -16,5 +16,5 @@ def test_just_do_it() -> None:
     assert just_do_it1(me) == ("Help", "Please")
     assert just_do_it2(just_for_test) == "It's true"
     assert just_do_it3(nechto3, nejki2) == ["It's", "so", "wonderfull"]  # noqa: E203
-    assert just_do_it4(string_for_test, char_for_test) == "Taatasaiana Vasasaeasa"  # noqa: W503
+    assert just_do_it4(string_for_test, char_for_test) == "Taaatasaiana aVasasaeasa"  # noqa: W503
     assert just_do_it5(for_test) == "Do You Like Apple ?"  # noqa: E501,W503
