@@ -12,7 +12,7 @@ def test_example05() -> None:
     string01 = "j"
     string02 = "FOR the glory of the Emperor"
     assert first_last_elements(col01) == (1, 7)
-    assert swapped_words(col02) == "aaaaaaaa                             bbbbbbbb"
+    assert swapped_words(col02) == "aaaaaaaa bbbbbbbb"
     assert slice_of_col03(col01, some_object) == [1, 2, 3, 4, 5, 6]
     assert (
         string_combination(string01, string02)
