@@ -22,6 +22,6 @@ def test_just_do() -> None:
     ]
     assert (
         just_do_it4(string_for_test, char_for_test)
-        == "Taaatasaiana aVasasaeas"
+        == "Taaatasaiana aVasasaeas"  # qa: W503
     )
     assert just_do_it5(for_test) == "Do You Like Apple ?"
