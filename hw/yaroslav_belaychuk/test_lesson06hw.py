@@ -1,10 +1,8 @@
-from hw.yaroslav_belaychuk.lesson06hw import (
-    cortage,
-    string,
-    collection,
-    str_in_str,
-    string_zaglavie,
-)
+from hw.yaroslav_belaychuk.lesson06hw import cortage
+from hw.yaroslav_belaychuk.lesson06hw import string
+from hw.yaroslav_belaychuk.lesson06hw import collection
+from hw.yaroslav_belaychuk.lesson06hw import str_in_str
+from hw.yaroslav_belaychuk.lesson06hw import string_zaglavie
 
 
 def test_function() -> None:
