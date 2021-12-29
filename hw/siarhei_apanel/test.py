@@ -1,3 +1,7 @@
+from hw.siarhei_apanel.refakt import aggression
+from hw.siarhei_apanel.refakt import far
+from hw.siarhei_apanel.refakt import func
+from hw.siarhei_apanel.refakt import gar
 from hw.siarhei_apanel.refakt import korteg
 from hw.siarhei_apanel.refakt import krypto
 from hw.siarhei_apanel.refakt import newwords
@@ -17,3 +21,12 @@ def test_example() -> None:  # noqa: W503
     assert (
         krypto(cod, key) == "Do only what only you can do"  # noqa: W503, E501
     )  # noqa: W503, E501
+    assert far() is None  # type: ignore
+    assert gar() == 4
+    assert aggression(True) == "Оно и видно!"
+    assert aggression(False) == "А могли бы и знать!"
+    assert func(1, 2, 1) == [-1.0, -1.0]
+    assert func(1, 1, 1) == [
+        (-0.49999999999999994 + 0.8660254037844386j),
+        (-0.5 - 0.8660254037844386j),
+    ]
