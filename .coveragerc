@@ -20,7 +20,7 @@ exclude_lines =
     if 0:
     if __name__ == .__main__.:
     @(abc\.)?abstractmethod
-fail_under = ${COVERAGE_MIN-100}
+fail_under = ${COVERAGE_MIN-99}
 skip_covered = False
 skip_empty = True
 sort = Cover
