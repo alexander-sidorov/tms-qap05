@@ -86,6 +86,7 @@ qa_workdir="hw/_qa/"
 
 allowed_files=(
   .gitignore
+  .github/scripts/check_contributor.sh
 )
 
 for file in "$@"; do
