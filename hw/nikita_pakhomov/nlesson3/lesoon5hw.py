@@ -17,6 +17,7 @@ from typing import Sequence
 
 from typing import Any
 
+
 def lwl3(collection: Any, object_1: Any) -> Any:
     i = collection.index(object_1)
     return collection[: i + 1]
