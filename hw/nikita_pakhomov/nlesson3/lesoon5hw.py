@@ -1,3 +1,6 @@
+from typing import Any
+
+
 def strok(abc: str) -> str:
     prabel = abc.find(" ")
     strok1 = abc[:prabel]
@@ -9,9 +12,6 @@ def strok(abc: str) -> str:
 def lwl1(p1: tuple) -> tuple:
     krt = (p1[0], p1[-1])
     return krt
-
-
-from typing import Any
 
 
 def lwl3(collection: Any, object_1: Any) -> Any:
