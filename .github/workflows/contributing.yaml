@@ -16,7 +16,7 @@ jobs:
         id: by
         if: ${{ github.actor == 'alexander-sidorov' }}
         run: |
-          echo "::set-output name=law::by1"
+          echo "::set-output name=law::by"
       - name: '🍻 The contributor does his/her job well.'
         if: ${{ steps.by.outputs.law != 'by' }}
         run: >
