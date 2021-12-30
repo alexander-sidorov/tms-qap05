@@ -15,19 +15,11 @@ from typing import Any
 from typing import Sequence
 
 
-def lwl3(
-    p1: Sequence,
-    p2: Any,
-) -> Sequence:
-    if type(p1) == str:
-        inde = p1.find(p2)
-        aza = p1[: inde + 1]
-    elif type(p1) == list:
-        aza = p1[:p2]
-    elif type(p1) == tuple:
-        inde = p1.index(p2)
-        aza = p1[: inde + 1]
-    return aza
+from typing import Any
+
+def lwl3(collection: Any, object_1: Any) -> Any:
+    i = collection.index(object_1)
+    return collection[: i + 1]
 
 
 def lwl5(p1: str) -> str:
