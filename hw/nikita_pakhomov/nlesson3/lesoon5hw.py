@@ -12,10 +12,6 @@ def lwl1(p1: tuple) -> tuple:
 
 
 from typing import Any
-from typing import Sequence
-
-
-from typing import Any
 
 
 def lwl3(collection: Any, object_1: Any) -> Any:
