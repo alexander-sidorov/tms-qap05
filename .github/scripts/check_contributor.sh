@@ -82,6 +82,7 @@ if [[ -z ${workdir} ]]; then
 fi
 
 workdir="hw/${workdir}/"
+qa_workdir="hw/_qa/"
 
 allowed_files=(
   .gitignore
@@ -89,8 +90,12 @@ allowed_files=(
 
 for file in "$@"; do
   file_in_hw=$(echo "${file}" | grep "^${workdir}")
+  file_in_qa=$(echo "${file}" | grep "^${qa_workdir}")
 
-  if [[ -z "${file_in_hw}" ]]; then
+  if [[ -n "${file_in_qa}" ]]; then
+    ok="ok"
+
+  elif [[ -z "${file_in_hw}" ]]; then
     ok=
 
     for allowed_file in ${allowed_files[*]}; do
