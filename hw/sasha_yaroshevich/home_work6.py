@@ -1,4 +1,4 @@
-def polindrom(stroka: str) -> str:
+def polindrom(stroka: str) -> dict:
     result = {}
 
     if type(stroka) != str:
