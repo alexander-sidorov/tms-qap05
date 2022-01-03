@@ -1,4 +1,4 @@
-def is_palindrome(text):
+def is_palindrome(text: str):
     result = {}
     s1 = "".join(c for c in text if c.isalpha())
     a = s1.lower()
