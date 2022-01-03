@@ -1,7 +1,7 @@
 from typing import Any
 
 
-def polindrom(stroka: str) -> Any:
+def polindrom(stroka: Any) -> dict:
     result = {}
 
     if type(stroka) != str:
