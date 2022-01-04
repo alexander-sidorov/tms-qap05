@@ -37,9 +37,9 @@ def newwords(words: str) -> str:
     return f"{words1[1]} {words1[0]}"
 
 
-def srez(spisk: list, another: Any) -> list:
-    spisk.append(another)
-    return spisk
+def srez(spisk: Any, another: Any) -> Any:
+    ind = spisk.index(another)
+    return spisk[: ind + 1]
 
 
 def stroki(stroka: str, stroka2: str) -> str:
@@ -51,7 +51,7 @@ def stroki(stroka: str, stroka2: str) -> str:
 
 def zaglav(stroka: str) -> str:
     if stroka == "":
-        return "No Value"
+        return ""
     return stroka.title()
 
 
