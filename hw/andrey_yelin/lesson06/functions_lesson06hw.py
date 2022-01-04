@@ -1,3 +1,7 @@
+import functools
+from datetime import date
+
+
 def isPalindrome(s=None):
     result = {}
     if s is None:
@@ -15,9 +19,6 @@ def isPalindrome(s=None):
     return result
 
 
-import functools
-
-
 def multiplyArgs(*m):
     result = {}
     args = [*m]
@@ -31,9 +32,6 @@ def multiplyArgs(*m):
     multiply = functools.reduce(lambda a, b: a * b, args)
     result["data"] = multiply
     return result
-
-
-from datetime import date
 
 
 def ageResult(born):
