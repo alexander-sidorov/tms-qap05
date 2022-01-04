@@ -1,7 +1,13 @@
-def is_palindrome(text: str) -> dict:
+from typing import Any
+
+
+def is_palindrome(text: Any) -> dict:
     result = {}
-    s1 = "".join(c for c in text if c.isalpha())
-    abc = s1.lower()
-    reverst_a = abc[::-1]
-    result["data"] = reverst_a == abc
+    if type(text) == str:
+        if text[::-1] == text:
+            result["data"] = True
+        else:
+            result["data"] = False
+    else:
+        result["errors"] = ["not string"]
     return result
