@@ -42,6 +42,15 @@ def ageResult(born):
         result["errors"] = "variable is not date"
         return result
     today = date.today()
-    age = int(today.year - born.year - ((today.month, today.day) < (born.month, born.day)))
-    result["data"] = {"year": born.year, "month": born.month, "day": born.day, "age": age}
+    age = int(
+        today.year
+        - born.year
+        - ((today.month, today.day) < (born.month, born.day))
+    )
+    result["data"] = {
+        "year": born.year,
+        "month": born.month,
+        "day": born.day,
+        "age": age,
+    }
     return result

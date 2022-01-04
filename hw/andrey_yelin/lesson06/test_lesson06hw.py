@@ -14,4 +14,6 @@ assert multiplyArgs(1, 2, 3) == {"data": 6}
 from datetime import date
 
 d = date(year=1987, month=8, day=2)
-assert ageResult(d) == {"data": {"year": 1987, "month": 8, "day": 2, "age": 34}}
+assert ageResult(d) == {
+    "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
+}
