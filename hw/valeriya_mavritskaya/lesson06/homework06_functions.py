@@ -41,14 +41,14 @@ print(multiplication(1,2,3,8.7))
 print(multiplication((1,2,3)))
 
 
-def birthday(my_date) -> Result:
+def birthday(my_date: tuple) -> Result:
     result: Result = {}
-    now = datetime.now()
-    year = now.strftime("%Y")
-    year = int(year)
 
-    result = year - my_date
-    return result
+    now = date.today()
+    age = int((now - my_date).days)
+    age = round(age / 365)
+
+    return age
 
 
-print(birthday(1993))
+print(birthday(date(1993, 8, 3)))
