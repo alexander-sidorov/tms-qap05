@@ -23,7 +23,5 @@ def level_2(*args: Any) -> dict:
     if fff != 0:
         result["errors"] = ["not int"]
     else:
-
         result["data"] = reduce(lambda x, y: x * y, args)
-
     return result
