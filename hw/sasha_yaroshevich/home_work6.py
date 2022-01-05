@@ -1,8 +1,9 @@
-from typing import Dict, Any
+from typing import Any
+from typing import Dict
 
 
 new_type = Dict[str, Any]
-def polindrom(stroka: Any) -> new_type:
+def polindrom_1(stroka: str) -> new_type:
     result = {}
 
     if type(stroka) != str:
@@ -13,3 +14,18 @@ def polindrom(stroka: Any) -> new_type:
         else:
             result["data"] = False
     return result
+
+
+def proizvedenie_2(*args):
+    result = {}
+
+    if args == 0:
+        result["errors"] = ["delenie na nol"]
+    else:
+        nakopitel = 1
+        for i in args:
+            nakopitel *= i
+
+        result["data"] = nakopitel
+    return result
+
