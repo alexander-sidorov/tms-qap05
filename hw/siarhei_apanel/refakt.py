@@ -61,8 +61,9 @@ def krypto(cod: str, key: str) -> str:
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
 
 
+
 def palindrom(di1: str) -> dict:
-    result = {}
+    result = {'errors': Any}
     if type(di1) != str:
         result["errors"] = ["TypeError"]
     else:
@@ -78,41 +79,37 @@ def palindrom(di1: str) -> dict:
     return result
 
 
-def proizvedenie(*digit: tuple) -> dict:
-    result = {}
+def proizvedenie(*digit: tuple[int]) -> dict:
+    
     verif = 0
     product = 1
 
     for dig in digit:
+        result: dict[str, int] = {}
 
         if type(dig) in [str, tuple, list]:
             verif += 1
             if verif >= 2:
-                result = {"errors": ["TypeError"]}
-                break
-
-            else:
-                product *= dig
-                result = {"data": product}
-        else:
-            product *= dig
-            result = {"data": product}
+                return {'errors': ["TypeError"]}
+        product *= dig
+        result = {"data": product}
 
     return result
 
 
 def dateday(yer: int, mont: int, dayz: int) -> dict:
-    result = {}
+    
     if (
         type(yer) in [str, tuple, list]
         or type(mont) in [str, tuple, list]
         or type(dayz) in [str, tuple, list]
     ):
-        result["errors"] = ["TypeError"]
-    elif yer == 0 or mont <= 0 or mont > 12 or dayz <= 0 or dayz > 31:
-        result["errors"] = ["ZeroError"]
-    else:
 
+        return {'errors': ["TypeError"]}
+    elif yer == 0 or mont <= 0 or mont > 12 or dayz <= 0 or dayz > 31:
+        return {'errors': ["ZeroError"]}
+    else:
+        result: dict[str, dict[str, int]] = {}
         data = date(yer, mont, dayz)
         now = date.today()
         delta = now - data
@@ -123,8 +120,8 @@ def dateday(yer: int, mont: int, dayz: int) -> dict:
                 "day": data.day,
                 "age": int(delta.days // 365),
             }
-        }
-    return result
+        }  
+        return result
 
 
 def happybithday(yer: dict) -> dict:

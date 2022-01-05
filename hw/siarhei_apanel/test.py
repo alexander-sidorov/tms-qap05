@@ -21,7 +21,7 @@ def test_example() -> None:  # noqa: W503
     assert srez([2, 14, "b", "h"], "r") == [2, 14, "b", "h", "r"]
     assert stroki("a4N67;i", "V") == "aV4VNV6V7V;Vi"
     assert stroki("a4N67;i", "") == "a4N67;i"
-    assert zaglav("") == "No Value"
+    assert zaglav("") == ""
     assert krypto(co, ke) == "Do only what only you can do"  # noqa: W503, E501
     assert far() is None  # type: ignore
     assert gar() == 4
