@@ -1,7 +1,5 @@
 from typing import Dict, Any
-from datetime import datetime
 from datetime import date
-
 
 Result = Dict[str, Any]
 
@@ -41,14 +39,40 @@ print(multiplication(1,2,3,8.7))
 print(multiplication((1,2,3)))
 
 
-def birthday(my_date: tuple) -> Result:
+def birthday(my_date: date) -> Result:
     result: Result = {}
-
-    now = date.today()
-    age = int((now - my_date).days)
-    age = round(age / 365)
-
-    return age
+    if not isinstance(my_date, date):
+        result["error"] = ["Input must be a date"]
+    else:
+        now = date.today()
+        age = int((now - my_date).days)
+        age = round(age / 365)
+        result = {
+            "year": my_date.year,
+            "month": my_date.month,
+            "day": my_date.day,
+            "age": age
+            }
+    return result
 
 
 print(birthday(date(1993, 8, 3)))
+print(birthday(1993))
+
+
+def oldest(person1: date, person2: date) -> Result:
+    result: Result = {}
+    if not isinstance(person1, date):
+        result["error"] = ["Input must be a date"]
+    else:
+        if person1 < person2:
+            result["data"] = ["Person 1 is older"]
+        elif person1 > person2:
+            result["data"] = ["Person 2 is older"]
+        elif person1 == person2:
+            result["data"] = ["Same age"]
+    return result
+
+
+print(oldest(date(1993, 8, 3), date(2000, 6, 6)))
+print(oldest(1993, 8))
