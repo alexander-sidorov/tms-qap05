@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Dict, Any
 
 
 new_type = Dict[str, Any]
