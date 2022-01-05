@@ -1,6 +1,6 @@
-def f() -> None:
+def f1() -> None:
     4  # noqa: B018
 
 
-def g() -> int:
+def g2() -> int:
     return 4
