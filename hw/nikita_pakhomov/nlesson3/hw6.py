@@ -1,3 +1,4 @@
+from functools import reduce
 from typing import Any
 
 
@@ -17,11 +18,12 @@ def level_2(*args):
     result = {}
     fff = 0
     for i in args:
-        if (isinstance(i, int)) == False: # noqa
+        if (isinstance(i, int)) == False:  # noqa
             fff = 1
     if fff != 0:
         result["errors"] = ["not int"]
     else:
-        result["data"] = sum(args)
+
+        result["data"] = reduce(lambda x, y: x * y, args)
 
     return result
