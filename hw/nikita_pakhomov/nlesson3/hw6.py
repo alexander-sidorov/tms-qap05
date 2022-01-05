@@ -11,3 +11,17 @@ def is_palindrome(text: Any) -> dict:
     else:
         result["errors"] = ["not string"]
     return result
+
+
+def level_2(*args):
+    result = {}
+    fff = 0
+    for i in args:
+        if (isinstance(i, int)) == False: # noqa
+            fff = 1
+    if fff != 0:
+        result["errors"] = ["not int"]
+    else:
+        result["data"] = sum(args)
+
+    return result
