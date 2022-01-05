@@ -13,15 +13,17 @@ from hw.siarhei_apanel.refakt import zaglav
 def test_example() -> None:  # noqa: W503
     co = "VD DzgS PwFl DzgS SDK ZFz HD"
     ke = "FTZHfrcwtoRgQzDaspdlKiPvSYLekVCqhJbyEnmMBAOIxuXjWUNG"  # noqa: E501
-    assert korteg([1, 3.0, "re", 8]) == (1, 8)
+    assert korteg([1, 3.0, "rer", 8]) == (1, 8)
     assert korteg([1]) == (1, 1)
     assert korteg([]) == ()
     assert newwords("asfN dB12") == "dB12 asfN"
     assert newwords("asfNdB12") == "asfNdB12"
-    assert srez([2, 14, "b", "h"], "r") == [2, 14, "b", "h", "r"]
+    assert srez([1, 2, 3, 4], 3) == [1, 2, 3]
+    assert srez([1, 2, 3, 4], 5) == ["NoValue"]
     assert stroki("a4N67;i", "V") == "aV4VNV6V7V;Vi"
     assert stroki("a4N67;i", "") == "a4N67;i"
     assert zaglav("") == ""
+    assert zaglav("ad aD") == "Ad Ad"
     assert krypto(co, ke) == "Do only what only you can do"  # noqa: W503, E501
     assert far() is None  # type: ignore
     assert gar() == 4

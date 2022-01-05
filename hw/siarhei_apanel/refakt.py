@@ -1,5 +1,5 @@
-from typing import Any
 from datetime import date
+from typing import Any
 
 
 def func(a1: float, back: float, cill: float) -> list:
@@ -38,9 +38,11 @@ def newwords(words: str) -> str:
     return f"{words1[1]} {words1[0]}"
 
 
-def srez(spisk: list, another: Any) -> list:
-    spisk.append(another)
-    return spisk
+def srez(spisk: Any, another: Any) -> list:
+    if another not in spisk:
+        return ["NoValue"]
+    limit = spisk.index(another)
+    return spisk[: limit + 1]  # noqa: E203
 
 
 def stroki(stroka: str, stroka2: str) -> str:
@@ -52,7 +54,7 @@ def stroki(stroka: str, stroka2: str) -> str:
 
 def zaglav(stroka: str) -> str:
     if stroka == "":
-        return "No Value"
+        return ""
     return stroka.title()
 
 
@@ -61,9 +63,8 @@ def krypto(cod: str, key: str) -> str:
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
 
 
-
 def palindrom(di1: str) -> dict:
-    result = {'errors': Any}
+    result = {"errors": Any}
     if type(di1) != str:
         result["errors"] = ["TypeError"]
     else:
@@ -79,8 +80,8 @@ def palindrom(di1: str) -> dict:
     return result
 
 
-def proizvedenie(*digit: tuple[int]) -> dict:
-    
+def proizvedenie(*digit: int) -> dict:
+
     verif = 0
     product = 1
 
@@ -90,24 +91,25 @@ def proizvedenie(*digit: tuple[int]) -> dict:
         if type(dig) in [str, tuple, list]:
             verif += 1
             if verif >= 2:
-                return {'errors': ["TypeError"]}
+                return {"errors": ["TypeError"]}
         product *= dig
+
         result = {"data": product}
 
     return result
 
 
 def dateday(yer: int, mont: int, dayz: int) -> dict:
-    
-    if (
-        type(yer) in [str, tuple, list]
-        or type(mont) in [str, tuple, list]
-        or type(dayz) in [str, tuple, list]
-    ):
 
-        return {'errors': ["TypeError"]}
+    if (
+        type(yer) in [str, tuple, list, set]
+        or type(mont) in [str, tuple, list, set]  # noqa: W503
+        or type(dayz) in [str, tuple, list, set]  # noqa: W503
+    ):  # noqa: W503
+        # noqa: W503
+        return {"errors": ["TypeError"]}
     elif yer == 0 or mont <= 0 or mont > 12 or dayz <= 0 or dayz > 31:
-        return {'errors': ["ZeroError"]}
+        return {"errors": ["ValueError"]}
     else:
         result: dict[str, dict[str, int]] = {}
         data = date(yer, mont, dayz)
@@ -120,7 +122,7 @@ def dateday(yer: int, mont: int, dayz: int) -> dict:
                 "day": data.day,
                 "age": int(delta.days // 365),
             }
-        }  
+        }
         return result
 
 
@@ -128,6 +130,8 @@ def happybithday(yer: dict) -> dict:
     age = date(1, 1, 1)
 
     for keys, value in yer.items():
+        if value == age:
+            return {"errors": ["EqualError"]}
 
         if value > age:
             age = yer[keys]
@@ -136,29 +140,41 @@ def happybithday(yer: dict) -> dict:
 
 
 def repeat(collect: Any) -> dict:
-
     noresult = []
     result = {}
+    if type(collect) in [list, tuple]:
+        for digit in collect:
+            noresult.append(digit)
+        result_dict = {
+            quant: noresult.count(quant)
+            for quant in noresult
+            if noresult.count(quant) > 1
+        }
 
-    for digit in collect:
-        noresult.append(digit)
-    result_dict = {
-        quant: noresult.count(quant)
-        for quant in noresult
-        if noresult.count(quant) > 1
-    }
+        result["data"] = result_dict
+        return result
+    elif type(collect) == set:
+        return {"errors": ["NoRepeatError"]}
+    else:
+        for value in collect.values():
+            noresult.append(value)
+            result_dict = {
+                quant: noresult.count(quant)
+                for quant in noresult
+                if noresult.count(quant) > 1
+            }
 
-    result["data"] = result_dict
-    return result
+        result["data"] = result_dict
+        return result
 
 
 def html_str(query: str) -> dict:
-    result = {}
+    result: dict[str, list] = {}
 
     for letter in query.split("&"):
         for el in range(len(letter.split("="))):
 
-            if letter.split("=")[el].isalpha() == True:
+            if letter.split("=")[el].isalpha():
                 result.setdefault(letter.split("=")[el], []).append(
                     letter.split("=")[el + 1]
                 )
@@ -169,16 +185,24 @@ def html_str(query: str) -> dict:
 
 
 def decodding(code: str) -> dict:
-    return {
-        "data": "".join(
-            code[sym] * int(code[sym + 1])
-            for sym in range(len(code))
-            if code[sym].isalpha() == True
-        )
-    }
+    if type(code) != str:
+        return {"errors": ["TypeError"]}
+    elif len(code) % 2 != 0:
+        return {"errors": ["NoQualityLetterError"]}
+    else:
+        return {
+            "data": "".join(
+                code[sym] * int(code[sym + 1])
+                for sym in range(len(code))
+                if code[sym].isalpha()
+            )
+        }
 
 
 def codding(s1: str) -> dict:
+    if type(s1) != str:
+        return {"errors": ["TypeError"]}
+
     i1 = 0
     num = 0
     result = ""
@@ -197,17 +221,18 @@ def codding(s1: str) -> dict:
                 z1 = str(g1)
             result += t1 + z1
             break
-        num += 1
+        num += 1  # noqa: SIM113
         if s1[i1] != s1[j1]:
-            t1 = s1[i1]
-            g1 = str(num)
-            result += t1 + g1
+            result += s1[i1] + str(num)
             num = 0
     return {"data": result}
 
 
 def rever_dict(d1: dict) -> dict:
-    result = {}
+    if type(d1) != dict:
+        return {"errors": ["TypeError"]}
+
+    result: dict[int, list] = {}
     spisok = []
     for value in d1.values():
         spisok.append(value)
