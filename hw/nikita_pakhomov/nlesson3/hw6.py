@@ -1,8 +1,11 @@
 from functools import reduce
 from typing import Any
+from typing import Dict
+
+type_1 = Dict[str, Any]
 
 
-def is_palindrome(text: Any) -> dict:
+def is_palindrome(text: str) -> type_1:
     result = {}
     if type(text) == str:
         if text[::-1] == text:
