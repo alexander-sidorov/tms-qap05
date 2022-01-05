@@ -1,7 +1,8 @@
 from typing import Any
 
 
-def polindrom(stroka: Any) -> dict:
+new_type = Dict[str, Any]
+def polindrom(stroka: Any) -> new_type:
     result = {}
 
     if type(stroka) != str:
