@@ -14,7 +14,7 @@ def is_palindrome(text: Any) -> dict:
     return result
 
 
-def level_2(*args):
+def level_2(*args: Any) -> dict:
     result = {}
     fff = 0
     for i in args:
