@@ -1,4 +1,5 @@
 from datetime import date
+from typing import Any  # noqa F401
 
 from hw.siarhei_apanel.refakt import codding
 from hw.siarhei_apanel.refakt import dateday
