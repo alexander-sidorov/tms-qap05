@@ -22,6 +22,7 @@ def test_example() -> None:  # noqa: W503
     assert stroki("a4N67;i", "V") == "aV4VNV6V7V;Vi"
     assert stroki("a4N67;i", "") == "a4N67;i"
     assert zaglav("") == ""
+    assert zaglav("ad aD") == "Da Da"
     assert krypto(co, ke) == "Do only what only you can do"  # noqa: W503, E501
     assert far() is None  # type: ignore
     assert gar() == 4
