@@ -63,7 +63,7 @@ def krypto(cod: str, key: str) -> str:
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
 
 
-def palindrom(di1: str) -> dict:
+def palindrom(di1: Any) -> dict:
     result = {"errors": Any}
     if type(di1) != str:
         result["errors"] = ["TypeError"]
@@ -80,7 +80,7 @@ def palindrom(di1: str) -> dict:
     return result
 
 
-def proizvedenie(*digit: int) -> dict:
+def proizvedenie(*digit: Any) -> dict:
 
     verif = 0
     product = 1
@@ -99,31 +99,24 @@ def proizvedenie(*digit: int) -> dict:
     return result
 
 
-def dateday(yer: int, mont: int, dayz: int) -> dict:
+def dateday(yer: date) -> dict:
 
-    if (
-        type(yer) in [str, tuple, list, set]
-        or type(mont) in [str, tuple, list, set]  # noqa: W503
-        or type(dayz) in [str, tuple, list, set]  # noqa: W503
-    ):  # noqa: W503
-        # noqa: W503
+    if type(yer) != date:
         return {"errors": ["TypeError"]}
-    elif yer == 0 or mont <= 0 or mont > 12 or dayz <= 0 or dayz > 31:
-        return {"errors": ["ValueError"]}
-    else:
-        result: dict[str, dict[str, int]] = {}
-        data = date(yer, mont, dayz)
-        now = date.today()
-        delta = now - data
-        result = {
-            "data": {
-                "year": data.year,
-                "month": data.month,
-                "day": data.day,
-                "age": int(delta.days // 365),
-            }
+
+    result: dict[str, dict[str, int]] = {}
+    now = date.today()
+    delta = now - yer
+
+    result = {
+        "data": {
+            "year": yer.year,
+            "month": yer.month,
+            "day": yer.day,
+            "age": int(delta.days // 365),
         }
-        return result
+    }
+    return result
 
 
 def happybithday(yer: dict) -> dict:
@@ -140,32 +133,18 @@ def happybithday(yer: dict) -> dict:
 
 
 def repeat(collect: Any) -> dict:
-    noresult = []
-    result = {}
-    if type(collect) in [list, tuple]:
-        for digit in collect:
-            noresult.append(digit)
-        result_dict = {
-            quant: noresult.count(quant)
-            for quant in noresult
-            if noresult.count(quant) > 1
-        }
-
-        result["data"] = result_dict
-        return result
-    elif type(collect) == set:
+    if type(collect) not in [list, tuple, str]:
         return {"errors": ["NoRepeatError"]}
-    else:
-        for value in collect.values():
-            noresult.append(value)
-            result_dict = {
-                quant: noresult.count(quant)
-                for quant in noresult
-                if noresult.count(quant) > 1
-            }
+    noresult = []
+    for digit in collect:
+        noresult.append(digit)
+    result_dict = {
+        quant: noresult.count(quant)
+        for quant in noresult
+        if noresult.count(quant) > 1
+    }
 
-        result["data"] = result_dict
-        return result
+    return {"data": result_dict}
 
 
 def html_str(query: str) -> dict:
@@ -174,7 +153,7 @@ def html_str(query: str) -> dict:
     for letter in query.split("&"):
         for el in range(len(letter.split("="))):
 
-            if letter.split("=")[el].isalpha():
+            if letter.split("=")[el] != letter.split("=")[-1]:
                 result.setdefault(letter.split("=")[el], []).append(
                     letter.split("=")[el + 1]
                 )
@@ -274,8 +253,8 @@ def new_set(set1: set, set2: set) -> dict:
             "a-b": set1 - set2,
             "b-a": set2 - set1,
             "|a-b|": set1 ^ set2,
-            "a in b": set1 in set2,
-            "b in a": set2 in set1,
+            "a in b": set1.issubset(set2),
+            "b in a": set2.issubset(set1),
         }
     }
 
