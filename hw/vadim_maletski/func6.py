@@ -1,110 +1,127 @@
 from collections import Counter
 from datetime import date
 from itertools import zip_longest
+from typing import Any
 
 
-def level_01(string: str) -> dict:  # type: ignore
+def level_01(string: Any) -> dict:
     result = {}
+    errors = []
 
-    if type(string) != str:
-        result["error"] = f"Wrong input type ({string}) -, need string"
+    if not string:
+        errors.append("argument must not be empty")
+    if type(string) == int:
+        errors.append("argument must not be number")
+    if errors:
+        result["errors"] = errors
 
     else:
         if string == string[::-1]:
             result["data"] = True  # type: ignore
-
         else:
             result["data"] = False  # type: ignore
 
     return result
 
 
-def level_02(arguments: tuple) -> dict:
-    data = len(str(arguments))
+def level_02(arguments: Any) -> dict:
     result = {}
+    errors = []
 
-    if arguments == "":
-        result["error"] = "No arguments"
-    elif type(arguments) == str:
-        result["error"] = f"({arguments}) Must be list of numbers"
+    data = len(str(arguments))
+
+    if not arguments:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
         if data == 1:
-            result["data"] = arguments  # type: ignore
+            result["data"] = int(arguments)  # type: ignore
 
         else:
             ans = 1
             for i in arguments:
                 ans *= i
 
-                result["data"] = ans  # type: ignore
+            result["data"] = ans  # type: ignore
 
     return result
 
 
-def level_03(bd: date) -> dict:
-    today = date.today()
+def level_03(bd: Any) -> dict:
     result = {}
+    errors = []
 
-    if bd.year <= today.year:
+    today = date.today()
+
+    if bd.year > today.year:
+        errors.append("wrong year")
+    if errors:
+        result["errors"] = errors
+
+    else:
         age = (
             today.year
             - bd.year  # noqa: W503
             - ((today.month, today.day) < (bd.month, bd.day))  # noqa: W503
         )
 
-        result["data"] = {
+        result["data"] = {  # type: ignore
             "year": bd.year,
             "month": bd.month,
             "day": bd.day,
             "age": age,
         }
 
-    else:
-        result["error"] = "Incorrect year"  # type: ignore
-
     return result
 
 
-def level_04(dic: dict) -> dict:
+def level_04(dic: Any) -> dict:
     result = {}
+    errors = []
 
     if dic["A"] == dic["B"]:
-        result["error"] = "Years must be a different"
-
-    elif dic["A"] > dic["B"]:
-        result["data"] = "B"
+        errors.append("years must be a different")
+    if errors:
+        result["errors"] = errors
 
     else:
-        result["data"] = "A"
+        if dic["A"] > dic["B"]:
+            result["data"] = "B"  # type: ignore
+        else:
+            result["data"] = "A"  # type: ignore
 
     return result
 
 
-def level_05(lis: list) -> dict:
+def level_05(lis: Any) -> dict:
     result = {}
+    errors = []
 
-    if type(lis) != list:
-        result["error"] = f"({lis}) Must be list"
-
-    elif not lis:
-        result["error"] = f"({lis}) List is empty"
+    if not lis:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
         res = dict(  # noqa: C402
             (x, lis.count(x)) for x in set(lis) if lis.count(x) > 1
-        )
+        )  # noqa: C402
 
         result["data"] = res  # type: ignore
 
     return result
 
 
-def level_06(query: str) -> dict:
+def level_06(query: Any) -> dict:
     result = {}
+    errors = []
 
-    if type(query) != str:
-        result["error"] = f"({query}) Must be string"
+    if not query:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
         query2 = query.replace("=", "")
@@ -127,29 +144,35 @@ def level_06(query: str) -> dict:
     return result
 
 
-def level_07(string: str) -> dict:
+def level_07(string: Any) -> dict:
     result = {}
+    errors = []
 
-    if type(string) != str:
-        result["error"] = f"({string}) Must be string"
+    if not string:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
+
     else:
-
         s1 = list(string[::2])
         s2 = list(string[1::2])
 
         s3 = [k * int(v) for (k, v) in zip(s1, s2)]
         s4 = "".join(s3)
 
-        result["data"] = s4
+        result["data"] = s4  # type: ignore
 
     return result
 
 
-def level_08(string: str) -> dict:
+def level_08(string: Any) -> dict:
     result = {}
+    errors = []
 
-    if type(string) != str:
-        result["error"] = f"({string}) Must be string"
+    if not string:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
         s1 = list(string[::])
@@ -157,16 +180,19 @@ def level_08(string: str) -> dict:
         s2 = (f"{key}{value}" for (key, value) in dic.items())
         s3 = "".join(s2)
 
-        result["data"] = s3
+        result["data"] = s3  # type: ignore
 
     return result
 
 
-def level_09(dic: dict) -> dict:
+def level_09(dic: Any) -> dict:
     result = {}
+    errors = []
 
-    if type(dic) != dict:
-        result["error"] = f"({dic}) Must be dict"
+    if not dic:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
         lis = [(value, key) for key, value in dic.items()]
@@ -181,15 +207,16 @@ def level_09(dic: dict) -> dict:
     return result
 
 
-def level_10a(a1: str, b1: list) -> dict:
+def level_10a(a1: Any, b1: Any) -> dict:
     result = {}
+    errors = []
 
-    if type(a1) != str:
-        result["error"] = f"({a1}) Must be string"
-    elif type(b1) != list:
-        result["error"] = f"({b1}) Must be list"
-    elif type(b1) == str:
-        result["error"] = f"({b1}) Must be list of numbers"
+    if not a1:
+        errors.append("argument must not be empty")
+    if not b1:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
         a11 = list(a1)
@@ -199,14 +226,16 @@ def level_10a(a1: str, b1: list) -> dict:
     return result
 
 
-def level_10b(a2: str, b2: list) -> dict:
+def level_10b(a2: Any, b2: Any) -> dict:
     result = {}
-    if type(a2) != str:
-        result["error"] = f"({a2}) Must be string"
-    elif type(b2) != list:
-        result["error"] = f"({b2}) Must be list"
-    elif type(b2) == str:
-        result["error"] = f"({b2}) Must be list of numbers"
+    errors = []
+
+    if not a2:
+        errors.append("argument must not be empty")
+    if not b2:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
         a22 = list(a2)
@@ -216,13 +245,16 @@ def level_10b(a2: str, b2: list) -> dict:
     return result
 
 
-def level_11(s1: set, s2: set) -> dict:
+def level_11(s1: Any, s2: Any) -> dict:
     result = {}
+    errors = []
 
-    if type(s1) != set:
-        result["error"] = f"({s1}) Must be set"
-    elif type(s2) != set:
-        result["error"] = f"({s2}) Must be set"
+    if not s1:
+        errors.append("argument must not be empty")
+    if not s2:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
         dic = {"a": s1, "b": s2}
@@ -247,21 +279,18 @@ def level_11(s1: set, s2: set) -> dict:
     return result
 
 
-def level_12(arg: tuple) -> dict:
+def level_12(arg: Any) -> dict:
     result = {}
+    errors = []
 
-    if arg == "":
-        result["error"] = "No arguments"
-    elif type(arg) == str:
-        result["error"] = f"({arg}) Must be list of numbers"
+    if not arg:
+        errors.append("argument must not be empty")
+    if errors:
+        result["errors"] = errors
 
     else:
-        list1 = [
-            value for (key, value) in enumerate(arg) if key % 2 == 0
-        ]  # noqa: E501  # type: ignore
-        list2 = [
-            value for (key, value) in enumerate(arg) if key % 2 != 0
-        ]  # noqa: E501  # type: ignore
+        list1 = [value for (key, value) in enumerate(arg) if key % 2 == 0]
+        list2 = [value for (key, value) in enumerate(arg) if key % 2 != 0]
 
         list3 = dict(zip(list1, list2))
 
