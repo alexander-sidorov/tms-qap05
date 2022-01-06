@@ -1,5 +1,4 @@
 from datetime import date
-from typing import Any  # noqa F401
 
 from hw.siarhei_apanel.refakt import codding
 from hw.siarhei_apanel.refakt import dateday
@@ -15,29 +14,25 @@ from hw.siarhei_apanel.refakt import repeat
 from hw.siarhei_apanel.refakt import rever_dict
 
 
-def test_example() -> None:  # noqa: W503
-    yers = {"a": date(2000, 7, 12), "b": date(2000, 7, 12)}  # noqa: E501
-    dic = {1: 100, 2: 100, 3: 300}  # noqa: E501
+def test_example() -> None:
+    yers = {"a": date(2000, 7, 12), "b": date(2000, 7, 12)}
+    dic = {1: 100, 2: 100, 3: 300}
     set1 = {1, 2}
     set2 = {1, 3}
-    da = {"a": date(2000, 7, 12), "b": date(1987, 12, 24)}  # noqa: E501
+    da = {"a": date(2000, 7, 12), "b": date(1987, 12, 24)}
     dat = date(year=1987, month=8, day=2)
     assert palindrom("") == {"data": True}
     assert palindrom("x") == {"data": True}
     assert palindrom("xx") == {"data": True}
     assert palindrom("xy") == {"data": False}
-    assert palindrom(1) == {"errors": ["TypeError"]}  # noqa: E800, E501
+    assert palindrom(1) == {"errors": ["TypeError"]}
     assert proizvedenie(1, 2, 3) == {"data": 6}
     assert proizvedenie(1) == {"data": 1}
     assert proizvedenie(1, 2) == {"data": 2}
-    assert proizvedenie("1", 3) == {"data": "111"}  # noqa: E800, E501
-    # assert proizvedenie("1", "3") == {"errors": ["TypeError"]} # noqa: E800, E501
-    # assert proizvedenie(2, [3]) == {"data": [3, 3]} # noqa: E800, E501
-    # assert proizvedenie((1, 3), [9], 2) == {"errors": ["TypeError"]} # noqa: E800, E501
+    assert proizvedenie("1", 3) == {"data": "111"}
     assert dateday(dat) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
-    # assert dateday(1997) == {"errors": ["TypeError"]} # noqa: E800, E501
     assert happybithday(da) == {"data": "b"}
     assert happybithday(yers) == {"errors": ["EqualError"]}
     assert repeat([(), "", "", 1]) == {"data": {"": 2}}
@@ -50,11 +45,8 @@ def test_example() -> None:  # noqa: W503
     }
     assert decodding("a3b2c1") == {"data": "aaabbc"}
     assert decodding("a3b2c") == {"errors": ["NoQualityLetterError"]}
-    # assert decodding(1234) == {"errors": ["TypeError"]} # noqa: E800
     assert codding("aaabb") == {"data": "a3b2"}
-    # assert codding(55) == {"errors": ["TypeError"]} # noqa: E800
     assert rever_dict(dic) == {"data": {100: [1, 2], 300: 3}}
-    # assert rever_dict([2, 5, 7]) == {"errors": ["TypeError"]} # noqa: E800
     assert rever_dict({"a": "a", "b": "b"}) == {"data": {"a": "a", "b": "b"}}
     assert new_dict("abc", [1, 2]) == {"data": {"a": 1, "b": 2, "c": None}}
     assert new_dict("ab", [1, 2, 3]) == {"data": {"a": 1, "b": 2, ...: [3]}}
