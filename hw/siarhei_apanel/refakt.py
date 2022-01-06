@@ -1,7 +1,3 @@
-from typing import Any
-from datetime import date
-
-
 def func(a1: float, back: float, cill: float) -> list:
     disk = back ** 2 - 4 * a1 * cill
     sqrt = disk ** 0.5
