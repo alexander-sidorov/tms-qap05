@@ -69,8 +69,8 @@ def test_example() -> None:  # noqa: W503
             "b in a": False,
         }
     }  # noqa: E501
-    assert new_set({1}, {1, 2})["data"]["a in b"] == True  # noqa: E712
-    assert new_set({1}, {1, 2})["data"]["b in a"] == False  # noqa: E712
+    assert new_set({1}, {1, 2})["data"]["a in b"] is True
+    assert new_set({1}, {1, 2})["data"]["b in a"] is False
     assert diction(1, 2) == {"data": {1: 2}}
     assert diction(1, 2, 3) == {"errors": ["NoPares"]}
     assert diction({1}, 2) == {"errors": ["TypeError"]}
