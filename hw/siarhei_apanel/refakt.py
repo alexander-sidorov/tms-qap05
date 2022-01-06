@@ -38,7 +38,7 @@ def newwords(words: str) -> str:
     return f"{words1[1]} {words1[0]}"
 
 
-def srez(spisk: Any, another: Any) -> list:
+def srez(spisk: list, another: int) -> list:
     if another not in spisk:
         return ["NoValue"]
     limit = spisk.index(another)
