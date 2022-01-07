@@ -1,3 +1,9 @@
+from typing import Any
+from typing import Callable
+from typing import Iterable
+from typing import List
+from typing import Union
+
 from hw.alexander_sidorov.lesson06.homework import task_01
 from hw.alexander_sidorov.lesson06.homework import task_02
 from hw.alexander_sidorov.lesson06.homework import task_03
@@ -11,29 +17,79 @@ from hw.alexander_sidorov.lesson06.homework import task_10
 from hw.alexander_sidorov.lesson06.homework import task_11
 from hw.alexander_sidorov.lesson06.homework import task_12
 
+Undefined = object()
 
-def test_task_01() -> None:
-    got = task_01("")
 
-    assert isinstance(got, dict), f"result {got=!r} MUST be dict"
-    assert got, f"empty result {got=!r} is not valid"
-    assert len(got) == 1, "only one key is allowed"
-    assert ("errors" in got) or ("data" in got), f"unknown key {got.keys()}"
+def validate(
+    func: Callable,
+    *args: Any,
+    expected_data: Any = Undefined,
+    expected_errors: Union[List[str], object] = Undefined,
+) -> None:
+    _e = "double expectations are not allowed"
+    assert (expected_data is Undefined) ^ (expected_errors is Undefined), _e
 
-    if "errors" in got:
-        errors = got["errors"]
-        assert isinstance(errors, list), f"{got['errors']=!r} MUST be a list"
-        assert errors, f"{got['errors']=!r} MUST contain at least one error"
+    result = func(*args)
+
+    assert isinstance(result, dict), f"{type(result)=!r}, MUST be a dict"
+    assert len(result) == 1, "only one dict key is allowed"
+    _e = f"unknown key {result.keys()}"
+    assert ("errors" in result) or ("data" in result), _e
+
+    if expected_data is not Undefined:
+        _e = "errors key MUST not be present for happy way"
+        assert "errors" not in result, _e
+
+        _e = "data key MUST be present for happy path"
+        assert "data" in result, _e
+
+        got_data = result["data"]
+        _e = f"expectations failed for {func.__name__}{args}"
+        assert got_data == expected_data, _e
+
+    if expected_errors is not Undefined:
+        assert isinstance(expected_errors, Iterable)
+
+        _e = "errors key MUST be present for failed path"
+        assert "errors" in result, _e
+
+        _e = "data key MUST not be present for failed path"
+        assert "data" not in result, _e
+
+        errors: List[str] = result["errors"]
+        _e = f"{type(result['errors'])=!r}, MUST be a list"
+        assert isinstance(errors, list)
+
+        _e = f"{result['errors']=!r} MUST contain at least one error"
+        assert errors, _e
+
         for i, error in enumerate(errors):
-            assert isinstance(
-                error, str
-            ), f"{got['errors'][{i}]=!r} MUST be a str"
+            _e = f"{result['errors'][i]=!r} MUST be a str"
+            assert isinstance(error, str), _e
+
+        missing_errors = set(expected_errors) - set(errors)
+        _e = f"missing errors: {sorted(missing_errors)}"
+        assert not missing_errors, _e
+
         assert errors == sorted(errors), "errors are not sorted"
 
-    assert task_01("") == {"data": True}
-    assert task_01("x") == {"data": True}
-    assert task_01("xx") == {"data": True}
-    assert task_01("xy") == {"data": False}
+
+def test_task_01() -> None:
+    validate(task_01, "", expected_data=True)
+    validate(task_01, "x", expected_data=True)
+    validate(task_01, "xx", expected_data=True)
+    validate(task_01, "xy", expected_data=False)
+
+    validate(
+        task_01,
+        None,
+        expected_errors=["type(arg)=NoneType, MUST be a string"],
+    )
+    validate(
+        task_01,
+        1,
+        expected_errors=["type(arg)=int, MUST be a string"],
+    )
 
 
 def test_task_02() -> None:
