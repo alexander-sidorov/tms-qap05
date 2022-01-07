@@ -68,7 +68,7 @@ def validate(
             assert isinstance(error, str), _e
 
         missing_errors = set(expected_errors) - set(errors)
-        _e = f"missing errors: {sorted(missing_errors)}"
+        _e = f"errors={sorted(errors)}, missing: {sorted(missing_errors)}"
         assert not missing_errors, _e
 
         assert errors == sorted(errors), "errors are not sorted"
@@ -93,7 +93,33 @@ def test_task_01() -> None:
 
 
 def test_task_02() -> None:
-    assert task_02()
+    validate(task_02, "a", 2, expected_data="aa")
+    validate(task_02, (3,), 2, expected_data=(3, 3))
+    validate(task_02, 0.2, 5, expected_data=1.0)
+    validate(task_02, 1j, -1j, expected_data=1)
+    validate(task_02, 1, 2, 3, expected_data=6)
+    validate(task_02, 1, 2, expected_data=2)
+    validate(task_02, 1, expected_data=1)
+    validate(task_02, 2, "b", expected_data="bb")
+    validate(task_02, 2, "c", 3, expected_data="cccccc")
+    validate(task_02, [2], 2, expected_data=[2, 2])
+    validate(task_02, True, False, expected_data=0)
+
+    validate(task_02, None, 2, expected_errors=["cannot do: None * 2"])
+    validate(task_02, {}, 2, expected_errors=["cannot do: {} * 2"])
+
+    validate(
+        task_02,
+        2,
+        "c",
+        3,
+        "c",
+        expected_errors=["cannot do: 'cccccc' * 'c'"],
+    )
+    validate(
+        task_02,
+        expected_errors=["nothing to multiply"],
+    )
 
 
 def test_task_03() -> None:
