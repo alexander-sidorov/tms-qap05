@@ -1,5 +1,6 @@
 import functools
 from datetime import date
+from datetime import datetime
 
 
 def isPalindrome(s=None):
@@ -51,4 +52,45 @@ def ageResult(born):
         "day": born.day,
         "age": age,
     }
+    return result
+
+
+def older(oldDate):
+    result = {}
+    if len(oldDate) == 0:
+        result["errors"] = "empty variable"
+        return result
+    maxDate = 0
+
+    for key in oldDate:
+        t = date.today()
+        ma = t - oldDate[key]
+        dd = str(ma)
+        if int(dd.split()[0]) > maxDate:
+            maxDate = int(dd.split()[0])
+            result["data"] = key
+    return result
+
+
+c = [(), "", "", 1, 1]
+
+
+def repeatingElements(elementsList):
+    result = {}
+    zy = {}
+    repeat = {}
+    for elem in elementsList:
+        if elem in zy:
+            zy[elem] = zy[elem] + 1
+        else:
+            zy[elem] = 1
+    print(zy)
+    for key in zy:
+        if zy[key] > 1:
+            repeat[key] = zy[key]
+    if len(repeat) == 0:
+        result["data"] = "elements are not repeat"
+        return result
+    else:
+        result["data"] = repeat
     return result
