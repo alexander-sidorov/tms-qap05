@@ -12,7 +12,7 @@
 .mypy_cache/
 .pytest_cache/
 .secrets.*
-.vscode
+.vscode/
 Pipfile.lock
 __pycache__/
 config/.secrets/
