@@ -17,8 +17,8 @@ def test_fun2() -> None:
 
 def test_fun3() -> None:
     collection1 = (1, 2, 3, 4, 5, 10)
-    object = 4
-    assert fun3(collection1, object) == (1, 2, 3, 4)
+    object3 = 4
+    assert fun3(collection1, object3) == (1, 2, 3, 4)
 
 
 def test_fun4() -> None:

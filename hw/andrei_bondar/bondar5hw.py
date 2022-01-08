@@ -10,8 +10,8 @@ def fun2(string: str) -> str:
     return f"{string1[1]} {string1[0]}"
 
 
-def fun3(collection1: Any, object: Any) -> Any:
-    collection2 = collection1.index(object)
+def fun3(collection1: Any, object3: Any) -> Any:
+    collection2 = collection1.index(object3)
     return collection1[: collection2 + 1]
 
 
