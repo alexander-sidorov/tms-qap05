@@ -9,3 +9,4 @@ def test_func1_palindrome() -> None:
     assert func1_palindrome(["x", "y"]) == {"errors": ["should be str"]}
     assert func1_palindrome("Xx") == {"data": True}
     assert func1_palindrome("Do geese see God") == {"data": True}
+    assert func1_palindrome("Do geese    se e God  ") == {"data": True}
