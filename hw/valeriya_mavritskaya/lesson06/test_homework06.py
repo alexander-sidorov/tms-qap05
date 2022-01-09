@@ -75,7 +75,7 @@ def test_oldest_4() -> None:
     assert oldest_4(
         {"A": date(1993, 8, 3), "B": date(2000, 6, 6), "C": date(1980, 4, 5)}
     ) == {"data": "C"}
-    assert oldest_4(True) == {"error": "Input must be a dictionary"}  # type: ignore
+    assert oldest_4(True) == {"error": "Input must be a dictionary"}  # type: ignore  # noqa: E501
     assert oldest_4({"qwe": True}) == {"error": "Input must contain date"}
 
 
@@ -88,7 +88,7 @@ def test_dict_from_http_6() -> None:
     assert dict_from_http_6("x=1&x=2&y=3") == {
         "data": {"x": ["1", "2"], "y": ["3"]}
     }
-    assert dict_from_http_6(True) == {"error": "Input must be http query"}  # type: ignore
+    assert dict_from_http_6(True) == {"error": "Input must be http query"}  # type: ignore  # noqa: E501
 
 
 def test_repeated_symbols_7() -> None:
@@ -129,7 +129,7 @@ def test_set_operations_11() -> None:
             "b in a": False,
         }
     }
-    assert set_operations_11(1, 2) == {"error": "Input should be set"}  # type: ignore
+    assert set_operations_11(1, 2) == {"error": "Input should be set"}  # type: ignore  # noqa: E501
 
 
 def test_mk_dictionary_12() -> None:
