@@ -16,9 +16,9 @@ def func7_str_duplicate_char(arg: Any) -> dict:
             result_error.append("str is empty")
             is_error = True
         else:
-            res = re.findall('([a-zA-Z]+\d+)', arg)  # noqa: W605
+            res = re.findall("([a-zA-Z]+\d+)", arg)  # noqa: W605
             for val in res:
-                res2 = re.split('(\d+)', val)  # noqa: W605
+                res2 = re.split("(\d+)", val)  # noqa: W605
                 result_data += res2[0] * int(res2[1])
 
     if is_error:

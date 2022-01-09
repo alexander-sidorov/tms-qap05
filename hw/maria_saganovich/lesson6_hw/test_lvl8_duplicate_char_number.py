@@ -1,4 +1,6 @@
-from hw.maria_saganovich.lesson6_hw.lvl8_duplicate_char_number import func8_duplicate_char_number
+from hw.maria_saganovich.lesson6_hw.lvl8_duplicate_char_number import (
+    func8_duplicate_char_number,
+)
 
 
 def test_func8_duplicate_char_number() -> None:

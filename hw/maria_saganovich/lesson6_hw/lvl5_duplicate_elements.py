@@ -17,7 +17,9 @@ def func5_duplicate_elements(collection: Any) -> dict:
             is_error = True
         for value in collection:
             counter[value] = counter.get(value, 0) + 1
-            result_data = {data: count for data, count in counter.items() if count > 1}
+            result_data = {
+                data: count for data, count in counter.items() if count > 1
+            }
 
     if len(result_data) == 0:
         result_data = ["no duplicates"]

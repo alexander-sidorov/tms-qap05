@@ -7,7 +7,12 @@ def func3_age(d1: Any) -> dict:
     if type(d1) != date:
         result["errors"] = ["should be date"]
     else:
-        some_age = {"year": d1.year, "month": d1.month, "day": d1.day, "age": int}
+        some_age = {
+            "year": d1.year,
+            "month": d1.month,
+            "day": d1.day,
+            "age": int,
+        }
         today = date.today()
         age = date.today().year - d1.year
 

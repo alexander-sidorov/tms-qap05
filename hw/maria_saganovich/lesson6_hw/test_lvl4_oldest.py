@@ -17,6 +17,10 @@ def test_func4_oldest() -> None:
     assert func4_oldest(d2) == {"data": ["C"]}
     assert func4_oldest(d3) == {"errors": ["args should be date"]}
     assert func4_oldest(d4) == {"errors": ["is not born", "is not born"]}
-    assert func4_oldest(d5) == {"errors": ["args should be date", "is not born"]}
-    assert func4_oldest(d6) == {"errors": ["args should be date", "is not born"]}
+    assert func4_oldest(d5) == {
+        "errors": ["args should be date", "is not born"]
+    }
+    assert func4_oldest(d6) == {
+        "errors": ["args should be date", "is not born"]
+    }
     assert func4_oldest(d7) == {"data": ["Aria", "Jasmin"]}

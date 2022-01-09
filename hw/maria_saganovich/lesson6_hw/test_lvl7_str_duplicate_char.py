@@ -1,4 +1,6 @@
-from hw.maria_saganovich.lesson6_hw.lvl7_str_duplicate_char import func7_str_duplicate_char
+from hw.maria_saganovich.lesson6_hw.lvl7_str_duplicate_char import (
+    func7_str_duplicate_char,
+)
 
 
 def test_func7_str_duplicate_char() -> None:

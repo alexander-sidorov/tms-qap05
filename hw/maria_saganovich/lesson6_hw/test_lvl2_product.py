@@ -10,4 +10,4 @@ def test_func2_product() -> None:
     assert func2_product("abc", "def") == {"errors": ["should be number(s)"]}
     assert func2_product(2, -21.9) == {"data": -43.8}
     assert func2_product(2, 0, 1) == {"data": 0}
-    assert func2_product((1+2j), (3+4j)) == {"data": (-5 + 10j)}
+    assert func2_product((1 + 2j), (3 + 4j)) == {"data": (-5 + 10j)}

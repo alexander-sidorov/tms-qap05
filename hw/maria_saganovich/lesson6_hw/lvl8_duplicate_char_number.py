@@ -19,7 +19,9 @@ def func8_duplicate_char_number(arg: Any) -> dict:
         else:
             for value in arg:
                 counter[value] = counter.get(value, 0) + 1
-                result_d = {data: count for data, count in counter.items() if count > 1}
+                result_d = {
+                    data: count for data, count in counter.items() if count > 1
+                }
 
             for key, val in result_d.items():
                 result_data += key + str(val)

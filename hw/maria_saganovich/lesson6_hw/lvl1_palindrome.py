@@ -7,7 +7,7 @@ def func1_palindrome(palindrome: Any) -> dict:
         result["errors"] = ["should be str"]
     else:
         b1 = palindrome.split()
-        b1 = ''.join(b1)
+        b1 = "".join(b1)
         str_palindrome = str(b1).lower()
         if str_palindrome == str_palindrome[::-1]:
             result = {"data": True}
