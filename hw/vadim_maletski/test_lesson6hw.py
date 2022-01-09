@@ -53,8 +53,8 @@ def test() -> None:
     assert (
         level_04(
             {
-                 "A": date(year=1999, month=1, day=1),
-                 "B": date(year=2000, month=1, day=1),
+                "A": date(year=1999, month=1, day=1),
+                "B": date(year=2000, month=1, day=1),
             }
         )
     ) == {"data": "A"}
