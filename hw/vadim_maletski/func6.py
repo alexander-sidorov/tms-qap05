@@ -106,7 +106,9 @@ def level_05(lis: Any) -> Result:
             result["data"] = res
 
         else:
-            res = {(x, lis.count(x)) for x in lis if lis.count(x) > 1}  # type: ignore
+            res = {
+                (x, lis.count(x)) for x in lis if lis.count(x) > 1
+            }  # type: ignore
             result["data"] = dict(res)
 
     return result
