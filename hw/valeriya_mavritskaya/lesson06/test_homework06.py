@@ -62,7 +62,7 @@ def test_birthday_3() -> None:
     }
     assert birthday_3(date(year=3333, month=8, day=2)) == {
         "error": "Date should be in the past"
-    }  # noqa: E501
+    }
     assert birthday_3("1987") == {"error": "Input must be a date"}  # type: ignore  # noqa: E501
 
 
