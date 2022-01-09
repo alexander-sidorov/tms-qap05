@@ -33,18 +33,21 @@ def multiplication_2(*args: Any) -> dict:
 
 def birthday_3(input_date: date) -> dict:
     result = {}
-    if isinstance(input_date, date):
-        now = date.today()
-        age = int((now - input_date).days)
-        age = round(age / 365)
-        result = {
-            "year": input_date.year,
-            "month": input_date.month,
-            "day": input_date.day,
-            "age": age,
-        }
-    else:
+    now = date.today()
+    if not isinstance(input_date, date):
         result["error"] = "Input must be a date"
+    else:
+        if now > input_date:
+            age = int((now - input_date).days)
+            age = round(age / 365)
+            result = {
+                "year": input_date.year,
+                "month": input_date.month,
+                "day": input_date.day,
+                "age": age,
+            }
+        else:
+            result["error"] = "Date should be in the past"  # type: ignore
     return result
 
 
