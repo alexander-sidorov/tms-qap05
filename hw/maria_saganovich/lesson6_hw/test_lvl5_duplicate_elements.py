@@ -4,12 +4,12 @@ from hw.maria_saganovich.lesson6_hw.lvl5_duplicate_elements import (
 
 
 def test_func5_duplicate_elements() -> None:
-    c = [(), "", "", 1]
+    c0 = [(), "", "", 1]
     c1 = [10, 10, 23, 10, 123, 66, 78, 123]
     c2 = ()
-    c3 = []
+    c3: list = []
     c4 = ["may", "day"]
-    assert func5_duplicate_elements(c) == {"data": {"": 2}}
+    assert func5_duplicate_elements(c0) == {"data": {"": 2}}
     assert func5_duplicate_elements(c1) == {"data": {10: 3, 123: 2}}
     assert func5_duplicate_elements(c2) == {"errors": ["arg should be list"]}
     assert func5_duplicate_elements(c3) == {

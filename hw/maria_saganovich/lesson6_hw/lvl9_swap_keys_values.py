@@ -2,9 +2,9 @@ from typing import Any
 
 
 def func9_swap_keys_values(arg: Any) -> dict:
-    result = {}
+    result: dict[Any, Any] = {}
     is_error = False
-    result_data = {}
+    result_data: dict = {}
     result_error = []
 
     if type(arg) != dict:
@@ -16,7 +16,7 @@ def func9_swap_keys_values(arg: Any) -> dict:
             is_error = True
         else:
             for key, value in arg.items():
-                if value in result_data.keys():
+                if value in result_data.keys():  # noqa: SIM118
                     result_data[value].append(key)
                 else:
                     result_data[value] = [key]

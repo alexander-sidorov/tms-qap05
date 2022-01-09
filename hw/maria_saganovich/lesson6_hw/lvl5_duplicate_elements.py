@@ -4,9 +4,9 @@ from typing import Any
 def func5_duplicate_elements(collection: Any) -> dict:
     result = {}
     is_error = False
-    result_data = []
+    result_data: Any = []
     result_error = []
-    counter = {}
+    counter: dict = {}
 
     if type(collection) != list:
         result_error.append("arg should be list")

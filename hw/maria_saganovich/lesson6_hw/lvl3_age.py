@@ -16,11 +16,10 @@ def func3_age(d1: Any) -> dict:
         today = date.today()
         age = date.today().year - d1.year
 
-        if d1.month > today.month:
+        if (d1.month > today.month) or (
+            d1.month == today.month and d1.day > today.day
+        ):
             age = date.today().year - d1.year - 1
-        elif d1.month == today.month:
-            if d1.day > today.day:
-                age = date.today().year - d1.year - 1
         some_age["age"] = age
         result = {"data": some_age}
 

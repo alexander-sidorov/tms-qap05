@@ -2,7 +2,7 @@ from datetime import date
 from typing import Any
 
 
-def func4_oldest(d1: Any) -> dict:
+def func4_oldest(d1: Any) -> dict:  # noqa: CCR001
     result = {}
     oldest = date.today()
     is_error = False
@@ -13,16 +13,16 @@ def func4_oldest(d1: Any) -> dict:
         error.append("should be dict")
         is_error = True
     else:
-        for k, v in d1.items():
-            if isinstance(v, date):
-                if v < oldest:
-                    oldest = v
-                    result_data = [k]
-                elif v > oldest:
+        for key, value in d1.items():
+            if isinstance(value, date):
+                if value < oldest:
+                    oldest = value
+                    result_data = [key]
+                elif value > oldest:
                     error.append("is not born")
                     is_error = True
                 else:
-                    result_data.append(k)
+                    result_data.append(key)
             else:
                 error.append("args should be date")
                 is_error = True

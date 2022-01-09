@@ -2,15 +2,12 @@ from typing import Any
 
 
 def func11_relation_bt_2_sets(arg1: Any, arg2: Any) -> dict:
-    result = {}
+    result: dict[Any, Any] = {}
     is_error = False
     result_data = {}
     result_error = []
 
-    if type(arg1) != set:
-        result_error.append("arg should be set")
-        is_error = True
-    elif type(arg2) != set:
+    if type(arg1) != set or type(arg2) != set:
         result_error.append("arg should be set")
         is_error = True
     else:

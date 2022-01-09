@@ -1,15 +1,10 @@
-# Функция принимает бесконечное количество позиционных аргументов.
-# Из них она составляет и возвращает словарь. Словарь составляется по правилу:
-# четные элементы - ключи, нечетные - значения, попарно.
-#
-# assert f(1,2) == {"data": {1: 2}}
 from typing import Any
 
 
-def func12_even_keys_odd_values(*args: Any) -> dict:
-    result = {}
+def func12_even_keys_odd_values(*args: Any) -> dict:  # noqa: CCR001
+    result: dict[Any, Any] = {}
     is_error = False
-    result_data = {}
+    result_data: dict[Any, Any] = {}
     result_error = []
     odd_args = []
     even_args = []
@@ -32,7 +27,9 @@ def func12_even_keys_odd_values(*args: Any) -> dict:
                 result_data[value] = None
 
         if len(odd_args) < len(even_args):
-            result_data[...] = even_args[len(odd_args) : len(even_args) + 1]
+            result_data[...] = even_args[
+                len(odd_args) : len(even_args) + 1  # noqa: E203
+            ]
 
     if is_error:
         result["errors"] = sorted(result_error)

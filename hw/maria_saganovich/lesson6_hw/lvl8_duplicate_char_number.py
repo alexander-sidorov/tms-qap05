@@ -2,11 +2,11 @@ from typing import Any
 
 
 def func8_duplicate_char_number(arg: Any) -> dict:
-    result = {}
+    result: dict[Any, Any] = {}
     is_error = False
     result_data = ""
     result_error = []
-    counter = {}
+    counter: dict = {}
     result_d = {}
 
     if type(arg) != str:
@@ -23,8 +23,8 @@ def func8_duplicate_char_number(arg: Any) -> dict:
                     data: count for data, count in counter.items() if count > 1
                 }
 
-            for key, val in result_d.items():
-                result_data += key + str(val)
+            for key, value in result_d.items():
+                result_data += key + str(value)
 
     if is_error:
         result["errors"] = sorted(result_error)

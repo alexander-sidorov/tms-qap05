@@ -1,10 +1,10 @@
 from typing import Any
 
 
-def func6_dict_http_query(query: Any) -> dict:
-    result = {}
+def func6_dict_http_query(query: Any) -> dict:  # noqa: CCR001
+    result: dict[Any, Any] = {}
     is_error = False
-    result_data = {}
+    result_data: dict = {}
     result_error = []
 
     if type(query) != str:
@@ -16,10 +16,10 @@ def func6_dict_http_query(query: Any) -> dict:
             is_error = True
         else:
             data = str(query).split("&")
-            for val in data:
-                if val.find("=") != -1:
-                    tmp = val.split("=")
-                    if tmp[0] in result_data.keys():
+            for value in data:
+                if value.find("=") != -1:
+                    tmp = value.split("=")
+                    if tmp[0] in result_data.keys():  # noqa: SIM118
                         result_data[tmp[0]].append(tmp[1])
                     else:
                         result_data[tmp[0]] = [tmp[1]]

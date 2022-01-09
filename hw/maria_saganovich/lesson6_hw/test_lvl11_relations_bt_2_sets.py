@@ -4,7 +4,7 @@ from hw.maria_saganovich.lesson6_hw.lvl11_relations_bt_2_sets import (
 
 
 def test_func11_relation_bt_2_sets() -> None:
-    assert func11_relation_bt_2_sets({1, 2}, {1, 3}) == {
+    assert func11_relation_bt_2_sets({1, 2}, {1, 3}) == {  # noqa: JS101
         "data": {
             "a&b": {1},
             "a|b": {1, 2, 3},
@@ -14,8 +14,8 @@ def test_func11_relation_bt_2_sets() -> None:
             "a in b": False,
             "b in a": False,
         }
-    }
-    assert func11_relation_bt_2_sets({1, 2}, {1, 2, 3}) == {
+    }  # noqa: JS102
+    assert func11_relation_bt_2_sets({1, 2}, {1, 2, 3}) == {  # noqa: JS101
         "data": {
             "a&b": {1, 2},
             "a|b": {1, 2, 3},
@@ -25,8 +25,8 @@ def test_func11_relation_bt_2_sets() -> None:
             "a in b": True,
             "b in a": False,
         }
-    }
-    assert func11_relation_bt_2_sets({1, 3}, {1, 3}) == {
+    }  # noqa: JS102
+    assert func11_relation_bt_2_sets({1, 3}, {1, 3}) == {  # noqa: JS101
         "data": {
             "a&b": {1, 3},
             "a|b": {1, 3},
@@ -36,8 +36,8 @@ def test_func11_relation_bt_2_sets() -> None:
             "a in b": True,
             "b in a": True,
         }
-    }
-    assert func11_relation_bt_2_sets({1}, {""}) == {
+    }  # noqa: JS102
+    assert func11_relation_bt_2_sets({1}, {""}) == {  # noqa: JS101
         "data": {
             "a&b": set(),
             "a|b": {"", 1},
@@ -47,10 +47,10 @@ def test_func11_relation_bt_2_sets() -> None:
             "a in b": False,
             "b in a": False,
         }
-    }
-    assert func11_relation_bt_2_sets([], {""}) == {
+    }  # noqa: JS102
+    assert func11_relation_bt_2_sets([], {""}) == {  # noqa: JS101
         "errors": ["arg should be set"]
-    }
-    assert func11_relation_bt_2_sets({""}, []) == {
+    }  # noqa: JS102
+    assert func11_relation_bt_2_sets({""}, []) == {  # noqa: JS101
         "errors": ["arg should be set"]
-    }
+    }  # noqa: JS102
