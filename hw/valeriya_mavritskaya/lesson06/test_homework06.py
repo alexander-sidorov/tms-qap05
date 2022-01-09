@@ -75,16 +75,20 @@ def test_oldest_4() -> None:
     assert oldest_4(
         {"A": date(1993, 8, 3), "B": date(2000, 6, 6), "C": date(1980, 4, 5)}
     ) == {"data": "C"}
+    assert oldest_4(True) == {"error": "Input must be a dictionary"}  # type: ignore
+    assert oldest_4({"qwe": True}) == {"error": "Input must contain date"}
 
 
 def test_duplicates_5() -> None:
     assert duplicates_5([(), "", "", 1]) == {"data": {"": 2}}
+    assert duplicates_5(True) == {"error": "Invalid input"}
 
 
 def test_dict_from_http_6() -> None:
     assert dict_from_http_6("x=1&x=2&y=3") == {
         "data": {"x": ["1", "2"], "y": ["3"]}
     }
+    assert dict_from_http_6(True) == {"error": "Input must be http query"}  # type: ignore
 
 
 def test_repeated_symbols_7() -> None:
@@ -101,6 +105,7 @@ def test_revert_dictionary_9() -> None:
     assert revert_dictionary_9({1: 100, 2: 100, 3: 300}) == {  # noqa: JS101
         "data": {100: [1, 2], 300: 3}
     }
+    assert revert_dictionary_9(1) == {"error": "Invalid input"}  # type: ignore
 
 
 def test_join_dictionary_10() -> None:
@@ -124,6 +129,7 @@ def test_set_operations_11() -> None:
             "b in a": False,
         }
     }
+    assert set_operations_11(1, 2) == {"error": "Input should be set"}  # type: ignore
 
 
 def test_mk_dictionary_12() -> None:
@@ -134,3 +140,6 @@ def test_mk_dictionary_12() -> None:
         "data": {1: True, (1, 2, 3): {3: 3}, "qwe": 7.8}
     }
     assert mk_dictionary_12(1, [1, 2, 34]) == {"error": "Invalid type"}
+    assert mk_dictionary_12((1, 2, 3)) == {
+        "error": "Use even number of elements"
+    }

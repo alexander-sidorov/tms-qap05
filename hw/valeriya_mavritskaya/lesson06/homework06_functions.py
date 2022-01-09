@@ -83,7 +83,7 @@ def dict_from_http_6(input_query: str) -> dict:
             else:
                 result[parameter] = [value]
     else:
-        result["error"] = "Input must be http query"
+        return {"error": "Input must be http query"}
     return {"data": result}
 
 
