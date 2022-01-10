@@ -2,22 +2,15 @@ from typing import Any
 
 
 def func2_product(*args: Any) -> dict:
-    result: dict
-    is_error = False
-    errors = {"errors": Any}
     product: Any = 1
 
     for arg in args:
-        if isinstance(arg, (int, float, complex)):
-            product *= arg
-        else:
-            errors["errors"] = ["should be number(s)"]
-            is_error = True
-            break
+        if not isinstance(arg, (int, float, complex, str, list)):
+            return {"errors": "Unsupported type"}
 
-    if is_error:
-        result = errors
-    else:
-        result = {"data": product}
+        if isinstance(product, (list, str)) and isinstance(arg, (list, str)):
+            return {"errors": "Can't multiply sequence by non-int of types"}
 
-    return result
+        product *= arg
+
+    return {"data": product}

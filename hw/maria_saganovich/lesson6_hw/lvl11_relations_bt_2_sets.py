@@ -3,13 +3,11 @@ from typing import Any
 
 def func11_relation_bt_2_sets(arg1: Any, arg2: Any) -> dict:
     result: dict[Any, Any] = {}
-    is_error = False
     result_data = {}
     result_error = []
 
     if type(arg1) != set or type(arg2) != set:
         result_error.append("arg should be set")
-        is_error = True
     else:
         result_data = {
             "a&b": arg1 & arg2,
@@ -21,7 +19,7 @@ def func11_relation_bt_2_sets(arg1: Any, arg2: Any) -> dict:
             "b in a": arg2.issubset(arg1),
         }
 
-    if is_error:
+    if bool(result_error):
         result["errors"] = sorted(result_error)
     else:
         result["data"] = result_data

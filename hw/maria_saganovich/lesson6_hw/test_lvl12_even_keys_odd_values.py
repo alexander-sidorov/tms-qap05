@@ -7,10 +7,10 @@ def test_func12_even_keys_odd_values() -> None:
     assert func12_even_keys_odd_values(1, 2) == {"data": {1: 2}}
     assert func12_even_keys_odd_values(1, 2, 3, 4) == {"data": {1: 2, 3: 4}}
     assert func12_even_keys_odd_values(1, 2, 3, 4, 5, 7, 6, 9) == {
-        "data": {1: 2, 3: 4, 5: 6, 7: None, 9: None}
+        "data": {1: 2, 3: 4, 5: 7, 6: 9}
     }
     assert func12_even_keys_odd_values(1, 2, 3, 4, 5, 6, 8, 10) == {
-        "data": {1: 2, 3: 4, 5: 6, ...: [8, 10]}
+        "data": {1: 2, 3: 4, 5: 6, 8: 10}
     }
     assert func12_even_keys_odd_values(1, "", 3, 4) == {
         "errors": ["should be number"]

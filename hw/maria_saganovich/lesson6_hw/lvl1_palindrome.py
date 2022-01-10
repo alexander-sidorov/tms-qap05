@@ -3,13 +3,11 @@ from typing import Any
 
 def func1_palindrome(palindrome: Any) -> dict:
     result: dict[Any, Any] = {}
-    is_error = False
     result_data: bool = False
     result_error = []
 
     if type(palindrome) != str:
         result_error.append("should be str")
-        is_error = True
     else:
         b1 = palindrome.split()
         b2 = "".join(b1)
@@ -19,7 +17,7 @@ def func1_palindrome(palindrome: Any) -> dict:
         else:
             result_data = False
 
-    if is_error:
+    if bool(result_error):
         result["errors"] = sorted(result_error)
     else:
         result["data"] = result_data

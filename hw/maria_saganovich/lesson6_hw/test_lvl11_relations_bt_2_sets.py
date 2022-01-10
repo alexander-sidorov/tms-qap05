@@ -14,7 +14,7 @@ def test_func11_relation_bt_2_sets() -> None:
             "a in b": False,
             "b in a": False,
         }
-    }  # noqa: JS102
+    }
     assert func11_relation_bt_2_sets({1, 2}, {1, 2, 3}) == {  # noqa: JS101
         "data": {
             "a&b": {1, 2},
@@ -25,7 +25,7 @@ def test_func11_relation_bt_2_sets() -> None:
             "a in b": True,
             "b in a": False,
         }
-    }  # noqa: JS102
+    }
     assert func11_relation_bt_2_sets({1, 3}, {1, 3}) == {  # noqa: JS101
         "data": {
             "a&b": {1, 3},
@@ -36,7 +36,7 @@ def test_func11_relation_bt_2_sets() -> None:
             "a in b": True,
             "b in a": True,
         }
-    }  # noqa: JS102
+    }
     assert func11_relation_bt_2_sets({1}, {""}) == {  # noqa: JS101
         "data": {
             "a&b": set(),
@@ -47,10 +47,10 @@ def test_func11_relation_bt_2_sets() -> None:
             "a in b": False,
             "b in a": False,
         }
-    }  # noqa: JS102
+    }
     assert func11_relation_bt_2_sets([], {""}) == {  # noqa: JS101
         "errors": ["arg should be set"]
-    }  # noqa: JS102
+    }
     assert func11_relation_bt_2_sets({""}, []) == {  # noqa: JS101
         "errors": ["arg should be set"]
-    }  # noqa: JS102
+    }

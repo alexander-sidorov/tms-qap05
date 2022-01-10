@@ -11,8 +11,12 @@ def test_func5_duplicate_elements() -> None:
     c4 = ["may", "day"]
     assert func5_duplicate_elements(c0) == {"data": {"": 2}}
     assert func5_duplicate_elements(c1) == {"data": {10: 3, 123: 2}}
-    assert func5_duplicate_elements(c2) == {"errors": ["arg should be list"]}
-    assert func5_duplicate_elements(c3) == {
-        "errors": ["list shouldn't be empty"]
+    assert func5_duplicate_elements(c2) == {"data": {}}
+    assert func5_duplicate_elements(c3) == {"data": {}}
+    assert func5_duplicate_elements(c4) == {"data": {}}
+    assert func5_duplicate_elements((1, 2, 3)) == {"data": {}}
+    assert func5_duplicate_elements((1, 1, 1)) == {"data": {1: 3}}
+    assert func5_duplicate_elements("aaa") == {"data": {"a": 3}}
+    assert func5_duplicate_elements([[], []]) == {
+        "errors": "Unhashable type: 'list'"
     }
-    assert func5_duplicate_elements(c4) == {"data": ["no duplicates"]}
