@@ -5,5 +5,5 @@ def test_func11_new_set() -> None:
     result = new_set({""}, [])
     print(result)
     errors = result.get("errors")
-    assert type(errors) == list
+    assert isinstance(errors, list)
     assert errors == sorted(errors)
