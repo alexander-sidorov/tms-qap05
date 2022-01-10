@@ -1,9 +1,7 @@
 import re
-from collections import Counter
 from itertools import groupby
 from itertools import zip_longest
 from typing import Any
-from typing import Collection
 from typing import Dict
 from typing import Hashable
 from typing import List
@@ -19,23 +17,6 @@ from .common import Result
 from .common import Undefined
 from .common import build_result
 from .common import even
-
-
-def task_05(collection: Collection[T1]) -> Result:
-    elem: T1
-
-    errors: List[str] = []
-
-    for i, elem in enumerate(collection):
-        if not isinstance(elem, Hashable):
-            errors.append(f"collection[{i}]={elem!r} is not hashable")
-
-    if errors:
-        return {"errors": errors}
-
-    ctr = Counter(collection)
-    data = {elem: count for elem, count in ctr.items() if count > 1}
-    return {"data": data}
 
 
 def task_06(query: str) -> Result:
