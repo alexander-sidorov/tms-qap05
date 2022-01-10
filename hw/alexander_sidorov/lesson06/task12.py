@@ -1,6 +1,7 @@
 from typing import Any
 from typing import Hashable
 
+from .common import Errors
 from .common import Result
 from .common import Undefined
 from .common import build_result
@@ -14,7 +15,7 @@ def task_12(*args: Any) -> Result:
     Odd args are treated as values
     """
 
-    errors = []
+    errors: Errors = []
 
     if len(args) % 2 == 1:
         errors.append("odd number of elements")

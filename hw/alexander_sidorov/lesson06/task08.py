@@ -2,6 +2,7 @@ import re
 from itertools import groupby
 
 from .common import Result
+from .common import build_result
 
 RE_INTEGERS = re.compile(r".*\d")
 
@@ -12,11 +13,18 @@ def task_08(flatten_text: str) -> Result:
     <char><number of reps>
     """
 
-    if re.match(RE_INTEGERS, flatten_text):
-        return {"errors": ["integers MUST not be present in flatten text"]}
+    if not isinstance(flatten_text, str):
+        return build_result(errors=[f"{type(flatten_text)=!r}, MUST be a str"])
 
-    folded_text = "".join(
+    if re.match(RE_INTEGERS, flatten_text):
+        return build_result(
+            errors=["integers MUST not be present in flatten text"]
+        )
+
+    data = "".join(
         f"{char}{len(list(group))}" for char, group in groupby(flatten_text)
     )
 
-    return {"data": folded_text}
+    result = build_result(data=data)
+
+    return result

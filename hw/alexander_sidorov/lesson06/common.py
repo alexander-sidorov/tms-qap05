@@ -2,12 +2,14 @@ from typing import Any
 from typing import Callable
 from typing import Dict
 from typing import FrozenSet
+from typing import Hashable
 from typing import Iterable
 from typing import List
 from typing import Set
 from typing import Union
 
 AnySet = Union[Set, FrozenSet]
+Errors = List[str]
 Result = Dict[str, Any]
 
 
@@ -21,7 +23,7 @@ Undefined = UndefinedType()
 def build_result(
     *,
     data: Any = Undefined,
-    errors: Union[List[str], UndefinedType] = Undefined,
+    errors: Union[Errors, UndefinedType] = Undefined,
 ) -> Result:
     """
     Composes a Result from given kwargs.
@@ -51,7 +53,7 @@ def validate(
     func: Callable,
     *args: Any,
     expected_data: Any = Undefined,
-    expected_errors: Union[List[str], object] = Undefined,
+    expected_errors: Union[Errors, UndefinedType] = Undefined,
 ) -> None:
     """
     Does a full validation of function call.
@@ -78,9 +80,12 @@ def validate(
         _e = f"happy path: 'data' key MUST be present: {result!r}"
         assert "data" in result, _e
 
-        got_data = result["data"]
-        _e = f"expectations failed for {func.__name__}{args}: got != expected"
-        assert got_data == expected_data, _e
+        got = result["data"]
+        _e = (
+            f"expectations failed for {func.__name__}{args}:\n"
+            f"{got=!r} != expected={expected_data!r}"
+        )
+        assert got == expected_data, _e
 
     if expected_errors is not Undefined:
         assert isinstance(expected_errors, Iterable)
@@ -107,3 +112,19 @@ def validate(
         assert not missing_errors, _e
 
         assert errors == sorted(errors), "errors are not sorted"
+
+
+def multiplicative(arg: Any) -> bool:
+    """
+    Tells if the given arg supports multiplication.
+    """
+
+    return hasattr(arg, "__mul__")
+
+
+def hashable(arg: Any) -> bool:
+    """
+    Tells if the given arg is hashable.
+    """
+
+    return isinstance(arg, Hashable)
