@@ -2,6 +2,7 @@ from hw.siarhei_apanel.refakt import new_set
 
 
 def test_func11_new_set() -> None:
-    assert new_set({""}, []) == {  # noqa: JS101
-        "errors": ["arg should be set"]
-    }  # noqa: JS102
+    result = new_set({""}, [])
+    errors = result.get("errors")
+    assert errors
+    assert errors == sorted(errors)
