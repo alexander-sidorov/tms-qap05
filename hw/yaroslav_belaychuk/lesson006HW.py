@@ -43,7 +43,7 @@ def date_age(b: date) -> dict:
             "age": int(delta.days // 365),
         }
     }
-    return result
+
 
 
 def zadacha_4(day: dict) -> dict:
