@@ -8,6 +8,12 @@ from .common import even
 
 
 def task_12(*args: Any) -> Result:
+    """
+    Composes a dict from args
+    Even args are treated as keys
+    Odd args are treated as values
+    """
+
     errors = []
 
     if len(args) % 2 == 1:
