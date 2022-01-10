@@ -20,8 +20,8 @@ def palindrom(slovo: str) -> dict:
 
 def umnogenie(*nums: Any) -> dict:
     banka = 1
-    for n in nums:
-        banka *= n
+    for n2 in nums:
+        banka *= n2
     return {"data": banka}
 
 
@@ -59,9 +59,9 @@ def zadacha_5(collection: Any) -> dict:
     banka = {}
     if len(collection) == 0:
         return {"error"}  # type: ignore
-    for n in collection:
-        if collection.count(n) >= 2:
-            banka[n] = collection.count(n)
+    for n1 in collection:
+        if collection.count(n1) >= 2:
+            banka[n1] = collection.count(n1)
     return {"data": banka}
 
 
@@ -73,6 +73,6 @@ def zadacha_7(sybol_num: str) -> dict:
     banka = ""
     b3 = tuple(filter(str.isalpha, sybol_num))
     c3 = tuple(filter(str.isdigit, sybol_num))
-    for x, z in zip(b3, c3):
+    for x1, z1 in zip(b3, c3):
         banka += x * int(z)
     return {"data": banka}
