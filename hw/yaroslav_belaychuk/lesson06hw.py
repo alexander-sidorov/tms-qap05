@@ -19,6 +19,8 @@ def collection(c1: list, c2: Any) -> list:
 
 
 def str_in_str(d1: str, d2: str) -> str:
+    if d2 == "":
+        return d1
     string = d2.join(d1)
     return string
 
