@@ -8,7 +8,6 @@ from typing import Union
 
 from freezegun import freeze_time
 
-from .homework import task_11
 from .homework import task_12
 from .task01 import task_01
 from .task02 import task_02
@@ -20,6 +19,7 @@ from .task07 import task_07
 from .task08 import task_08
 from .task09 import task_09
 from .task10 import task_10
+from .task11 import task_11
 
 Undefined = object()
 
