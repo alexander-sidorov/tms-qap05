@@ -21,13 +21,24 @@ def test_function() -> None:
     assert umnogenie(1) == {"data": 1}
     assert umnogenie(1, 2) == {"data": 2}
     assert umnogenie("1", 3) == {"data": "111"}
+    assert umnogenie(2, "a") == {"data": "aa"}
+    assert umnogenie(2, [2]) == {"data": [2, 2]}
+    assert umnogenie(2, [2], 2) == {"data": [2, 2, 2, 2]}
+    assert umnogenie(2, [2], 2, [2]) == {"errors": ["TypeError"]}
     assert date_age(d1) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
-    assert date_age(d2) == {"TypeError"}  # type: ignore
+    assert date_age(d2) == {"errors": ["TypeError"]}
+    assert date_age(...) == {"errors": ["TypeError"]}
     assert zadacha_4(f1) == {"data": "vika"}
+    assert zadacha_4({}) == {"errors": ["NonValueError"]}
+    assert zadacha_4({1: 1j, 2: 2j}) == {"errors": ["TypeError"]}
     assert zadacha_5(("a", "a", 1, 2)) == {"data": {"a": 2}}
-    assert zadacha_5({(), "", "", 1}) == {"errors": ["NoRepeatError"]}
+    assert zadacha_5({(), "", "", 1}) == {"errors": ["TypeError"]}
+    assert zadacha_5({}) == {"errors": ["TypeError"]}
+    assert zadacha_5([]) == {"errors": ["NumbersError"]}
+    assert zadacha_5([[], []]) == {"errors": ["TypeError"]}
     assert zadacha_7("a3b4c2") == {"data": "aaabbbbcc"}
-    assert zadacha_7("a3b2c") == {"Error"}
-    assert zadacha_7(["a3b4c5"]) == {"TypeError"}  # type: ignore
+    assert zadacha_7("a3b2c") == {"errors": ["NonDigitError"]}
+    assert zadacha_7(["a3b4c5"]) == {"errors": ["TypeError"]}
+    assert zadacha_7("a11") == {"data": "aaaaaaaaaaa"}

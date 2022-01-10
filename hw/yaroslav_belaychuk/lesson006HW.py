@@ -19,16 +19,20 @@ def palindrom(slovo: str) -> dict:
 
 
 def umnogenie(*nums: Any) -> dict:
+    count1 = 0
     banka = 1
     for n2 in nums:
+        if type(n2) in [str, tuple, list]:
+            count1 += 1
+            if count1 >= 2:
+                return {"errors": ["TypeError"]}
         banka *= n2
     return {"data": banka}
 
 
 def date_age(b1: date) -> dict:
     if type(b1) != date:
-        return {"TypeError"}  # type: ignore
-
+        return {"errors": ["TypeError"]}
     segodnya = date.today()
     delta = segodnya - b1
     result = {
@@ -43,36 +47,58 @@ def date_age(b1: date) -> dict:
 
 
 def zadacha_4(day: dict) -> dict:
+    if len(day) < 1:
+        return {"errors": ["NonValueError"]}
+    if type(day) != dict:
+        return {"errors": ["TypeError"]}
     keys = []
     values = []
     for key, value in day.items():
+        if type(value) != date:
+            return {"errors": ["TypeError"]}
         keys.append(key)
         values.append(value)
-
     name = keys[values.index(min(values))]
     return {"data": name}
 
 
 def zadacha_5(collection: Any) -> dict:
     if type(collection) not in [list, tuple, str]:
-        return {"errors": ["NoRepeatError"]}
+        return {"errors": ["TypeError"]}
     banka = {}
+    list_result = []
     if len(collection) == 0:
-        return {"error"}  # type: ignore
+        return {"errors": ["NumbersError"]}
     for n1 in collection:
         if collection.count(n1) >= 2:
-            banka[n1] = collection.count(n1)
+            list_result.append(n1)
+    for n2 in list_result:
+        if type(n2) == list:
+            return {"errors": ["TypeError"]}
+        else:
+            banka[n2] = list_result.count(n2)
     return {"data": banka}
 
 
 def zadacha_7(sybol_num: str) -> dict:
     if type(sybol_num) != str:
-        return {"TypeError"}  # type: ignore
-    if len(sybol_num) % 2 != 0:
-        return {"Error"}  # type: ignore
-    banka = ""
-    b3 = tuple(filter(str.isalpha, sybol_num))
-    c3 = tuple(filter(str.isdigit, sybol_num))
-    for x1, z1 in zip(b3, c3):
-        banka += x1 * int(z1)
-    return {"data": banka}
+        return {"errors": ["TypeError"]}
+    if sybol_num[-1].isalpha():
+        return {"errors": ["NonDigitError"]}
+    list_digit = []
+    list_letter = []
+    bank = ""
+    bank2 = ""
+    for x1 in sybol_num:
+        if x1.isalpha():
+            list_letter.append(x1)
+            if bank != "":
+                list_digit.append(bank)
+                bank = ""
+        else:
+            bank += x1
+    list_digit.append(bank)
+    for x1, z1 in zip(list_letter, list_digit):
+        bank2 += x1 * int(z1)
+
+    return {"data": bank2}
