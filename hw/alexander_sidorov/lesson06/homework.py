@@ -13,21 +13,13 @@ from typing import Sequence
 from typing import Union
 from urllib.parse import parse_qs
 
-from .common import AnySet
-from .common import build_result
-from .common import even
-from .common import Result
 from .common import T1
 from .common import T2
+from .common import AnySet
+from .common import Result
 from .common import Undefined
-
-
-def task_03(arg: date) -> Result:
-    diff = date.today() - arg
-    days = diff.days
-    years = int(round((days / 365.25)))
-    data = {_a: getattr(arg, _a) for _a in {"year", "month", "day"}}
-    return {"data": data | {"age": years}}
+from .common import build_result
+from .common import even
 
 
 def task_04(birthdays: Dict[T1, date]) -> Result:
