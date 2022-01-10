@@ -133,10 +133,10 @@ def revert_dictionary_9(input_dictionary: dict) -> dict:
 
 
 def join_dictionary_10(keys: Any, values: Any) -> dict:
-    dictionary_length = max(len(keys), len(values))
     result: dict = {}
-    if dict in [type(keys), type(values)]:
+    if ... in [keys, values]:
         return {"error": "Invalid input"}
+    dictionary_length = max(len(keys), len(values))
     for index in range(dictionary_length):
         should_use_source_key = len(keys) > index
         should_use_source_value = len(values) > index

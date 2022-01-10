@@ -141,7 +141,7 @@ def test_join_dictionary_10() -> None:
     assert join_dictionary_10("ab", [1, 2, 3]) == {
         "data": {"a": 1, "b": 2, ...: [3]}
     }
-    assert join_dictionary_10({}, []) == {"error": "Invalid input"}
+    assert join_dictionary_10(..., ...) == {"error": "Invalid input"}
 
 
 def test_set_operations_11() -> None:
