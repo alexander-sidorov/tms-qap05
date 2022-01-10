@@ -1,51 +1,11 @@
-from itertools import zip_longest
 from typing import Any
-from typing import Dict
 from typing import Hashable
-from typing import List
-from typing import Optional
-from typing import Sequence
-from typing import Union
 
-from .common import T1
-from .common import T2
 from .common import AnySet
 from .common import Result
 from .common import Undefined
 from .common import build_result
 from .common import even
-
-
-def task_10(keys: Sequence[T1], values: Sequence[T2]) -> Result:
-    data: Dict[  # noqa: TAE002
-        Union[T1, ellipsis],  # noqa: F821
-        Union[Optional[T2], List[Optional[T2]]],
-    ] = {}
-    errors: List[str] = []
-
-    pairs = zip_longest(keys, values, fillvalue=Undefined)
-    anon_values: List[Optional[T2]] = []
-
-    for i, (key, value) in enumerate(pairs):
-        if not isinstance(key, Hashable):
-            errors.append(f"keys[{i}]={key!r} is not hashable")
-
-        if errors:
-            continue
-
-        if key is Undefined:
-            anon_values.append(value)
-            continue
-
-        if value is Undefined:
-            value = None
-
-        data[key] = value
-
-    if not errors and anon_values:
-        data[...] = anon_values
-
-    return build_result(data=data, errors=errors)
 
 
 def task_11(arg1: AnySet, arg2: AnySet) -> Result:
