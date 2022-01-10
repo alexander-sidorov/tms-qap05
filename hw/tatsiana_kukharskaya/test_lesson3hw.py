@@ -18,7 +18,7 @@ def den() -> str:
     return ""
 
 
-def alle() -> None:
+def test_alle() -> None:
     assert avr1() is True
     assert avr2() is False
     assert kim() < 0
