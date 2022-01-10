@@ -1,8 +1,11 @@
+from datetime import date
 from typing import Any
 from typing import Callable
 from typing import Iterable
 from typing import List
 from typing import Union
+
+from freezegun import freeze_time
 
 from hw.alexander_sidorov.lesson06.homework import task_01
 from hw.alexander_sidorov.lesson06.homework import task_02
@@ -122,8 +125,13 @@ def test_task_02() -> None:
     )
 
 
+@freeze_time(date(2000, 1, 1))
 def test_task_03() -> None:
-    assert task_03()
+    validate(
+        task_03,
+        date(year=1987, month=8, day=2),
+        expected_data={"year": 1987, "month": 8, "day": 2, "age": 12},
+    )
 
 
 def test_task_04() -> None:

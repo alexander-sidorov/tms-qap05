@@ -1,3 +1,4 @@
+from datetime import date
 from typing import Any
 from typing import Dict
 from typing import Sequence
@@ -33,8 +34,12 @@ def task_02(*args: Any) -> Result:
     return {"data": acc}
 
 
-def task_03() -> Result:
-    return {"data": None}
+def task_03(arg: date) -> Result:
+    diff = date.today() - arg
+    days = diff.days
+    years = int(round((days / 365.25)))
+    data = {_a: getattr(arg, _a) for _a in {"year", "month", "day"}}
+    return {"data": data | {"age": years}}
 
 
 def task_04() -> Result:
