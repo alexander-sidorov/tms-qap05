@@ -1,7 +1,7 @@
 from typing import Any
 from typing import Sequence
 
-from hw.alexander_sidorov.lesson06.common import Result
+from .common import Result
 
 
 def task_02(*args: Any) -> Result:

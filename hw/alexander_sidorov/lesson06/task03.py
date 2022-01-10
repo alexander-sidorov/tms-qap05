@@ -1,6 +1,6 @@
 from datetime import date
 
-from hw.alexander_sidorov.lesson06.common import Result
+from .common import Result
 
 
 def task_03(arg: date) -> Result:

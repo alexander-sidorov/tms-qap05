@@ -1,6 +1,5 @@
 import re
 from collections import Counter
-from datetime import date
 from itertools import groupby
 from itertools import zip_longest
 from typing import Any
@@ -20,17 +19,6 @@ from .common import Result
 from .common import Undefined
 from .common import build_result
 from .common import even
-
-
-def task_04(birthdays: Dict[T1, date]) -> Result:
-    name: T1
-    _birthday: date
-    name, _birthday = min(
-        birthdays.items(),
-        key=lambda _pair: _pair[1],
-    )
-
-    return {"data": name}
 
 
 def task_05(collection: Collection[T1]) -> Result:

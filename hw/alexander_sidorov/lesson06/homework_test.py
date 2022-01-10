@@ -8,18 +8,18 @@ from typing import Union
 
 from freezegun import freeze_time
 
-from hw.alexander_sidorov.lesson06.homework import task_04
-from hw.alexander_sidorov.lesson06.homework import task_05
-from hw.alexander_sidorov.lesson06.homework import task_06
-from hw.alexander_sidorov.lesson06.homework import task_07
-from hw.alexander_sidorov.lesson06.homework import task_08
-from hw.alexander_sidorov.lesson06.homework import task_09
-from hw.alexander_sidorov.lesson06.homework import task_10
-from hw.alexander_sidorov.lesson06.homework import task_11
-from hw.alexander_sidorov.lesson06.homework import task_12
-from hw.alexander_sidorov.lesson06.task01 import task_01
-from hw.alexander_sidorov.lesson06.task02 import task_02
-from hw.alexander_sidorov.lesson06.task03 import task_03
+from .homework import task_05
+from .homework import task_06
+from .homework import task_07
+from .homework import task_08
+from .homework import task_09
+from .homework import task_10
+from .homework import task_11
+from .homework import task_12
+from .task01 import task_01
+from .task02 import task_02
+from .task03 import task_03
+from .task04 import task_04
 
 Undefined = object()
 

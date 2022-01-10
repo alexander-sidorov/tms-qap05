@@ -1,4 +1,4 @@
-from hw.alexander_sidorov.lesson06.common import Result
+from .common import Result
 
 
 def task_01(arg: str) -> Result:
