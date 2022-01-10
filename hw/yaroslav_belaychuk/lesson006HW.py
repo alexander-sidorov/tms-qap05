@@ -3,7 +3,6 @@ from typing import Any
 
 
 def palindrom(slovo: str) -> dict:
-    result = {}
     if type(slovo) != str:
         return {"errors": ["TypeErrors"]}
     else:
@@ -20,7 +19,6 @@ def palindrom(slovo: str) -> dict:
 
 
 def umnogenie(*nums: Any) -> dict:
-    result = {}
     banka = 1
     for n in nums:
         banka *= n
@@ -28,7 +26,6 @@ def umnogenie(*nums: Any) -> dict:
 
 
 def date_age(b: date) -> dict:
-    result = {}
     if type(b) != date:
         return {"TypeError"}
 
@@ -46,7 +43,6 @@ def date_age(b: date) -> dict:
 
 
 def zadacha_4(day: dict) -> dict:
-    result = {}
     keys = []
     values = []
     for key, value in day.items():
