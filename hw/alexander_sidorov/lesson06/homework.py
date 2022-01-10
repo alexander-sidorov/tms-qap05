@@ -1,5 +1,3 @@
-import re
-from itertools import groupby
 from itertools import zip_longest
 from typing import Any
 from typing import Dict
@@ -16,17 +14,6 @@ from .common import Result
 from .common import Undefined
 from .common import build_result
 from .common import even
-
-
-def task_08(flatten_text: str) -> Result:
-    if re.match(r".*\d", flatten_text):
-        return {"errors": ["integers MUST not be present in flatten text"]}
-
-    folded_text = "".join(
-        f"{char}{len(list(group))}" for char, group in groupby(flatten_text)
-    )
-
-    return {"data": folded_text}
 
 
 def task_09(arg: Dict[T1, T2]) -> Result:
