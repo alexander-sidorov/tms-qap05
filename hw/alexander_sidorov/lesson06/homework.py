@@ -22,25 +22,6 @@ from .common import T2
 from .common import Undefined
 
 
-def task_02(*args: Any) -> Result:
-    if not args:
-        return {"errors": ["nothing to multiply"]}
-
-    acc = args[0]
-
-    for arg in args[1:]:
-        are_sequences = isinstance(acc, Sequence) and isinstance(arg, Sequence)
-        is_acc_ok = isinstance(acc, (Sequence, int, float, complex))
-        is_arg_ok = isinstance(arg, (Sequence, int, float, complex))
-
-        if are_sequences or not all((is_acc_ok, is_arg_ok)):
-            return {"errors": [f"cannot do: {acc!r} * {arg!r}"]}
-
-        acc = acc * arg
-
-    return {"data": acc}
-
-
 def task_03(arg: date) -> Result:
     diff = date.today() - arg
     days = diff.days
