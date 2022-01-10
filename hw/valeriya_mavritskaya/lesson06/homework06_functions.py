@@ -5,7 +5,7 @@ from math import prod
 from typing import Any
 
 
-def if_palindrome_1(u_input: Any) -> dict:
+def if_palindrome_1(u_input: str) -> dict:
     result = {}
     if isinstance(u_input, str):
         u_input = u_input.lower()
@@ -24,7 +24,9 @@ def if_palindrome_1(u_input: Any) -> dict:
 
 def multiplication_2(*args: Any) -> dict:
     result = {}
-    if any(not isinstance(item, int) for item in args):
+    if any(
+        type(item) not in [int, str, complex, float, list] for item in args
+    ):
         result["error"] = "Input must be a number"
     else:
         result["data"] = prod(args)
@@ -62,7 +64,9 @@ def oldest_4(people: dict) -> dict:
 
 
 def duplicates_5(collection: Any) -> dict:
-    if type(collection) not in [list, tuple, str]:
+    if (type(collection) not in [list, tuple, str]) or any(
+        type(item) == dict for item in collection
+    ):
         return {"error": "Invalid input"}
     result = {}
     select_duplicates = {i: collection.count(i) for i in collection}
@@ -131,6 +135,8 @@ def revert_dictionary_9(input_dictionary: dict) -> dict:
 def join_dictionary_10(keys: Any, values: Any) -> dict:
     dictionary_length = max(len(keys), len(values))
     result: dict = {}
+    if dict in [type(keys), type(values)]:
+        return {"error": "Invalid input"}
     for index in range(dictionary_length):
         should_use_source_key = len(keys) > index
         should_use_source_value = len(values) > index
@@ -163,8 +169,5 @@ def set_operations_11(set1: set, set2: set) -> dict:
 def mk_dictionary_12(*args: Any) -> dict:
     if len(args) % 2 != 0:
         return {"error": "Use even number of elements"}
-    for elem in args:
-        if type(elem) == list:
-            return {"error": "Invalid type"}
     result = {args[i]: args[i + 1] for i in range(0, len(args), 2)}
     return {"data": result}
