@@ -41,10 +41,10 @@ def validate(
     assert ("errors" in result) or ("data" in result), _e
 
     if expected_data is not Undefined:
-        _e = "errors key MUST not be present for happy way"
+        _e = f"errors key MUST not be present for happy way: {result!r}"
         assert "errors" not in result, _e
 
-        _e = "data key MUST be present for happy path"
+        _e = f"data key MUST be present for happy path: {result!r}"
         assert "data" in result, _e
 
         got_data = result["data"]
@@ -54,10 +54,10 @@ def validate(
     if expected_errors is not Undefined:
         assert isinstance(expected_errors, Iterable)
 
-        _e = "errors key MUST be present for failed path"
+        _e = f"errors key MUST be present for failed path: {result!r}"
         assert "errors" in result, _e
 
-        _e = "data key MUST not be present for failed path"
+        _e = f"data key MUST not be present for failed path: {result!r}"
         assert "data" not in result, _e
 
         errors: List[str] = result["errors"]
@@ -409,4 +409,51 @@ def test_task_11() -> None:
 
 
 def test_task_12() -> None:
-    assert task_12()
+    args: Any
+
+    args = (1, 2)
+    validate(
+        task_12,
+        *args,
+        expected_data={1: 2},
+    )
+
+    args = "ab"
+    validate(
+        task_12,
+        *args,
+        expected_data={"a": "b"},
+    )
+
+    args = (None, [], ..., {})
+    validate(
+        task_12,
+        *args,
+        expected_data={None: [], ...: {}},
+    )
+
+    args = "a" * 20
+    validate(
+        task_12,
+        *args,
+        expected_data={"a": "a"},
+    )
+
+    args = "a" * 19
+    validate(
+        task_12,
+        *args,
+        expected_errors=["odd number of elements"],
+    )
+
+    args = [[], None, set(), "a", {}]
+    validate(
+        task_12,
+        *args,
+        expected_errors=[
+            "args[2]=set() is not hashable",
+            "args[4]={} is not hashable",
+            "args[0]=[] is not hashable",
+            "odd number of elements",
+        ],
+    )

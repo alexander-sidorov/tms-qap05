@@ -218,5 +218,30 @@ def task_11(arg1: AnySet, arg2: AnySet) -> Result:
     return build_result(data=data)
 
 
-def task_12() -> Result:
-    return {"data": None}
+def task_12(*args: Any) -> Result:
+    errors = []
+
+    if len(args) % 2 == 1:
+        errors.append("odd number of elements")
+
+    data = {}
+    key: Any = Undefined
+
+    for i, elem in enumerate(args):
+        if even(i):
+            if not isinstance(elem, Hashable):
+                errors.append(f"args[{i}]={elem!r} is not hashable")
+                continue
+            key = elem
+            continue
+
+        if errors:
+            continue
+
+        data[key] = elem
+
+    return build_result(data=data, errors=errors)
+
+
+def even(arg: int) -> bool:
+    return arg % 2 == 0
