@@ -7,6 +7,7 @@ from typing import Hashable
 from typing import List
 from typing import Sequence
 from typing import TypeVar
+from urllib.parse import parse_qs
 
 Result = Dict[str, Any]
 
@@ -77,8 +78,12 @@ def task_05(collection: Collection[T1]) -> Result:
     return {"data": data}
 
 
-def task_06() -> Result:
-    return {"data": None}
+def task_06(query: str) -> Result:
+    parsed = parse_qs(
+        query,
+        keep_blank_values=True,
+    )
+    return {"data": parsed}
 
 
 def task_07() -> Result:

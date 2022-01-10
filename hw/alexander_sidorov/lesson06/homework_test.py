@@ -174,7 +174,31 @@ def test_task_05() -> None:
 
 
 def test_task_06() -> None:
-    assert task_06()
+    validate(
+        task_06,
+        "",
+        expected_data={},
+    )
+    validate(
+        task_06,
+        "xx=",
+        expected_data={"xx": [""]},
+    )
+    validate(
+        task_06,
+        "xx=&yy=",
+        expected_data={"xx": [""], "yy": [""]},
+    )
+    validate(
+        task_06,
+        "xx=1&yy=2",
+        expected_data={"xx": ["1"], "yy": ["2"]},
+    )
+    validate(
+        task_06,
+        "xx=1&yy=2&&yy=3",
+        expected_data={"xx": ["1"], "yy": ["2", "3"]},
+    )
 
 
 def test_task_07() -> None:
