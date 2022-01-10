@@ -14,6 +14,7 @@ from urllib.parse import parse_qs
 Result = Dict[str, Any]
 
 T1 = TypeVar("T1")
+T2 = TypeVar("T2")
 
 
 def task_01(arg: str) -> Result:
@@ -111,8 +112,33 @@ def task_08(flatten_text: str) -> Result:
     return {"data": folded_text}
 
 
-def task_09() -> Result:
-    return {"data": None}
+def task_09(arg: Dict[T1, T2]) -> Result:
+    errors: List[str] = []
+    data: Dict[T2, List[T1]] = {}
+    result: Result = {}
+
+    for key, value in arg.items():
+        if not isinstance(value, Hashable):
+            errors.append(
+                f"{value=!r} of {key=!r} cannot be used as a new key"
+            )
+
+        if errors:
+            continue
+
+        bucket: List[T1] = data.setdefault(value, [])
+        bucket.append(key)
+
+    if errors:
+        result["errors"] = sorted(errors)
+    else:
+        data_ = {
+            value: (bucket if len(bucket) > 1 else bucket[0])
+            for value, bucket in data.items()
+        }
+        result["data"] = data_
+
+    return result
 
 
 def task_10() -> Result:
