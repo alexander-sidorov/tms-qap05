@@ -17,15 +17,18 @@ def is_the_string_is_the_palindrome(string: str) -> dict:
 
 def data_multiplication(*any_data: Any) -> dict:
     result = {}
-    if len(any_data) < 1:
-        return {"errors": "must be more than 0 arguments"}
-    elif len(any_data) == 1:
-        result["data"] = any_data[0]
-    else:
-        mult_result = 1
-        for i in any_data:
-            mult_result *= i
-            result["data"] = mult_result
+    try:
+        if len(any_data) < 1:
+            return {"errors": "must be more than 0 arguments"}
+        elif len(any_data) == 1:
+            result["data"] = any_data[0]
+        else:
+            mult_result = 1
+            for i in any_data:
+                mult_result *= i
+                result["data"] = mult_result
+    except TypeError:
+        return {"errors": "given arguments' types can't be multiplied"}
     return result
 
 

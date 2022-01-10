@@ -29,6 +29,10 @@ def test_data_multiplication() -> None:
         "data": (1, 2, 3, 1, 2, 3, 1, 2, 3)
     }
     assert data_multiplication() == {"errors": "must be more than 0 arguments"}
+    assert data_multiplication(2, "a") == {"data": "aa"}
+    assert data_multiplication(2, [2]) == {"data": [2, 2]}
+    assert data_multiplication(2, [2], 2) == {"data": [2, 2, 2, 2]}
+    assert "errors" in data_multiplication(2, [2], 2, [2])
 
 
 def test_how_old_are_you() -> None:
