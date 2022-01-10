@@ -37,6 +37,9 @@ def test_multiply() -> None:
     assert multiply("abc", "ab") == {
         "errors": "given arguments' types can't be multiplied"
     }
+    assert multiply("a", 2) == {"data": "aa"}
+    assert multiply(2, [1], 2) == {"data": [1, 1, 1, 1]}
+    assert multiply("a") == {"data": "a"}
 
 
 def test_get_formatted_birthday() -> None:
@@ -106,6 +109,9 @@ def test_http_query_parser() -> None:
     assert http_query_parser("x=1&&x=2&q=3") == {
         "errors": "given query contains wrong format"
     }
+    assert http_query_parser("xxx=&yyy=") == {
+        "data": {"xxx": [""], "yyy": [""]}
+    }
 
 
 def test_repeat_chars() -> None:
@@ -113,13 +119,11 @@ def test_repeat_chars() -> None:
     assert repeat_chars(["a3b2c1"]) == {  # type: ignore
         "errors": "given argument is not string type"
     }
-    assert repeat_chars("a3b2c") == {"errors": "length of given string is odd"}
-    assert repeat_chars("13b2c1") == {
-        "errors": "given string is in wrong format"
-    }
-    assert repeat_chars("a3b2cv") == {
-        "errors": "given string is in wrong format"
-    }
+    assert repeat_chars("a3b2c") == {"errors": "wrong format of string"}
+    assert repeat_chars("13b2c1") == {"errors": "wrong format of string"}
+    assert repeat_chars("a3b2cv") == {"errors": "wrong format of string"}
+    assert repeat_chars("a11") == {"data": "aaaaaaaaaaa"}
+    assert repeat_chars("a1b1a1") == {"data": "aba"}
 
 
 def test_count_chars() -> None:
@@ -149,6 +153,9 @@ def test_zip_collections_to_dict() -> None:
     }
     assert zip_collections_to_dict("ab", [1, 2, 3]) == {
         "data": {"a": 1, "b": 2, "...": [3]}
+    }
+    assert zip_collections_to_dict("abc", [5, 6, 7]) == {
+        "data": {"a": 5, "b": 6, "c": 7}
     }
     assert zip_collections_to_dict("abc", 123) == {
         "errors": ["given argument with values is not a list, str or tuple"]

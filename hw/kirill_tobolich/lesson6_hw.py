@@ -1,4 +1,5 @@
 import collections
+import re
 from collections import Counter
 from datetime import date
 from typing import Any
@@ -119,20 +120,16 @@ def repeat_chars(string: str) -> dict:
     result = {}
     if not isinstance(string, str):
         return {"errors": "given argument is not string type"}
-    elif len(string) % 2 != 0:
-        return {"errors": "length of given string is odd"}
-    elif not string[::2].isalpha() or not string[1::2].isdigit():
-        return {"errors": "given string is in wrong format"}
+    numbers = re.findall("\d+", string)  # noqa: W605
+    chars = re.findall("\D", string)  # noqa: W605
+    if len(numbers) != len(chars):
+        return {"errors": "wrong format of string"}
     else:
-        list_of_chars = list(filter(str.isalpha, string))
-        list_of_digits = list(filter(str.isdigit, string))
-        result_string = "".join(
-            [
-                char * int(digit)
-                for char, digit in zip(list_of_chars, list_of_digits)
-            ]
-        )
-    result["data"] = result_string
+        zipped_lists = list(zip(numbers, chars))
+        result_str = ""
+        for num, char in zipped_lists:
+            result_str += char * int(num)
+        result["data"] = result_str
     return result
 
 
@@ -172,60 +169,41 @@ def inverted_dictionary(dictionary: dict) -> dict:
     return result
 
 
-def zip_collections_to_dict(  # noqa: CCR001
-    keys_collection: Any, values_collection: Any
-) -> dict:
+def zip_collections_to_dict(keys: Any, values: Any) -> dict:
     result: dict = {}
     errors: list = []
     types = (list, str, tuple)
-    if type(keys_collection) not in types:
-        errors.append("given argument with keys is not a list, str or tuple")
-    if type(values_collection) not in types:
-        errors.append("given argument with values is not a list, str or tuple")
+    unhashable_types = (list, set, dict)
+    error_txt1 = "given argument with keys is not a list, str or tuple"
+    error_txt2 = "given argument with values is not a list, str or tuple"
+    error_txt3 = "collections contain values with unhashable type"
+    if type(keys) not in types:
+        errors.append(error_txt1)
+    if type(values) not in types:
+        errors.append(error_txt2)
     if errors:
         result["errors"] = errors
     else:
-        keys_collection = list(keys_collection)
-        values_collection = list(values_collection)
-        if len(keys_collection) > len(values_collection):
-            differance = len(keys_collection) - len(values_collection)
-            values_collection.extend(None for i in range(differance))
+        if any((isinstance(keys, unhashable_types) for x in keys)):
+            return {"errors": error_txt3}
+        keys = list(keys)
+        values = list(values)
+        if len(keys) > len(values):
+            differance = len(keys) - len(values)
+            values.extend(None for i in range(differance))
+            list_of_zipped_collections = list(zip(keys, values))
+            result["data"] = dict(list_of_zipped_collections)
+        elif len(keys) < len(values):
+            differance_list = values[len(keys) :]  # noqa: E203
+            list_with_the_same_length = values[: len(keys)]
             list_of_zipped_collections = list(
-                zip(keys_collection, values_collection)
-            )
-            try:
-                result["data"] = dict(list_of_zipped_collections)
-            except TypeError:
-                return {
-                    "errors": "collections contain values with unhashable type"
-                }
-        elif len(keys_collection) < len(values_collection):
-            differance_list = values_collection[
-                len(keys_collection) :  # noqa: E203
-            ]  # noqa: E203
-            list_with_the_same_length = values_collection[
-                : len(keys_collection)  # noqa: E203
-            ]
-            list_of_zipped_collections = list(
-                zip(keys_collection, list_with_the_same_length)
+                zip(keys, list_with_the_same_length)
             )
             list_of_zipped_collections.append(("...", differance_list))
-            try:
-                result["data"] = dict(list_of_zipped_collections)
-            except TypeError:
-                return {
-                    "errors": "collections contain values with unhashable type"
-                }
+            result["data"] = dict(list_of_zipped_collections)
         else:
-            list_of_zipped_collections = list(
-                zip(keys_collection, values_collection)
-            )
-            try:
-                result["data"] = dict(list_of_zipped_collections)
-            except TypeError:
-                return {
-                    "errors": "collections contain values with unhashable type"
-                }
+            list_of_zipped_collections = list(zip(keys, values))
+            result["data"] = dict(list_of_zipped_collections)
     return result
 
 
