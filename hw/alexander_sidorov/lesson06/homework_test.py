@@ -135,7 +135,15 @@ def test_task_03() -> None:
 
 
 def test_task_04() -> None:
-    assert task_04()
+    validate(
+        task_04,
+        {
+            1: date(year=1987, month=8, day=2),
+            (): date(year=1987, month=8, day=1),
+            ...: date(year=1987, month=7, day=1),
+        },
+        expected_data=...,
+    )
 
 
 def test_task_05() -> None:

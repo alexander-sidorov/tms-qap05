@@ -9,7 +9,7 @@ verify_ssl = true
 
 [packages]
 atomicwrites = { version = "*", sys_platform = "== 'win32'" }
-black = "==21.12b0"
+black = "*"
 coverage = { extras = ["toml"], version = "*" }
 devtools = { extras = ["pygments"], version = "*" }
 dlint = "*"
@@ -48,3 +48,4 @@ pytest-asyncio = "*"
 pytest-cov = "*"
 pytest-mock = "*"
 python-dotenv = "*"
+types-freezegun = "*"

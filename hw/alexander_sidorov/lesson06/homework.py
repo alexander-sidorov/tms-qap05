@@ -2,6 +2,7 @@ from datetime import date
 from typing import Any
 from typing import Dict
 from typing import Sequence
+from typing import TypeVar
 
 Result = Dict[str, Any]
 
@@ -42,8 +43,18 @@ def task_03(arg: date) -> Result:
     return {"data": data | {"age": years}}
 
 
-def task_04() -> Result:
-    return {"data": None}
+T1 = TypeVar("T1")
+
+
+def task_04(birthdays: Dict[T1, date]) -> Result:
+    name: T1
+    _birthday: date
+    name, _birthday = min(
+        birthdays.items(),
+        key=lambda _pair: _pair[1],
+    )
+
+    return {"data": name}
 
 
 def task_05() -> Result:
