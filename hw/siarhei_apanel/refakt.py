@@ -133,7 +133,7 @@ def happybithday(yer: dict) -> dict:
 
 
 def repeat(collect: Any) -> dict:
-    if type(collect) not in [list, tuple, str]:
+    if type(collect) not in [list, tuple, str] or len(collect) < 2:
         return {"errors": ["NoRepeatError"]}
     noresult = []
     for digit in collect:
@@ -149,6 +149,8 @@ def repeat(collect: Any) -> dict:
 
 def html_str(query: str) -> dict:
     result: dict[str, list] = {}
+    if type(query) != str:
+        return {"errors": ["TypeError"]}
 
     for letter in query.split("&"):
         for el in range(len(letter.split("="))):
@@ -246,6 +248,8 @@ def new_dict(key: Any, value: Any) -> dict:
 
 
 def new_set(set1: set, set2: set) -> dict:
+    if type(set1) != set or type(set2) != set:
+        return {"errors": ["TypeError"]} 
     return {
         "data": {
             "a&b": set1 & set2,

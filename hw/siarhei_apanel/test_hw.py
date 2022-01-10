@@ -1,17 +1,17 @@
 from datetime import date
 
-from hw.siarhei_apanel.refakt import codding
-from hw.siarhei_apanel.refakt import dateday
-from hw.siarhei_apanel.refakt import decodding
-from hw.siarhei_apanel.refakt import diction
-from hw.siarhei_apanel.refakt import happybithday
-from hw.siarhei_apanel.refakt import html_str
-from hw.siarhei_apanel.refakt import new_dict
-from hw.siarhei_apanel.refakt import new_set
-from hw.siarhei_apanel.refakt import palindrom
-from hw.siarhei_apanel.refakt import proizvedenie
-from hw.siarhei_apanel.refakt import repeat
-from hw.siarhei_apanel.refakt import rever_dict
+from refakt import codding
+from refakt import dateday
+from refakt import decodding
+from refakt import diction
+from refakt import happybithday
+from refakt import html_str
+from refakt import new_dict
+from refakt import new_set
+from refakt import palindrom
+from refakt import proizvedenie
+from refakt import repeat
+from refakt import rever_dict
 
 
 def test_example() -> None:
@@ -39,10 +39,12 @@ def test_example() -> None:
     assert repeat({5: 2, 4: 2, 6: 1, 3: 2}) == {"errors": ["NoRepeatError"]}
     assert repeat({(), "", "", 1}) == {"errors": ["NoRepeatError"]}
     assert repeat("aaabbc") == {"data": {"a": 3, "b": 2}}
+    assert repeat([]) == {"errors": ["NoRepeatError"]}
     assert html_str("x=1&x=2&y=3") == {"data": {"x": ["1", "2"], "y": ["3"]}}
     assert html_str("a=x&b=y&z=") == {
         "data": {"a": ["x"], "b": ["y"], "z": [""]}
     }
+    assert html_str([]) == {"errors": ["TypeError"]}
     assert decodding("a3b2c1") == {"data": "aaabbc"}
     assert decodding("a3b2c") == {"errors": ["NoQualityLetterError"]}
     assert codding("aaabb") == {"data": "a3b2"}
@@ -61,6 +63,7 @@ def test_example() -> None:
             "b in a": False,
         }
     }  # noqa: E501
+    assert new_set({""}, []) == {"errors": ["TypeError"]}
     assert new_set({1}, {1, 2})["data"]["a in b"] is True
     assert new_set({1}, {1, 2})["data"]["b in a"] is False
     assert diction(1, 2) == {"data": {1: 2}}
