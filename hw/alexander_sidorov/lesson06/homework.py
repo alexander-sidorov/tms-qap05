@@ -1,6 +1,7 @@
 import re
 from collections import Counter
 from datetime import date
+from itertools import groupby
 from typing import Any
 from typing import Collection
 from typing import Dict
@@ -99,8 +100,15 @@ def task_07(folded_text: str) -> Result:
     return {"data": flatten_text}
 
 
-def task_08() -> Result:
-    return {"data": None}
+def task_08(flatten_text: str) -> Result:
+    if re.match(r".*\d", flatten_text):
+        return {"errors": ["integers MUST not be present in flatten text"]}
+
+    folded_text = "".join(
+        f"{char}{len(list(group))}" for char, group in groupby(flatten_text)
+    )
+
+    return {"data": folded_text}
 
 
 def task_09() -> Result:

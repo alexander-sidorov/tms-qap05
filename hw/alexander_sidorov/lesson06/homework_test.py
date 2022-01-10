@@ -238,7 +238,34 @@ def test_task_07() -> None:
 
 
 def test_task_08() -> None:
-    assert task_08()
+    validate(
+        task_08,
+        "",
+        expected_data="",
+    )
+    validate(
+        task_08,
+        "x",
+        expected_data="x1",
+    )
+    validate(
+        task_08,
+        "xxxxxxxxxxxy",
+        expected_data="x11y1",
+    )
+    validate(
+        task_08,
+        "aba",
+        expected_data="a1b1a1",
+    )
+
+    validate(
+        task_08,
+        "aba1",
+        expected_errors=[
+            "integers MUST not be present in flatten text",
+        ],
+    )
 
 
 def test_task_09() -> None:
