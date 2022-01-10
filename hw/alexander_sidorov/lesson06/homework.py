@@ -8,7 +8,6 @@ from typing import List
 from typing import Optional
 from typing import Sequence
 from typing import Union
-from urllib.parse import parse_qs
 
 from .common import T1
 from .common import T2
@@ -17,14 +16,6 @@ from .common import Result
 from .common import Undefined
 from .common import build_result
 from .common import even
-
-
-def task_06(query: str) -> Result:
-    parsed = parse_qs(
-        query,
-        keep_blank_values=True,
-    )
-    return {"data": parsed}
 
 
 def task_07(folded_text: str) -> Result:
