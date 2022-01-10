@@ -3,7 +3,6 @@ from hw.siarhei_apanel.refakt import new_set
 
 def test_func11_new_set() -> None:
     result = new_set({""}, [])
-    print(result)
     errors = result.get("errors")
     assert isinstance(errors, list)
     assert errors == sorted(errors)
