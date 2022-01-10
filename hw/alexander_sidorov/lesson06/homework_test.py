@@ -1,6 +1,7 @@
 from datetime import date
 from typing import Any
 from typing import Callable
+from typing import FrozenSet
 from typing import Iterable
 from typing import List
 from typing import Union
@@ -344,7 +345,67 @@ def test_task_10() -> None:
 
 
 def test_task_11() -> None:
-    assert task_11()
+    empty: FrozenSet = frozenset()
+
+    validate(
+        task_11,
+        set(),
+        empty,
+        expected_data={
+            "a&b": empty,
+            "a|b": empty,
+            "a-b": empty,
+            "b-a": empty,
+            "|a-b|": empty,
+            "a in b": True,
+            "b in a": True,
+        },
+    )
+
+    validate(
+        task_11,
+        {1, 2, 3},
+        {2, 3, 4},
+        expected_data={
+            "a&b": {2, 3},
+            "a|b": {1, 2, 3, 4},
+            "a-b": {1},
+            "b-a": {4},
+            "|a-b|": {1, 4},
+            "a in b": False,
+            "b in a": False,
+        },
+    )
+
+    validate(
+        task_11,
+        {1, 2},
+        {1, 2, 3},
+        expected_data={
+            "a&b": {1, 2},
+            "a|b": {1, 2, 3},
+            "a-b": empty,
+            "b-a": {3},
+            "|a-b|": {3},
+            "a in b": True,
+            "b in a": False,
+        },
+    )
+
+    validate(
+        task_11,
+        {1, 2, 3},
+        {1, 2},
+        expected_data={
+            "a&b": {1, 2},
+            "a|b": {1, 2, 3},
+            "a-b": {3},
+            "b-a": empty,
+            "|a-b|": {3},
+            "a in b": False,
+            "b in a": True,
+        },
+    )
 
 
 def test_task_12() -> None:

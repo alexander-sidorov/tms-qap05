@@ -6,13 +6,17 @@ from itertools import zip_longest
 from typing import Any
 from typing import Collection
 from typing import Dict
+from typing import FrozenSet
 from typing import Hashable
 from typing import List
 from typing import Optional
 from typing import Sequence
+from typing import Set
 from typing import TypeVar
 from typing import Union
 from urllib.parse import parse_qs
+
+AnySet = Union[Set, FrozenSet]
 
 Result = Dict[str, Any]
 
@@ -200,8 +204,18 @@ def task_10(keys: Sequence[T1], values: Sequence[T2]) -> Result:
     return build_result(data=data, errors=errors)
 
 
-def task_11() -> Result:
-    return {"data": None}
+def task_11(arg1: AnySet, arg2: AnySet) -> Result:
+    data = {
+        "a&b": arg1 & arg2,
+        "a|b": arg1 | arg2,
+        "a-b": arg1 - arg2,
+        "b-a": arg2 - arg1,
+        "|a-b|": arg1 ^ arg2,
+        "a in b": arg1.issubset(arg2),
+        "b in a": arg2.issubset(arg1),
+    }
+
+    return build_result(data=data)
 
 
 def task_12() -> Result:
