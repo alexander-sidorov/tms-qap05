@@ -1,10 +1,16 @@
+from collections import Counter
 from datetime import date
 from typing import Any
+from typing import Collection
 from typing import Dict
+from typing import Hashable
+from typing import List
 from typing import Sequence
 from typing import TypeVar
 
 Result = Dict[str, Any]
+
+T1 = TypeVar("T1")
 
 
 def task_01(arg: str) -> Result:
@@ -43,9 +49,6 @@ def task_03(arg: date) -> Result:
     return {"data": data | {"age": years}}
 
 
-T1 = TypeVar("T1")
-
-
 def task_04(birthdays: Dict[T1, date]) -> Result:
     name: T1
     _birthday: date
@@ -57,8 +60,21 @@ def task_04(birthdays: Dict[T1, date]) -> Result:
     return {"data": name}
 
 
-def task_05() -> Result:
-    return {"data": None}
+def task_05(collection: Collection[T1]) -> Result:
+    elem: T1
+
+    errors: List[str] = []
+
+    for i, elem in enumerate(collection):
+        if not isinstance(elem, Hashable):
+            errors.append(f"collection[{i}]={elem!r} is not hashable")
+
+    if errors:
+        return {"errors": errors}
+
+    ctr = Counter(collection)
+    data = {elem: count for elem, count in ctr.items() if count > 1}
+    return {"data": data}
 
 
 def task_06() -> Result:

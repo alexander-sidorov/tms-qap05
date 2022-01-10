@@ -147,7 +147,30 @@ def test_task_04() -> None:
 
 
 def test_task_05() -> None:
-    assert task_05()
+    validate(
+        task_05,
+        "abc",
+        expected_data={},
+    )
+    validate(
+        task_05,
+        "aaab",
+        expected_data={"a": 3},
+    )
+    validate(
+        task_05,
+        {1, 2, 3},
+        expected_data={},
+    )
+
+    validate(
+        task_05,
+        [[], []],
+        expected_errors=[
+            "collection[0]=[] is not hashable",
+            "collection[1]=[] is not hashable",
+        ],
+    )
 
 
 def test_task_06() -> None:
