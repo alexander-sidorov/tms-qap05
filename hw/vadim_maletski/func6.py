@@ -31,16 +31,21 @@ def level_02(*arguments: Any) -> Result:
     result: Result = {}
     errors = []
 
-    if not arguments:
-        errors.append("argument must not be empty")
-    if errors:
-        result["errors"] = errors
+    try:
+        if not arguments:
+            errors.append("argument must not be empty")
 
-    else:
-        pr = 1
-        for i in arguments:
-            pr *= i
-            result["data"] = pr
+        if errors:
+            result["errors"] = errors
+
+        else:
+            pr = 1
+            for i in arguments:
+                pr *= i
+                result["data"] = pr
+
+    except TypeError:
+        return {"errors": f"types {arguments=!r} must be not multiplied"}
 
     return result
 
@@ -51,17 +56,21 @@ def level_03(bd: Any) -> Result:
 
     today = date.today()
 
-    if bd.year > today.year:
-        errors.append("wrong year")
+    if not isinstance(bd, date):
+        errors.append("type must be date")
     if errors:
         result["errors"] = errors
 
     else:
-        age = (
-            today.year
-            - bd.year  # noqa: W503
-            - ((today.month, today.day) < (bd.month, bd.day))  # noqa: W503
-        )
+        if (today.year - bd.year) < 0:
+            age = None
+            result["data"] = age
+        else:
+            age = (
+                today.year
+                - bd.year  # noqa: W503
+                - ((today.month, today.day) < (bd.month, bd.day))  # noqa: W503
+            )
 
         result["data"] = {
             "year": bd.year,
@@ -73,20 +82,18 @@ def level_03(bd: Any) -> Result:
     return result
 
 
-def level_04(dic: dict[str, date]) -> Result:
+def level_04(dic: Any) -> Result:
     result: Result = {}
     errors = []
 
-    if dic["A"] == dic["B"]:
-        errors.append("years must be a different")
+    if type(dic) != dict:
+        errors.append("argument must be dict")
     if errors:
         result["errors"] = errors
 
     else:
-        if dic["A"] > dic["B"]:
-            result["data"] = "B"
-        else:
-            result["data"] = "A"
+        res = min(dic, key=dic.get)
+        result["data"] = res
 
     return result
 
@@ -95,21 +102,18 @@ def level_05(lis: Any) -> Result:
     result: Result = {}
     errors = []
 
-    if type(lis) == bool:
-        errors.append("argument must not be bool")
-    if errors:
-        result["errors"] = errors
-
-    else:
-        if type(lis) == set:
-            res = {}  # type: ignore
-            result["data"] = res
+    try:
+        if not isinstance(lis, (dict, list, str, tuple)):
+            errors.append("argument must be collection")
+        if errors:
+            result["errors"] = errors
 
         else:
-            res = {
-                (x, lis.count(x)) for x in lis if lis.count(x) > 1
-            }  # type: ignore
+            res = {(x, lis.count(x)) for x in lis if lis.count(x) > 1}
             result["data"] = dict(res)
+
+    except TypeError:
+        return {"errors": "unhashable type"}
 
     return result
 
@@ -118,8 +122,8 @@ def level_06(query: Any) -> Result:
     result: Result = {}
     errors = []
 
-    if type(query) == int:
-        errors.append(f"argument ({query=!r}) must be string")
+    if not isinstance(query, str):
+        errors.append("argument must be string")
     if errors:
         result["errors"] = errors
 
@@ -176,18 +180,19 @@ def level_08(string: Any) -> Result:
         dic = ["".join(g) for _, g in groupby(string)]
 
         res = []
+
         el = 0
-        for _ in enumerate(dic):
+        while el < len(dic):
             rr = len(dic[el])
             res.append(rr)
-            el += 1  # noqa: SIM113
+            el += 1
 
         s2 = {key: value for (key, value) in zip(dic, res)}
-        s2 = (f"{key}{value}" for (key, value) in s2.items())  # type: ignore
-        s3 = "".join(s2)
-        s4 = "".join(c[0] for c in itertools.groupby(s3))
+        s3 = "".join("".join((str(k), str(v))) for k, v in s2.items())
+        s4 = "".join(map("".join, tuple(s3)))
+        s5 = "".join(c[0] for c in itertools.groupby(s4))
 
-        result["data"] = s4
+        result["data"] = s5
 
     return result
 
@@ -196,7 +201,7 @@ def level_09(dic: Any) -> Result:
     result: Result = {}
     errors = []
 
-    if not dic:
+    if not isinstance(dic, dict):
         errors.append("argument must not be empty")
     if errors:
         result["errors"] = errors
@@ -212,29 +217,26 @@ def level_09(dic: Any) -> Result:
     return result
 
 
-def level_10(a1: Any, b1: Any, a2: Any, b2: Any) -> Result:
+def level_10(args1: Any, args2: Any) -> Result:
     result: Result = {}
     errors = []
 
-    if not a1:
-        errors.append(f"arguments ({a1=!r}) must not be empty")
-    if not b1:
-        errors.append(f"arguments ({b1=!r}) must not be empty")
-    if not a2:
-        errors.append(f"arguments ({a2=!r}) must not be empty")
-    if not b2:
-        errors.append(f"arguments ({b2=!r}) must not be empty")
+    if not isinstance(args1, (list, str, tuple)):
+        errors.append("argument must be list, str or tuple")
+    if not isinstance(args2, (list, str, tuple)):
+        errors.append("argument must be list, str or tuple")
     if errors:
         result["errors"] = errors
 
     else:
-        a11 = list(a1)
-        d1 = dict(zip_longest(a11, b1))
+        if len(args1) > len(args2):
+            args11 = list(args1)
+            dic = dict(zip_longest(args11, args2))
+        else:
+            args22 = list(args1)
+            dic = dict(zip_longest(args22, args2, fillvalue="..."))
 
-        a22 = list(a2)
-        d2 = dict(zip_longest(a22, b2, fillvalue="..."))
-
-        result["data"] = d1, d2
+        result["data"] = dic
 
     return result
 
@@ -243,10 +245,10 @@ def level_11(s1: Any, s2: Any) -> Result:
     result: Result = {}
     errors = []
 
-    if type(s1) == str:
-        errors.append(f"argument {s1=!r} must be set")
-    if type(s2) == str:
-        errors.append(f"argument {s2=!r} must be set")
+    if not isinstance(s1, (set, frozenset)):
+        errors.append("argument must be set")
+    if not isinstance(s2, (set, frozenset)):
+        errors.append("argument must be set")
     if errors:
         result["errors"] = errors
 
@@ -273,18 +275,22 @@ def level_11(s1: Any, s2: Any) -> Result:
     return result
 
 
-def level_12(arg: Any) -> Result:
+def level_12(*arguments: Any) -> Result:
     result: Result = {}
     errors = []
 
-    if not arg:
+    if not arguments:
         errors.append("argument must not be empty")
     if errors:
         result["errors"] = errors
 
     else:
-        list1 = [value for (key, value) in enumerate(arg) if key % 2 == 0]
-        list2 = [value for (key, value) in enumerate(arg) if key % 2 != 0]
+        list1 = [
+            value for (key, value) in enumerate(arguments) if key % 2 == 0
+        ]
+        list2 = [
+            value for (key, value) in enumerate(arguments) if key % 2 != 0
+        ]
 
         list3 = dict(zip(list1, list2))
 
