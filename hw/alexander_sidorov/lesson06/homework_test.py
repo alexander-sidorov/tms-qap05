@@ -1,14 +1,10 @@
 from datetime import date
 from typing import Any
-from typing import Callable
 from typing import FrozenSet
-from typing import Iterable
-from typing import List
-from typing import Union
 
 from freezegun import freeze_time
 
-from .common import Undefined
+from .common import validate
 from .task01 import task_01
 from .task02 import task_02
 from .task03 import task_03
@@ -21,60 +17,6 @@ from .task09 import task_09
 from .task10 import task_10
 from .task11 import task_11
 from .task12 import task_12
-
-
-def validate(
-    func: Callable,
-    *args: Any,
-    expected_data: Any = Undefined,
-    expected_errors: Union[List[str], object] = Undefined,
-) -> None:
-    _e = "double expectations are not allowed"
-    assert (expected_data is Undefined) ^ (expected_errors is Undefined), _e
-
-    result = func(*args)
-
-    assert isinstance(result, dict), f"{type(result)=!r}, MUST be a dict"
-    assert len(result) == 1, "only one dict key is allowed"
-    _e = f"unknown key {result.keys()}"
-    assert ("errors" in result) or ("data" in result), _e
-
-    if expected_data is not Undefined:
-        _e = f"errors key MUST not be present for happy way: {result!r}"
-        assert "errors" not in result, _e
-
-        _e = f"data key MUST be present for happy path: {result!r}"
-        assert "data" in result, _e
-
-        got_data = result["data"]
-        _e = f"expectations failed for {func.__name__}{args}"
-        assert got_data == expected_data, _e
-
-    if expected_errors is not Undefined:
-        assert isinstance(expected_errors, Iterable)
-
-        _e = f"errors key MUST be present for failed path: {result!r}"
-        assert "errors" in result, _e
-
-        _e = f"data key MUST not be present for failed path: {result!r}"
-        assert "data" not in result, _e
-
-        errors: List[str] = result["errors"]
-        _e = f"{type(result['errors'])=!r}, MUST be a list"
-        assert isinstance(errors, list)
-
-        _e = f"{result['errors']=!r} MUST contain at least one error"
-        assert errors, _e
-
-        for i, error in enumerate(errors):
-            _e = f"{result['errors'][i]=!r} MUST be a str"
-            assert isinstance(error, str), _e
-
-        missing_errors = set(expected_errors) - set(errors)
-        _e = f"errors={sorted(errors)}, missing: {sorted(missing_errors)}"
-        assert not missing_errors, _e
-
-        assert errors == sorted(errors), "errors are not sorted"
 
 
 def test_task_01() -> None:

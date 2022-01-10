@@ -2,9 +2,11 @@ from collections import Counter
 from typing import Collection
 from typing import Hashable
 from typing import List
+from typing import TypeVar
 
-from .common import T1
 from .common import Result
+
+T1 = TypeVar("T1")
 
 
 def task_05(collection: Collection[T1]) -> Result:
