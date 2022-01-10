@@ -2,19 +2,46 @@ import re
 from collections import Counter
 from datetime import date
 from itertools import groupby
+from itertools import zip_longest
 from typing import Any
 from typing import Collection
 from typing import Dict
 from typing import Hashable
 from typing import List
+from typing import Optional
 from typing import Sequence
 from typing import TypeVar
+from typing import Union
 from urllib.parse import parse_qs
 
 Result = Dict[str, Any]
 
 T1 = TypeVar("T1")
 T2 = TypeVar("T2")
+
+
+class UndefinedType:
+    pass
+
+
+Undefined = UndefinedType()
+
+
+def build_result(
+    *,
+    data: Any = Undefined,
+    errors: Union[List[str], UndefinedType] = Undefined,
+) -> Result:
+    result: Result = {}
+
+    if errors and errors is not Undefined:
+        assert isinstance(errors, list)
+        result["errors"] = sorted(errors)
+
+    if not result and data is not Undefined:
+        result["data"] = data
+
+    return result
 
 
 def task_01(arg: str) -> Result:
@@ -141,8 +168,36 @@ def task_09(arg: Dict[T1, T2]) -> Result:
     return result
 
 
-def task_10() -> Result:
-    return {"data": None}
+def task_10(keys: Sequence[T1], values: Sequence[T2]) -> Result:
+    data: Dict[  # noqa: TAE002
+        Union[T1, ellipsis],  # noqa: F821
+        Union[Optional[T2], List[Optional[T2]]],
+    ] = {}
+    errors: List[str] = []
+
+    pairs = zip_longest(keys, values, fillvalue=Undefined)
+    anon_values: List[Optional[T2]] = []
+
+    for i, (key, value) in enumerate(pairs):
+        if not isinstance(key, Hashable):
+            errors.append(f"keys[{i}]={key!r} is not hashable")
+
+        if errors:
+            continue
+
+        if key is Undefined:
+            anon_values.append(value)
+            continue
+
+        if value is Undefined:
+            value = None
+
+        data[key] = value
+
+    if not errors and anon_values:
+        data[...] = anon_values
+
+    return build_result(data=data, errors=errors)
 
 
 def task_11() -> Result:

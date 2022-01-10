@@ -296,7 +296,51 @@ def test_task_09() -> None:
 
 
 def test_task_10() -> None:
-    assert task_10()
+    validate(
+        task_10,
+        {},
+        [],
+        expected_data={},
+    )
+    validate(
+        task_10,
+        {1, 2, 3},
+        frozenset({1, 2, 3}),
+        expected_data={1: 1, 2: 2, 3: 3},
+    )
+    validate(
+        task_10,
+        "ab",
+        [[], [[]]],
+        expected_data={"a": [], "b": [[]]},
+    )
+    validate(
+        task_10,
+        "ab",
+        "a",
+        expected_data={"a": "a", "b": None},
+    )
+    validate(
+        task_10,
+        "a",
+        "ab",
+        expected_data={"a": "a", ...: ["b"]},
+    )
+    validate(
+        task_10,
+        [None, None],
+        "ab",
+        expected_data={None: "b"},
+    )
+    validate(
+        task_10,
+        [{}, []],
+        "ab",
+        expected_errors=[
+            "keys[0]={} is not hashable",
+            "keys[1]=[] is not hashable",
+        ],
+    )
 
 
 def test_task_11() -> None:
