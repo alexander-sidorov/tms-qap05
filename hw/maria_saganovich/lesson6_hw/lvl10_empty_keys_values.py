@@ -15,14 +15,6 @@ def func10_empty_keys_values(arg1: Any, arg2: Any) -> dict:  # noqa: CCR001
             result_error.append("is undefined")
             is_error = True
         else:
-            if len(arg1) == 0:
-                result_error.append("str is empty")
-                is_error = True
-            if len(arg2) == 0:
-                result_error.append("list is empty")
-                is_error = True
-
-        if not is_error:
             for index, values in enumerate(list(arg1)):
                 if index < len(arg2):
                     result_data[values] = arg2[index]

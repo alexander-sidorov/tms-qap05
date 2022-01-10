@@ -14,9 +14,11 @@ def test_func10_empty_keys_values() -> None:
         "data": {"a": 1, "b": 2, ...: [3, 4]}
     }
     assert func10_empty_keys_values("", [1, 2, 3]) == {
-        "errors": ["str is empty"]
+        "data": {...: [1, 2, 3]}
     }
-    assert func10_empty_keys_values("sdv", []) == {"errors": ["list is empty"]}
+    assert func10_empty_keys_values("sdv", []) == {
+        "data": {"s": None, "d": None, "v": None}
+    }
     assert func10_empty_keys_values("", []) == {"errors": ["is undefined"]}
     assert func10_empty_keys_values([], []) == {"errors": ["incorrect arg"]}
     assert func10_empty_keys_values("sdv", {}) == {"errors": ["incorrect arg"]}
