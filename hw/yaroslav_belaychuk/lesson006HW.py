@@ -74,5 +74,5 @@ def zadacha_7(sybol_num: str) -> dict:
     b3 = tuple(filter(str.isalpha, sybol_num))
     c3 = tuple(filter(str.isdigit, sybol_num))
     for x1, z1 in zip(b3, c3):
-        banka += x * int(z)
+        banka += x1 * int(z1)
     return {"data": banka}
