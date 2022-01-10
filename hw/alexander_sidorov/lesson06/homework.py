@@ -12,6 +12,7 @@ from typing import Optional
 from typing import Sequence
 from typing import Union
 from urllib.parse import parse_qs
+
 from .common import AnySet
 from .common import build_result
 from .common import even
@@ -19,15 +20,6 @@ from .common import Result
 from .common import T1
 from .common import T2
 from .common import Undefined
-
-
-def task_01(arg: str) -> Result:
-    if not isinstance(arg, str):
-        type_name = type(arg).__name__
-        return {"errors": [f"type(arg)={type_name}, MUST be a string"]}
-
-    rev = arg[::-1]
-    return {"data": arg == rev}
 
 
 def task_02(*args: Any) -> Result:
