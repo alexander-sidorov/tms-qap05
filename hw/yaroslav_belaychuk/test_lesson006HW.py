@@ -30,4 +30,4 @@ def test_function() -> None:
     assert zadacha_5({(), "", "", 1}) == {"errors": ["NoRepeatError"]}
     assert zadacha_7("a3b4c2") == {"data": "aaabbbbcc"}
     assert zadacha_7("a3b2c") == {"Error"}
-    assert zadacha_7(["a3b4c5"]) == {"TypeError"}
+    assert zadacha_7("[a3b4c5]") == {"TypeError"}

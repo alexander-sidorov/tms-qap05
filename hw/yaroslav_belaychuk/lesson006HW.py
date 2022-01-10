@@ -27,7 +27,7 @@ def umnogenie(*nums: Any) -> dict:
 
 def date_age(b: date) -> dict:
     if type(b) != date:
-        return {"TypeError"}
+        return {"TypeError"}   # type: ignore
 
     segodnya = date.today()
     delta = segodnya - b
@@ -58,7 +58,7 @@ def zadacha_5(collection: Any) -> dict:
         return {"errors": ["NoRepeatError"]}
     banka = {}
     if len(collection) == 0:
-        return {"error"}
+        return {"error"}   # type: ignore
     for n in collection:
         if collection.count(n) >= 2:
             banka[n] = collection.count(n)
@@ -67,9 +67,9 @@ def zadacha_5(collection: Any) -> dict:
 
 def zadacha_7(sybol_num: str) -> dict:
     if type(sybol_num) != str:
-        return {"TypeError"}
+        return {"TypeError"}   # type: ignore
     if len(sybol_num) % 2 != 0:
-        return {"Error"}
+        return {"Error"}   # type: ignore
     banka = ""
     b = tuple(filter(str.isalpha, sybol_num))
     c = tuple(filter(str.isdigit, sybol_num))
