@@ -6,46 +6,19 @@ from itertools import zip_longest
 from typing import Any
 from typing import Collection
 from typing import Dict
-from typing import FrozenSet
 from typing import Hashable
 from typing import List
 from typing import Optional
 from typing import Sequence
-from typing import Set
-from typing import TypeVar
 from typing import Union
 from urllib.parse import parse_qs
-
-AnySet = Union[Set, FrozenSet]
-
-Result = Dict[str, Any]
-
-T1 = TypeVar("T1")
-T2 = TypeVar("T2")
-
-
-class UndefinedType:
-    pass
-
-
-Undefined = UndefinedType()
-
-
-def build_result(
-    *,
-    data: Any = Undefined,
-    errors: Union[List[str], UndefinedType] = Undefined,
-) -> Result:
-    result: Result = {}
-
-    if errors and errors is not Undefined:
-        assert isinstance(errors, list)
-        result["errors"] = sorted(errors)
-
-    if not result and data is not Undefined:
-        result["data"] = data
-
-    return result
+from .common import AnySet
+from .common import build_result
+from .common import even
+from .common import Result
+from .common import T1
+from .common import T2
+from .common import Undefined
 
 
 def task_01(arg: str) -> Result:
@@ -241,7 +214,3 @@ def task_12(*args: Any) -> Result:
         data[key] = elem
 
     return build_result(data=data, errors=errors)
-
-
-def even(arg: int) -> bool:
-    return arg % 2 == 0
