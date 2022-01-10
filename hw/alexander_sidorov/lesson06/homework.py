@@ -18,18 +18,6 @@ from .common import build_result
 from .common import even
 
 
-def task_07(folded_text: str) -> Result:
-    folds = re.findall(r"(\D\d+)", folded_text)
-    if "".join(folds) != folded_text:
-        return {"errors": [f"{folded_text=!r} is malformed"]}
-
-    chars_counts = ((fold[0], int(fold[1:])) for fold in folds)
-
-    flatten_text = "".join(char * count for char, count in chars_counts)
-
-    return {"data": flatten_text}
-
-
 def task_08(flatten_text: str) -> Result:
     if re.match(r".*\d", flatten_text):
         return {"errors": ["integers MUST not be present in flatten text"]}
