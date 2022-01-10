@@ -1,17 +1,17 @@
 from datetime import date
 
-from refakt import codding
-from refakt import dateday
-from refakt import decodding
-from refakt import diction
-from refakt import happybithday
-from refakt import html_str
-from refakt import new_dict
-from refakt import new_set
-from refakt import palindrom
-from refakt import proizvedenie
-from refakt import repeat
-from refakt import rever_dict
+from hw.siarhei_apanel.refakt import codding
+from hw.siarhei_apanel.refakt import dateday
+from hw.siarhei_apanel.refakt import decodding
+from hw.siarhei_apanel.refakt import diction
+from hw.siarhei_apanel.refakt import happybithday
+from hw.siarhei_apanel.refakt import html_str
+from hw.siarhei_apanel.refakt import new_dict
+from hw.siarhei_apanel.refakt import new_set
+from hw.siarhei_apanel.refakt import palindrom
+from hw.siarhei_apanel.refakt import proizvedenie
+from hw.siarhei_apanel.refakt import repeat
+from hw.siarhei_apanel.refakt import rever_dict
 
 
 def test_example() -> None:
