@@ -29,8 +29,7 @@ def umnogenie(*nums: Any) -> dict:
 
 def date_age(b: date) -> dict:
     result = {}
-
-    if b != date:
+    if type(b) != date:
         return {"TypeError"}
 
     segodnya = date.today()
@@ -59,6 +58,8 @@ def zadacha_4(day: dict) -> dict:
 
 
 def zadacha_5(collection: Any) -> dict:
+    if type(collection) not in [list, tuple, str]:
+        return {"errors": ["NoRepeatError"]}
     banka = {}
     if len(collection) == 0:
         return {"error"}
