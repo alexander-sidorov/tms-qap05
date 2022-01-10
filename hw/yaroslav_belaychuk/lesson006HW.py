@@ -25,17 +25,17 @@ def umnogenie(*nums: Any) -> dict:
     return {"data": banka}
 
 
-def date_age(b: date) -> dict:
-    if type(b) != date:
+def date_age(b1: date) -> dict:
+    if type(b1) != date:
         return {"TypeError"}  # type: ignore
 
     segodnya = date.today()
-    delta = segodnya - b
+    delta = segodnya - b1
     result = {
         "data": {
-            "year": b.year,
-            "month": b.month,
-            "day": b.day,
+            "year": b1.year,
+            "month": b1.month,
+            "day": b1.day,
             "age": int(delta.days // 365),
         }
     }
@@ -71,8 +71,8 @@ def zadacha_7(sybol_num: str) -> dict:
     if len(sybol_num) % 2 != 0:
         return {"Error"}  # type: ignore
     banka = ""
-    b = tuple(filter(str.isalpha, sybol_num))
-    c = tuple(filter(str.isdigit, sybol_num))
-    for x, z in zip(b, c):
+    b3 = tuple(filter(str.isalpha, sybol_num))
+    c3 = tuple(filter(str.isdigit, sybol_num))
+    for x, z in zip(b3, c3):
         banka += x * int(z)
     return {"data": banka}
