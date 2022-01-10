@@ -16,7 +16,7 @@ def test_function() -> None:
     assert palindrom("x") == {"data": True}
     assert palindrom("xx") == {"data": True}
     assert palindrom("xy") == {"data": False}
-    assert palindrom(1) == {"errors": ["TypeErrors"]}   # type: ignore
+    assert palindrom(1) == {"errors": ["TypeErrors"]}  # type: ignore
     assert umnogenie(1, 2, 3) == {"data": 6}
     assert umnogenie(1) == {"data": 1}
     assert umnogenie(1, 2) == {"data": 2}
@@ -24,10 +24,10 @@ def test_function() -> None:
     assert date_age(d1) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
-    assert date_age(d2) == {"TypeError"}   # type: ignore
+    assert date_age(d2) == {"TypeError"}  # type: ignore
     assert zadacha_4(f1) == {"data": "vika"}
     assert zadacha_5(("a", "a", 1, 2)) == {"data": {"a": 2}}
     assert zadacha_5({(), "", "", 1}) == {"errors": ["NoRepeatError"]}
     assert zadacha_7("a3b4c2") == {"data": "aaabbbbcc"}
     assert zadacha_7("a3b2c") == {"Error"}
-    assert zadacha_7(["a3b4c5"]) == {"TypeError"}   # type: ignore
+    assert zadacha_7(["a3b4c5"]) == {"TypeError"}  # type: ignore
