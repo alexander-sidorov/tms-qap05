@@ -1,3 +1,4 @@
+import re
 from collections import Counter
 from datetime import date
 from typing import Any
@@ -86,8 +87,16 @@ def task_06(query: str) -> Result:
     return {"data": parsed}
 
 
-def task_07() -> Result:
-    return {"data": None}
+def task_07(folded_text: str) -> Result:
+    folds = re.findall(r"(\D\d+)", folded_text)
+    if "".join(folds) != folded_text:
+        return {"errors": [f"{folded_text=!r} is malformed"]}
+
+    chars_counts = ((fold[0], int(fold[1:])) for fold in folds)
+
+    flatten_text = "".join(char * count for char, count in chars_counts)
+
+    return {"data": flatten_text}
 
 
 def task_08() -> Result:
