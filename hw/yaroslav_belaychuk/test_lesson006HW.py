@@ -28,8 +28,8 @@ def test_function() -> None:
     assert date_age(d1) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
-    assert date_age(d2) == {"errors": ["TypeError"]}
-    assert date_age(...) == {"errors": ["TypeError"]}
+    assert date_age(d2) == {"errors": ["TypeError"]}  # type: ignore
+    assert date_age(...) == {"errors": ["TypeError"]}  # type: ignore
     assert zadacha_4(f1) == {"data": "vika"}
     assert zadacha_4({}) == {"errors": ["NonValueError"]}
     assert zadacha_4({1: 1j, 2: 2j}) == {"errors": ["TypeError"]}
@@ -40,5 +40,5 @@ def test_function() -> None:
     assert zadacha_5([[], []]) == {"errors": ["TypeError"]}
     assert zadacha_7("a3b4c2") == {"data": "aaabbbbcc"}
     assert zadacha_7("a3b2c") == {"errors": ["NonDigitError"]}
-    assert zadacha_7(["a3b4c5"]) == {"errors": ["TypeError"]}
+    assert zadacha_7(["a3b4c5"]) == {"errors": ["TypeError"]}  # type: ignore
     assert zadacha_7("a11") == {"data": "aaaaaaaaaaa"}
