@@ -147,7 +147,7 @@ def repeat(collect: Any) -> dict:
     return {"data": result_dict}
 
 
-def html_str(query: str) -> dict:
+def html_str(query: Any) -> dict:
     result: dict[str, list] = {}
     if type(query) != str:
         return {"errors": ["TypeError"]}
@@ -247,9 +247,9 @@ def new_dict(key: Any, value: Any) -> dict:
     return {"data": result}
 
 
-def new_set(set1: set, set2: set) -> dict:
+def new_set(set1: Any, set2: Any) -> dict:
     if type(set1) != set or type(set2) != set:
-        return {"errors": ["TypeError"]} 
+        return {"errors": ["TypeError"]}
     return {
         "data": {
             "a&b": set1 & set2,
