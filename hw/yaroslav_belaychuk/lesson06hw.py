@@ -7,13 +7,15 @@ def cortage(a1: list) -> tuple:
 
 def string(b1: str) -> str:
     b2 = b1.split()
-    new_word = b2[1] + " " + b2[0]
+    new_word = f"{b2[1]} {b2[0]}"
     return new_word
 
 
-def collection(c1: list, c2: Any) -> Any:
-    c1.append(c2)
-    return c1
+def collection(c1: list, c2: Any) -> list:
+    if c2 not in c1:
+        return ["Errors Value"]
+    c3 = c1.index(c2)
+    return c1[: c3 + 1]  # noqa: E203
 
 
 def str_in_str(d1: str, d2: str) -> str:
