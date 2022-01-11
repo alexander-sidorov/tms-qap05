@@ -8,7 +8,7 @@ from typing import Any
 def palindrome(string: str) -> dict:
     result = {}
     if not isinstance(string, str):
-        return {"errors": "given argument is not string type"}
+        return {"errors": ["given argument is not string type"]}
     if string[:] == string[::-1]:
         result["data"] = True
     else:
@@ -20,7 +20,7 @@ def multiply(*args: Any) -> dict:
     result = {}
     try:
         if len(args) < 1:
-            return {"errors": "no argument is given"}
+            return {"errors": ["no argument is given"]}
         elif len(args) == 1:
             result["data"] = args[0]
         else:
@@ -29,14 +29,14 @@ def multiply(*args: Any) -> dict:
                 multiplication_result *= i
                 result["data"] = multiplication_result
     except TypeError:
-        return {"errors": "given arguments' types can't be multiplied"}
+        return {"errors": ["given arguments' types can't be multiplied"]}
     return result
 
 
 def get_formatted_birthday(birthday_date: date) -> dict:
     result = {}
     if not isinstance(birthday_date, date):
-        return {"errors": "given argument is not object of date type"}
+        return {"errors": ["given argument is not object of date type"]}
     today = date.today()
     birthday_this_year = date(
         today.year, birthday_date.month, birthday_date.day
@@ -57,12 +57,12 @@ def get_formatted_birthday(birthday_date: date) -> dict:
 def get_the_eldest(dictionary: dict) -> dict:
     result = {}
     if not isinstance(dictionary, dict):
-        return {"errors": "Given argument is not a dictionary"}
+        return {"errors": ["Given argument is not a dictionary"]}
     keys = []
     values = []
     for key, value in dictionary.items():
         if not isinstance(value, date):
-            return {"errors": "key value is not object of date type"}
+            return {"errors": ["key value is not object of date type"]}
         keys.append(key)
         values.append(value)
     min_age = min(values)
@@ -72,16 +72,16 @@ def get_the_eldest(dictionary: dict) -> dict:
 
 
 def get_the_same_elements_in_collection(collection: Any) -> dict:
-    types = (list, str, tuple)
+    types = (list, str, tuple, set, dict)
     if type(collection) not in types:
         return {
-            "errors": "given argument with keys is not a list, str or tuple"
+            "errors": ["given argument with keys is not a list, str or tuple"]
         }
     result = {}
     try:
         counter: Counter = collections.Counter(collection)
     except TypeError:
-        return {"errors": "collection contains unhashable type"}
+        return {"errors": ["collection contains unhashable type"]}
     result_dict = {}
     for key, value in counter.items():
         if value == 1:
@@ -95,7 +95,7 @@ def get_the_same_elements_in_collection(collection: Any) -> dict:
 def http_query_parser(query: str) -> dict:
     result = {}
     if not isinstance(query, str):
-        return {"errors": "given argument is not string type"}
+        return {"errors": ["given argument is not string type"]}
     dict_with_queries = {}
     try:
         split_query = query.split("&")
@@ -111,7 +111,7 @@ def http_query_parser(query: str) -> dict:
                     i[index_of_equals + 1 :]  # noqa: E203
                 )  # noqa: E203
     except IndexError and ValueError:
-        return {"errors": "given query contains wrong format"}
+        return {"errors": ["given query contains wrong format"]}
     result["data"] = dict_with_queries
     return result
 
@@ -119,11 +119,11 @@ def http_query_parser(query: str) -> dict:
 def repeat_chars(string: str) -> dict:
     result = {}
     if not isinstance(string, str):
-        return {"errors": "given argument is not string type"}
-    numbers = re.findall("\d+", string)  # noqa: W605
-    chars = re.findall("\D", string)  # noqa: W605
+        return {"errors": ["given argument is not string type"]}
+    numbers = re.findall(r"\d+", string)
+    chars = re.findall(r"\D", string)
     if len(numbers) != len(chars):
-        return {"errors": "wrong format of string"}
+        return {"errors": ["wrong format of string"]}
     else:
         zipped_lists = list(zip(numbers, chars))
         result_str = ""
@@ -136,23 +136,34 @@ def repeat_chars(string: str) -> dict:
 def count_chars(string: str) -> dict:
     result = {}
     if not isinstance(string, str):
-        return {"errors": "given argument is not string type"}
-    counter: Counter = Counter()
-    for i in string:
-        counter[i] += 1
-    dict_result = dict(counter)
-    result_string = ""
-    for key, value in dict_result.items():
-        char_and_counter = f"{key}{str(value)}"
-        result_string += char_and_counter
-    result["data"] = result_string
+        return {"errors": ["given argument is not string type"]}
+    if len(string) == 0:
+        result["data"] = ""
+        return result
+    if len(string) == 1:
+        result["data"] = f"{string[0]}1"
+        return result
+    result_str = ""
+    counter: dict = {string[0]: 0}
+    previous_value = string[0]
+    for letter in string:
+        if letter in counter:
+            counter[letter] += 1
+        else:
+            counter[letter] = 1
+            substring = f"{previous_value}{counter[previous_value]}"
+            result_str += substring
+            counter.pop(previous_value)
+            previous_value = letter
+    result_str += f"{list(counter.keys())[0]}{list(counter.values())[0]}"
+    result["data"] = result_str
     return result
 
 
 def inverted_dictionary(dictionary: dict) -> dict:
     result = {}
     if not isinstance(dictionary, dict):
-        return {"errors": "given argument is not dict type"}
+        return {"errors": ["given argument is not dict type"]}
     inverted_dict = {}
     try:
         for key, value in dictionary.items():
@@ -161,7 +172,7 @@ def inverted_dictionary(dictionary: dict) -> dict:
             else:
                 inverted_dict[value].append(key)
     except TypeError:
-        return {"errors": "dictionary value contains unhashable type"}
+        return {"errors": ["dictionary value contains unhashable type"]}
     for new_key, new_value in inverted_dict.items():
         if len(new_value) < 2:
             inverted_dict[new_key] = new_value[0]
@@ -176,7 +187,7 @@ def zip_collections_to_dict(keys: Any, values: Any) -> dict:
     unhashable_types = (list, set, dict)
     error_txt1 = "given argument with keys is not a list, str or tuple"
     error_txt2 = "given argument with values is not a list, str or tuple"
-    error_txt3 = "collections contain values with unhashable type"
+    error_txt3 = ["collections contain values with unhashable type"]
     if type(keys) not in types:
         errors.append(error_txt1)
     if type(values) not in types:
@@ -232,7 +243,7 @@ def make_dictionary(*args: Any) -> dict:
     result = {}
     dictionary_from_arguments = {}
     if len(args) % 2 != 0:
-        return {"errors": "Quantity of given arguments is not even"}
+        return {"errors": ["Quantity of given arguments is not even"]}
     else:
         keys = []
         values = []
@@ -244,6 +255,6 @@ def make_dictionary(*args: Any) -> dict:
         try:
             dictionary_from_arguments = dict(list(zip(keys, values)))
         except TypeError:
-            return {"errors": "odd argument is unhashable type"}
+            return {"errors": ["odd argument is unhashable type"]}
         result = {"data": dictionary_from_arguments}
     return result
