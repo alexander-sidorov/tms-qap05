@@ -16,7 +16,7 @@ def is_palindrome(text: str) -> type_1:
     return result
 
 
-def level_2(*args):
+def level_2(*args: Any) -> dict:
     result = {}
 
     if args == 0:
