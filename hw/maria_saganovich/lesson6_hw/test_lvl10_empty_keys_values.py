@@ -23,4 +23,4 @@ def test_func10_empty_keys_values() -> None:
         "data": {"s": None, "d": None, "v": None}
     }
     assert func10_empty_keys_values("", []) == {"data": {}}
-    assert func10_empty_keys_values([], []) == {"errors": "incorrect arg"}
+    assert func10_empty_keys_values([], []) == {"data": {}}

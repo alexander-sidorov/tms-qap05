@@ -8,12 +8,12 @@ def func8_duplicate_char_number(arg: Any) -> dict:
     count = 0
     counter: dict = {}
 
-    if type(arg) != str or len(arg) == 0:
-        return {"errors": "Invalid argument"}
+    if type(arg) != str:
+        return {"errors": ["Invalid argument"]}
 
     for value in arg:
         if value.isdigit():
-            return {"errors": "Unsupported type 'int'"}
+            return {"errors": ["Unsupported type 'int'"]}
 
         if prev_val != value:
             pair_key += value

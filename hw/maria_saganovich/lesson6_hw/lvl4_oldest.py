@@ -9,7 +9,7 @@ def func4_oldest(d1: Any) -> dict:
     error = []
 
     if type(d1) != dict:
-        return {"errors": "should be dict"}
+        return {"errors": ["should be dict"]}
 
     for key, value in d1.items():
         if not isinstance(value, date):

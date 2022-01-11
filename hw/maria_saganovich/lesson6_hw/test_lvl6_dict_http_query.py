@@ -12,4 +12,4 @@ def test_func6_dict_http_query() -> None:
     }
     assert func6_dict_http_query("") == {"data": {}}
     assert func6_dict_http_query("3q&ue=ry5") == {"data": {"ue": ["ry5"]}}
-    assert func6_dict_http_query([]) == {"errors": "arg should be str"}
+    assert func6_dict_http_query([]) == {"errors": ["arg should be str"]}

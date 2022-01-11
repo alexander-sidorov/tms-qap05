@@ -8,14 +8,13 @@ def func12_even_keys_odd_values(*args: Any) -> dict:
     odd_args = []
     even_args = []
 
+    if len(args) % 2 == 1:
+        result_error.append("should be even count")
     for key, arg in enumerate(args, start=1):
-        if type(arg) != int:
-            result_error.append("should be number")
+        if key % 2 == 1:
+            odd_args.append(arg)
         else:
-            if key % 2 == 1:
-                odd_args.append(arg)
-            else:
-                even_args.append(arg)
+            even_args.append(arg)
 
     for index, value in enumerate(odd_args):
         if index < len(even_args):

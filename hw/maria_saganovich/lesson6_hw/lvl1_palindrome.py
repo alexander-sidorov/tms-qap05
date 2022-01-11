@@ -9,9 +9,7 @@ def func1_palindrome(palindrome: Any) -> dict:
     if type(palindrome) != str:
         result_error.append("should be str")
     else:
-        b1 = palindrome.split()
-        b2 = "".join(b1)
-        str_palindrome = str(b2).lower()
+        str_palindrome = str(palindrome)
         if str_palindrome == str_palindrome[::-1]:
             result_data = True
         else:

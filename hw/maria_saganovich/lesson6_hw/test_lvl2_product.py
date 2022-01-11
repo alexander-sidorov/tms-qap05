@@ -12,7 +12,7 @@ def test_func2_product() -> None:
         "data": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabc"
     }
     assert func2_product("abc", "def") == {
-        "errors": "Can't multiply sequence by non-int of types"
+        "errors": ["Can't multiply sequence by non-int of types"]
     }
     assert func2_product(2, -21.9) == {"data": -43.8}
     assert func2_product(2, 0, 1) == {"data": 0}
@@ -21,5 +21,5 @@ def test_func2_product() -> None:
     assert func2_product(2, [2]) == {"data": [2, 2]}
     assert func2_product(2, [2], 2) == {"data": [2, 2, 2, 2]}
     assert func2_product(2, [2], 2, [2]) == {
-        "errors": "Can't multiply sequence by non-int of types"
+        "errors": ["Can't multiply sequence by non-int of types"]
     }

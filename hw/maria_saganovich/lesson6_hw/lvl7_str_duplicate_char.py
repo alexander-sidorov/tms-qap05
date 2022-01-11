@@ -7,7 +7,7 @@ def func7_str_duplicate_char(arg: Any) -> dict:
     result_data = ""
     result_error = []
 
-    if type(arg) != str or len(arg) == 0:
+    if type(arg) != str:
         result_error.append("Invalid argument")
     else:
         res = re.findall("([a-zA-Z]+\\d+)", arg)

@@ -18,5 +18,5 @@ def test_func5_duplicate_elements() -> None:
     assert func5_duplicate_elements((1, 1, 1)) == {"data": {1: 3}}
     assert func5_duplicate_elements("aaa") == {"data": {"a": 3}}
     assert func5_duplicate_elements([[], []]) == {
-        "errors": "Unhashable type: 'list'"
+        "errors": ["Unhashable type: 'list'"]
     }

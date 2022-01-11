@@ -5,7 +5,7 @@ def func6_dict_http_query(query: Any) -> dict:
     result_data: dict = {}
 
     if type(query) != str:
-        return {"errors": "arg should be str"}
+        return {"errors": ["arg should be str"]}
 
     if len(str(query)) > 0:
         data = str(query).split("&")

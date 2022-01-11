@@ -6,5 +6,5 @@ from hw.maria_saganovich.lesson6_hw.lvl7_str_duplicate_char import (
 def test_func7_str_duplicate_char() -> None:
     assert func7_str_duplicate_char("a3b2c1") == {"data": "aaabbc"}
     assert func7_str_duplicate_char("aaa3b2c1") == {"data": "aaaaaaaaabbc"}
-    assert func7_str_duplicate_char("") == {"errors": ["Invalid argument"]}
+    assert func7_str_duplicate_char("") == {"data": ""}
     assert func7_str_duplicate_char([]) == {"errors": ["Invalid argument"]}
