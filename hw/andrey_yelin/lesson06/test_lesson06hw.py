@@ -1,47 +1,66 @@
 from datetime import date
 
-from hw.andrey_yelin.lesson06.functions_lesson06hw import ageResult
-from hw.andrey_yelin.lesson06.functions_lesson06hw import isPalindrome
-from hw.andrey_yelin.lesson06.functions_lesson06hw import multiplyArgs
-from hw.andrey_yelin.lesson06.functions_lesson06hw import older
-from hw.andrey_yelin.lesson06.functions_lesson06hw import repeatingElements
+from hw.andrey_yelin.lesson06.functions_lesson06hw import age_result_3
+from hw.andrey_yelin.lesson06.functions_lesson06hw import decode_7
+from hw.andrey_yelin.lesson06.functions_lesson06hw import is_palindrome_1
+from hw.andrey_yelin.lesson06.functions_lesson06hw import multiply_args_2
+from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4
+from hw.andrey_yelin.lesson06.functions_lesson06hw import parse_http_query_6
+from hw.andrey_yelin.lesson06.functions_lesson06hw import repeating_elements_5
 
 
-def test_isPalindrome() -> None:  # noqa: N802
-    assert isPalindrome("") == {"data": True}
-    assert isPalindrome("x") == {"data": True}
-    assert isPalindrome("xx") == {"data": True}
-    assert isPalindrome("xy") == {"data": False}
-    assert isPalindrome(None) == {"errors": "none argument"}
-    assert isPalindrome(1) == {"errors": "not a string"}
+def test_is_palindrome_1() -> None:
+    assert is_palindrome_1("") == {"data": True}
+    assert is_palindrome_1("x") == {"data": True}
+    assert is_palindrome_1("xx") == {"data": True}
+    assert is_palindrome_1("xy") == {"data": False}
+    assert is_palindrome_1(None) == {"errors": "none argument"}
+    assert is_palindrome_1(1) == {"errors": "not a string"}
 
 
-def test_multiplyArgs() -> None:  # noqa: N802
-    assert multiplyArgs(1) == {"data": 1}
-    assert multiplyArgs(1, 2) == {"data": 2}
-    assert multiplyArgs(1, 2, 3) == {"data": 6}
-    assert multiplyArgs() == {"errors": "empty arguments"}
-    assert multiplyArgs(1, "a") == {"errors": "variable is not a number"}
+def test_multiply_args_2() -> None:
+    assert multiply_args_2(1) == {"data": 1}
+    assert multiply_args_2(1, 2) == {"data": 2}
+    assert multiply_args_2(1, 2, 3) == {"data": 6}
+    assert multiply_args_2() == {"errors": "empty arguments"}
+    assert multiply_args_2(1, "a") == {"errors": "variable is not a number"}
 
 
-def test_ageResult() -> None:  # noqa: N802
-    d = date(year=1987, month=8, day=2)  # noqa: VNE001
-    assert ageResult(d) == {
+def test_age_result_3() -> None:
+    date_variable = date(year=1987, month=8, day=2)
+    assert age_result_3(date_variable) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
-    assert ageResult(2) == {"errors": "variable is not a date"}
+    assert age_result_3(2) == {"errors": "variable is not a date"}
 
 
-def test_older() -> None:
-    b = {  # noqa: VNE001
+def test_older_4() -> None:
+    birthday = {
         "A": date(year=2021, month=7, day=18),
         "B": date(year=1993, month=6, day=27),
     }
-    assert older(b) == {"data": "B"}
-    assert older([]) == {"errors": "empty variable"}
-    assert older({}) == {"errors": "empty variable"}
+    assert older_4(birthday) == {"data": "B"}
+    assert older_4([]) == {"errors": "empty variable"}
+    assert older_4({}) == {"errors": "empty variable"}
 
 
-def test_repeatingElements() -> None:  # noqa: N802
-    c = [(), "", "", 1]  # noqa: VNE001
-    assert repeatingElements(c) == {"data": {"": 2}}
+def test_repeating_elements_5() -> None:
+    elements = [(), "", "", 1]
+    assert repeating_elements_5(elements) == {"data": {"": 2}}
+
+
+def test_parse_http_query_6() -> None:
+    http_query = "x=1&x=2&y=3"
+    assert parse_http_query_6(http_query) == {
+        "data": {"x": ["1", "2"], "y": ["3"]}
+    }
+    assert parse_http_query_6(None) == {"errors": "none argument"}
+    assert parse_http_query_6((1, 2)) == {"errors": "variable is not a string"}
+    assert parse_http_query_6("") == {"errors": "empty string"}
+
+
+def test_decode_7() -> None:
+    deco7 = "a11b2c3"
+    assert decode_7(deco7) == {"data": "aaaaaaaaaaabbccc"}
+    assert decode_7(None) == {"errors": "none argument"}
+    assert decode_7("2") == {"errors": "so short string"}
