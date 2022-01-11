@@ -1,4 +1,3 @@
-from functools import reduce
 from typing import Any
 from typing import Dict
 
@@ -17,14 +16,15 @@ def is_palindrome(text: str) -> type_1:
     return result
 
 
-def level_2(*args: Any) -> dict:
+def level_2(*args):
     result = {}
-    fff = 0
-    for i in args:
-        if (isinstance(i, int)) is not True:
-            fff = 1
-    if fff != 0:
-        result["errors"] = ["not int"]
+
+    if args == 0:
+        result["errors"] = ["delenie na nol"]
     else:
-        result["data"] = reduce(lambda x, y: x * y, args)
+        nakopitel = 1
+        for i in args:
+            nakopitel *= i
+
+        result["data"] = nakopitel
     return result
