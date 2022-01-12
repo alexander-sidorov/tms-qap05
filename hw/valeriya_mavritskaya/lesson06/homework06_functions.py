@@ -168,5 +168,5 @@ def mk_dictionary_12(*args: Any) -> dict:
         result = {args[i]: args[i + 1] for i in range(0, len(args), 2)}
         result = {"data": result}
     except TypeError:
-        return {"errors": ["given arguments' types can't be multiplied"]}
+        return {"errors": ["wrong types"]}
     return result
