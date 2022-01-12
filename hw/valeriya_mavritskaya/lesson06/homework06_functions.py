@@ -164,5 +164,9 @@ def set_operations_11(set1: set, set2: set) -> dict:
 def mk_dictionary_12(*args: Any) -> dict:
     if len(args) % 2 != 0:
         return {"errors": ["Use even number of elements"]}
-    result = {args[i]: args[i + 1] for i in range(0, len(args), 2)}
-    return {"data": result}
+    try:
+        result = {args[i]: args[i + 1] for i in range(0, len(args), 2)}
+        result = {"data": result}
+    except TypeError:
+        return {"errors": ["given arguments' types can't be multiplied"]}
+    return result
