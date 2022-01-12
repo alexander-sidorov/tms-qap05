@@ -19,10 +19,10 @@ def test() -> None:
     assert (level_01("")) == {"data": True}
     assert (level_01("xx")) == {"data": True}
     assert (level_01("xy")) == {"data": False}
-    assert (level_02()) == {"errors": ["argument must not be empty"]}
-    assert (level_02(2, [2], 2, [2])) == {
-        "errors": "types arguments=(2, [2], 2, [2]) must be not multiplied"
-    }
+    assert (level_02(2, "a", 2)) == {"data": "aaaa"}
+    assert (level_02("a", 2, "a")) == {"errors": ["TypeError"]}
+    assert (level_02()) == {"errors": ["no arguments"]}
+    assert (level_02(2, [2], 2, [2])) == {"errors": ["TypeError"]}
     assert (level_02(1, 2, 3)) == {"data": 6}
     assert (level_02("a" * 2)) == {"data": "aa"}
     assert (level_02(())) == {"data": ()}
@@ -55,45 +55,66 @@ def test() -> None:
     assert level_04(
         {1: date(1990, 1, 1), 2: date(1990, 1, 2), 3: date(1950, 1, 1)}
     ) == {"data": 3}
-    assert (level_04(...)) == {"errors": ["argument must be dict"]}
-    assert (level_04(None)) == {"errors": ["argument must be dict"]}
-    assert (level_04(1)) == {"errors": ["argument must be dict"]}
-    assert (level_04(1.0)) == {"errors": ["argument must be dict"]}
-    assert (level_04(1j)) == {"errors": ["argument must be dict"]}
-    assert (level_04(object())) == {"errors": ["argument must be dict"]}
-    assert (level_04(object)) == {"errors": ["argument must be dict"]}
+    assert (level_04(...)) == {"errors": ["argument must be date"]}
+    assert (level_04(None)) == {"errors": ["argument must be date"]}
+    assert (level_04(1)) == {"errors": ["argument must be date"]}
+    assert (level_04(1.0)) == {"errors": ["argument must be date"]}
+    assert (level_04(1j)) == {"errors": ["argument must be date"]}
+    assert (level_04(object())) == {"errors": ["argument must be date"]}
+    assert (level_04(object)) == {"errors": ["argument must be date"]}
     assert (level_04(type("_", (), {}))) == {  # noqa: JS101
-        "errors": ["argument must be dict"]
+        "errors": ["argument must be date"]
     }
-    assert (level_04(type)) == {"errors": ["argument must be dict"]}
-    assert (level_04(level_04)) == {"errors": ["argument must be dict"]}
+    assert (level_04(type)) == {"errors": ["argument must be date"]}
+    assert (level_04(level_04)) == {"errors": ["argument must be date"]}
     assert (level_04(date(1999, 1, 1))) == {
-        "errors": ["argument must be dict"]
+        "errors": ["argument must be date"]
     }
-    assert (level_04([[], []])) == {"errors": ["argument must be dict"]}
+    assert (level_04([[], []])) == {"errors": ["argument must be date"]}
+    assert (level_04({1: [], 2: {}, 3: [], 4: set()})) == {  # noqa: JS101
+        "errors": ["TypeError"]
+    }
     assert (level_05([])) == {"data": {}}
     assert (level_05({})) == {"data": {}}
     assert (level_05([(), "", "", 1])) == {"data": {"": 2}}
     assert (level_05(((), (), ()))) == {"data": {(): 3}}
     assert (level_05("aaa")) == {"data": {"a": 3}}
-    assert (level_05({1, 2, 3})) == {"errors": ["argument must be collection"]}
+    assert (level_05({1, 2, 3})) == {"data": {}}
     assert (level_05((1, 2, 3))) == {"data": {}}
-    assert (level_05(...)) == {"errors": ["argument must be collection"]}
-    assert (level_05(None)) == {"errors": ["argument must be collection"]}
-    assert (level_05(1)) == {"errors": ["argument must be collection"]}
-    assert (level_05(1.0)) == {"errors": ["argument must be collection"]}
-    assert (level_05(1j)) == {"errors": ["argument must be collection"]}
-    assert (level_05(object())) == {"errors": ["argument must be collection"]}
-    assert (level_05(object)) == {"errors": ["argument must be collection"]}
+    assert (level_05(...)) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
+    assert (level_05(None)) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
+    assert (level_05(1)) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
+    assert (level_05(1.0)) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
+    assert (level_05(1j)) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
+    assert (level_05(object())) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
+    assert (level_05(object)) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
     assert (level_05(type("_", (), {}))) == {  # noqa: JS101
-        "errors": ["argument must be collection"]
+        "errors": ["argument must be list, tuple, str, set, dict"]
     }
-    assert (level_05(type)) == {"errors": ["argument must be collection"]}
-    assert (level_05(level_05)) == {"errors": ["argument must be collection"]}
+    assert (level_05(type)) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
+    assert (level_05(level_05)) == {
+        "errors": ["argument must be list, tuple, str, set, dict"]
+    }
     assert (level_05(date(1999, 1, 1))) == {
-        "errors": ["argument must be collection"]
+        "errors": ["argument must be list, tuple, str, set, dict"]
     }
-    assert (level_05([[], []])) == {"errors": "unhashable type"}
+    assert (level_05([[], []])) == {"errors": ["TypeError unhashable type"]}
     assert (level_06(9)) == {"errors": ["argument must be string"]}
     assert (level_06("x=1&x=2&y=3")) == {"data": {"x": ["1", "2"], "y": ["3"]}}
     assert (level_06("")) == {"data": {}}
@@ -118,34 +139,34 @@ def test() -> None:
     assert (level_06([[], []])) == {"errors": ["argument must be string"]}
     assert (level_07(9)) == {"errors": ["argument (string=9) must be string"]}
     assert (level_07("a3b2c1")) == {"data": "aaabbc"}
-    assert (level_07("a10b1")) == {"data": "aaaaaaaaaab"}
+    assert (level_07("a10b1")) == {"errors": ["wrong input"]}
     assert (level_08(9)) == {"errors": ["argument (string=9) must be string"]}
     assert (level_08("aaabb")) == {"data": "a3b2"}
     assert (level_08("aaabbab")) == {"data": "a3b2a1b1"}
-    assert (level_09(None)) == {"errors": ["argument must not be empty"]}
+    assert (level_09(None)) == {"errors": ["argument must be dict"]}
     assert (level_09({1: 100, 2: 100, 3: 300})) == {  # noqa: JS101
-        "data": {100: [1, 2], 300: [3]}
+        "data": {100: [1, 2], 300: 3}
     }
-    assert (level_09(None)) == {"errors": ["argument must not be empty"]}
-    assert (level_09({1: 100, 2: 100, 3: 300})) == {  # noqa: JS101
-        "data": {100: [1, 2], 300: [3]}
-    }
-    assert (level_09(...)) == {"errors": ["argument must not be empty"]}
-    assert (level_09(1)) == {"errors": ["argument must not be empty"]}
-    assert (level_09(1.0)) == {"errors": ["argument must not be empty"]}
-    assert (level_09(1j)) == {"errors": ["argument must not be empty"]}
-    assert (level_09(object())) == {"errors": ["argument must not be empty"]}
-    assert (level_09(object)) == {"errors": ["argument must not be empty"]}
+    assert (level_09(...)) == {"errors": ["argument must be dict"]}
+    assert (level_09(1)) == {"errors": ["argument must be dict"]}
+    assert (level_09(1.0)) == {"errors": ["argument must be dict"]}
+    assert (level_09(1j)) == {"errors": ["argument must be dict"]}
+    assert (level_09(object())) == {"errors": ["argument must be dict"]}
+    assert (level_09(object)) == {"errors": ["argument must be dict"]}
     assert (level_09(type("_", (), {}))) == {  # noqa: JS101
-        "errors": ["argument must not be empty"]
+        "errors": ["argument must be dict"]
     }
-    assert (level_09(type)) == {"errors": ["argument must not be empty"]}
-    assert (level_09(level_05)) == {"errors": ["argument must not be empty"]}
+    assert (level_09(type)) == {"errors": ["argument must be dict"]}
+    assert (level_09(level_05)) == {"errors": ["argument must be dict"]}
     assert (level_09(date(1999, 1, 1))) == {
-        "errors": ["argument must not be empty"]
+        "errors": ["argument must be dict"]
     }
-    assert (level_09([[], []])) == {"errors": ["argument must not be empty"]}
-
+    assert (level_09([[], []])) == {
+        "errors": ["argument must be dict", "TypeError"]
+    }
+    assert (level_09({1: [], 2: {}, 3: [], 4: set()})) == {  # noqa: JS101
+        "errors": ["TypeError unhashable type"]
+    }
     assert (level_10(None, None)) == {
         "errors": [
             "argument must be list, str or tuple",
@@ -153,6 +174,9 @@ def test() -> None:
         ]
     }
     assert (level_10("abc", [1, 2])) == {"data": {"a": 1, "b": 2, "c": None}}
+    assert (level_10("1234", "ab")) == {
+        "data": {"1": "a", "2": "b", "3": None, "4": None}
+    }
     assert (level_10("ab", [1, 2, 3])) == {"data": {"a": 1, "b": 2, "...": 3}}
     assert (level_10("ab", "cd")) == {"data": {"a": "c", "b": "d"}}
     assert (level_10("", "")) == {"data": {}}
@@ -222,7 +246,8 @@ def test() -> None:
             "b in a": False,
         }
     }
-    assert (level_12()) == {"errors": ["argument must not be empty"]}
+    assert (level_12(*(1, 2, 3))) == {"errors": ["no pairs"]}
+    assert (level_12(*([], 1, {}, 2, set(), 3))) == {"errors": ["TypeError"]}
     assert (level_12(1, 2)) == {"data": {1: 2}}
     assert (level_12(1, 2, 3, "a", 5, {}, 6, object)) == {  # noqa: JS101
         "data": {1: 2, 3: "a", 5: {}, 6: object}

@@ -11,12 +11,9 @@ Result = Dict[str, Any]
 
 def level_01(string: Any) -> Result:
     result: Result = {}
-    errors = []
 
     if type(string) != str:
-        errors.append("argument must be string")
-    if errors:
-        result["errors"] = errors
+        return {"errors": ["argument must be string"]}
 
     else:
         if string == string[::-1]:
@@ -29,23 +26,21 @@ def level_01(string: Any) -> Result:
 
 def level_02(*arguments: Any) -> Result:
     result: Result = {}
-    errors = []
 
     try:
-        if not arguments:
-            errors.append("argument must not be empty")
+        if len(arguments) < 1:
+            return {"errors": ["no arguments"]}
 
-        if errors:
-            result["errors"] = errors
+        elif len(arguments) == 1:
+            result["data"] = arguments[0]
 
         else:
             pr = 1
             for i in arguments:
                 pr *= i
                 result["data"] = pr
-
     except TypeError:
-        return {"errors": f"types {arguments=!r} must be not multiplied"}
+        return {"errors": ["TypeError"]}
 
     return result
 
@@ -87,12 +82,16 @@ def level_04(dic: Any) -> Result:
     errors = []
 
     if type(dic) != dict:
-        errors.append("argument must be dict")
+        errors.append("argument must be date")
     if errors:
         result["errors"] = errors
 
     else:
-        res = min(dic, key=dic.get)
+        try:
+            res = min(dic, key=dic.get)
+        except TypeError:
+            return {"errors": ["TypeError"]}
+
         result["data"] = res
 
     return result
@@ -100,20 +99,19 @@ def level_04(dic: Any) -> Result:
 
 def level_05(lis: Any) -> Result:
     result: Result = {}
-    errors = []
 
-    try:
-        if not isinstance(lis, (dict, list, str, tuple)):
-            errors.append("argument must be collection")
-        if errors:
-            result["errors"] = errors
+    if type(lis) not in [list, tuple, str, set, dict]:
+        return {"errors": ["argument must be list, tuple, str, set, dict"]}
 
-        else:
-            res = {(x, lis.count(x)) for x in lis if lis.count(x) > 1}
-            result["data"] = dict(res)
-
-    except TypeError:
-        return {"errors": "unhashable type"}
+    else:
+        try:
+            items = []
+            for arg in lis:
+                items.append(arg)
+            res = {el: items.count(el) for el in items if items.count(el) > 1}
+        except TypeError:
+            return {"errors": ["TypeError unhashable type"]}
+        result["data"] = res
 
     return result
 
@@ -135,36 +133,20 @@ def level_06(query: Any) -> Result:
     return result
 
 
-def level_07(string: Any) -> Result:
-    result: Result = {}
-    errors = []
+def level_07(string: Any) -> dict:
 
     if type(string) != str:
-        errors.append(f"argument ({string=!r}) must be string")
-    if errors:
-        result["errors"] = errors
-
+        return {"errors": [f"argument ({string=!r}) must be string"]}
+    elif len(string) % 2 != 0:
+        return {"errors": ["wrong input"]}
     else:
-        letter = [el for el in string if not el.isdigit()]
-
-        num_list = []
-        num = ""
-        for char in string:
-            if char.isdigit():
-                num = num + char
-            else:
-                if num != "":
-                    num_list.append(int(num))
-                    num = ""
-        if num != "":
-            num_list.append(int(num))
-
-            s3 = [k * v for (k, v) in zip(list(num_list), list(letter))]
-            s4 = "".join(s3)
-
-            result["data"] = s4
-
-    return result
+        return {
+            "data": "".join(
+                string[el] * int(string[el + 1])
+                for el in range(len(string))
+                if string[el].isalpha()
+            )
+        }
 
 
 def level_08(string: Any) -> Result:
@@ -197,22 +179,32 @@ def level_08(string: Any) -> Result:
     return result
 
 
-def level_09(dic: Any) -> Result:
+def level_09(dic: Any) -> Result:  # noqa: CCR001
     result: Result = {}
     errors = []
+    try:
+        if type(dic) != dict:
+            errors.append("argument must be dict")
 
-    if not isinstance(dic, dict):
-        errors.append("argument must not be empty")
-    if errors:
-        result["errors"] = errors
+        if type(dic) in [list, set]:
+            errors.append("TypeError")
 
-    else:
-        res = {
-            n: [key for key in dic.keys() if dic[key] == n]
-            for n in set(dic.values())
-        }
+        if errors:
+            result["errors"] = errors
 
-        result["data"] = res
+        else:
+            spisok = []
+            for value in dic.values():
+                spisok.append(value)
+            for key, value in dic.items():
+                if spisok.count(value) > 1:
+                    result.setdefault(value, []).append(key)
+                else:
+                    result[value] = key
+
+            return {"data": result}
+    except TypeError:
+        return {"errors": ["TypeError unhashable type"]}
 
     return result
 
@@ -277,12 +269,9 @@ def level_11(s1: Any, s2: Any) -> Result:
 
 def level_12(*arguments: Any) -> Result:
     result: Result = {}
-    errors = []
 
-    if not arguments:
-        errors.append("argument must not be empty")
-    if errors:
-        result["errors"] = errors
+    if len(arguments) % 2 != 0:
+        return {"errors": ["no pairs"]}
 
     else:
         list1 = [
@@ -291,8 +280,10 @@ def level_12(*arguments: Any) -> Result:
         list2 = [
             value for (key, value) in enumerate(arguments) if key % 2 != 0
         ]
-
-        list3 = dict(zip(list1, list2))
+        try:
+            list3 = dict(zip(list1, list2))
+        except TypeError:
+            return {"errors": ["TypeError"]}
 
         result["data"] = list3
 
