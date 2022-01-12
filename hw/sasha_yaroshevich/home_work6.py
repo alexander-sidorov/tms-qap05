@@ -24,11 +24,13 @@ def proizvedenie_2(*args):
     for i in args:
         nr = isinstance(nakopitel, (str, list, tuple))
         er = isinstance(i, (str, list, tuple))
-        if nr == er:
+        if nr and er:
             result["errors"] = ["stroki, niz9"]
         else:
             nakopitel *= i
 
         result["data"] = nakopitel
     return result
+
+def date_rojdeniya(*):
 
