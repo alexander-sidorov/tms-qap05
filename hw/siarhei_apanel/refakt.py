@@ -99,7 +99,7 @@ def proizvedenie(*digit: Any) -> dict:
     return result
 
 
-def dateday(yer: date) -> dict:
+def dateday(yer: Any) -> dict:
 
     if type(yer) != date:
         return {"errors": ["TypeError"]}
@@ -165,7 +165,7 @@ def html_str(query: Any) -> dict:
     return {"data": result}
 
 
-def decodding(code: str) -> dict:
+def decodding(code: Any) -> dict:
     if type(code) != str:
         return {"errors": ["TypeError"]}
     elif len(code) % 2 != 0:
@@ -180,7 +180,7 @@ def decodding(code: str) -> dict:
         }
 
 
-def codding(s1: str) -> dict:
+def codding(s1: Any) -> dict:
     if type(s1) != str:
         return {"errors": ["TypeError"]}
 
@@ -209,7 +209,7 @@ def codding(s1: str) -> dict:
     return {"data": result}
 
 
-def rever_dict(d1: dict) -> dict:
+def rever_dict(d1: Any) -> dict:
     if type(d1) != dict:
         return {"errors": ["TypeError"]}
 
