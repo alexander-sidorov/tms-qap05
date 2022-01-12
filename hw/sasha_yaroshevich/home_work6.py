@@ -19,6 +19,7 @@ def polindrom_1(stroka: str) -> new_type:
 def proizvedenie_2(*args):
     result = {}
 
+
     if args == 0:
         result["errors"] = ["umnojenie na nol"]
     else:
