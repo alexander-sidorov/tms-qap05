@@ -1,11 +1,12 @@
 import functools
 from datetime import date
 from typing import Any
+from typing import Dict
 from urllib.parse import parse_qs
 
 
 def is_palindrome_1(strochka: Any = None) -> dict:
-    result = {}
+    result: Dict[str, Any] = {}
     if strochka is None:
         result["errors"] = "none argument"
         return result
@@ -15,9 +16,9 @@ def is_palindrome_1(strochka: Any = None) -> dict:
     rev = "".join(reversed(strochka))
 
     if strochka == rev:
-        result["data"] = True  # type: ignore
+        result["data"] = True
     else:
-        result["data"] = False  # type: ignore
+        result["data"] = False
     return result
 
 
@@ -37,7 +38,7 @@ def multiply_args_2(*m: Any) -> dict:
 
 
 def age_result_3(born: Any) -> dict:
-    result = {}
+    result: Dict[str, Any] = {}
     if not isinstance(born, date):
         result["errors"] = "variable is not a date"
         return result
@@ -47,7 +48,7 @@ def age_result_3(born: Any) -> dict:
         - born.year  # noqa: W503
         - ((today.month, today.day) < (born.month, born.day))  # noqa: W503
     )
-    result["data"] = {  # type: ignore
+    result["data"] = {
         "year": born.year,
         "month": born.month,
         "day": born.day,
@@ -94,7 +95,7 @@ def repeating_elements_5(elements_list: Any) -> dict:
 
 
 def parse_http_query_6(string: Any = None) -> dict:
-    result = {}
+    result: Dict[str, Any] = {}
     if string is None:
         result["errors"] = "none argument"
         return result
@@ -105,33 +106,33 @@ def parse_http_query_6(string: Any = None) -> dict:
     if len(parse_string) == 0:
         result["errors"] = "empty string"
         return result
-    result = {"data": parse_qs(string)}  # type: ignore
+    result = {"data": parse_qs(string)}
     return result
 
 
-def decode_7(string: Any = None) -> dict:  # noqa: CCR001
+def decode_7(string: Any = None) -> dict:
     result = {}
     if string is None:
         result["errors"] = "none argument"
         return result
     number = []
     letter = []
-    symb = ""
+    symbl = ""
     if len(string) < 2:
         result["errors"] = "so short string"
         return result
     index = 0
-    for sym in list(string):
+    for sym in string:
         try:
             isinstance(float(sym), float)
-            symb = symb + sym
-            if index == (len(list(string)) - 1):
-                number.append(float(symb))
+            symbl = symbl + sym
+            if index == (len(string) - 1):
+                number.append(float(symbl))
         except BaseException:
             letter.append(sym)
-            if symb != "":
-                number.append(float(symb))
-            symb = ""
+            if symbl != "":
+                number.append(float(symbl))
+            symbl = ""
         index += 1  # noqa: SIM113
     if len(letter) != len(number):
         result["errors"] = "letters not equal to numbers"
@@ -142,3 +143,6 @@ def decode_7(string: Any = None) -> dict:  # noqa: CCR001
             data.append(int(number[i]) * letter[i])
         result["data"] = "".join(data)
         return result
+
+
+print(decode_7(""))
