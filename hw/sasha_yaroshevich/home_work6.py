@@ -33,16 +33,19 @@ def proizvedenie_2(*args):
         result["data"] = nakopitel
     return result
 
-def date_rojdeniya(date_v):
+def date_rojdeniya_3(date_v):
     result = {}
 
-    d = date(date_v)
+    if date_v.year >= 2022:
+        result["errors"] = ["ne rodilsya"]
+    else:
 
-    now = datetime.datetime.now()
-    then = datetime.datetime(d)
-    delta = now - then
-    age = delta.days // 365
 
-    new_dict = {"year": d.year, "month": d.month, "day": d.day, "age": age}
-    result["data"] = new_dict
+        now = datetime.now()
+        then = datetime(date_v.year, date_v.month, date_v.day)
+        delta = now - then
+        age = delta.days // 365
+
+        new_dict = {"year": date_v.year, "month": date_v.month, "day": date_v.day, "age": age}
+        result["data"] = new_dict
     return result
