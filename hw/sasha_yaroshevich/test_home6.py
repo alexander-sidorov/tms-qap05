@@ -6,4 +6,5 @@ def test_home6() -> None:
     polindrom_inp = "xyx"
     assert polindrom_1(polindrom_inp) == {"data": True}
     assert proizvedenie_2(1,2) == {"data": 2}
+    assert proizvedenie_2(0, 1, 2, 3) == {"data": 0}
 
