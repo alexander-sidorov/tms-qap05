@@ -118,19 +118,19 @@ def level_05(lis: Any) -> Result:
 
 def level_06(query: Any) -> Result:
     result: Result = {}
-    errors = []
-
     if not isinstance(query, str):
-        errors.append("argument must be string")
-    if errors:
-        result["errors"] = errors
+        return {"errors": ["TypeError"]}
 
-    else:
-        res = parse_qs(query)
+    try:
+        for lis in query.split("&"):
+            for el in range(len(lis.split("="))):
+                if lis.split("=")[el] != lis.split("=")[-1]:
+                    result.setdefault(lis.split("=")[el], []).append(lis.split("=")[el + 1])
 
-        result["data"] = res
+    except NameError:
+            return {"errors": ["name is not defined"]}
 
-    return result
+    return {"data": result}
 
 
 def level_07(string: Any) -> dict:
@@ -208,7 +208,7 @@ def level_09(dic: Any) -> Result:  # noqa: CCR001
 
     return result
 
-
+from collections import defaultdict
 def level_10(args1: Any, args2: Any) -> Result:
     result: Result = {}
     errors = []

@@ -19,6 +19,8 @@ def test() -> None:
     assert (level_01("")) == {"data": True}
     assert (level_01("xx")) == {"data": True}
     assert (level_01("xy")) == {"data": False}
+
+
     assert (level_02(2, "a", 2)) == {"data": "aaaa"}
     assert (level_02("a", 2, "a")) == {"errors": ["TypeError"]}
     assert (level_02()) == {"errors": ["no arguments"]}
@@ -30,6 +32,8 @@ def test() -> None:
     assert (level_02("")) == {"data": ""}
     assert (level_02("a", 2)) == {"data": "aa"}
     assert (level_02((1, 2))) == {"data": (1, 2)}
+
+
     assert (level_03(date(year=2222, month=8, day=2))) == {
         "data": {"year": 2222, "month": 8, "day": 2, "age": None}
     }
@@ -47,6 +51,8 @@ def test() -> None:
     assert (level_03(type)) == {"errors": ["type must be date"]}
     assert (level_03(level_03)) == {"errors": ["type must be date"]}
     assert (level_03([[], []])) == {"errors": ["type must be date"]}
+
+
     assert (
         level_04({"A": date(2000, 1, 1), "B": date(1999, 1, 1)})
     ) == {  # noqa: JS101
@@ -74,6 +80,8 @@ def test() -> None:
     assert (level_04({1: [], 2: {}, 3: [], 4: set()})) == {  # noqa: JS101
         "errors": ["TypeError"]
     }
+
+
     assert (level_05([])) == {"data": {}}
     assert (level_05({})) == {"data": {}}
     assert (level_05([(), "", "", 1])) == {"data": {"": 2}}
@@ -115,6 +123,8 @@ def test() -> None:
         "errors": ["argument must be list, tuple, str, set, dict"]
     }
     assert (level_05([[], []])) == {"errors": ["TypeError unhashable type"]}
+
+
     assert (level_06(9)) == {"errors": ["argument must be string"]}
     assert (level_06("x=1&x=2&y=3")) == {"data": {"x": ["1", "2"], "y": ["3"]}}
     assert (level_06("")) == {"data": {}}
@@ -137,12 +147,18 @@ def test() -> None:
         "errors": ["argument must be string"]
     }
     assert (level_06([[], []])) == {"errors": ["argument must be string"]}
+
+
     assert (level_07(9)) == {"errors": ["argument (string=9) must be string"]}
     assert (level_07("a3b2c1")) == {"data": "aaabbc"}
     assert (level_07("a10b1")) == {"errors": ["wrong input"]}
+
+
     assert (level_08(9)) == {"errors": ["argument (string=9) must be string"]}
     assert (level_08("aaabb")) == {"data": "a3b2"}
     assert (level_08("aaabbab")) == {"data": "a3b2a1b1"}
+
+
     assert (level_09(None)) == {"errors": ["argument must be dict"]}
     assert (level_09({1: 100, 2: 100, 3: 300})) == {  # noqa: JS101
         "data": {100: [1, 2], 300: 3}
@@ -167,6 +183,8 @@ def test() -> None:
     assert (level_09({1: [], 2: {}, 3: [], 4: set()})) == {  # noqa: JS101
         "errors": ["TypeError unhashable type"]
     }
+
+
     assert (level_10(None, None)) == {
         "errors": [
             "argument must be list, str or tuple",
@@ -180,6 +198,8 @@ def test() -> None:
     assert (level_10("ab", [1, 2, 3])) == {"data": {"a": 1, "b": 2, "...": 3}}
     assert (level_10("ab", "cd")) == {"data": {"a": "c", "b": "d"}}
     assert (level_10("", "")) == {"data": {}}
+
+
     assert (level_11(frozenset(), frozenset())) == {
         "data": {
             "a&b": frozenset(),
@@ -246,6 +266,8 @@ def test() -> None:
             "b in a": False,
         }
     }
+
+
     assert (level_12(*(1, 2, 3))) == {"errors": ["no pairs"]}
     assert (level_12(*([], 1, {}, 2, set(), 3))) == {"errors": ["TypeError"]}
     assert (level_12(1, 2)) == {"data": {1: 2}}
