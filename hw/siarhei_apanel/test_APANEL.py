@@ -18,7 +18,7 @@ def test_example() -> None:  # noqa: W503
     assert korteg([]) == ()
     assert newwords("asfN dB12") == "dB12 asfN"
     assert newwords("asfNdB12") == "asfNdB12"
-    assert srez([1, 2, 3, 4, 5], 3) == [1, 2, 3]
+    assert srez([1, 2, 3, 4], 3) == [1, 2, 3]
     assert srez([1, 2, 3, 4], 5) == ["NoValue"]
     assert stroki("a4N67;i", "V") == "aV4VNV6V7V;Vi"
     assert stroki("a4N67;i", "") == "a4N67;i"
