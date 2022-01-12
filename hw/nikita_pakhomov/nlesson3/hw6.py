@@ -20,7 +20,7 @@ def level_2(*args: Any) -> dict:
     result = {}
 
     if args == 0:
-        result["errors"] = ["delenie na nol"]
+        result["errors"] = 0
     else:
         nakopitel = 1
         for i in args:
