@@ -209,6 +209,7 @@ def codding(s1: str) -> dict:
     return {"data": result}
 
 
+
 def rever_dict(d1: dict) -> dict:
     if type(d1) != dict:
         return {"errors": ["TypeError"]}
