@@ -18,12 +18,13 @@ def if_palindrome_1(u_input: str) -> dict:
 
 def multiplication_2(*args: Any) -> dict:
     result = {}
-    if any(
-        type(item) not in [int, str, complex, float, list] for item in args
-    ):
-        return {"errors": ["Input must be a number"]}
-    else:
-        result["data"] = prod(args)
+    try:
+        if len(args) < 1:
+            return {"errors": ["no argument is given"]}
+        else:
+            result["data"] = prod(args)
+    except TypeError:
+        return {"errors": ["given arguments' types can't be multiplied"]}
     return result
 
 
