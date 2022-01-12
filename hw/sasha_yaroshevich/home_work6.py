@@ -20,7 +20,7 @@ def proizvedenie_2(*args):
     result = {}
 
     if args == 0:
-        result["errors"] = ["delenie na nol"]
+        result["errors"] = ["umnojenie na nol"]
     else:
         nakopitel = 1
         for i in args:
