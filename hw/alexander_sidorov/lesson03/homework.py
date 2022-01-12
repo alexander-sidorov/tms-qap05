@@ -43,9 +43,9 @@ def quadratic_roots(
     if a == 0:
         # degenerate cases
         if b == 0:
-           if c == 0:
-               x1 = x2 = 0
-           else:
+            if c == 0:
+                x1 = x2 = 0
+            else:
                 x1 = x2 = nan
         else:
             x1 = x2 = -c / b
@@ -59,4 +59,3 @@ def quadratic_roots(
     x2 = complex(x2)
 
     return x1, x2
-
