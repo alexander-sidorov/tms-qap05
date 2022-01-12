@@ -50,9 +50,9 @@ def test_task_01() -> None:
 
 
 def test_task_02() -> None:
-    assert func2_product((1,), 2) == (1, 1)
-    assert func2_product(2, (1,)) == (1, 1)
-    assert func2_product(2, "a", 2) == "aaaa"
+    assert func2_product((1,), 2) == {"data": (1, 1)}
+    assert func2_product(2, (1,)) == {"data": (1, 1)}
+    assert func2_product(2, "a", 2) == {"data": "aaaa"}
 
     validate_errors(func2_product(2, "a", (2,)))
 
@@ -65,7 +65,7 @@ def test_task_04() -> None:
 
     data = {(): d1, frozenset(): d2}
 
-    assert func4_oldest(data) == {"data": frozenset()}
+    assert func4_oldest(data) == {"data": [frozenset()]}
 
 
 def test_task_05() -> None:
@@ -84,15 +84,15 @@ def test_task_06() -> None:
 
 def test_task_07() -> None:
     assert func7_str_duplicate_char("") == {"data": ""}
-    assert func7_str_duplicate_char("aaaaaaaaaaaba") == {"data": "a11b1a1"}
-    validate_errors(func7_str_duplicate_char("aaa3"))
+    assert func7_str_duplicate_char("a11b1a1") == {"data": "aaaaaaaaaaaba"}
 
 
 def test_task_08() -> None:
     assert func8_duplicate_char_number("") == {"data": ""}
-    assert func8_duplicate_char_number("a11b1a1") == {"data": "aaaaaaaaaaaba"}
+    assert func8_duplicate_char_number("aaaaaaaaaaaba") == {"data": "a11b1a1"}
     validate_errors(func8_duplicate_char_number(Typ()))
     validate_errors(func8_duplicate_char_number("1"))
+    validate_errors(func8_duplicate_char_number("aaa3"))
 
 
 def test_task_09() -> None:
