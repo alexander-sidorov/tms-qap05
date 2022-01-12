@@ -143,6 +143,3 @@ def decode_7(string: Any = None) -> dict:
             data.append(int(number[i]) * letter[i])
         result["data"] = "".join(data)
         return result
-
-
-print(decode_7(""))
