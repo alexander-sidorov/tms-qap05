@@ -12,7 +12,7 @@ def is_palindrome(text: str) -> type_1:
         else:
             result["data"] = False
     else:
-        result["errors"] = ["not string"]
+        result["errors"] = False
     return result
 
 
