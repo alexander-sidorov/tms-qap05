@@ -1,5 +1,6 @@
 from typing import Any
 from typing import Dict
+from datetime import date, datetime
 
 
 new_type = Dict[str, Any]
@@ -32,5 +33,15 @@ def proizvedenie_2(*args):
         result["data"] = nakopitel
     return result
 
-def date_rojdeniya(*):
+def date_rojdeniya(*args):
+    result = {}
 
+    if len(args) != 3:
+        result["errors"] = ["vveli ne datu. Nujno 3 chisla"]
+    else:
+        d_1, d_2, d_3 = args
+        date_vvedennoe = date(year=d_1, month=d_2, day=d_3)
+        current_datetime = datetime.now()
+        date_now = current_datetime.year
+        age = date_now - date_vvedennoe
+        result["data"] = {"year": d_1, "month": d_2, "day": d_3, "age": age}
