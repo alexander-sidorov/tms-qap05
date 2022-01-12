@@ -9,5 +9,5 @@ def test_home6() -> None:
     assert proizvedenie_2(1,2) == {"data": 2}
     assert proizvedenie_2(0, 1, 2, 3) == {"data": 0}
     assert proizvedenie_2(1, "2", 3) == {"data": "222"}
-    assert date_rojdeniya(1993, 3, 20) == {"data": {"year": 1993, "month": 3, "day": 20, "age": 29}}
+    assert date_rojdeniya(1993, 3, 20) == {"data": {"year": 1993, "month": 3, "day": 20, "age": 28}}
 

@@ -33,15 +33,16 @@ def proizvedenie_2(*args):
         result["data"] = nakopitel
     return result
 
-def date_rojdeniya(*args):
+def date_rojdeniya(date_v):
     result = {}
 
-    if len(args) != 3:
-        result["errors"] = ["vveli ne datu. Nujno 3 chisla"]
-    else:
-        d_1, d_2, d_3 = args
-        date_vvedennoe = date(year=d_1, month=d_2, day=d_3)
-        current_datetime = datetime.now()
-        date_now = current_datetime.year
-        age = date_now - date_vvedennoe
-        result["data"] = {"year": d_1, "month": d_2, "day": d_3, "age": age}
+    d = date(date_v)
+
+    now = datetime.datetime.now()
+    then = datetime.datetime(d)
+    delta = now - then
+    age = delta.days // 365
+
+    new_dict = {"year": d.year, "month": d.month, "day": d.day, "age": age}
+    result["data"] = new_dict
+    return result
