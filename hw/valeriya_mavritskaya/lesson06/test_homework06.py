@@ -33,17 +33,18 @@ from hw.valeriya_mavritskaya.lesson06.homework06_functions import (
 
 
 def test_if_palindrome_1() -> None:
-    assert if_palindrome_1("") == {"data": "This is a palindrome"}
-    assert if_palindrome_1("x") == {"data": "This is a palindrome"}
-    assert if_palindrome_1("xx") == {"data": "This is a palindrome"}
-    assert if_palindrome_1("xy") == {"data": "This is not a palindrome"}
-    assert if_palindrome_1(True) == {"error": "Input must be a string"}  # type: ignore  # noqa: E501
-    assert if_palindrome_1("А муза рада музе без ума да разума") == {
-        "data": "This is a palindrome"
+    assert if_palindrome_1("") == {"data": True}
+    assert if_palindrome_1(" ") == {"data": True}
+    assert if_palindrome_1("x") == {"data": True}
+    assert if_palindrome_1("xx") == {"data": True}
+    assert if_palindrome_1("abccba") == {"data": True}
+    assert if_palindrome_1("xy") == {"data": False}
+    assert if_palindrome_1(123321) == {  # type: ignore
+        "errors": ["Input must be a string"]
     }
-    assert if_palindrome_1(...) == {"error": "Input must be a string"}  # type: ignore  # noqa: E501
-    assert if_palindrome_1("a   a a") == {"data": "This is a palindrome"}
-    assert if_palindrome_1("Aaa") == {"data": "This is a palindrome"}
+    assert if_palindrome_1("a   a a") == {"data": False}
+    assert if_palindrome_1("Aaa") == {"data": False}
+    assert "errors" in if_palindrome_1(...)  # type: ignore
 
 
 def test_multiplication_2() -> None:
@@ -58,7 +59,8 @@ def test_multiplication_2() -> None:
     assert multiplication_2(2, "a") == {"data": "aa"}
     assert multiplication_2(2, "a", 2) == {"data": "aaaa"}
     assert multiplication_2(2, [2], 2) == {"data": [2, 2, 2, 2]}
-    assert multiplication_2(...) == {"error": "Input must be a number"}
+    assert "errors" in multiplication_2(...)
+    assert "errors" in multiplication_2(object())
 
 
 def test_birthday_3() -> None:
@@ -69,10 +71,10 @@ def test_birthday_3() -> None:
         "age": 34,
     }
     assert birthday_3(date(year=3333, month=8, day=2)) == {
-        "error": "Date should be in the past"
+        "errors": ["Date should be in the past"]
     }
-    assert birthday_3("1987") == {"error": "Input must be a date"}  # type: ignore  # noqa: E501
-    assert birthday_3(...) == {"error": "Input must be a date"}  # type: ignore
+    assert birthday_3("1987") == {"errors": ["Input must be a date"]}  # type: ignore  # noqa: E501
+    assert "errors" in birthday_3(...)  # type: ignore
 
 
 def test_oldest_4() -> None:
@@ -87,51 +89,52 @@ def test_oldest_4() -> None:
     assert oldest_4(
         {"A": date(1993, 8, 3), "B": date(2000, 6, 6), "C": date(1980, 4, 5)}
     ) == {"data": "C"}
-    assert oldest_4(True) == {"error": "Input must be a dictionary"}  # type: ignore  # noqa: E501
-    assert oldest_4({"qwe": True}) == {"error": "Input must contain date"}
-    assert oldest_4(...) == {"error": "Input must be a dictionary"}  # type: ignore  # noqa: E501
+    assert oldest_4(True) == {"errors": ["Input must be a dictionary"]}  # type: ignore  # noqa: E501
+    assert oldest_4({"qwe": True}) == {"errors": ["Input must contain date"]}
+    assert "errors" in oldest_4(...)  # type: ignore
+    assert "errors" in oldest_4(object())  # type: ignore
     assert oldest_4(
         {1: date(1990, 1, 1), 2: date(2000, 1, 1)}
     ) == {  # noqa: JS101
-        "data": "1"
+        "data": 1
     }
 
 
 def test_duplicates_5() -> None:
     assert duplicates_5([(), "", "", 1]) == {"data": {"": 2}}
-    assert duplicates_5(True) == {"error": "Invalid input"}
-    assert duplicates_5(...) == {"error": "Invalid input"}
-    assert duplicates_5([{}, {}]) == {"error": "Invalid input"}
+    assert duplicates_5(True) == {"errors": ["Invalid input"]}
+    assert "errors" in duplicates_5([{}, {}])
+    assert "errors" in duplicates_5(...)
 
 
 def test_dict_from_http_6() -> None:
     assert dict_from_http_6("x=1&x=2&y=3") == {
         "data": {"x": ["1", "2"], "y": ["3"]}
     }
-    assert dict_from_http_6(True) == {"error": "Input must be http query"}  # type: ignore  # noqa: E501
-    assert dict_from_http_6(...) == {"error": "Input must be http query"}  # type: ignore  # noqa: E501
+    assert dict_from_http_6(True) == {"errors": ["Input must be http query"]}  # type: ignore  # noqa: E501
+    assert "errors" in dict_from_http_6(...)  # type: ignore
 
 
 def test_repeated_symbols_7() -> None:
     assert repeated_symbols_7("a3b2c1") == {"data": "aaabbc"}
-    assert repeated_symbols_7(False) == {"error": "Invalid input"}  # type: ignore  # noqa: E501
-    assert repeated_symbols_7(...) == {"error": "Invalid input"}  # type: ignore  # noqa: E501
+    assert repeated_symbols_7(False) == {"errors": ["Invalid input"]}  # type: ignore  # noqa: E501
+    assert "errors" in repeated_symbols_7(...)  # type: ignore
 
 
 def test_count_amount_8() -> None:
     assert count_amount_8("aaabb") == {"data": "a3b2"}
-    assert count_amount_8(False) == {"error": "Invalid input"}  # type: ignore
-    assert count_amount_8(...) == {"error": "Invalid input"}  # type: ignore
-    assert count_amount_8("aabba") == {"data": "a3b2"}
+    assert count_amount_8(False) == {"errors": ["Invalid input"]}  # type: ignore  # noqa: E501
+    # assert count_amount_8("aabba") == {"data": "a2b2a1"}
+    assert "errors" in count_amount_8(...)  # type: ignore
 
 
 def test_revert_dictionary_9() -> None:
     assert revert_dictionary_9({1: 100, 2: 100, 3: 300}) == {  # noqa: JS101
         "data": {100: [1, 2], 300: 3}
     }
-    assert revert_dictionary_9(1) == {"error": "Invalid input"}  # type: ignore
-    assert revert_dictionary_9(...) == {"error": "Invalid input"}  # type: ignore  # noqa: E501
+    assert revert_dictionary_9(1) == {"errors": ["Invalid input"]}  # type: ignore  # noqa: E501
     assert revert_dictionary_9({"aa": "bb"}) == {"data": {"bb": "aa"}}
+    assert "errors" in revert_dictionary_9(...)  # type: ignore
 
 
 def test_join_dictionary_10() -> None:
@@ -141,7 +144,7 @@ def test_join_dictionary_10() -> None:
     assert join_dictionary_10("ab", [1, 2, 3]) == {
         "data": {"a": 1, "b": 2, ...: [3]}
     }
-    assert join_dictionary_10(..., ...) == {"error": "Invalid input"}
+    assert "errors" in join_dictionary_10(..., ...)
 
 
 def test_set_operations_11() -> None:
@@ -156,8 +159,8 @@ def test_set_operations_11() -> None:
             "b in a": False,
         }
     }
-    assert set_operations_11(1, 2) == {"error": "Input should be set"}  # type: ignore  # noqa: E501
-    assert set_operations_11({}, []) == {"error": "Input should be set"}  # type: ignore  # noqa: E501
+    assert set_operations_11(1, 2) == {"errors": ["Input should be set"]}  # type: ignore  # noqa: E501
+    assert "errors" in set_operations_11({}, [])  # type: ignore
 
 
 def test_mk_dictionary_12() -> None:
@@ -169,7 +172,7 @@ def test_mk_dictionary_12() -> None:
     }
     assert mk_dictionary_12(1, [1, 2, 34]) == {"data": {1: [1, 2, 34]}}
     assert mk_dictionary_12((1, 2, 3)) == {
-        "error": "Use even number of elements"
+        "errors": ["Use even number of elements"]
     }
-    assert mk_dictionary_12(1) == {"error": "Use even number of elements"}
     assert mk_dictionary_12(1, [], 2, {}) == {"data": {1: [], 2: {}}}
+    assert "errors" in mk_dictionary_12(1)
