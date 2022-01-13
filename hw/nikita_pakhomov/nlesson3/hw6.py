@@ -62,7 +62,7 @@ def level_3(born):
 
 def level_4(age: Any) -> dict:
     result = {}
-    if type(age["A"]) != date or type(age["B"]) != date:  # noqa
+    if type(age["A"]) != date or type(age["B"]) != date:  # noqa: SIM108
         result["errors"] = "this is not a date"
         return result
     if age["A"] > age["B"]:
