@@ -1,9 +1,9 @@
 from datetime import date
 
-
-from hw.andrei_bondar.lesson_06hw import palindrome
 from hw.andrei_bondar.lesson_06hw import argum1
 from hw.andrei_bondar.lesson_06hw import datrog
+from hw.andrei_bondar.lesson_06hw import palindrome
+
 
 def test_palindrom() -> None:
     assert palindrome("") == {"data": True}
@@ -23,5 +23,9 @@ def test_datrog() -> None:
     d1 = date(year=1987, month=8, day=2)
     d2 = date(year=1911, month=1, day=1)
 
-    assert datrog(d1) == {"date": {"year": 1987, "month": 8, "day": 2, "age": 34}}
-    assert datrog(d2) == {"date": {"year": 1911, "month": 1, "day": 1, "age": 111}}
+    assert datrog(d1) == {
+        "date": {"year": 1987, "month": 8, "day": 2, "age": 34}
+    }
+    assert datrog(d2) == {
+        "date": {"year": 1911, "month": 1, "day": 1, "age": 111}
+    }

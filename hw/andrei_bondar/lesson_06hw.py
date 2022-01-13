@@ -1,5 +1,5 @@
-from typing import Any
 from datetime import date
+from typing import Any
 
 
 def palindrome(string: str) -> dict:
@@ -36,18 +36,13 @@ def datrog(d3: Any) -> dict:
     if type(d3) != date:
         result["errors"] = ["be date"]
     else:
-        s_age = {
-            "year": d3.year,
-            "month": d3.month,
-            "day": d3.day,
-            "age": int
-        }
+        s_age = {"year": d3.year, "month": d3.month, "day": d3.day, "age": int}
         today = date.today()
         age = date.today().year - d3.year
 
         if (d3.month > today.month) or (
             d3.month == today.month and d3.day > today.day
-         ):
+        ):
             age = date.today().year - d3.year - 1
         s_age["age"] = age
         result = {"date": s_age}
