@@ -20,4 +20,3 @@ coverage.xml
 db.sqlite3
 htmlcov/
 zsh-syntax-highlighting/
-.coveragerc
