@@ -132,17 +132,20 @@ def join_dictionary_10(keys: Any, values: Any) -> dict:
     if ... in [keys, values]:
         return {"errors": ["Invalid input"]}
     dictionary_length = max(len(keys), len(values))
-    for index in range(dictionary_length):
-        should_use_source_key = len(keys) > index
-        should_use_source_value = len(values) > index
-        result_key = keys[index] if should_use_source_key else ...
-        result[result_key] = (
-            (values[index] if should_use_source_value else None)
-            if should_use_source_key
-            else [values[index]]
-            if ... not in result
-            else result[result_key] + [values[index]]
-        )
+    try:
+        for index in range(dictionary_length):
+            should_use_source_key = len(keys) > index
+            should_use_source_value = len(values) > index
+            result_key = keys[index] if should_use_source_key else ...
+            result[result_key] = (
+                (values[index] if should_use_source_value else None)
+                if should_use_source_key
+                else [values[index]]
+                if ... not in result
+                else result[result_key] + [values[index]]
+            )
+    except TypeError:
+        return {"errors": ["wrong types"]}
     return {"data": result}
 
 
