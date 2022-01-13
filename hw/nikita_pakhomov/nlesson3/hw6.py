@@ -64,15 +64,17 @@ def level_4(age: Any) -> dict:
     result = {}
     a_peremen = age["A"]
     b_peremen = age["B"]
-    if type(age) != dict:
+    if type(age) == dict:
+
+        if type(age["A"]) != date or type(age["B"]) != date:
+            result["errors"] = "this is not a date"
+            return result
+        elif a_peremen > b_peremen:
+            result["data"] = "B"
+            return result
+        elif age["A"] < age["B"]:
+            result["data"] = "A"
+            return result
+    else:
         result["errors"] = "this is not a dict"
-        return result
-    elif type(age["A"]) != date or type(age["B"]) != date:
-        result["errors"] = "this is not a date"
-        return result
-    elif a_peremen > b_peremen:
-        result["data"] = "B"
-        return result
-    elif age["A"] < age["B"]:
-        result["data"] = "A"
         return result
