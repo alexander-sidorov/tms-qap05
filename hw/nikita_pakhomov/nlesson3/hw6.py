@@ -62,15 +62,22 @@ def level_3(born):
 
 def level_4(age: Any) -> dict:
     result = {}
-    a_peremen = age["A"]
-    b_peremen = age["B"]
 
-    if type(age["A"]) != date or type(age["B"]) != date:
+    if (
+        type(age["A" : date(year=2021, month=3, day=1)]) != date
+        or type(age["B" : date(year=1999, month=4, day=1)]) != date
+    ):
         result["errors"] = "this is not a date"
         return result
-    if a_peremen > b_peremen:
+    if (
+        age["A" : date(year=2021, month=3, day=1)]
+        > age["B" : date(year=1999, month=4, day=1)]
+    ):
         result["data"] = "B"
         return result
-    elif age["A"] < age["B"]:
+    elif (
+        age["A" : date(year=2021, month=3, day=1)]
+        < age["B" : date(year=1999, month=4, day=1)]
+    ):
         result["data"] = "A"
         return result
