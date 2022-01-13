@@ -59,10 +59,15 @@ def oldest_4(people: dict) -> dict:
 
 
 def duplicates_5(collection: Any) -> dict:
-    if (type(collection) not in [list, tuple, str]) or any(
-        type(item) == dict for item in collection
-    ):
-        return {"errors": ["Invalid input"]}
+    types = (list, str, tuple, set, dict)
+    if type(collection) not in types:
+        return {
+            "errors": ["Invalid input"]
+        }
+    try:
+        counter: collections.Counter = collections.Counter(collection)
+    except TypeError:
+        return {"errors": ["collection contains unhashable type"]}
     result = {}
     select_duplicates = {i: collection.count(i) for i in collection}
     result["data"] = {
