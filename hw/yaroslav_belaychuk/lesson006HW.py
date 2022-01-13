@@ -5,17 +5,18 @@ from typing import Any
 def palindrom(slovo: str) -> dict:
     if type(slovo) != str:
         return {"errors": ["TypeErrors"]}
-    else:
-        once_letter = 0
-        last_letter = len(slovo) - 1
-        palindrom = True
+
+    once_letter = 0
+    last_letter = len(slovo) - 1
+    palindrom = True
+
     while once_letter < last_letter:
         if slovo[once_letter] != slovo[last_letter]:
             palindrom = False
         once_letter += 1
         last_letter -= 1
-    result = {"data": True} if palindrom else {"data": False}
-    return result
+
+    return {"data": True} if palindrom else {"data": False}
 
 
 def umnogenie(*nums: Any) -> dict:
