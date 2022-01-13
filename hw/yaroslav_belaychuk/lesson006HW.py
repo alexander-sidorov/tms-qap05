@@ -47,10 +47,10 @@ def date_age(b1: date) -> dict:
 
 
 def zadacha_4(day: dict) -> dict:
-    if len(day) < 1:
-        return {"errors": ["NonValueError"]}
     if type(day) != dict:
         return {"errors": ["TypeError"]}
+    if len(day) < 1:
+        return {"errors": ["NonValueError"]}
     keys = []
     values = []
     for key, value in day.items():
@@ -63,28 +63,37 @@ def zadacha_4(day: dict) -> dict:
 
 
 def zadacha_5(collection: Any) -> dict:
+    if type(collection) in [set, dict]:
+        return {"data": {}}
     if type(collection) not in [list, tuple, str]:
         return {"errors": ["TypeError"]}
     banka = {}
     list_result = []
     if len(collection) == 0:
-        return {"errors": ["NumbersError"]}
+        return {"data": banka}
     for n1 in collection:
         if collection.count(n1) >= 2:
             list_result.append(n1)
     for n2 in list_result:
-        if type(n2) == list:
+        if type(n2) in [list, dict]:
             return {"errors": ["TypeError"]}
         else:
             banka[n2] = list_result.count(n2)
     return {"data": banka}
 
 
+print(zadacha_5([]))
+
+
 def zadacha_7(sybol_num: str) -> dict:
+    if len(sybol_num) == 0:
+        return {"data": ""}
     if type(sybol_num) != str:
         return {"errors": ["TypeError"]}
     if sybol_num[-1].isalpha():
         return {"errors": ["NonDigitError"]}
+    if sybol_num[0].isdigit():
+        return {"errors": ["NonLetterError"]}
     list_digit = []
     list_letter = []
     bank = ""

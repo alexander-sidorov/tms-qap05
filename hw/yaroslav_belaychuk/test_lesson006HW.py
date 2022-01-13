@@ -33,12 +33,21 @@ def test_function() -> None:
     assert zadacha_4(f1) == {"data": "vika"}
     assert zadacha_4({}) == {"errors": ["NonValueError"]}
     assert zadacha_4({1: 1j, 2: 2j}) == {"errors": ["TypeError"]}
+    assert zadacha_4(1) == {"errors": ["TypeError"]}
     assert zadacha_5(("a", "a", 1, 2)) == {"data": {"a": 2}}
-    assert zadacha_5({(), "", "", 1}) == {"errors": ["TypeError"]}
-    assert zadacha_5({}) == {"errors": ["TypeError"]}
-    assert zadacha_5([]) == {"errors": ["NumbersError"]}
+    assert zadacha_5([(), "", "", 1]) == {"data": {"": 2}}
+    assert zadacha_5({}) == {"data": {}}
+    assert zadacha_5([]) == {"data": {}}
     assert zadacha_5([[], []]) == {"errors": ["TypeError"]}
+    assert zadacha_5("abc") == {"data": {}}
+    assert zadacha_5("aaa") == {"data": {"a": 3}}
+    assert zadacha_5([{}, {}, set()]) == {"errors": ["TypeError"]}
     assert zadacha_7("a3b4c2") == {"data": "aaabbbbcc"}
     assert zadacha_7("a3b2c") == {"errors": ["NonDigitError"]}
     assert zadacha_7(["a3b4c5"]) == {"errors": ["TypeError"]}  # type: ignore
     assert zadacha_7("a11") == {"data": "aaaaaaaaaaa"}
+    assert zadacha_7("a0") == {"data": ""}
+    assert zadacha_7("a1") == {"data": "a"}
+    assert zadacha_7("a2b2a1") == {"data": "aabba"}
+    assert zadacha_7("a") == {"errors": ["NonDigitError"]}
+    assert zadacha_7("") == {"data": ""}
