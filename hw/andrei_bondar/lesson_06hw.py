@@ -44,6 +44,7 @@ def datrog(d3: Any) -> dict:
         }
         today = date.today()
         age = date.today().year - d3.year
+
         if (d3.month > today.month) or (
             d3.month == today.month and d3.day > today.day
          ):
@@ -51,4 +52,4 @@ def datrog(d3: Any) -> dict:
         s_age["age"] = age
         result = {"date": s_age}
 
-        return result
+    return result
