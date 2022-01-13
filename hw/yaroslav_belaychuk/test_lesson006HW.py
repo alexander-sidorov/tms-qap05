@@ -16,7 +16,7 @@ def test_function() -> None:
     assert palindrom("x") == {"data": True}
     assert palindrom("xx") == {"data": True}
     assert palindrom("xy") == {"data": False}
-    assert palindrom(1) == {"errors": ["TypeErrors"]}  # type: ignore
+    assert palindrom(1) == {"errors": ["TypeErrors"]}   # type: ignore
     assert umnogenie(1, 2, 3) == {"data": 6}
     assert umnogenie(1) == {"data": 1}
     assert umnogenie(1, 2) == {"data": 2}

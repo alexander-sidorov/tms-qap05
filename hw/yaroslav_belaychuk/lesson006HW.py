@@ -68,7 +68,7 @@ def zadacha_5(collection: Any) -> dict:
         return {"data": {}}
     if type(collection) not in [list, tuple, str]:
         return {"errors": ["TypeError"]}
-    banka = {}
+    banka = {}   # type: ignore
     list_result = []
     if len(collection) == 0:
         return {"data": banka}
