@@ -1,6 +1,6 @@
+from datetime import date
 from typing import Any
 from typing import Dict
-from datetime import date
 
 type_1 = Dict[str, Any]
 
@@ -31,21 +31,46 @@ def level_2(*args: Any) -> dict:
     return result
 
 
-def level_3(born: Any) -> dict:
+def calculate_age(born):
     result = {}
-    if not isinstance(born, date):
-        result["errors"] = "variable is not a date"
-        return result
+
     today = date.today()
-    age = int(
-        today.year
-        - born.year  # noqa: W503
-        - ((today.month, today.day) < (born.month, born.day))  # noqa: W503
-    )
-    result["data"] = {  # type: ignore
-        "year": born.year,
-        "month": born.month,
-        "day": born.day,
-        "age": age,
-    }
-    return result
+    try:
+        birthday = born.replace(year=today.year)
+    except ValueError:
+        birthday = born.replace(year=today.year, month=born.month + 1, day=1)
+    if birthday > today:
+        age = today.year - born.year - 1
+        result["data"] = {
+            "year": born.year,
+            "month": born.month,
+            "day": born.day,
+            "age": age,
+        }
+        age = today.year - born.year - 1
+        return result
+    else:
+        age = today.year - born.year
+        result["data"] = {
+            "year": born.year,
+            "month": born.month,
+            "day": born.day,
+            "age": age,
+        }
+        return result
+
+
+def level_4(age: Any) -> dict:
+    result = {}
+    if type(age["A"]) != date or type(age["B"]) != date:
+        result["errors"] = "this is not a date"
+        return result
+    if age["A"] > age["B"]:
+        result["data"] = "B"
+        return result
+    elif age["A"] < age["B"]:
+        result["data"] = "A"
+        return result
+    else:
+        result["errors"] = "this is not a date"
+        return result
