@@ -94,15 +94,19 @@ def dict_from_http_6(input_query: str) -> dict:
 
 
 def repeated_symbols_7(input_str: str) -> dict:
-    if isinstance(input_str, str):
+    if not isinstance(input_str, str):
+        return {"errors": ["Invalid input"]}
+    numbers = re.findall(r"\d+", input_str)
+    chars = re.findall(r"\D", input_str)
+    if len(numbers) != len(chars):
+        return {"errors": ["wrong format of string"]}
+    else:
         groups = re.findall(r"(\D+\d+)", input_str)
         result = ""
         for element in groups:
             symbol = re.findall(r"\D+", element)[0]
             count = int(re.findall(r"\d+", element)[0])
             result = result + symbol * count
-    else:
-        return {"errors": ["Invalid input"]}
     return {"data": result}
 
 
