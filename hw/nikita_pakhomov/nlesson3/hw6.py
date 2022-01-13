@@ -74,6 +74,10 @@ def level_4(age: Any) -> dict:
         elif age["A"] < age["B"]:
             result["data"] = "A"
             return result
+        elif age["A"] == age["B"]:
+            result["errors"] = "dates are equal"
+            return result
+
     else:
         result["errors"] = "this is not a date"
         return result
