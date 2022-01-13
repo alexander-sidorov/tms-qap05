@@ -89,13 +89,13 @@ def level_4(age: Any) -> dict:
 def level_5(spisok: Any) -> dict:
     result: dict = {}
     clovar: dict = {}
-    for i in spisok:
-        if i in clovar:
-            clovar[i] = clovar[i] + 1
+    for iii in spisok:
+        if iii in clovar:
+            clovar[iii] = clovar[iii] + 1
         else:
-            clovar[i] = 1
-    for y in spisok:
-        if clovar[y] <= 1:
-            del clovar[y]
+            clovar[iii] = 1
+    for yyy in spisok:
+        if clovar[yyy] <= 1:
+            del clovar[yyy]
     result["data"] = clovar
     return result
