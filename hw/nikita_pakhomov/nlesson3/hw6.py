@@ -84,3 +84,18 @@ def level_4(age: Any) -> dict:
     else:
         result["errors"] = "this is not a date"
         return result
+
+
+def level_5(spisok: Any) -> dict:
+    result: dict = {}
+    clovar: dict = {}
+    for i in spisok:
+        if i in clovar:
+            clovar[i] = clovar[i] + 1
+        else:
+            clovar[i] = 1
+    for y in spisok:
+        if clovar[y] <= 1:
+            del clovar[y]
+    result["data"] = clovar
+    return result

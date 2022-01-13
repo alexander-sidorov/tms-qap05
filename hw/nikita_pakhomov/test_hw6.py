@@ -4,6 +4,7 @@ from hw.nikita_pakhomov.nlesson3.hw6 import is_palindrome
 from hw.nikita_pakhomov.nlesson3.hw6 import level_2
 from hw.nikita_pakhomov.nlesson3.hw6 import level_3
 from hw.nikita_pakhomov.nlesson3.hw6 import level_4
+from hw.nikita_pakhomov.nlesson3.hw6 import level_5
 
 
 def test_is_palindrome() -> None:
@@ -44,3 +45,7 @@ def test_level_4() -> None:
     assert level_4([]) == {"errors": "this is not a date"}
     assert level_4(datys_1) == {"data": "A"}
     assert level_4(datys_2) == {"errors": "dates are equal"}
+
+    def test_level_5() -> None:
+        elements = [(), "", "", 1]
+        assert level_5(elements) == {"data": {"": 2}}
