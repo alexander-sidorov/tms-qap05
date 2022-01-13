@@ -82,9 +82,6 @@ def zadacha_5(collection: Any) -> dict:
     return {"data": banka}
 
 
-print(zadacha_5([]))
-
-
 def zadacha_7(sybol_num: str) -> dict:
     if len(sybol_num) == 0:
         return {"data": ""}
