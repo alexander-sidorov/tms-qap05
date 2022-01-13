@@ -5,6 +5,7 @@ from hw.nikita_pakhomov.nlesson3.hw6 import level_2
 from hw.nikita_pakhomov.nlesson3.hw6 import level_3
 from hw.nikita_pakhomov.nlesson3.hw6 import level_4
 from hw.nikita_pakhomov.nlesson3.hw6 import level_5
+from hw.nikita_pakhomov.nlesson3.hw6 import level_6
 
 
 def test_is_palindrome() -> None:
@@ -53,4 +54,6 @@ def test_level_5() -> None:
 
 
 def test_level_6() -> None:
-    assert ("x=1&x=2&y=3") == {"data": {"x": ["1", "2"], "y": ["3"]}}
+    vvvvv = "x=1&x=2&y=3"
+    assert level_6(vvvvv) == {"data": {"x": ["1", "2"], "y": ["3"]}}
+    assert level_6(624) == {"errors": "incorrect input"}
