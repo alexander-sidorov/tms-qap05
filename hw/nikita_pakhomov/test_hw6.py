@@ -1,7 +1,9 @@
+from datetime import date
+
 from hw.nikita_pakhomov.nlesson3.hw6 import is_palindrome
 from hw.nikita_pakhomov.nlesson3.hw6 import level_2
 from hw.nikita_pakhomov.nlesson3.hw6 import level_3
-from datetime import date
+from hw.nikita_pakhomov.nlesson3.hw6 import level_4
 
 
 def test_is_palindrome() -> None:
@@ -22,4 +24,12 @@ def test_level_3() -> None:
     assert level_3(date_variable) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
-    assert level_3(2) == {"errors": "variable is not a date"}
+
+
+def test_level_4() -> None:
+    datys = {
+        "A": date(year=2021, month=3, day=1),
+        "B": date(year=1999, month=4, day=1),
+    }
+    assert level_4(datys) == {"data": "B"}
+    assert level_4([]) == {"errors": "this is not a date"}
