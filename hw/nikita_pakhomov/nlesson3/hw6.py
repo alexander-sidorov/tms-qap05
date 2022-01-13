@@ -1,6 +1,7 @@
 from datetime import date
 from typing import Any
 from typing import Dict
+from urllib.parse import parse_qs
 
 type_1 = Dict[str, Any]
 
@@ -99,3 +100,13 @@ def level_5(spisok: Any) -> dict:
             del clovar[yyy]
     result["data"] = clovar
     return result
+
+
+def level_6(stroka: str) -> dict:
+    result = {}
+    if type(stroka) == str and stroka != "":
+        result = {"data": parse_qs(stroka)}
+        return result
+    else:
+        result["errors"] = "incorrect input"
+        return result
