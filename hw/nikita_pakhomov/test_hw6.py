@@ -31,5 +31,11 @@ def test_level_4() -> None:
         "A": date(year=2021, month=3, day=1),
         "B": date(year=1999, month=4, day=1),
     }
+    datys_1 = {
+        "A": date(year=1999, month=4, day=1),
+        "B": date(year=2021, month=3, day=1),
+    }
+
     assert level_4(datys) == {"data": "B"}
     assert level_4([]) == {"errors": "this is not a date"}
+    assert level_4(datys_1) == {"data": "A"}
