@@ -31,7 +31,7 @@ def level_2(*args: Any) -> dict:
     return result
 
 
-def level_3(born):
+def level_3(born: Any) -> dict:
     result = {}
 
     today = date.today()
