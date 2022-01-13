@@ -4,7 +4,7 @@ from typing import Any
 def func6_dict_http_query(query: Any) -> dict:
     result_data: dict = {}
 
-    if type(query) != str:
+    if not isinstance(query, str):
         return {"errors": ["arg should be str"]}
 
     if len(str(query)) > 0:

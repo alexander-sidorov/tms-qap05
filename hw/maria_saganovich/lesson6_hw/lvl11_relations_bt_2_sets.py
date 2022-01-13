@@ -19,7 +19,7 @@ def func11_relation_bt_2_sets(arg1: Any, arg2: Any) -> dict:
             "b in a": arg2.issubset(arg1),
         }
 
-    if bool(result_error):
+    if result_error:
         result["errors"] = sorted(result_error)
     else:
         result["data"] = result_data

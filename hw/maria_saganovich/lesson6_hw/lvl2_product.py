@@ -8,7 +8,7 @@ def func2_product(*args: Any) -> dict:
         if not isinstance(arg, (int, float, complex, str, list, tuple)):
             return {"errors": ["Unsupported type"]}
 
-        if isinstance(product, (list, str)) and isinstance(
+        if isinstance(product, (list, str, tuple)) and isinstance(
             arg, (list, tuple, str)
         ):
             return {"errors": ["Can't multiply sequence by non-int of types"]}

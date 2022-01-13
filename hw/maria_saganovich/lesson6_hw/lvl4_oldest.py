@@ -1,31 +1,27 @@
-from datetime import date
+import datetime
 from typing import Any
 
 
 def func4_oldest(d1: Any) -> dict:
-    result = {}
-    oldest = date.today()
+    oldest = datetime.datetime.today()
     result_data = []
-    error = []
 
-    if type(d1) != dict:
+    if not isinstance(d1, dict):
         return {"errors": ["should be dict"]}
 
     for key, value in d1.items():
-        if not isinstance(value, date):
-            error.append("args should be date")
+        if not isinstance(value, (datetime.date, datetime.datetime)):
+            return {"errors": ["args should be date"]}
+
+        if isinstance(value, datetime.date):
+            value = datetime.datetime(value.year, value.month, value.day)
+
+        if value < oldest:
+            oldest = value
+            result_data = [key]
+        elif value > oldest:
+            return {"errors": ["is not born"]}
         else:
-            if value < oldest:
-                oldest = value
-                result_data = [key]
-            elif value > oldest:
-                error.append("is not born")
-            else:
-                result_data.append(key)
+            result_data.append(key)
 
-    if bool(error):
-        result["errors"] = sorted(error)
-    else:
-        result["data"] = sorted(result_data)
-
-    return result
+    return {"data": sorted(result_data)}

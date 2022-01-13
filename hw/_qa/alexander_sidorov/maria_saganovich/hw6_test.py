@@ -80,10 +80,10 @@ def test_task_04() -> None:
     d2 = datetime.now().replace(year=1990, month=1, day=1)
 
     data = {(): d1, frozenset(): d2}
-    assert func4_oldest(data) == {"data": frozenset()}
+    assert func4_oldest(data) == {"data": [frozenset()]}
 
     data = defaultdict(None, data)
-    assert func4_oldest(data) == {"data": frozenset()}
+    assert func4_oldest(data) == {"data": [frozenset()]}
 
 
 def test_task_05() -> None:
@@ -118,12 +118,12 @@ def test_task_07() -> None:
     assert func7_str_duplicate_char("") == {"data": ""}
     assert func7_str_duplicate_char("a11b1a1") == {"data": "aaaaaaaaaaaba"}
     assert func7_str_duplicate_char(SuperStr("")) == {"data": ""}
+    assert func7_str_duplicate_char("¹2") == {"data": "¹¹"}
 
 
 def test_task_08() -> None:
     assert func8_duplicate_char_number("") == {"data": ""}
     assert func8_duplicate_char_number("aaaaaaaaaaaba") == {"data": "a11b1a1"}
-    assert func8_duplicate_char_number("¹2") == {"data": "¹¹"}
     assert func8_duplicate_char_number(SuperStr("")) == {"data": ""}
     validate_errors(func8_duplicate_char_number("1"))
     validate_errors(func8_duplicate_char_number("aaa3"))

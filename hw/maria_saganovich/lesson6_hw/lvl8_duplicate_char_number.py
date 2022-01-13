@@ -8,7 +8,7 @@ def func8_duplicate_char_number(arg: Any) -> dict:
     count = 0
     counter: dict = {}
 
-    if type(arg) != str:
+    if not isinstance(arg, str):
         return {"errors": ["Invalid argument"]}
 
     for value in arg:

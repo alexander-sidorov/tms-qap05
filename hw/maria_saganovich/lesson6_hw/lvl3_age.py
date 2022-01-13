@@ -1,10 +1,11 @@
+import datetime
 from datetime import date
 from typing import Any
 
 
 def func3_age(d1: Any) -> dict:
     result = {"errors": Any}
-    if type(d1) != date:
+    if not isinstance(d1, (datetime.date, datetime.datetime)):
         result["errors"] = ["should be date"]
     else:
         some_age = {
