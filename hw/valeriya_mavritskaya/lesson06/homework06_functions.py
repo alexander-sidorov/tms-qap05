@@ -47,14 +47,14 @@ def birthday_3(input_date: date) -> dict:
     return result
 
 
-def oldest_4(people: dict) -> dict:
+def oldest_4(people: dict[Any, date]) -> dict:
     result = {}
     if not isinstance(people, dict):
         result["errors"] = ["Input must be a dictionary"]
     elif any(not isinstance(p, date) for p in people.values()):
         result["errors"] = ["Input must contain date"]
     else:
-        result["data"] = min(people, key=lambda e: people[e])  # type: ignore
+        result["data"] = min(people, key=lambda e: people[e])
     return result
 
 
