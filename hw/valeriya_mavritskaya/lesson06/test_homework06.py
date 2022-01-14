@@ -135,6 +135,8 @@ def test_revert_dictionary_9() -> None:
     assert revert_dictionary_9(1) == {"errors": ["Invalid input"]}  # type: ignore  # noqa: E501
     assert revert_dictionary_9({"aa": "bb"}) == {"data": {"bb": "aa"}}
     assert "errors" in revert_dictionary_9(...)  # type: ignore
+    assert "errors" in revert_dictionary_9({1: [], 2: set(), 3: {}})
+    assert "errors" in revert_dictionary_9(...)  # type: ignore
 
 
 def test_join_dictionary_10() -> None:

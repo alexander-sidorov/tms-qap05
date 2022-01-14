@@ -132,6 +132,11 @@ def count_amount_8(str_input: str) -> dict:  # type: ignore
 def revert_dictionary_9(input_dictionary: dict) -> dict:
     if type(input_dictionary) != dict:
         return {"errors": ["Invalid input"]}
+    try:
+        for i in input_dictionary.values():
+            assert isinstance(i, Hashable)
+    except AssertionError:
+        return {"errors": ["collection contains unhashable type"]}
     result: dict[int, list] = {}
     values_list = []
     for value in input_dictionary.values():
