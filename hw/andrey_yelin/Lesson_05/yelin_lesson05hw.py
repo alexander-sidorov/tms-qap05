@@ -16,7 +16,7 @@ def slice_of_col03(collection: Any, some_object: Any) -> Any:
 
 
 def string_combination(string02: str, string01: str) -> str:
-    return string01.join(list(string02))
+    return string01.join(string02)
 
 
 def titled_string(some_string: str) -> str:
