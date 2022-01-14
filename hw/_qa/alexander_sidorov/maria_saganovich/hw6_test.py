@@ -80,10 +80,10 @@ def test_task_04() -> None:
     d2 = datetime.now().replace(year=1990, month=1, day=1)
 
     data = {(): d1, frozenset(): d2}
-    assert func4_oldest(data) == {"data": [frozenset()]}
+    assert func4_oldest(data) == {"data": frozenset()}
 
     data = defaultdict(None, data)
-    assert func4_oldest(data) == {"data": [frozenset()]}
+    assert func4_oldest(data) == {"data": frozenset()}
 
 
 def test_task_05() -> None:
