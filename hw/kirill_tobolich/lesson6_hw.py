@@ -62,7 +62,7 @@ def get_the_eldest(dictionary: dict[Any, date]) -> dict:
         if not isinstance(value, date):
             return {"errors": ["key value is not object of date type"]}
     min_value = min(dictionary, key=lambda v: dictionary[v])
-    result["data"] = min_value[0]
+    result["data"] = min_value
     return result
 
 
