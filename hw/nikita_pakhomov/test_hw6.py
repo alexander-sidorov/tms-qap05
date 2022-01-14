@@ -5,7 +5,6 @@ from hw.nikita_pakhomov.nlesson3.hw6 import level_2
 from hw.nikita_pakhomov.nlesson3.hw6 import level_3
 from hw.nikita_pakhomov.nlesson3.hw6 import level_4
 from hw.nikita_pakhomov.nlesson3.hw6 import level_5
-from hw.nikita_pakhomov.nlesson3.hw6 import level_6
 
 
 def test_is_palindrome() -> None:
