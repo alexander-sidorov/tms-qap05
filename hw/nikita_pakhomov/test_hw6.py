@@ -13,6 +13,7 @@ def test_is_palindrome() -> None:
     assert is_palindrome("x") == {"data": True}
     assert is_palindrome("xx") == {"data": True}
     assert is_palindrome("xy") == {"data": False}
+    assert is_palindrome("xX") == {"data": False}
 
 
 def test_level_2() -> None:
