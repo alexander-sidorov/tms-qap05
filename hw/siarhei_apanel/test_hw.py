@@ -36,7 +36,7 @@ def test_example() -> None:
     }
     assert dateday(1998) == {"errors": ["TypeError"]}
     assert happybithday(da) == {"data": "b"}
-    assert happybithday(yers) == {"errors": ["EqualError"]}
+    assert happybithday([yers]) == {"errors": ["TypeError"]}
     assert repeat([(), "", "", 1]) == {"data": {"": 2}}
     assert repeat({5: 2, 4: 2, 6: 1, 3: 2}) == {"errors": ["NoRepeatError"]}
     assert repeat({(), "", "", 1}) == {"errors": ["NoRepeatError"]}

@@ -63,7 +63,17 @@ def krypto(cod: str, key: str) -> str:
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
 
 
-def palindrom(di1: Any) -> dict:
+def decor_data(func: Any) -> Any:
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        if isinstance(result, dict) and "errors" in result:
+            return result
+        return {"data": result}
+
+    return wrapper
+
+
+def palindrom(di1: Any) -> Any:
     result = {"errors": Any}
     if type(di1) != str:
         result["errors"] = ["TypeError"]
@@ -80,13 +90,13 @@ def palindrom(di1: Any) -> dict:
     return result
 
 
-def proizvedenie(*digit: Any) -> dict:
+@decor_data
+def proizvedenie(*digit: Any) -> Any:
 
     verif = 0
     product = 1
 
     for dig in digit:
-        result: dict[str, int] = {}
 
         if type(dig) in [str, tuple, list]:
             verif += 1
@@ -94,59 +104,50 @@ def proizvedenie(*digit: Any) -> dict:
                 return {"errors": ["TypeError"]}
         product *= dig
 
-        result = {"data": product}
-
-    return result
+    return product
 
 
-def dateday(yer: Any) -> dict:
+@decor_data
+def dateday(yer: Any) -> Any:
 
     if type(yer) != date:
         return {"errors": ["TypeError"]}
 
-    result: dict[str, dict[str, int]] = {}
     now = date.today()
     delta = now - yer
 
-    result = {
-        "data": {
-            "year": yer.year,
-            "month": yer.month,
-            "day": yer.day,
-            "age": int(delta.days // 365),
-        }
+    return {
+        "year": yer.year,
+        "month": yer.month,
+        "day": yer.day,
+        "age": int(delta.days // 365),
     }
-    return result
 
 
-def happybithday(yer: dict) -> dict:
-    age = date(1, 1, 1)
+@decor_data
+def happybithday(yer: Any) -> dict:
 
-    for keys, value in yer.items():
-        if value == age:
-            return {"errors": ["EqualError"]}
+    if isinstance(yer, dict) is False:
+        return {"errors": ["TypeError"]}
 
-        if value > age:
-            age = yer[keys]
-
-    return {"data": keys}
+    return min(yer, key=lambda t: yer[t])
 
 
+@decor_data
 def repeat(collect: Any) -> dict:
     if type(collect) not in [list, tuple, str] or len(collect) < 2:
         return {"errors": ["NoRepeatError"]}
     noresult = []
     for digit in collect:
         noresult.append(digit)
-    result_dict = {
+    return {
         quant: noresult.count(quant)
         for quant in noresult
         if noresult.count(quant) > 1
     }
 
-    return {"data": result_dict}
 
-
+@decor_data
 def html_str(query: Any) -> dict:
     result: dict[str, list] = {}
     if type(query) != str:
@@ -162,25 +163,25 @@ def html_str(query: Any) -> dict:
 
             else:
                 continue
-    return {"data": result}
+    return result
 
 
-def decodding(code: Any) -> dict:
+@decor_data
+def decodding(code: Any) -> Any:
     if type(code) != str:
         return {"errors": ["TypeError"]}
     elif len(code) % 2 != 0:
         return {"errors": ["NoQualityLetterError"]}
     else:
-        return {
-            "data": "".join(
-                code[sym] * int(code[sym + 1])
-                for sym in range(len(code))
-                if code[sym].isalpha()
-            )
-        }
+        return "".join(
+            code[sym] * int(code[sym + 1])
+            for sym in range(len(code))
+            if code[sym].isalpha()
+        )
 
 
-def codding(s1: Any) -> dict:
+@decor_data
+def codding(s1: Any) -> Any:
     if type(s1) != str:
         return {"errors": ["TypeError"]}
 
@@ -206,9 +207,10 @@ def codding(s1: Any) -> dict:
         if s1[i1] != s1[j1]:
             result += s1[i1] + str(num)
             num = 0
-    return {"data": result}
+    return result
 
 
+@decor_data
 def rever_dict(d1: Any) -> dict:
     if type(d1) != dict:
         return {"errors": ["TypeError"]}
@@ -223,9 +225,10 @@ def rever_dict(d1: Any) -> dict:
         else:
             result[value] = key
 
-    return {"data": result}
+    return result
 
 
+@decor_data
 def new_dict(key: Any, value: Any) -> dict:
     result = {}
     if len(key) > len(value):
@@ -244,25 +247,25 @@ def new_dict(key: Any, value: Any) -> dict:
         for f1 in range(-len_none2, 0):
             result.setdefault(..., []).append(value[f1])
 
-    return {"data": result}
+    return result
 
 
+@decor_data
 def new_set(set1: Any, set2: Any) -> dict:
     if type(set1) != set or type(set2) != set:
         return {"errors": ["TypeError"]}
     return {
-        "data": {
-            "a&b": set1 & set2,
-            "a|b": set1 | set2,
-            "a-b": set1 - set2,
-            "b-a": set2 - set1,
-            "|a-b|": set1 ^ set2,
-            "a in b": set1.issubset(set2),
-            "b in a": set2.issubset(set1),
-        }
+        "a&b": set1 & set2,
+        "a|b": set1 | set2,
+        "a-b": set1 - set2,
+        "b-a": set2 - set1,
+        "|a-b|": set1 ^ set2,
+        "a in b": set1.issubset(set2),
+        "b in a": set2.issubset(set1),
     }
 
 
+@decor_data
 def diction(*digit: Any) -> dict:
     if len(digit) % 2 != 0:
         return {"errors": ["NoPares"]}
@@ -278,7 +281,7 @@ def diction(*digit: Any) -> dict:
             continue
         result[digit[dig]] = digit[dig + 1]
 
-    return {"data": result}
+    return result
 
 
 if __name__ == "__main__":
