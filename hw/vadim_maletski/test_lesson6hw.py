@@ -14,7 +14,7 @@ from hw.vadim_maletski.func6 import level_11
 from hw.vadim_maletski.func6 import level_12
 
 
-def test() -> None:
+def test() -> None:  # type: ignore
     assert (level_01(98)) == {"errors": ["argument must be string"]}
     assert (level_01("")) == {"data": True}
     assert (level_01("xx")) == {"data": True}
@@ -58,25 +58,26 @@ def test() -> None:
     assert level_04(
         {1: date(1990, 1, 1), 2: date(1990, 1, 2), 3: date(1950, 1, 1)}
     ) == {"data": 3}
-    assert (level_04(...)) == {"errors": ["argument must be date"]}
+    assert (level_04(...)) == {"errors": ["argument must be date"]}  # type: ignore
     assert (level_04(None)) == {"errors": ["argument must be date"]}  # type: ignore
     assert (level_04(1)) == {"errors": ["argument must be date"]}  # type: ignore
     assert (level_04(1.0)) == {"errors": ["argument must be date"]}  # type: ignore
     assert (level_04(1j)) == {"errors": ["argument must be date"]}  # type: ignore
     assert (level_04(object())) == {"errors": ["argument must be date"]}  # type: ignore
     assert (level_04(object)) == {"errors": ["argument must be date"]}  # type: ignore
-    assert (level_04(type("_", (), {}))) == {  # noqa: JS101  # type: ignore
-        "errors": ["argument must be date"]
-    }
+
+    got = level_04(type("_", (), {}))  # type: ignore
+    assert got == {"errors": ["argument must be date"]}
+
     assert (level_04(type)) == {"errors": ["argument must be date"]}  # type: ignore
     assert (level_04(level_04)) == {"errors": ["argument must be date"]}  # type: ignore
     assert (level_04(date(1999, 1, 1))) == {  # type: ignore
         "errors": ["argument must be date"]
     }
     assert (level_04([[], []])) == {"errors": ["argument must be date"]}  # type: ignore
-    assert (level_04({1: [], 2: {}, 3: [], 4: set()})) == {  # noqa: JS101  # type: ignore
-        "errors": ["TypeError"]
-    }
+
+    got = level_04({1: [], 2: {}, 3: [], 4: set()})  # type: ignore
+    assert got == {"errors": ["TypeError"]}
 
     assert (level_05([])) == {"data": {}}
     assert (level_05({})) == {"data": {}}
