@@ -77,7 +77,7 @@ def level_03(bd: Any) -> Result:
     return result
 
 
-def level_04(dic: Any) -> Result:
+def level_04(dic: dict[Any, date]) -> Result:
     result: Result = {}
     errors = []
 
