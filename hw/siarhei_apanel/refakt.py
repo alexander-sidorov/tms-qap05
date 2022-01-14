@@ -64,7 +64,7 @@ def krypto(cod: str, key: str) -> str:
 
 
 def decor_data(func: Any) -> Any:
-    def wrapper(*args, **kwargs):
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         result = func(*args, **kwargs)
         if isinstance(result, dict) and "errors" in result:
             return result
@@ -125,7 +125,7 @@ def dateday(yer: Any) -> Any:
 
 
 @decor_data
-def happybithday(yer: Any) -> dict:
+def happybithday(yer: Any) -> Any:
 
     if isinstance(yer, dict) is False:
         return {"errors": ["TypeError"]}
