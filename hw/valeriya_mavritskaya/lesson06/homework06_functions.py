@@ -124,7 +124,6 @@ def count_amount_8(str_input: str) -> dict:  # type: ignore
             else:
                 result += str_input[item] + str(cnt)
                 cnt = 1
-            continue
         else:
             result += str_input[item] + str(cnt)
             return {"data": result}
@@ -133,19 +132,16 @@ def count_amount_8(str_input: str) -> dict:  # type: ignore
 def revert_dictionary_9(input_dictionary: dict) -> dict:
     if type(input_dictionary) != dict:
         return {"errors": ["Invalid input"]}
-    try:
-        result: dict[int, list] = {}
-        values_list = []
-        for value in input_dictionary.values():
-            values_list.append(value)
-        for key, value in input_dictionary.items():
-            if values_list.count(value) > 1:
-                result.setdefault(value, []).append(key)
-            else:
-                result[value] = key
-        return {"data": result}
-    except TypeError:
-        return {"errors": ["Invalid input"]}
+    result: dict[int, list] = {}
+    values_list = []
+    for value in input_dictionary.values():
+        values_list.append(value)
+    for key, value in input_dictionary.items():
+        if values_list.count(value) > 1:
+            result.setdefault(value, []).append(key)
+        else:
+            result[value] = key
+    return {"data": result}
 
 
 def join_dictionary_10(keys: Any, values: Any) -> dict:
