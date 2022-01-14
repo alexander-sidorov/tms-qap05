@@ -53,9 +53,3 @@ def test_level_5() -> None:
     elements = [(), "", "", 1]
     assert level_5(elements) == {"data": {"": 2}}
     assert level_5([]) == {'data': {}}
-
-
-def test_level_6() -> None:
-    assert level_6("x=1&x=2&y=3") == {"data": {"x": ["1", "2"], "y": ["3"]}}
-    assert level_6("") == {"errors": "incorrect input"}
-    assert level_6("x=1&x=2&y=1") == {"data": {"x": ["1", "2"], "y": ["1"]}}
