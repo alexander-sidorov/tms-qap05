@@ -102,7 +102,7 @@ def level_5(spisok: Any) -> dict:
     return result
 
 
-def level_6(stroka: str) -> dict:
+def level_6(stroka: Any) -> dict:
     result = {}
     if stroka == "":
         result["errors"] = "incorrect input"
