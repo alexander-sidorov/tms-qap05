@@ -75,9 +75,7 @@ def level_4(age: Any) -> dict:
         elif age["A"] < age["B"]:
             result["data"] = "A"
             return result
-        elif age["A"] == age["B"]:
-            result["errors"] = "dates are equal"
-            return result
+
         else:
             result["errors"] = "dates are equal"
             return result
@@ -110,7 +108,6 @@ def level_6(stroka: str) -> dict:
     elif type(stroka) == str:
         result = {"data": parse_qs(stroka)}
         return result
-
     else:
         result["errors"] = "incorrect input"
         return result
