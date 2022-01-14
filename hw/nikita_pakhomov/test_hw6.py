@@ -58,3 +58,4 @@ def test_level_5() -> None:
 def test_level_7() -> None:
     assert level_7("a3b2c1") == {"data": "aaabbc"}
     assert level_7("a3b2c") == {"errors": "incorrect input"}
+    assert level_7("") == {"errors": "incorrect input"}
