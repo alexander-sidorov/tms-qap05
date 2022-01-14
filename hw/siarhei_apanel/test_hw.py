@@ -30,9 +30,11 @@ def test_example() -> None:
     assert proizvedenie(1) == {"data": 1}
     assert proizvedenie(1, 2) == {"data": 2}
     assert proizvedenie("1", 3) == {"data": "111"}
+    assert "errors" in proizvedenie("a", "a")
     assert dateday(dat) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
+    assert dateday(1998) == {"errors": ["TypeError"]}
     assert happybithday(da) == {"data": "b"}
     assert happybithday(yers) == {"errors": ["EqualError"]}
     assert repeat([(), "", "", 1]) == {"data": {"": 2}}
@@ -46,12 +48,21 @@ def test_example() -> None:
     }
     assert html_str([]) == {"errors": ["TypeError"]}
     assert decodding("a3b2c1") == {"data": "aaabbc"}
+    assert decodding(123) == {"errors": ["TypeError"]}
     assert decodding("a3b2c") == {"errors": ["NoQualityLetterError"]}
     assert codding("aaabb") == {"data": "a3b2"}
+    assert codding(123) == {"errors": ["TypeError"]}
+    assert codding("a") == {"data": "a1"}
+    assert codding("aa") == {"data": "a2"}
+    assert codding("ab") == {"data": "a1b1"}
+    assert codding("") == {"data": ""}
+    assert codding("ccc%") == {"data": "c3%1"}
     assert rever_dict(dic) == {"data": {100: [1, 2], 300: 3}}
     assert rever_dict({"a": "a", "b": "b"}) == {"data": {"a": "a", "b": "b"}}
+    assert rever_dict({"a"}) == {"errors": ["TypeError"]}
     assert new_dict("abc", [1, 2]) == {"data": {"a": 1, "b": 2, "c": None}}
     assert new_dict("ab", [1, 2, 3]) == {"data": {"a": 1, "b": 2, ...: [3]}}
+    assert new_dict("abс", [1, 2, 3]) == {"data": {"a": 1, "b": 2, "с": 3}}
     assert new_set(set1, set2) == {
         "data": {
             "a&b": {1},
