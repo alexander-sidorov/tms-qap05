@@ -71,7 +71,7 @@ def test_get_the_eldest() -> None:
     assert get_the_eldest(198782) == {  # type: ignore
         "errors": ["Given argument is not a dictionary"]
     }
-    assert get_the_eldest(d3) == {
+    assert get_the_eldest(d3) == {  # type: ignore
         "errors": ["key value is not object of date type"]
     }
 

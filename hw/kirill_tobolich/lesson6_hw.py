@@ -54,7 +54,7 @@ def get_formatted_birthday(birthday_date: date) -> dict:
     return result
 
 
-def get_the_eldest(dictionary: dict) -> dict:
+def get_the_eldest(dictionary: dict[Any, date]) -> dict:
     result = {}
     if not isinstance(dictionary, dict):
         return {"errors": ["Given argument is not a dictionary"]}
