@@ -61,11 +61,9 @@ def oldest_4(people: dict) -> dict:
 def duplicates_5(collection: Any) -> dict:
     types = (list, str, tuple, set, dict)
     if type(collection) not in types:
-        return {
-            "errors": ["Invalid input"]
-        }
+        return {"errors": ["Invalid input"]}
     try:
-        counter: collections.Counter = collections.Counter(collection)
+        collections.Counter = collections.Counter(collection)
     except TypeError:
         return {"errors": ["collection contains unhashable type"]}
     result = {}
@@ -111,14 +109,24 @@ def repeated_symbols_7(input_str: str) -> dict:
 
 
 def count_amount_8(str_input: str) -> dict:
-    if type(str_input) == str:
-        result = {}
-        count = collections.Counter(str_input)
-        create_str = (f"{key}{value}" for (key, value) in count.items())
-        result["data"] = "".join(create_str)
-    else:
+    if not isinstance(str_input, str):
         return {"errors": ["Invalid input"]}
-    return result
+    for symbol in str_input:
+        if symbol.isdigit():
+            return {"errors": ["Invalid input"]}
+    cnt = 1
+    result = ""
+    str_length = len(str_input)
+    for symbol in range(str_length):
+        if symbol == (str_length - 1):
+            result += str_input[symbol] + str(cnt)
+            return {"data": result}
+        else:
+            if str_input[symbol] == str_input[symbol + 1]:
+                cnt = cnt + 1
+            else:
+                result += str_input[symbol] + str(cnt)
+                cnt = 1
 
 
 def revert_dictionary_9(input_dictionary: dict) -> dict:
@@ -144,20 +152,17 @@ def join_dictionary_10(keys: Any, values: Any) -> dict:
     if ... in [keys, values]:
         return {"errors": ["Invalid input"]}
     dictionary_length = max(len(keys), len(values))
-    try:
-        for index in range(dictionary_length):
-            should_use_source_key = len(keys) > index
-            should_use_source_value = len(values) > index
-            result_key = keys[index] if should_use_source_key else ...
-            result[result_key] = (
-                (values[index] if should_use_source_value else None)
-                if should_use_source_key
-                else [values[index]]
-                if ... not in result
-                else result[result_key] + [values[index]]
-            )
-    except TypeError:
-        return {"errors": ["wrong types"]}
+    for index in range(dictionary_length):
+        should_use_source_key = len(keys) > index
+        should_use_source_value = len(values) > index
+        result_key = keys[index] if should_use_source_key else ...
+        result[result_key] = (
+            (values[index] if should_use_source_value else None)
+            if should_use_source_key
+            else [values[index]]
+            if ... not in result
+            else result[result_key] + [values[index]]
+        )
     return {"data": result}
 
 
