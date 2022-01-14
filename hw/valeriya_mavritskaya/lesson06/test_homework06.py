@@ -126,6 +126,7 @@ def test_count_amount_8() -> None:
     assert count_amount_8(False) == {"errors": ["Invalid input"]}  # type: ignore  # noqa: E501
     assert count_amount_8("aabba") == {"data": "a2b2a1"}
     assert "errors" in count_amount_8(...)  # type: ignore
+    assert "errors" in count_amount_8("2aabba")
 
 
 def test_revert_dictionary_9() -> None:
