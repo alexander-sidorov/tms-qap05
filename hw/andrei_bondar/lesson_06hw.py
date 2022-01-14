@@ -50,7 +50,7 @@ def datrog(d3: Any) -> dict:
     return result
 
 
-def the_oldest_one(birthday: dict) -> dict:
+def ber4(birthday: dict) -> dict:
     if not isinstance(birthday, dict):  # определяет тип аргумента
         return {"errors": "Given argument is not a dictionary"}
     else:
