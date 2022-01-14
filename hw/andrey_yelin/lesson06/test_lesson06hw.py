@@ -62,5 +62,3 @@ def test_parse_http_query_6() -> None:
 def test_decode_7() -> None:
     deco7 = "a11b2c3"
     assert decode_7(deco7) == {"data": "aaaaaaaaaaabbccc"}
-    assert decode_7(None) == {"errors": "none argument"}
-    assert decode_7("2") == {"errors": "so short string"}

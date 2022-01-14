@@ -110,28 +110,18 @@ def parse_http_query_6(string: Any = None) -> dict:
     return result
 
 
-def decode_7(string: Any = None) -> dict:
-    result = {}
-    if string is None:
-        result["errors"] = "none argument"
-        return result
-    number = []
-    letter = []
-    symbl = ""
-    if len(string) < 2:
-        result["errors"] = "so short string"
-        return result
-    index = 0
+def decode_7(string: str) -> dict:
+    result, number, letter, symbl, index = {}, [], [], "", 0
     for sym in string:
         try:
-            isinstance(float(sym), float)
+            isinstance(int(sym), int)
             symbl = symbl + sym
             if index == (len(string) - 1):
-                number.append(float(symbl))
+                number.append(int(symbl))
         except BaseException:
             letter.append(sym)
             if symbl != "":
-                number.append(float(symbl))
+                number.append(int(symbl))
             symbl = ""
         index += 1  # noqa: SIM113
     if len(letter) != len(number):
@@ -143,3 +133,6 @@ def decode_7(string: Any = None) -> dict:
             data.append(int(number[i]) * letter[i])
         result["data"] = "".join(data)
         return result
+
+
+print(decode_7("2g4d"))
