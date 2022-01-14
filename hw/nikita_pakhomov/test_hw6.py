@@ -51,6 +51,7 @@ def test_level_4() -> None:
 def test_level_5() -> None:
     elements = [(), "", "", 1]
     assert level_5(elements) == {"data": {"": 2}}
+    assert level_5([]) == {'data': {}}
 
 
 def test_level_6() -> None:
