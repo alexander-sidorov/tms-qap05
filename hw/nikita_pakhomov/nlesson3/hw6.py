@@ -47,7 +47,6 @@ def level_3(born: Any) -> dict:
             "day": born.day,
             "age": age,
         }
-        age = today.year - born.year - 1
         return result
     else:
         age = today.year - born.year
@@ -102,21 +101,26 @@ def level_5(spisok: Any) -> dict:
 def level_7(stroka: str) -> dict:
     result = {}
     aaa = ""
+
     if type(stroka) == str and stroka != "":
-        if (
-            stroka[::2].isalpha()
-            and stroka[1::2].isdecimal()
-            and len(stroka[1::2]) == len(stroka[::2])
-        ):
+        if stroka[::2].isalpha() and stroka[1::2].isdecimal():
+            if len(stroka[1::2]) == len(stroka[::2]):
 
-            if type(stroka) == str:
-                if stroka[::2].isalpha():
-                    for i in range(len(stroka)):
-                        if stroka[i].isalpha():
+                if type(stroka) == str:
+                    if stroka[::2].isalpha():
+                        for i in range(len(stroka)):
+                            if stroka[i].isalpha():
 
-                            aaa = aaa + stroka[i] * int(stroka[i + 1])
+                                aaa = aaa + stroka[i] * int(stroka[i + 1])
 
-                    result = {"data": aaa}
+                        result = {"data": aaa}
+            else:
+
+                result["errors"] = "incorrect input"
+        else:
+
+            result["errors"] = "incorrect input"
     else:
+
         result["errors"] = "incorrect input"
     return result
