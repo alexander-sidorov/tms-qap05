@@ -5,6 +5,7 @@ from hw.andrey_yelin.lesson06.functions_lesson06hw import decode_7
 from hw.andrey_yelin.lesson06.functions_lesson06hw import is_palindrome_1
 from hw.andrey_yelin.lesson06.functions_lesson06hw import multiply_args_2
 from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4
+from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4_v_lambda
 from hw.andrey_yelin.lesson06.functions_lesson06hw import parse_http_query_6
 from hw.andrey_yelin.lesson06.functions_lesson06hw import repeating_elements_5
 
@@ -42,6 +43,16 @@ def test_older_4() -> None:
     assert older_4(birthday) == {"data": "B"}
     assert older_4([]) == {"errors": "empty variable"}
     assert older_4({}) == {"errors": "empty variable"}
+
+
+def test_older_4_v_lambda() -> None:
+    birthday = {
+        "A": date(year=2021, month=7, day=18),
+        "B": date(year=1993, month=6, day=27),
+    }
+    assert older_4_v_lambda(birthday) == {"data": "B"}
+    assert older_4_v_lambda([]) == {"errors": "empty variable"}  # type: ignore
+    assert older_4_v_lambda({}) == {"errors": "empty variable"}
 
 
 def test_repeating_elements_5() -> None:

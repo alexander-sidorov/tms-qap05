@@ -4,6 +4,8 @@ from typing import Any
 from typing import Dict
 from urllib.parse import parse_qs
 
+Result = Dict[str, Any]
+
 
 def is_palindrome_1(strochka: Any = None) -> dict:
     result: Dict[str, Any] = {}
@@ -63,7 +65,6 @@ def older_4(old_date: Any) -> dict:
         result["errors"] = "empty variable"
         return result
     max_date = 0
-
     for key in old_date:
         today_time = date.today()
         ma = today_time - old_date[key]
@@ -71,6 +72,18 @@ def older_4(old_date: Any) -> dict:
         if int(dd.split()[0]) > max_date:
             max_date = int(dd.split()[0])
             result["data"] = key
+    return result
+
+
+def older_4_v_lambda(old_date: Dict[Any, date]) -> Result:
+    result: Result = {}
+    if not old_date:
+        result["errors"] = "empty variable"
+        return result
+
+    res = min(old_date, key=lambda n: old_date[n])
+    result["data"] = res
+
     return result
 
 
@@ -133,6 +146,3 @@ def decode_7(string: str) -> dict:
             data.append(int(number[i]) * letter[i])
         result["data"] = "".join(data)
         return result
-
-
-print(decode_7("2g4d"))
