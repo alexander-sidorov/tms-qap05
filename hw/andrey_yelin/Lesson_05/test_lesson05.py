@@ -1,4 +1,4 @@
-from hw.andrey_yelin.yelin_lesson05 import aggression
+from hw.andrey_yelin.Lesson_05.yelin_lesson05 import aggression
 
 
 def test_aggression() -> None:
