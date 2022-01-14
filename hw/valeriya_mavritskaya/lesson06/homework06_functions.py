@@ -20,10 +20,7 @@ def if_palindrome_1(u_input: str) -> dict:
 def multiplication_2(*args: Any) -> dict:
     result = {}
     try:
-        if len(args) < 1:
-            return {"errors": ["no argument is given"]}
-        else:
-            result["data"] = prod(args)
+        result["data"] = prod(args)
     except TypeError:
         return {"errors": ["given arguments' types can't be multiplied"]}
     return result
