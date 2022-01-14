@@ -82,6 +82,20 @@ def level_4(age: Any) -> dict:
         result["errors"] = "this is not a date"
         return result
 
+def level_4_1(age: dict[Any, date]) -> dict:
+    result = {}
+    if type(age) == dict:
+        if type(age["A"]) != date or type(age["B"]) != date:
+            result["errors"] = "this is not a date"
+
+        name = min(age, key=lambda n: age[n])
+        return {"data": name}
+
+
+
+
+
+
 
 def level_5(spisok: Any) -> dict:
     result: dict = {}
