@@ -111,6 +111,3 @@ def level_6(stroka: str) -> dict:
         result = {"data": parse_qs(stroka)}
         return result
 
-    else:
-        result["errors"] = "incorrect input"
-        return result
