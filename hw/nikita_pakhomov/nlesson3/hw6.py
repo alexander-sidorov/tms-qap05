@@ -104,7 +104,7 @@ def level_5(spisok: Any) -> dict:
 
 def level_6(stroka: str) -> dict:
     result = {}
-    if stroka != "":
+    if stroka == "":
         result["errors"] = "incorrect input"
         return result
     elif type(stroka) == str:
