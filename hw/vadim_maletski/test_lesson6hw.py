@@ -175,7 +175,7 @@ def test() -> None:
     assert (level_09(...)) == {"errors": ["argument must be dict"]}
     assert (level_09(1)) == {"errors": ["argument must be dict"]}
     assert (level_09(1.0)) == {"errors": ["argument must be dict"]}
-    assert (level_09(1j)) == {"errors": ["argument must be dict"]}
+    assert (level_09(1j)) == {"errors": ["argument must be dict"]}  # noqa: JS101
     assert (level_09(object())) == {"errors": ["argument must be dict"]}
     assert (level_09(object)) == {"errors": ["argument must be dict"]}
     assert (level_09(type("_", (), {}))) == {  # noqa: JS101
