@@ -90,11 +90,9 @@ def level_4_1(age: dict[Any, date]) -> dict:
 
         name = min(age, key=lambda n: age[n])
         return {"data": name}
-
-
-
-
-
+    else:
+        result["errors"] = "dates are equal"
+        return result
 
 
 def level_5(spisok: Any) -> dict:
