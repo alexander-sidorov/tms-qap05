@@ -56,4 +56,4 @@ def test_level_5() -> None:
 def test_level_6() -> None:
     assert level_6("x=1&x=2&y=3") == {"data": {"x": ["1", "2"], "y": ["3"]}}
     assert level_6("") == {"errors": "incorrect input"}
-    assert level_6(True) == {"errors": "incorrect input"}
+    assert level_6("x=1&x=2&y=3") == {"data": {"x": ["1", "2"], "y": ["1"]}}
