@@ -104,12 +104,13 @@ def level_5(spisok: Any) -> dict:
 
 def level_6(stroka: str) -> dict:
     result = {}
-    if type(stroka) == str:
-        result = {"data": parse_qs(stroka)}
-        return result
-    elif stroka != "":
+    if stroka != "":
         result["errors"] = "incorrect input"
         return result
+    elif type(stroka) == str:
+        result = {"data": parse_qs(stroka)}
+        return result
+
     else:
         result["errors"] = "incorrect input"
         return result
