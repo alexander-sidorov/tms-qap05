@@ -88,7 +88,8 @@ def level_04(dic: Any) -> Result:
 
     else:
         try:
-            res = min(dic, key=dic.get)
+            res = min(dic, key=lambda n: dic[n])
+
         except TypeError:
             return {"errors": ["TypeError"]}
 
