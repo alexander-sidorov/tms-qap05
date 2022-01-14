@@ -48,3 +48,11 @@ def datrog(d3: Any) -> dict:
         result = {"date": s_age}
 
     return result
+
+
+def the_oldest_one(birthday: dict) -> dict:
+    if not isinstance(birthday, dict):  # определяет тип аргумента
+        return {"errors": "Given argument is not a dictionary"}
+    else:
+        name_result = min(birthday, key=lambda t: birthday[t])
+        return {"data": name_result}
