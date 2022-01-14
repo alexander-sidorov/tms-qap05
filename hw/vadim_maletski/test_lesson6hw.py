@@ -122,7 +122,7 @@ def test() -> None:
     assert (level_05("aa")) == {"data": {"a": 2}}
     assert (level_05({1: 2, 2: 2})) == {"data": {}}
     assert (level_05({1, 2})) == {"data": {}}
-    assert (level_05([[], [], {}, {}])) == {
+    assert (level_05([[], [], {}, {}])) == {  # noqa: JS101
         "errors": ["TypeError unhashable type"]
     }
 
@@ -175,7 +175,9 @@ def test() -> None:
     assert (level_09(...)) == {"errors": ["argument must be dict"]}
     assert (level_09(1)) == {"errors": ["argument must be dict"]}
     assert (level_09(1.0)) == {"errors": ["argument must be dict"]}
-    assert (level_09(1j)) == {"errors": ["argument must be dict"]}  # noqa: JS101
+    assert (level_09(1j)) == {
+        "errors": ["argument must be dict"]
+    }  # noqa: JS101
     assert (level_09(object())) == {"errors": ["argument must be dict"]}
     assert (level_09(object)) == {"errors": ["argument must be dict"]}
     assert (level_09(type("_", (), {}))) == {  # noqa: JS101
