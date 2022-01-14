@@ -1,8 +1,9 @@
-import collections
 import re
 from datetime import date
 from math import prod
 from typing import Any
+from typing import Hashable
+from typing import Sequence
 
 
 def if_palindrome_1(u_input: str) -> dict:
@@ -59,12 +60,12 @@ def oldest_4(people: dict[Any, date]) -> dict:
 
 
 def duplicates_5(collection: Any) -> dict:
-    types = (list, str, tuple, set, dict)
-    if type(collection) not in types:
+    if not isinstance(collection, Sequence):
         return {"errors": ["Invalid input"]}
     try:
-        collections.Counter = collections.Counter(collection)
-    except TypeError:
+        for i in collection:
+            assert isinstance(i, Hashable)
+    except AssertionError:
         return {"errors": ["collection contains unhashable type"]}
     result = {}
     select_duplicates = {i: collection.count(i) for i in collection}
@@ -108,7 +109,7 @@ def repeated_symbols_7(input_str: str) -> dict:
     return {"data": result}
 
 
-def count_amount_8(str_input: str) -> dict:
+def count_amount_8(str_input: str) -> dict:  # type: ignore
     if not isinstance(str_input, str):
         return {"errors": ["Invalid input"]}
     for symbol in str_input:
@@ -116,17 +117,17 @@ def count_amount_8(str_input: str) -> dict:
             return {"errors": ["Invalid input"]}
     cnt = 1
     result = ""
-    str_length = len(str_input)
-    for symbol in range(str_length):
-        if symbol == (str_length - 1):
-            result += str_input[symbol] + str(cnt)
-            return {"data": result}
-        else:
-            if str_input[symbol] == str_input[symbol + 1]:
+    for item in range(len(str_input)):
+        if item != (len(str_input) - 1):
+            if str_input[item] == str_input[item + 1]:
                 cnt = cnt + 1
             else:
-                result += str_input[symbol] + str(cnt)
+                result += str_input[item] + str(cnt)
                 cnt = 1
+            continue
+        else:
+            result += str_input[item] + str(cnt)
+            return {"data": result}
 
 
 def revert_dictionary_9(input_dictionary: dict) -> dict:

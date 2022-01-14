@@ -90,7 +90,7 @@ def test_oldest_4() -> None:
         {"A": date(1993, 8, 3), "B": date(2000, 6, 6), "C": date(1980, 4, 5)}
     ) == {"data": "C"}
     assert oldest_4(True) == {"errors": ["Input must be a dictionary"]}  # type: ignore  # noqa: E501
-    assert oldest_4({"qwe": True}) == {"errors": ["Input must contain date"]}  # type: ignore
+    assert oldest_4({"qwe": True}) == {"errors": ["Input must contain date"]}  # type: ignore  # noqa: E501
     assert "errors" in oldest_4(...)  # type: ignore
     assert "errors" in oldest_4(object())  # type: ignore
     assert oldest_4(
