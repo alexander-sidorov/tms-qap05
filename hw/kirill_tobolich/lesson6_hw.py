@@ -58,7 +58,7 @@ def get_the_eldest(dictionary: dict) -> dict:
     result = {}
     if not isinstance(dictionary, dict):
         return {"errors": ["Given argument is not a dictionary"]}
-    for value in dictionary.items():
+    for _key, value in dictionary.items():
         if not isinstance(value, date):
             return {"errors": ["key value is not object of date type"]}
     min_value = min(dictionary, key=lambda v: dictionary[v])
