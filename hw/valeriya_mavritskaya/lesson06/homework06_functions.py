@@ -54,7 +54,7 @@ def oldest_4(people: dict) -> dict:
     elif any(not isinstance(p, date) for p in people.values()):
         result["errors"] = ["Input must contain date"]
     else:
-        result["data"] = min(people, key=people.get)  # type: ignore
+        result["data"] = min(people, key=lambda e: people[e])  # type: ignore
     return result
 
 
