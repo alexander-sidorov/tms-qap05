@@ -105,13 +105,15 @@ def level_7(stroka: str) -> dict:
     if type(stroka) == str and stroka != "":
         if stroka[::2].isalpha() and stroka[1::2].isdecimal():
             if len(stroka[1::2]) == len(stroka[::2]):
+
                 for i in range(len(stroka)):
                     if stroka[i].isalpha():
                         aaa = aaa + stroka[i] * int(stroka[i + 1])
                         result = {"data": aaa}
+            else:
+                result["errors"] = "incorrect input"
 
         else:
-
             result["errors"] = "incorrect input"
     else:
 
