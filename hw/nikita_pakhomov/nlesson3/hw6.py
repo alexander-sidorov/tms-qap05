@@ -1,7 +1,6 @@
 from datetime import date
 from typing import Any
 from typing import Dict
-from urllib.parse import parse_qs
 
 type_1 = Dict[str, Any]
 
