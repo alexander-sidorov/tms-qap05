@@ -51,8 +51,8 @@ def datrog(d3: Any) -> dict:
 
 
 def ber4(birthday: dict[Any, date]) -> dict:
-    if not isinstance(birthday, dict):
-        return {"errors": "Given argument is not a dictionary"}
+    if not isinstance(birthday, dict):  # определяет тип аргумента
+        return {"errors": Any}
     else:
         name_result = min(birthday, key=lambda t: birthday[t])
         return {"data": name_result}
