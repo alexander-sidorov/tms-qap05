@@ -110,4 +110,3 @@ def level_6(stroka: str) -> dict:
     elif type(stroka) == str:
         result = {"data": parse_qs(stroka)}
         return result
-
