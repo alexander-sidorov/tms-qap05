@@ -1,10 +1,10 @@
 import itertools
+import re
 from datetime import date
 from itertools import groupby
 from itertools import zip_longest
 from typing import Any
 from typing import Dict
-from urllib.parse import parse_qs
 
 Result = Dict[str, Any]
 
@@ -120,115 +120,104 @@ def level_06(query: Any) -> Result:
     result: Result = {}
     if not isinstance(query, str):
         return {"errors": ["TypeError"]}
-
-    try:
-        for lis in query.split("&"):
-            for el in range(len(lis.split("="))):
-                if lis.split("=")[el] != lis.split("=")[-1]:
-                    result.setdefault(lis.split("=")[el], []).append(lis.split("=")[el + 1])
-
-    except NameError:
-            return {"errors": ["name is not defined"]}
-
+    lis2 = query.split("&")
+    for lis in lis2:
+        for el in range(len(lis.split("="))):
+            if lis.split("=")[el] != lis.split("=")[-1]:
+                result.setdefault(lis.split("=")[el], []).append(
+                    lis.split("=")[el + 1]
+                )
     return {"data": result}
 
 
-def level_07(string: Any) -> dict:
+def level_07(string: Any) -> Result:
 
-    if type(string) != str:
+    if not isinstance(string, str):
         return {"errors": [f"argument ({string=!r}) must be string"]}
-    elif len(string) % 2 != 0:
-        return {"errors": ["wrong input"]}
+    nums = re.findall(r"\d+", string)
+    letters = re.findall(r"\D", string)
+    if len(nums) != len(letters):
+        return {"errors": ["wrong format of string"]}
+    if not string:
+        return {"data": ""}
+    first_el = string[0]
+    if first_el.isdigit():
+        return {"errors": ["wrong format of string"]}
     else:
-        return {
-            "data": "".join(
-                string[el] * int(string[el + 1])
-                for el in range(len(string))
-                if string[el].isalpha()
-            )
-        }
+        s1 = ["".join(g) for k, g in itertools.groupby(string, str.isalpha)]
+        letter = [el for el in s1 if el.isalpha()]
+        number = [int(el) for el in s1 if el.isdigit()]
+        s2 = list(map(lambda s_l, s_n: s_l * s_n, letter, number))
+        return {"data": "".join(s2)}
 
 
 def level_08(string: Any) -> Result:
     result: Result = {}
-    errors = []
 
     if type(string) != str:
-        errors.append(f"argument ({string=!r}) must be string")
-    if errors:
-        result["errors"] = errors
-
+        return {"errors": [f"argument ({string=!r}) must be string"]}
+    if not string:
+        return {"data": ""}
+    if not string.isalpha():
+        return {"errors": ["argument must be without nums"]}
     else:
-        dic = ["".join(g) for _, g in groupby(string)]
-
-        res = []
-
+        col_letter = ["".join(g) for _, g in groupby(string)]
+        num = []
         el = 0
-        while el < len(dic):
-            rr = len(dic[el])
-            res.append(rr)
+        while el < len(col_letter):
+            rr = len(col_letter[el])
+            num.append(str(rr))
             el += 1
+        letter = [x[-1] for x in col_letter]
+        s1 = list(map(lambda x, y: x + y, letter, num))
+        s2 = "".join(s1)
 
-        s2 = {key: value for (key, value) in zip(dic, res)}
-        s3 = "".join("".join((str(k), str(v))) for k, v in s2.items())
-        s4 = "".join(map("".join, tuple(s3)))
-        s5 = "".join(c[0] for c in itertools.groupby(s4))
-
-        result["data"] = s5
+        result["data"] = s2
 
     return result
 
 
-def level_09(dic: Any) -> Result:  # noqa: CCR001
+def level_09(dic: Any) -> Result:
     result: Result = {}
-    errors = []
+
+    if not isinstance(dic, dict):
+        return {"errors": ["argument must be dict"]}
     try:
-        if type(dic) != dict:
-            errors.append("argument must be dict")
-
-        if type(dic) in [list, set]:
-            errors.append("TypeError")
-
-        if errors:
-            result["errors"] = errors
-
-        else:
-            spisok = []
-            for value in dic.values():
-                spisok.append(value)
-            for key, value in dic.items():
-                if spisok.count(value) > 1:
-                    result.setdefault(value, []).append(key)
-                else:
-                    result[value] = key
-
-            return {"data": result}
+        spisok = []
+        for value in dic.values():
+            spisok.append(value)
+        for key, value in dic.items():
+            if spisok.count(value) > 1:
+                result.setdefault(value, []).append(key)
+            else:
+                result[value] = key
     except TypeError:
         return {"errors": ["TypeError unhashable type"]}
 
-    return result
+    return {"data": result}
 
-from collections import defaultdict
-def level_10(args1: Any, args2: Any) -> Result:
+
+def level_10(arg1: Any, arg2: Any) -> Result:
     result: Result = {}
-    errors = []
 
-    if not isinstance(args1, (list, str, tuple)):
-        errors.append("argument must be list, str or tuple")
-    if not isinstance(args2, (list, str, tuple)):
-        errors.append("argument must be list, str or tuple")
-    if errors:
-        result["errors"] = errors
+    if type(arg1) not in (list, str, tuple):
+        return {"errors": ["unhashable type"]}
 
     else:
-        if len(args1) > len(args2):
-            args11 = list(args1)
-            dic = dict(zip_longest(args11, args2))
+        if any((isinstance(arg1, (list, set, dict)) for el in arg1)):
+            return {"errors": ["unhashable type"]}
+        key = list(arg1)
+        val = list(arg2)  # noqa: VNE002
+        if len(key) >= len(val):
+            dic = dict(zip_longest(key, val))
+            result["data"] = dic
         else:
-            args22 = list(args1)
-            dic = dict(zip_longest(args22, args2, fillvalue="..."))
-
-        result["data"] = dic
+            val_no_key = val[len(key) :]  # noqa: E203
+            key_with_value = val[: len(key)]
+            res = list(zip(key, key_with_value))
+            res.append((..., val_no_key))
+            dic = dict(res)
+            result["data"] = dic
 
     return result
 
