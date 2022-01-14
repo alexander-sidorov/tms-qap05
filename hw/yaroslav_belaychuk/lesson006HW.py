@@ -48,18 +48,12 @@ def date_age(b1: date) -> dict:
 
 
 def zadacha_4(day: dict) -> dict:
-    if type(day) != dict:
+    if isinstance(day, dict) is False:
         return {"errors": ["TypeError"]}
     if len(day) < 1:
         return {"errors": ["NonValueError"]}
-    keys = []
-    values = []
-    for key, value in day.items():
-        if type(value) != date:
-            return {"errors": ["TypeError"]}
-        keys.append(key)
-        values.append(value)
-    name = keys[values.index(min(values))]
+
+    name = min(day, key=lambda e: day[e])
     return {"data": name}
 
 
