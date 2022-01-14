@@ -3,7 +3,7 @@ from typing import Any
 
 
 def func4_oldest(d1: dict[Any, datetime]) -> dict:
-    oldest = datetime.date.today()
+    oldest = datetime.datetime.today()
 
     if not isinstance(d1, dict):
         return {"errors": ["should be dict"]}
@@ -11,6 +11,8 @@ def func4_oldest(d1: dict[Any, datetime]) -> dict:
     for key, value in d1.items():
         if not isinstance(value, (datetime.date, datetime.datetime)):
             return {"errors": ["args should be date"]}
+        if isinstance(value, datetime.date):
+            d1[key] = value = datetime.datetime(value.year, value.month, value.day)
         if value > oldest:
             return {"errors": ["is not born"]}
 
