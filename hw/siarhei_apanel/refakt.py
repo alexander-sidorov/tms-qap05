@@ -73,21 +73,19 @@ def decor_data(func: Any) -> Any:
     return wrapper
 
 
+@decor_data
 def palindrom(di1: Any) -> Any:
-    result = {"errors": Any}
     if type(di1) != str:
-        result["errors"] = ["TypeError"]
-    else:
-        i34 = 0
-        j34 = len(di1) - 1
-        is_palindrom = True
-        while i34 < j34:
-            if di1[i34] != di1[j34]:
-                is_palindrom = False
-            i34 += 1
-            j34 -= 1
-        result = {"data": True} if is_palindrom else {"data": False}
-    return result
+        return {"errors": ["TypeError"]}
+    i34 = 0
+    j34 = len(di1) - 1
+    is_palindrom = True
+    while i34 < j34:
+        if di1[i34] != di1[j34]:
+            is_palindrom = False
+        i34 += 1
+        j34 -= 1
+    return is_palindrom
 
 
 @decor_data
