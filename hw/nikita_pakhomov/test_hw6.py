@@ -48,6 +48,7 @@ def test_level_4() -> None:
     assert level_4(datys_1) == {"data": "A"}
     assert level_4(datys_2) == {"errors": "dates are equal"}
 
+
 def test_level_4_1() -> None:
     datys = {
         "A": date(year=2021, month=3, day=1),
