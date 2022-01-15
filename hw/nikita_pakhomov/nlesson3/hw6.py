@@ -82,7 +82,8 @@ def level_4(age: Any) -> dict:
         result["errors"] = "this is not a date"
         return result
 
-def level_4_1(age: dict[Any, date]) -> dict:
+
+def level_4_1(age: dict) -> dict:
     result = {}
     if type(age) == dict:
         if type(age["A"]) != date or type(age["B"]) != date:
