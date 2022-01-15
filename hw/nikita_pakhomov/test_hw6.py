@@ -65,7 +65,7 @@ def test_level_4_1() -> None:
 
     assert level_4_1(datys) == {"data": "B"}
     assert level_4_1(datys_1) == {"data": "A"}
-    assert level_4_1(datys_2) == {"errors": "dates are equal"}
+    assert level_4_1(datys_2) == {"data": "A"}
 
 
 def test_level_5() -> None:
