@@ -89,7 +89,7 @@ def level_4_1(age: dict) -> dict:
         if type(age["A"]) != date or type(age["B"]) != date:
             result["errors"] = "this is not a date"
 
-        name = min(age, key=lambda n: age[n]) # noqa
+        name = min(age, key=lambda n: age[n])
         return {"data": name}
     else:
         result["errors"] = "dates are equal"
