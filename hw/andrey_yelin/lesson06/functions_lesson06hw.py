@@ -1,4 +1,5 @@
 import functools
+from builtins import function
 from datetime import date
 from typing import Any
 from typing import Dict
@@ -7,8 +8,19 @@ from urllib.parse import parse_qs
 Result = Dict[str, Any]
 
 
-def is_palindrome_1(strochka: Any = None) -> dict:
-    result: Dict[str, Any] = {}
+def decorate(func: Any) -> Any:
+    def my_decorator(*args: Any) -> Any:
+        result = func(*args)
+        if isinstance(result, dict) and "errors" in result:
+            return result
+        return {"data": result}
+
+    return my_decorator
+
+
+@decorate
+def is_palindrome_1(strochka: Any = None) -> Any:
+    result: Any = 0
     if strochka is None:
         result["errors"] = "none argument"
         return result
@@ -18,14 +30,15 @@ def is_palindrome_1(strochka: Any = None) -> dict:
     rev = "".join(reversed(strochka))
 
     if strochka == rev:
-        result["data"] = True
+        result = True
     else:
-        result["data"] = False
+        result = False
     return result
 
 
-def multiply_args_2(*m: Any) -> dict:
-    result = {}
+@decorate
+def multiply_args_2(*m: Any) -> Any:
+    result: Any = {}
     args = [*m]
     if not len(args):
         result["errors"] = "empty arguments"
@@ -35,12 +48,13 @@ def multiply_args_2(*m: Any) -> dict:
             result["errors"] = "variable is not a number"
             return result
     multiply = functools.reduce(lambda a, b: a * b, args)
-    result["data"] = multiply
+    result = multiply
     return result
 
 
-def age_result_3(born: Any) -> dict:
-    result: Dict[str, Any] = {}
+@decorate
+def age_result_3(born: Any) -> Any:
+    result: Any = {}
     if not isinstance(born, date):
         result["errors"] = "variable is not a date"
         return result
@@ -50,7 +64,7 @@ def age_result_3(born: Any) -> dict:
         - born.year  # noqa: W503
         - ((today.month, today.day) < (born.month, born.day))  # noqa: W503
     )
-    result["data"] = {
+    result = {
         "year": born.year,
         "month": born.month,
         "day": born.day,
@@ -59,8 +73,9 @@ def age_result_3(born: Any) -> dict:
     return result
 
 
-def older_4(old_date: Any) -> dict:
-    result = {}
+@decorate
+def older_4(old_date: Any) -> Any:
+    result: Any = {}
     if len(old_date) == 0:
         result["errors"] = "empty variable"
         return result
@@ -71,7 +86,7 @@ def older_4(old_date: Any) -> dict:
         dd = str(ma)
         if int(dd.split()[0]) > max_date:
             max_date = int(dd.split()[0])
-            result["data"] = key
+            result = key
     return result
 
 
@@ -87,8 +102,9 @@ def older_4_v_lambda(old_date: Dict[Any, date]) -> Result:
     return result
 
 
-def repeating_elements_5(elements_list: Any) -> dict:
-    result: dict = {}
+@decorate
+def repeating_elements_5(elements_list: Any) -> Any:
+    result: Any = {}
     zy: dict = {}
     repeat: dict = {}
     for elem in elements_list:
@@ -100,15 +116,16 @@ def repeating_elements_5(elements_list: Any) -> dict:
         if zy[key] > 1:
             repeat[key] = zy[key]
     if len(repeat) == 0:
-        result["data"] = "elements are not repeat"
+        result = "elements are not repeat"
         return result
     else:
-        result["data"] = repeat
+        result = repeat
     return result
 
 
-def parse_http_query_6(string: Any = None) -> dict:
-    result: Dict[str, Any] = {}
+@decorate
+def parse_http_query_6(string: Any = None) -> Any:
+    result: Any = {}
     if string is None:
         result["errors"] = "none argument"
         return result
@@ -119,17 +136,17 @@ def parse_http_query_6(string: Any = None) -> dict:
     if len(parse_string) == 0:
         result["errors"] = "empty string"
         return result
-    result = {"data": parse_qs(string)}
+    result = parse_qs(string)
     return result
 
 
-def decode_7(string: str) -> dict:
-    result, number, letter, symbl, index = {}, [], [], "", 0
-    for sym in string:
+def get_let_num_for_decode_7(command_str: str) -> tuple:
+    index, number, letter, symbl = 0, [], [], ""
+    for sym in command_str:
         try:
             isinstance(int(sym), int)
             symbl = symbl + sym
-            if index == (len(string) - 1):
+            if index == (len(command_str) - 1):
                 number.append(int(symbl))
         except BaseException:
             letter.append(sym)
@@ -137,6 +154,18 @@ def decode_7(string: str) -> dict:
                 number.append(int(symbl))
             symbl = ""
         index += 1  # noqa: SIM113
+    return number, letter
+
+
+@decorate
+def decode_7(string: str) -> Any:
+    result, number, letter, = (
+        {},
+        [],
+        [],
+    )
+
+    number, letter = get_let_num_for_decode_7(string)
     if len(letter) != len(number):
         result["errors"] = "letters not equal to numbers"
         return result
@@ -144,5 +173,8 @@ def decode_7(string: str) -> dict:
         data = []
         for i in range(len(letter)):
             data.append(int(number[i]) * letter[i])
-        result["data"] = "".join(data)
+        result = "".join(data)
         return result
+
+
+def un_decode_8(func: function) -> Any:
