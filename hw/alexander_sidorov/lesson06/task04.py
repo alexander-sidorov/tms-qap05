@@ -1,16 +1,18 @@
 from datetime import date
+from typing import Any
 from typing import Dict
 from typing import TypeVar
 
 from .common import Errors
-from .common import Result
 from .common import Undefined
+from .common import api
 from .common import build_result
 
 T1 = TypeVar("T1")
 
 
-def task_04(birthdays: Dict[T1, date]) -> Result:
+@api
+def task_04(birthdays: Dict[T1, date]) -> Any:
     """
     Returns the ID of the oldest person
     """
@@ -27,9 +29,7 @@ def task_04(birthdays: Dict[T1, date]) -> Result:
         min(birthdays, key=lambda n: birthdays[n]) if not errors else Undefined
     )
 
-    result = build_result(
-        data=data,
-        errors=errors,
-    )
+    if data is not Undefined:
+        return data
 
-    return result
+    return build_result(errors=errors)
