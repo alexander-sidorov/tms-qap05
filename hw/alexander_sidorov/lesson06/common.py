@@ -1,3 +1,4 @@
+from functools import wraps
 from typing import Any
 from typing import Callable
 from typing import Dict
@@ -8,9 +9,12 @@ from typing import List
 from typing import Set
 from typing import Union
 
+from typing_extensions import ParamSpec
+
 AnySet = Union[Set, FrozenSet]
 Errors = List[str]
 Result = Dict[str, Any]
+Params = ParamSpec("Params")
 
 
 class UndefinedType:
@@ -128,3 +132,14 @@ def hashable(arg: Any) -> bool:
     """
 
     return isinstance(arg, Hashable)
+
+
+def api(func: Callable[Params, Any]) -> Callable[Params, Result]:
+    @wraps(func)
+    def new_func(*args: Params.args, **kwargs: Params.kwargs) -> Result:
+        result = func(*args, **kwargs)
+        if isinstance(result, dict) and "errors" in result:
+            return result
+        return {"data": result}
+
+    return new_func

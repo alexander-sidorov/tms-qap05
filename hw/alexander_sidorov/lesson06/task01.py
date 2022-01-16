@@ -1,17 +1,15 @@
 from typing import Any
 
 from .common import Errors
-from .common import Result
-from .common import Undefined
-from .common import build_result
+from .common import api
 
 
-def task_01(arg: str) -> Result:
+@api
+def task_01(arg: str) -> Any:
     """
     Tells if the arg is a palindrome
     """
 
-    data: Any = Undefined
     errors: Errors = []
 
     if not isinstance(arg, str):
@@ -21,10 +19,6 @@ def task_01(arg: str) -> Result:
     if not errors:
         rev = arg[::-1]
         data = bool(rev == arg)
+        return data
 
-    result = build_result(
-        data=data,
-        errors=errors,
-    )
-
-    return result
+    return {"errors": errors}
