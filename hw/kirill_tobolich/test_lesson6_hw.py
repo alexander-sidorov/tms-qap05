@@ -21,7 +21,7 @@ def test_palindrome() -> None:
     assert palindrome("xx") == {"data": True}
     assert palindrome("abccba") == {"data": True}
     assert palindrome("xy") == {"data": False}
-    assert palindrome(123321) == {  # type: ignore
+    assert palindrome(123321) == {
         "errors": ["given argument is not string type"]
     }
 
@@ -51,7 +51,7 @@ def test_get_formatted_birthday() -> None:
     assert get_formatted_birthday(d2) == {
         "data": {"year": 1987, "month": 1, "day": 2, "age": 35}
     }
-    assert get_formatted_birthday(198782) == {  # type: ignore
+    assert get_formatted_birthday(198782) == {
         "errors": ["given argument is not object of date type"]
     }
 
@@ -68,10 +68,10 @@ def test_get_the_eldest() -> None:
     d3 = {"A": 198782, "B": 197282}
     assert get_the_eldest(d1) == {"data": "B"}
     assert get_the_eldest(d2) == {"data": "A"}
-    assert get_the_eldest(198782) == {  # type: ignore
+    assert get_the_eldest(198782) == {
         "errors": ["Given argument is not a dictionary"]
     }
-    assert get_the_eldest(d3) == {  # type: ignore
+    assert get_the_eldest(d3) == {
         "errors": ["key value is not object of date type"]
     }
 
@@ -107,7 +107,7 @@ def test_http_query_parser() -> None:
     assert http_query_parser("x=&x=2&q=3") == {
         "data": {"x": ["", "2"], "q": ["3"]}
     }
-    assert http_query_parser(["x=1&x=2&y=3"]) == {  # type: ignore
+    assert http_query_parser(["x=1&x=2&y=3"]) == {
         "errors": ["given argument is not string type"]
     }
     assert http_query_parser("x=1&&x=2&q=3") == {
@@ -120,7 +120,7 @@ def test_http_query_parser() -> None:
 
 def test_repeat_chars() -> None:
     assert repeat_chars("a3b2c1") == {"data": "aaabbc"}
-    assert repeat_chars(["a3b2c1"]) == {  # type: ignore
+    assert repeat_chars(["a3b2c1"]) == {
         "errors": ["given argument is not string type"]
     }
     assert repeat_chars("a3b2c") == {"errors": ["wrong format of string"]}
@@ -133,7 +133,7 @@ def test_repeat_chars() -> None:
 def test_count_chars() -> None:
     assert count_chars("aaabb") == {"data": "a3b2"}
     assert count_chars("aaabb111!!") == {"data": "a3b213!2"}
-    assert count_chars(12345) == {  # type: ignore
+    assert count_chars(12345) == {
         "errors": ["given argument is not string type"]
     }
     assert count_chars("") == {"data": ""}
@@ -145,7 +145,7 @@ def test_inverted_dictionary() -> None:
     d1 = {1: 100, 2: 100, 3: 300}
     d2 = {1: {1: 100, 2: 200}, 2: 100, 3: 300}
     assert inverted_dictionary(d1) == {"data": {100: [1, 2], 300: 3}}
-    assert inverted_dictionary(1234) == {  # type: ignore
+    assert inverted_dictionary(1234) == {
         "errors": ["given argument is not dict type"]
     }
     assert inverted_dictionary(d2) == {
@@ -220,9 +220,9 @@ def test_relations_between_two_sets() -> None:
             "b in a": False,
         }
     }
-    assert relations_between_two_sets(123, {1, 2, 3}) == error1  # type: ignore
-    assert relations_between_two_sets({1, 2, 3}, 123) == error2  # type: ignore
-    assert relations_between_two_sets(123, 123) == error3  # type: ignore
+    assert relations_between_two_sets(123, {1, 2, 3}) == error1
+    assert relations_between_two_sets({1, 2, 3}, 123) == error2
+    assert relations_between_two_sets(123, 123) == error3
 
 
 def test_make_dictionary() -> None:
