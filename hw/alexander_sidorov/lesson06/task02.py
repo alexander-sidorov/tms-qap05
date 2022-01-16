@@ -2,18 +2,17 @@ from typing import Any
 from typing import Collection
 
 from .common import Errors
-from .common import Result
-from .common import Undefined
+from .common import api
 from .common import build_result
 from .common import multiplicative
 
 
-def task_02(*args: Any) -> Result:
+@api
+def task_02(*args: Any) -> Any:
     """
     Multiplies given arguments, from left to right.
     """
 
-    data: Any = Undefined
     errors: Errors = []
 
     if not args:
@@ -34,11 +33,6 @@ def task_02(*args: Any) -> Result:
         rv *= lv
 
     if not errors:
-        data = rv
+        return rv
 
-    result = build_result(
-        data=data,
-        errors=errors,
-    )
-
-    return result
+    return build_result(errors=errors)
