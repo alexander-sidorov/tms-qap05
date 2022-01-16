@@ -2,12 +2,12 @@ from datetime import date
 from typing import Any
 
 from .common import Errors
-from .common import Result
-from .common import Undefined
+from .common import api
 from .common import build_result
 
 
-def task_03(arg: date) -> Result:
+@api
+def task_03(arg: date) -> Any:
     """
     Composes a birthday info in the specified format.
 
@@ -17,7 +17,6 @@ def task_03(arg: date) -> Result:
     Calculates an age, in years.
     """
 
-    data: Any = Undefined
     errors: Errors = []
 
     if not isinstance(arg, date):
@@ -30,9 +29,6 @@ def task_03(arg: date) -> Result:
         data = {_a: getattr(arg, _a) for _a in {"year", "month", "day"}}
         data["age"] = years
 
-    result = build_result(
-        data=data,
-        errors=errors,
-    )
+        return data
 
-    return result
+    return build_result(errors=errors)
