@@ -4,15 +4,16 @@ from typing import Collection
 from typing import TypeVar
 
 from .common import Errors
-from .common import Result
 from .common import Undefined
+from .common import api
 from .common import build_result
 from .common import hashable
 
 T1 = TypeVar("T1")
 
 
-def task_05(collection: Collection[T1]) -> Result:
+@api
+def task_05(collection: Collection[T1]) -> Any:
     """
     Calculates count of duplicates in the given collection
     """
@@ -27,10 +28,6 @@ def task_05(collection: Collection[T1]) -> Result:
     if not errors:
         ctr = Counter(collection)
         data = {elem: count for elem, count in ctr.items() if count > 1}
+        return data
 
-    result = build_result(
-        data=data,
-        errors=errors,
-    )
-
-    return result
+    return build_result(errors=errors)
