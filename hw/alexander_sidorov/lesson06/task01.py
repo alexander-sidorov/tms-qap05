@@ -1,30 +1,27 @@
 from typing import Any
+from typing import Optional
+from typing import Union
 
 from .common import Errors
-from .common import Result
-from .common import Undefined
-from .common import build_result
+from .common import api
 
 
-def task_01(arg: str) -> Result:
+@api
+def task_01(arg: str) -> Union[bool, Errors]:
     """
-    Tells if the arg is a palindrome
+    Tells if the arg is a palindrome.
     """
 
-    data: Any = Undefined
-    errors: Errors = []
+    if errors := validate(arg):
+        return errors
 
+    rev = arg[::-1]
+    data = bool(rev == arg)
+    return data
+
+
+def validate(arg: Any) -> Optional[Errors]:
     if not isinstance(arg, str):
-        type_name = type(arg).__name__
-        errors.append(f"type(arg)={type_name}, MUST be a string")
+        return {"errors": [f"{type(arg)=}, MUST be a string"]}
 
-    if not errors:
-        rev = arg[::-1]
-        data = bool(rev == arg)
-
-    result = build_result(
-        data=data,
-        errors=errors,
-    )
-
-    return result
+    return None
