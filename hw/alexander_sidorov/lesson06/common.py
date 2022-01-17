@@ -24,27 +24,6 @@ class UndefinedType:
 Undefined = UndefinedType()
 
 
-def build_result(
-    *,
-    data: Any = Undefined,
-    errors: Union[Errors, UndefinedType] = Undefined,
-) -> Result:
-    """
-    Composes a Result from given kwargs.
-    """
-
-    result: Result = {}
-
-    if errors and errors is not Undefined:
-        assert isinstance(errors, list)
-        result["errors"] = sorted(errors)
-
-    if not result and data is not Undefined:
-        result["data"] = data
-
-    return result
-
-
 def even(arg: int) -> bool:
     """
     Tells if the given arg number is even.
@@ -102,16 +81,7 @@ def validate(
         )
         assert not missing_errors, _e
 
-        _e = f"(unhappy path)\nerrors are not sorted\n{sorted(errors)}"
         assert errors == sorted(errors)
-
-
-def multiplicative(arg: Any) -> bool:
-    """
-    Tells if the given arg supports multiplication.
-    """
-
-    return hasattr(arg, "__mul__")
 
 
 def hashable(arg: Any) -> bool:

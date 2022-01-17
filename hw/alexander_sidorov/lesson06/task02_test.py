@@ -19,17 +19,17 @@ def test_task_02() -> None:
         task_02,
         None,
         2,
-        expected_errors=[
+        expected_errors={
             "args[0]=None has unsupported type",
-        ],
+        },
     )
     validate(
         task_02,
         {},
         2,
-        expected_errors=[
+        expected_errors={
             "args[0]={} has unsupported type",
-        ],
+        },
     )
     validate(
         task_02,
@@ -37,13 +37,33 @@ def test_task_02() -> None:
         "c",
         3,
         "c",
-        expected_errors=[
+        expected_errors={
             "cannot multiply 2 sequences",
-        ],
+        },
     )
     validate(
         task_02,
-        expected_errors=[
+        2,
+        "c",
+        3j,
+        expected_errors={
+            "cannot multiply sequences and non-ints",
+        },
+    )
+    validate(
+        task_02,
+        2,
+        "c",
+        3.0,
+        [1],
+        expected_errors={
+            "cannot multiply 2 sequences",
+            "cannot multiply sequences and non-ints",
+        },
+    )
+    validate(
+        task_02,
+        expected_errors={
             "nothing to multiply",
-        ],
+        },
     )

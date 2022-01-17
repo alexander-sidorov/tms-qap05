@@ -28,14 +28,16 @@ def task_04(birthdays: dict[T1, date]) -> Union[T1, Errors]:
 def validate(birthdays: Any) -> Optional[Errors]:
     errors: ErrorsList = []
 
-    if not isinstance(birthdays, dict):
-        errors.append(f"{type(birthdays)=}, MUST be a dict")
-
     if not birthdays:
         errors.append("empty birthdays")
 
-    for name, birthday in birthdays.items():
-        if not isinstance(birthday, date):
-            errors.append(f"birthdays[{name!r}]={birthday!r}, MUST be a date")
+    if not isinstance(birthdays, dict):
+        errors.append(f"{type(birthdays)=}, MUST be a dict")
+    else:
+        for name, birthday in birthdays.items():
+            if not isinstance(birthday, date):
+                errors.append(
+                    f"birthdays[{name!r}]={birthday!r}, MUST be a date"
+                )
 
     return {"errors": sorted(errors)} if errors else None
