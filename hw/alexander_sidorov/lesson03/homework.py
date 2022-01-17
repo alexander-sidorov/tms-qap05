@@ -59,7 +59,3 @@ def quadratic_roots(
     x2 = complex(x2)
 
     return x1, x2
-
-
-if __name__ == "__main__":
-    quadratic_roots(1, 2, 3)
