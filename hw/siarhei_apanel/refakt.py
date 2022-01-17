@@ -124,12 +124,12 @@ def dateday(yer: Any) -> Any:
 
 
 @decor_data
-def happybithday(yer: Any) -> Union[str,str]:
+def happybithday(yer: Any) -> Any:
 
     if isinstance(yer, dict) is False:
         return {"errors": ["TypeError"]}
-
-    return min(yer, key=lambda t: yer[t])
+    value = min(yer, key=lambda t: yer[t])
+    return value
 
 
 @decor_data
