@@ -83,7 +83,7 @@ def level_4(age: Any) -> dict:
         return result
 
 
-def level_4_1(age: dict) -> dict:
+def level_4_1(age: Dict[Any, date]) -> dict:
     result = {}
     if type(age) == dict:
         if type(age["A"]) != date or type(age["B"]) != date:
