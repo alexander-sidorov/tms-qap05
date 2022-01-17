@@ -19,6 +19,7 @@ def is_palindrome(text: str) -> type_1:
 
 def level_2(*args: Any) -> dict:
     result = {}
+
     nakopitel = 1
     for i in args:
         nakopitel *= i
