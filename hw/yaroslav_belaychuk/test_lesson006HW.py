@@ -44,7 +44,7 @@ def test_function() -> None:
     assert zadacha_5([{}, {}, set()]) == {"errors": ["TypeError"]}
     assert zadacha_7("a3b4c2") == {"data": "aaabbbbcc"}
     assert zadacha_7("a3b2c") == {"errors": ["NonDigitError"]}
-    assert zadacha_7(["a3b4c5"]) == {"errors": ["TypeError"]}  # type: ignore
+    assert zadacha_7(["a3b4c5"]) == {"errors": ["TypeError"]}
     assert zadacha_7("a11") == {"data": "aaaaaaaaaaa"}
     assert zadacha_7("a0") == {"data": ""}
     assert zadacha_7("a1") == {"data": "a"}

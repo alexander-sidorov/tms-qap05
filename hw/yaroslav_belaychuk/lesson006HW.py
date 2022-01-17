@@ -2,6 +2,14 @@ from datetime import date
 from typing import Any
 
 
+def decorator_function(func):
+    def wrapper(*args, **kwargs):
+        if isinstance(func(*args, **kwargs), dict) and "errors" in func(*args, **kwargs):
+            return func(*args, **kwargs)
+        return {"data": func(*args, **kwargs)}
+    return wrapper
+
+@decorator_function
 def palindrom(slovo: str) -> dict:
     if type(slovo) != str:
         return {"errors": ["TypeErrors"]}
@@ -16,9 +24,10 @@ def palindrom(slovo: str) -> dict:
         once_letter += 1
         last_letter -= 1
 
-    return {"data": True} if palindrom else {"data": False}
+    return True if palindrom else False
 
 
+@decorator_function
 def umnogenie(*nums: Any) -> dict:
     count1 = 0
     banka = 1
@@ -28,44 +37,49 @@ def umnogenie(*nums: Any) -> dict:
             if count1 >= 2:
                 return {"errors": ["TypeError"]}
         banka *= n2
-    return {"data": banka}
+    return banka
 
-
+@decorator_function
 def date_age(b1: date) -> dict:
     if type(b1) != date:
         return {"errors": ["TypeError"]}
     segodnya = date.today()
     delta = segodnya - b1
     result = {
-        "data": {
             "year": b1.year,
             "month": b1.month,
             "day": b1.day,
             "age": int(delta.days // 365),
         }
-    }
     return result
 
-
+@decorator_function
 def zadacha_4(day: dict) -> dict:
     if isinstance(day, dict) is False:
         return {"errors": ["TypeError"]}
     if len(day) < 1:
         return {"errors": ["NonValueError"]}
+    for value in day.values():
+        if isinstance(value, complex):
+            return {"errors": ["TypeError"]}
+
 
     name = min(day, key=lambda e: day[e])
-    return {"data": name}
-print(zadacha_4({1: 1j, 2: 2j}))
+    return name
 
+
+
+
+@decorator_function
 def zadacha_5(collection: Any) -> dict:
     if type(collection) in [set, dict]:
-        return {"data": {}}
+        return {}
     if type(collection) not in [list, tuple, str]:
         return {"errors": ["TypeError"]}
     banka = {}  # type: ignore
     list_result = []
     if len(collection) == 0:
-        return {"data": banka}
+        return banka
     for n1 in collection:
         if collection.count(n1) >= 2:
             list_result.append(n1)
@@ -74,12 +88,13 @@ def zadacha_5(collection: Any) -> dict:
             return {"errors": ["TypeError"]}
         else:
             banka[n2] = list_result.count(n2)
-    return {"data": banka}
+    return banka
 
 
+@decorator_function
 def zadacha_7(sybol_num: str) -> dict:
     if len(sybol_num) == 0:
-        return {"data": ""}
+        return ""
     if type(sybol_num) != str:
         return {"errors": ["TypeError"]}
     if sybol_num[-1].isalpha():
@@ -102,4 +117,4 @@ def zadacha_7(sybol_num: str) -> dict:
     for x1, z1 in zip(list_letter, list_digit):
         bank2 += x1 * int(z1)
 
-    return {"data": bank2}
+    return bank2
