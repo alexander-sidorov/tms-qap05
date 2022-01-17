@@ -1,5 +1,6 @@
 from datetime import date
 from typing import Any
+from typing import Union
 
 
 def func(a1: float, back: float, cill: float) -> list:
@@ -123,7 +124,7 @@ def dateday(yer: Any) -> Any:
 
 
 @decor_data
-def happybithday(yer: Any) -> Any:
+def happybithday(yer: Any) -> Union[str,str]:
 
     if isinstance(yer, dict) is False:
         return {"errors": ["TypeError"]}
