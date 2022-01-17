@@ -1,6 +1,6 @@
-from hw.andrey_yelin.yelin_lesson05 import aggression
+from hw.andrei_bondar.aggression5 import aggression
 
 
-def test_aggression() -> None:
+def test_aggression5() -> None:
     assert aggression(True) == "оно и видно"
     assert aggression(False) == "а мог бы и знать"
