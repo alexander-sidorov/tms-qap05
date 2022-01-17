@@ -137,7 +137,7 @@ def level_7(stroka: str) -> dict:
 
         for nnn in cpisok:
             if nnn == "":
-                del cpisok[nnn]
+                del cpisok[int(nnn)]
 
         if len(cpisok) == len(otvet):
             for y in range(len(otvet)):
