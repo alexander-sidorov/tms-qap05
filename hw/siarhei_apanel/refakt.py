@@ -123,7 +123,7 @@ def dateday(yer: Any) -> Any:
 
 
 @decor_data
-def happybithday(yer: dict[str, date]) -> Any:
+def happybithday(yer: dict[Any, date]) -> Any:
     if isinstance(yer, dict) is False:
         return {"errors": ["TypeError"]}
 
