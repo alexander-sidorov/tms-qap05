@@ -9,43 +9,55 @@ from typing import Dict
 Result = Dict[str, Any]
 
 
-def level_01(string: Any) -> Result:
-    result: Result = {}
+def decorator(func: Any) -> Any:
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
+        result = func(*args, **kwargs)
+        if isinstance(result, dict) and "errors" in result:
+            return result
+        return {"data": result}
+
+    return wrapper
+
+
+@decorator
+def level_01(string: Any) -> Any:
 
     if type(string) != str:
         return {"errors": ["argument must be string"]}
 
     else:
         if string == string[::-1]:
-            result["data"] = True
+            result = True
         else:
-            result["data"] = False
+            result = False
 
-    return result
+        return result
 
 
-def level_02(*arguments: Any) -> Result:
-    result: Result = {}
+@decorator
+def level_02(*arguments: Any) -> Any:
 
     try:
         if len(arguments) < 1:
             return {"errors": ["no arguments"]}
 
         elif len(arguments) == 1:
-            result["data"] = arguments[0]
+            result = arguments[0]
 
         else:
             pr = 1
             for i in arguments:
                 pr *= i
-                result["data"] = pr
+                result = pr
+
     except TypeError:
         return {"errors": ["TypeError"]}
 
     return result
 
 
-def level_03(bd: Any) -> Result:
+@decorator
+def level_03(bd: Any) -> Any:
     result: Result = {}
     errors = []
 
@@ -59,7 +71,6 @@ def level_03(bd: Any) -> Result:
     else:
         if (today.year - bd.year) < 0:
             age = None
-            result["data"] = age
         else:
             age = (
                 today.year
@@ -67,7 +78,7 @@ def level_03(bd: Any) -> Result:
                 - ((today.month, today.day) < (bd.month, bd.day))  # noqa: W503
             )
 
-        result["data"] = {
+        result = {
             "year": bd.year,
             "month": bd.month,
             "day": bd.day,
@@ -77,29 +88,30 @@ def level_03(bd: Any) -> Result:
     return result
 
 
-def level_04(dic: dict[Any, date]) -> Result:
+@decorator
+def level_04(dic: Any) -> Any:
     result: Result = {}
     errors = []
 
     if type(dic) != dict:
-        errors.append("argument must be date")
+        errors.append("must be date")
     if errors:
         result["errors"] = errors
 
     else:
         try:
-            res = min(dic, key=lambda n: dic[n])
+            res = min(dic, key=lambda n: dic[n])  # type: ignore
 
         except TypeError:
             return {"errors": ["TypeError"]}
 
-        result["data"] = res
+        result = res
 
     return result
 
 
-def level_05(lis: Any) -> Result:
-    result: Result = {}
+@decorator
+def level_05(lis: Any) -> Any:
 
     if type(lis) not in [list, tuple, str, set, dict]:
         return {"errors": ["argument must be list, tuple, str, set, dict"]}
@@ -112,12 +124,13 @@ def level_05(lis: Any) -> Result:
             res = {el: items.count(el) for el in items if items.count(el) > 1}
         except TypeError:
             return {"errors": ["TypeError unhashable type"]}
-        result["data"] = res
+        result = res
 
     return result
 
 
-def level_06(query: Any) -> Result:
+@decorator
+def level_06(query: Any) -> Any:
     result: Result = {}
     if not isinstance(query, str):
         return {"errors": ["TypeError"]}
@@ -128,10 +141,11 @@ def level_06(query: Any) -> Result:
                 result.setdefault(lis.split("=")[el], []).append(
                     lis.split("=")[el + 1]
                 )
-    return {"data": result}
+    return result
 
 
-def level_07(string: Any) -> Result:
+@decorator
+def level_07(string: Any) -> Any:
 
     if not isinstance(string, str):
         return {"errors": [f"argument ({string=!r}) must be string"]}
@@ -140,7 +154,7 @@ def level_07(string: Any) -> Result:
     if len(nums) != len(letters):
         return {"errors": ["wrong format of string"]}
     if not string:
-        return {"data": ""}
+        return ""
     first_el = string[0]
     if first_el.isdigit():
         return {"errors": ["wrong format of string"]}
@@ -149,16 +163,17 @@ def level_07(string: Any) -> Result:
         letter = [el for el in s1 if el.isalpha()]
         number = [int(el) for el in s1 if el.isdigit()]
         s2 = list(map(lambda s_l, s_n: s_l * s_n, letter, number))
-        return {"data": "".join(s2)}
+        s3 = "".join(s2)
+        return s3
 
 
-def level_08(string: Any) -> Result:
-    result: Result = {}
+@decorator
+def level_08(string: Any) -> Any:
 
     if type(string) != str:
         return {"errors": [f"argument ({string=!r}) must be string"]}
     if not string:
-        return {"data": ""}
+        return ""
     if not string.isalpha():
         return {"errors": ["argument must be without nums"]}
     else:
@@ -173,12 +188,11 @@ def level_08(string: Any) -> Result:
         s1 = list(map(lambda x, y: x + y, letter, num))
         s2 = "".join(s1)
 
-        result["data"] = s2
-
-    return result
+    return s2
 
 
-def level_09(dic: Any) -> Result:
+@decorator
+def level_09(dic: Any) -> Any:
     result: Result = {}
 
     if not isinstance(dic, dict):
@@ -195,11 +209,11 @@ def level_09(dic: Any) -> Result:
     except TypeError:
         return {"errors": ["TypeError unhashable type"]}
 
-    return {"data": result}
+    return result
 
 
-def level_10(arg1: Any, arg2: Any) -> Result:
-    result: Result = {}
+@decorator
+def level_10(arg1: Any, arg2: Any) -> Any:
 
     if type(arg1) not in (list, str, tuple):
         return {"errors": ["unhashable type"]}
@@ -211,19 +225,18 @@ def level_10(arg1: Any, arg2: Any) -> Result:
         val = list(arg2)  # noqa: VNE002
         if len(key) >= len(val):
             dic = dict(zip_longest(key, val))
-            result["data"] = dic
         else:
             val_no_key = val[len(key) :]  # noqa: E203
             key_with_value = val[: len(key)]
             res = list(zip(key, key_with_value))
             res.append((..., val_no_key))
             dic = dict(res)
-            result["data"] = dic
 
-    return result
+    return dic
 
 
-def level_11(s1: Any, s2: Any) -> Result:
+@decorator
+def level_11(s1: Any, s2: Any) -> Any:
     result: Result = {}
     errors = []
 
@@ -244,7 +257,7 @@ def level_11(s1: Any, s2: Any) -> Result:
         dic6 = s1.issubset(s2)
         dic7 = s2.issubset(s1)
 
-        result["data"] = {
+        result = {
             "a&b": dic1,
             "a|b": dic2,
             "a-b": dic3,
@@ -257,8 +270,8 @@ def level_11(s1: Any, s2: Any) -> Result:
     return result
 
 
-def level_12(*arguments: Any) -> Result:
-    result: Result = {}
+@decorator
+def level_12(*arguments: Any) -> Any:
 
     if len(arguments) % 2 != 0:
         return {"errors": ["no pairs"]}
@@ -275,6 +288,6 @@ def level_12(*arguments: Any) -> Result:
         except TypeError:
             return {"errors": ["TypeError"]}
 
-        result["data"] = list3
+        result = list3
 
     return result
