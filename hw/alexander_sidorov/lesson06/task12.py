@@ -1,39 +1,49 @@
 from typing import Any
-from typing import Hashable
+from typing import Optional
+from typing import Union
 
 from .common import Errors
-from .common import Result
-from .common import Undefined
-from .common import build_result
+from .common import ErrorsList
+from .common import api
 from .common import even
+from .common import hashable
 
 
-def task_12(*args: Any) -> Result:
+@api
+def task_12(*args: Any) -> Union[dict, Errors]:
     """
-    Composes a dict from args
-    Even args are treated as keys
-    Odd args are treated as values
+    Composes a dict from args.
+    Even args are treated as keys.
+    Odd args are treated as values.
     """
 
-    errors: Errors = []
-
-    if len(args) % 2 == 1:
-        errors.append("odd number of elements")
+    if errors := validate(args):
+        return errors
 
     data = {}
-    key: Any = Undefined
 
-    for i, elem in enumerate(args):
+    for i, elm in enumerate(args):
         if even(i):
-            if not isinstance(elem, Hashable):
-                errors.append(f"args[{i}]={elem!r} is not hashable")
-                continue
-            key = elem
+            key = elm
             continue
 
-        if errors:
-            continue
+        data[key] = elm
 
-        data[key] = elem
+    return data
 
-    return build_result(data=data, errors=errors)
+
+def validate(args: tuple) -> Optional[Errors]:
+    messages: ErrorsList = []
+
+    if (nr_elms := len(args)) % 2 == 1:
+        messages.append(f"odd number of elements ({nr_elms})")
+
+    wrong_keys = (
+        (i, arg) for i, arg in enumerate(args) if even(i) and not hashable(arg)
+    )
+
+    messages.extend(
+        f"args[{i}]={key!r} is not hashable" for i, key in wrong_keys
+    )
+
+    return {"errors": sorted(messages)} if messages else None

@@ -70,24 +70,24 @@ def test_task_11() -> None:
         task_11,
         None,
         {"ab"},
-        expected_errors=[
-            "type(arg1)=<class 'NoneType'>, MUST be a set",
-        ],
+        expected_errors={
+            "arg 1 is <class 'NoneType'>, MUST be a set",
+        },
     )
     validate(
         task_11,
         {"ab"},
         None,
-        expected_errors=[
-            "type(arg2)=<class 'NoneType'>, MUST be a set",
-        ],
+        expected_errors={
+            "arg 2 is <class 'NoneType'>, MUST be a set",
+        },
     )
     validate(
         task_11,
         None,
         None,
-        expected_errors=[
-            "type(arg1)=<class 'NoneType'>, MUST be a set",
-            "type(arg2)=<class 'NoneType'>, MUST be a set",
-        ],
+        expected_errors={
+            "arg 1 is <class 'NoneType'>, MUST be a set",
+            "arg 2 is <class 'NoneType'>, MUST be a set",
+        },
     )

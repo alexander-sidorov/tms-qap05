@@ -18,6 +18,14 @@ def test_task_04() -> None:
 
     validate(
         task_04,
+        {1, 2, 3},
+        expected_errors=[
+            "type(birthdays)=<class 'set'>, MUST be a dict",
+        ],
+    )
+
+    validate(
+        task_04,
         {
             1: date(year=1987, month=8, day=2),
             (): None,

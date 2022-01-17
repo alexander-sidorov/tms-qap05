@@ -39,17 +39,17 @@ def test_task_12() -> None:
     validate(
         task_12,
         *args,
-        expected_errors=["odd number of elements"],
+        expected_errors=["odd number of elements (19)"],
     )
 
     args = [[], None, set(), "a", {}]
     validate(
         task_12,
         *args,
-        expected_errors=[
+        expected_errors={
+            "args[0]=[] is not hashable",
             "args[2]=set() is not hashable",
             "args[4]={} is not hashable",
-            "args[0]=[] is not hashable",
-            "odd number of elements",
-        ],
+            "odd number of elements (5)",
+        },
     )

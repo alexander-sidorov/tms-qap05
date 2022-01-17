@@ -1,49 +1,54 @@
-from typing import Dict
-from typing import Hashable
+from typing import Any
 from typing import List
+from typing import Optional
 from typing import TypeVar
 from typing import Union
 
 from .common import Errors
-from .common import Result
-from .common import build_result
+from .common import ErrorsList
+from .common import api
+from .common import hashable
 
 T1 = TypeVar("T1")
 T2 = TypeVar("T2")
 
+ForwardDict = dict[T1, T2]
+ReversedDict = dict[T2, Union[T1, List[T1]]]
 
-def task_09(arg: Dict[T1, T2]) -> Result:
+
+@api
+def task_09(arg: ForwardDict) -> Union[ReversedDict, Errors]:
     """
     Reverses the dict.
     Multiple values are composed into a list value.
     """
 
-    if not isinstance(arg, dict):
-        return build_result(errors=[f"{type(arg)=!r}, MUST be a dict"])
+    if errors := validate(arg):
+        return errors
 
-    data: Dict[T2, Union[T1, List[T1]]] = {}  # noqa: TAE002
-    errors: Errors = []
+    data: ForwardDict = {}
 
     for key, value in arg.items():
-        if not isinstance(value, Hashable):
-            _e = f"{value=!r} of {key=!r} cannot be used as a new key"
-            errors.append(_e)
-
-        if errors:
-            continue
-
-        bucket: List[T1] = data.setdefault(value, [])  # type: ignore
+        bucket = data.setdefault(value, [])
         bucket.append(key)
 
-    if not errors:
-        data = {
-            value: (bucket if len(bucket) > 1 else bucket[0])  # type: ignore
-            for value, bucket in data.items()
-        }
+    data = {
+        value: (bucket if len(bucket) > 1 else bucket[0])
+        for value, bucket in data.items()
+    }
 
-    result = build_result(
-        data=data,
-        errors=errors,
-    )
+    return data
 
-    return result
+
+def validate(arg: Any) -> Optional[Errors]:
+    messages: ErrorsList = []
+
+    if not isinstance(arg, dict):
+        messages.append(f"{type(arg)=!r}, MUST be a dict")
+    else:
+        for key, value in arg.items():
+            if not hashable(value):
+                _e = f"{value=!r} of {key=!r} cannot be used as a new key"
+                messages.append(_e)
+
+    return {"errors": sorted(messages)} if messages else None
