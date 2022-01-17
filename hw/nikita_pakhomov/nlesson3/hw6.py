@@ -119,18 +119,18 @@ def level_7(stroka: str) -> dict:
     if stroka.isalnum():
 
         stroka = stroka + "="
-        for i in range(len(stroka)):
+        for iii in range(len(stroka)):
 
-            if stroka[i].isdecimal():
-                stroch = stroch + stroka[i]
+            if stroka[iii].isdecimal():
+                stroch = stroch + stroka[iii]
 
-            elif stroka[i].isalnum():
+            elif stroka[iii].isalnum():
 
-                otvet = otvet + stroka[i]
+                otvet = otvet + stroka[iii]
                 if stroch != "":
                     cpisok.append(stroch)
                     stroch = ""
-            elif stroka[i] == "=":
+            elif stroka[iii] == "=":
                 if stroch != "":
                     cpisok.append(stroch)
                     stroch = ""
@@ -140,8 +140,8 @@ def level_7(stroka: str) -> dict:
                 del cpisok[int(nnn)]
 
         if len(cpisok) == len(otvet):
-            for y in range(len(otvet)):
-                otvett = otvett + (otvet[y] * int(cpisok[y]))
+            for yyy in range(len(otvet)):
+                otvett = otvett + (otvet[yyy] * int(cpisok[yyy]))
             result["data"] = otvett
         else:
             result["errors"] = "wrong input"
