@@ -47,7 +47,7 @@ jobs:
       - name: '🍺 The code passes all QA checks'
         run: make qa
       - name: '📡 SonarCloud has scanned the project.'
-        if: ${{ startsWith(matrix.os, 'ubuntu' }}
+        if: ${{ startsWith(matrix.os, 'ubuntu') }}
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
