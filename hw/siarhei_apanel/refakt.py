@@ -128,7 +128,7 @@ def happybithday(yer: Any) -> Any:
     if isinstance(yer, dict) is False:
         return {"errors": ["TypeError"]}
 
-    return min(yer, key=lambda t: yer[t])  # type: ignore
+    return min(yer, key=lambda t: yer[t])
 
 
 @decor_data
@@ -168,14 +168,25 @@ def html_str(query: Any) -> dict:
 def decodding(code: Any) -> Any:
     if type(code) != str:
         return {"errors": ["TypeError"]}
-    elif len(code) % 2 != 0:
-        return {"errors": ["NoQualityLetterError"]}
-    else:
-        return "".join(
-            code[sym] * int(code[sym + 1])
-            for sym in range(len(code))
-            if code[sym].isalpha()
-        )
+    if code == "":
+        return ""
+    if code[-1].isalpha():
+        return {"errors": ["NonDigitError"]}
+    if code[0].isdigit():
+        return {"errors": ["NonLetterError"]}
+    list_digit = []
+    list_letter = []
+    num1 = ""
+    for x1 in code:
+        if x1.isalpha():
+            list_letter.append(x1)
+            if num1 != "":
+                list_digit.append(num1)
+                num1 = ""
+        else:
+            num1 += x1
+    list_digit.append(num1)
+    return "".join(x1 * int(z1) for x1, z1 in zip(list_letter, list_digit))
 
 
 @decor_data

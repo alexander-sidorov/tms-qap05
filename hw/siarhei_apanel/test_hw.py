@@ -49,7 +49,7 @@ def test_example() -> None:
     assert html_str([]) == {"errors": ["TypeError"]}
     assert decodding("a3b2c1") == {"data": "aaabbc"}
     assert decodding(123) == {"errors": ["TypeError"]}
-    assert decodding("a3b2c") == {"errors": ["NoQualityLetterError"]}
+    assert decodding("a3b2c") == {"errors": ["NonDigitError"]}
     assert codding("aaabb") == {"data": "a3b2"}
     assert codding(123) == {"errors": ["TypeError"]}
     assert codding("a") == {"data": "a1"}
