@@ -1,20 +1,34 @@
 from typing import Any
+from typing import Literal
+from typing import Optional
+from typing import Union
 
 from .common import AnySet
 from .common import Errors
-from .common import Result
-from .common import build_result
+from .common import ErrorsList
+from .common import api
+
+DataKeys = Literal[
+    "|a-b|",
+    "a in b",
+    "a-b",
+    "a&b",
+    "a|b",  # type: ignore
+    "b in a",
+    "b-a",
+]
+
+Data = dict[DataKeys, Union[AnySet, bool]]
 
 
-def task_11(arg1: AnySet, arg2: AnySet) -> Result:
+@api
+def task_11(arg1: AnySet, arg2: AnySet) -> Union[Data, Errors]:
     """
-    Displays the common set of operations on two sets.
+    Displays the common set of operations upon two sets.
     """
 
-    errors: Errors = []
-    validate_args(arg1, arg2, errors)
-    if errors:
-        return build_result(errors=errors)
+    if errors := validate(arg1, arg2):
+        return errors
 
     data = {
         "a&b": arg1 & arg2,
@@ -26,12 +40,14 @@ def task_11(arg1: AnySet, arg2: AnySet) -> Result:
         "b in a": arg2.issubset(arg1),
     }
 
-    return build_result(data=data)
+    return data
 
 
-def validate_args(arg1: Any, arg2: Any, errors: Errors) -> None:
-    if not isinstance(arg1, (set, frozenset)):
-        errors.append(f"{type(arg1)=!r}, MUST be a set")
+def validate(arg1: Any, arg2: Any) -> Optional[Errors]:
+    messages: ErrorsList = [
+        f"arg {i} is {type(arg)}, MUST be a set"
+        for i, arg in enumerate((arg1, arg2), start=1)
+        if not isinstance(arg, (set, frozenset))
+    ]
 
-    if not isinstance(arg2, (set, frozenset)):
-        errors.append(f"{type(arg2)=!r}, MUST be a set")
+    return {"errors": sorted(messages)} if messages else None

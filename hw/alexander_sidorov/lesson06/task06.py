@@ -1,20 +1,32 @@
+from typing import Any
+from typing import Optional
+from typing import Union
 from urllib.parse import parse_qs
 
-from .common import Result
-from .common import build_result
+from .common import Errors
+from .common import api
+
+Data = dict[str, list[str]]
 
 
-def task_06(query: str) -> Result:
+@api
+def task_06(query: str) -> Union[Data, Errors]:
     """
-    Splits HTTP query into a dict
+    Splits HTTP query into a dict.
     """
 
-    if not isinstance(query, str):
-        return build_result(errors=[f"{type(query)=!r}, MUST be a str"])
+    if errors := validate(query):
+        return errors
 
     data = parse_qs(
         query,
         keep_blank_values=True,
     )
 
-    return build_result(data=data)
+    return data
+
+
+def validate(query: Any) -> Optional[Errors]:
+    if not isinstance(query, str):
+        return {"errors": [f"{type(query)=!r}, MUST be a str"]}
+    return None

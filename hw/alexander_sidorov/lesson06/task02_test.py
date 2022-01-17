@@ -20,7 +20,7 @@ def test_task_02() -> None:
         None,
         2,
         expected_errors=[
-            "cannot do: None * 2",
+            "args[0]=None has unsupported type",
         ],
     )
     validate(
@@ -28,7 +28,7 @@ def test_task_02() -> None:
         {},
         2,
         expected_errors=[
-            "cannot do: {} * 2",
+            "args[0]={} has unsupported type",
         ],
     )
     validate(
@@ -38,7 +38,7 @@ def test_task_02() -> None:
         3,
         "c",
         expected_errors=[
-            "cannot do: 'cccccc' * 'c'",
+            "cannot multiply 2 sequences",
         ],
     )
     validate(

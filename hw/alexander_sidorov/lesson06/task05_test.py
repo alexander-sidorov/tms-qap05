@@ -27,8 +27,8 @@ def test_task_05() -> None:
     validate(
         task_05,
         [[], []],
-        expected_errors=[
-            "collection[0]=[], not hashable",
-            "collection[1]=[], not hashable",
-        ],
+        expected_errors={
+            "collection[0]=[] is not hashable",
+            "collection[1]=[] is not hashable",
+        },
     )

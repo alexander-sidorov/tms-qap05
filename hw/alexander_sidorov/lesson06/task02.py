@@ -1,38 +1,51 @@
-from typing import Any
+from functools import reduce
+from operator import mul
 from typing import Collection
+from typing import Optional
+from typing import Sequence
+from typing import Union
+from typing import get_args
 
 from .common import Errors
+from .common import ErrorsList
+from .common import Multiplicative
 from .common import api
-from .common import build_result
-from .common import multiplicative
 
 
 @api
-def task_02(*args: Any) -> Any:
+def task_02(*args: Multiplicative) -> Union[Multiplicative, Errors]:
     """
     Multiplies given arguments, from left to right.
     """
 
-    errors: Errors = []
+    if errors := validate(args):
+        return errors
+
+    data = reduce(mul, args)
+
+    return data
+
+
+def validate(args: Collection) -> Optional[Errors]:
+    messages: ErrorsList = []
 
     if not args:
-        errors.append("nothing to multiply")
-        return build_result(errors=errors)
+        messages.append("nothing to multiply")
 
-    rv = args[0]
+    allowed_types = get_args(Multiplicative)
+    nr_cols = 0
+    nr_non_ints = 0
+    for i, arg in enumerate(args):
+        if not isinstance(arg, allowed_types):
+            messages.append(f"args[{i}]={arg!r} has unsupported type")
 
-    for lv in args[1:]:
-        both_colls = isinstance(rv, Collection) and isinstance(lv, Collection)
-        rvalue_mul = multiplicative(rv)
-        lvalue_mul = multiplicative(lv)
+        nr_cols += isinstance(arg, Sequence)
+        nr_non_ints += isinstance(arg, (float, complex))
 
-        if both_colls or not all((rvalue_mul, lvalue_mul)):
-            errors.append(f"cannot do: {rv!r} * {lv!r}")
-            continue
+    if nr_cols > 1:
+        messages.append(f"cannot multiply {nr_cols} sequences")
 
-        rv *= lv
+    if nr_cols and nr_non_ints:
+        messages.append("cannot multiply sequences and non-ints")
 
-    if not errors:
-        return rv
-
-    return build_result(errors=errors)
+    return {"errors": sorted(messages)} if messages else None

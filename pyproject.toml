@@ -32,7 +32,7 @@ markers = [
 testpaths = [
     "hw",
 ]
-addopts = "--cov --no-cov-on-fail"
+addopts = "--tb=short --cov --cov-report html"
 
 
 [tool.mypy]

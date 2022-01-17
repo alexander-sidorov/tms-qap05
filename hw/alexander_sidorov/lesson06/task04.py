@@ -1,35 +1,41 @@
 from datetime import date
 from typing import Any
-from typing import Dict
+from typing import Optional
 from typing import TypeVar
+from typing import Union
 
 from .common import Errors
-from .common import Undefined
+from .common import ErrorsList
 from .common import api
-from .common import build_result
 
 T1 = TypeVar("T1")
 
 
 @api
-def task_04(birthdays: Dict[T1, date]) -> Any:
+def task_04(birthdays: dict[T1, date]) -> Union[T1, Errors]:
     """
-    Returns the ID of the oldest person
+    Returns the ID of the oldest person.
     """
 
-    errors: Errors = []
+    if errors := validate(birthdays):
+        return errors
+
+    data = min(birthdays, key=lambda n: birthdays[n])
+
+    return data
+
+
+def validate(birthdays: Any) -> Optional[Errors]:
+    errors: ErrorsList = []
+
+    if not isinstance(birthdays, dict):
+        errors.append(f"{type(birthdays)=}, MUST be a dict")
+
     if not birthdays:
-        return build_result(errors=["empty birthdays"])
+        errors.append("empty birthdays")
 
     for name, birthday in birthdays.items():
         if not isinstance(birthday, date):
             errors.append(f"birthdays[{name!r}]={birthday!r}, MUST be a date")
 
-    data = (
-        min(birthdays, key=lambda n: birthdays[n]) if not errors else Undefined
-    )
-
-    if data is not Undefined:
-        return data
-
-    return build_result(errors=errors)
+    return {"errors": sorted(errors)} if errors else None
