@@ -106,3 +106,46 @@ def level_5(spisok: Any) -> dict:
             del clovar[yyy]
     result["data"] = clovar
     return result
+
+
+def level_7(stroka: str) -> dict:
+    stroch = ""
+    otvet = ""
+    result = {}
+
+    cpisok = []
+    otvett = ""
+
+    if stroka.isalnum():
+
+        stroka = stroka + "="
+        for i in range(len(stroka)):
+
+            if stroka[i].isdecimal():
+                stroch = stroch + stroka[i]
+
+            elif stroka[i].isalnum():
+
+                otvet = otvet + stroka[i]
+                if stroch != "":
+                    cpisok.append(stroch)
+                    stroch = ""
+            elif stroka[i] == "=":
+                if stroch != "":
+                    cpisok.append(stroch)
+                    stroch = ""
+
+        for nnn in cpisok:
+            if nnn == "":
+                del cpisok[nnn]
+
+        if len(cpisok) == len(otvet):
+            for y in range(len(otvet)):
+                otvett = otvett + (otvet[y] * int(cpisok[y]))
+            result["data"] = otvett
+        else:
+            result["errors"] = "wrong input"
+        return result
+    else:
+        result["errors"] = "wrong input"
+        return result
