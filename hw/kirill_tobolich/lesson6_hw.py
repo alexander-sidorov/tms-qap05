@@ -6,6 +6,11 @@ from typing import Any
 from typing import Callable
 
 ERROR_NOT_STRING = "given argument is not string type"
+ERROR_NOT_LIST_STR_TUPLE = (
+    "given argument with keys is not a list, str or tuple"
+)
+ERROR_WRONG_FORMAT_OF_STR = "wrong format of string"
+ERROR_UNHASHABLE_TYPE = "collections contain values with unhashable type"
 
 
 def decorator_dict(func: Callable) -> Callable:
@@ -85,13 +90,11 @@ def get_the_eldest(dictionary: dict[Any, date]) -> Any:
 def get_the_same_elements_in_collection(collection: Any) -> dict:
     types = (list, str, tuple, set, dict)
     if type(collection) not in types:
-        return {
-            "errors": ["given argument with keys is not a list, str or tuple"]
-        }
+        return {"errors": [ERROR_NOT_LIST_STR_TUPLE]}
     try:
         counter: Counter = collections.Counter(collection)
     except TypeError:
-        return {"errors": ["collection contains unhashable type"]}
+        return {"errors": [ERROR_UNHASHABLE_TYPE]}
     result_dict = {}
     for key, value in counter.items():
         if value == 1:
@@ -133,7 +136,7 @@ def repeat_chars(string: str) -> Any:
     numbers = re.findall(r"\d+", string)
     chars = re.findall(r"\D", string)
     if len(numbers) != len(chars):
-        return {"errors": ["wrong format of string"]}
+        return {"errors": [ERROR_WRONG_FORMAT_OF_STR]}
     else:
         zipped_lists = list(zip(numbers, chars))
         result_str = ""
@@ -196,9 +199,9 @@ def zip_collections_to_dict(keys: Any, values: Any) -> dict:
     errors: list = []
     types = (list, str, tuple)
     unhashable_types = (list, set, dict)
-    error_txt1 = "given argument with keys is not a list, str or tuple"
-    error_txt2 = "given argument with values is not a list, str or tuple"
-    error_txt3 = ["collections contain values with unhashable type"]
+    error_txt1 = ERROR_NOT_LIST_STR_TUPLE
+    error_txt2 = ERROR_NOT_LIST_STR_TUPLE
+    error_txt3 = [ERROR_UNHASHABLE_TYPE]
     if type(keys) not in types:
         errors.append(error_txt1)
     if type(values) not in types:

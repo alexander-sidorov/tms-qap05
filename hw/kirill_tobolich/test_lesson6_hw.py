@@ -1,6 +1,8 @@
 from datetime import date
 
 from hw.kirill_tobolich.lesson6_hw import ERROR_NOT_STRING
+from hw.kirill_tobolich.lesson6_hw import ERROR_UNHASHABLE_TYPE
+from hw.kirill_tobolich.lesson6_hw import ERROR_WRONG_FORMAT_OF_STR
 from hw.kirill_tobolich.lesson6_hw import count_chars
 from hw.kirill_tobolich.lesson6_hw import get_formatted_birthday
 from hw.kirill_tobolich.lesson6_hw import get_the_eldest
@@ -90,7 +92,7 @@ def test_get_the_same_elements_in_collection() -> None:
         "errors": ["given argument with keys is not a list, str or tuple"]
     }
     assert get_the_same_elements_in_collection(c4) == {
-        "errors": ["collection contains unhashable type"]
+        "errors": [ERROR_UNHASHABLE_TYPE]
     }
     assert get_the_same_elements_in_collection(c5) == {"data": {}}
     assert get_the_same_elements_in_collection(c6) == {"data": {}}
@@ -120,9 +122,9 @@ def test_repeat_chars() -> None:
     assert repeat_chars(["a3b2c1"]) == {
         "errors": ["given argument is not string type"]
     }
-    assert repeat_chars("a3b2c") == {"errors": ["wrong format of string"]}
-    assert repeat_chars("13b2c1") == {"errors": ["wrong format of string"]}
-    assert repeat_chars("a3b2cv") == {"errors": ["wrong format of string"]}
+    assert repeat_chars("a3b2c") == {"errors": [ERROR_WRONG_FORMAT_OF_STR]}
+    assert repeat_chars("13b2c1") == {"errors": [ERROR_WRONG_FORMAT_OF_STR]}
+    assert repeat_chars("a3b2cv") == {"errors": [ERROR_WRONG_FORMAT_OF_STR]}
     assert repeat_chars("a11") == {"data": "aaaaaaaaaaa"}
     assert repeat_chars("a1b1a1") == {"data": "aba"}
 
@@ -174,13 +176,13 @@ def test_zip_collections_to_dict() -> None:
     assert zip_collections_to_dict(
         [{1: 2}, 4, 5], [1, 2, 3]
     ) == {  # noqa: JS101
-        "errors": ["collections contain values with unhashable type"]
+        "errors": [ERROR_UNHASHABLE_TYPE]
     }
     assert zip_collections_to_dict([{1: 2}, 4], [1, 2, 3],) == {  # noqa: JS101
-        "errors": ["collections contain values with unhashable type"]
+        "errors": [ERROR_UNHASHABLE_TYPE]
     }  # noqa: W503
     assert zip_collections_to_dict([{1: 2}, 3, 4], [1, 2],) == {  # noqa: JS101
-        "errors": ["collections contain values with unhashable type"]
+        "errors": [ERROR_UNHASHABLE_TYPE]
     }  # noqa: W503
 
 
