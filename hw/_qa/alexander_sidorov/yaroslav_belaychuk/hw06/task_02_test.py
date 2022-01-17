@@ -1,4 +1,3 @@
-import imp
 from typing import Any
 
 import pytest
@@ -9,8 +8,8 @@ from .common import azaza
 from .common import validate_data
 from .common import validate_errors
 
-happy_data = [
-    pytest.param(args, expected, id=name)
+happy_data = [  # type: ignore  # noqa: ECE001
+    pytest.param(args, expected, id=name)  # type: ignore
     for name, (args, expected) in {
         "complex-complex": [(1j, 1j), -1],
         "float-complex": [(2.0, 3j), 6.0j],

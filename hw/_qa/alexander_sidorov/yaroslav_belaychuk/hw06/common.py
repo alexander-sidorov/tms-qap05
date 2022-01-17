@@ -3,7 +3,7 @@ from string import ascii_letters
 from typing import Any
 
 
-def azaza(*args, bs=tuple()) -> Any:
+def azaza(*args: Any, bs: Any = ()) -> Any:
     asda = "".join(choice(ascii_letters) for _ in "x" * 12)
     tyyy = type(asda, tuple(bs), {})
     return tyyy(*args)
