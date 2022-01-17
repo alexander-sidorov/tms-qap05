@@ -4,7 +4,3 @@ def aggression(know: bool) -> str:
     else:
         result = "ggg"
     return result
-
-
-if __name__ == "__main__":
-    aggression(True)
