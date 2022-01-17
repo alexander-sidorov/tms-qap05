@@ -42,14 +42,18 @@ def test_example() -> None:
     assert repeat({(), "", "", 1}) == {"errors": ["NoRepeatError"]}
     assert repeat("aaabbc") == {"data": {"a": 3, "b": 2}}
     assert repeat([]) == {"errors": ["NoRepeatError"]}
-    assert html_str("x=1&x=2&y=3") == {"data": {"x": ["1", "2"], "y": ["3"]}}
+    assert html_str("x=1&x=2&y=33") == {"data": {"x": ["1", "2"], "y": ["33"]}}
     assert html_str("a=x&b=y&z=") == {
         "data": {"a": ["x"], "b": ["y"], "z": [""]}
     }
     assert html_str([]) == {"errors": ["TypeError"]}
+    assert html_str("a=x&b=y&z=z") == {
+        "data": {"a": ["x"], "b": ["y"], "z": ["z"]}
+    }
     assert decodding("a3b2c1") == {"data": "aaabbc"}
     assert decodding(123) == {"errors": ["TypeError"]}
     assert decodding("a3b2c") == {"errors": ["NonDigitError"]}
+    assert decodding("1a3b2c2") == {"errors": ["NonLetterError"]}
     assert codding("aaabb") == {"data": "a3b2"}
     assert codding(123) == {"errors": ["TypeError"]}
     assert codding("a") == {"data": "a1"}

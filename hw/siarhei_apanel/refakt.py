@@ -147,19 +147,21 @@ def repeat(collect: Any) -> dict:
 @decor_data
 def html_str(query: Any) -> dict:
     result: dict[str, list] = {}
+    verif = 0
     if type(query) != str:
         return {"errors": ["TypeError"]}
-
     for letter in query.split("&"):
         for el in range(len(letter.split("="))):
-
             if letter.split("=")[el] != letter.split("=")[-1]:
                 result.setdefault(letter.split("=")[el], []).append(
                     letter.split("=")[el + 1]
                 )
-
-            else:
-                continue
+                verif = 0
+            elif letter.split("=")[0] == letter.split("=")[1] and verif == 0:
+                result.setdefault(letter.split("=")[el], []).append(
+                    letter.split("=")[el]
+                )
+                verif += 1
     return result
 
 
