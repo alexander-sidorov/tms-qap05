@@ -55,7 +55,7 @@ def zadacha_4(day: dict) -> dict:
 
     name = min(day, key=lambda e: day[e])
     return {"data": name}
-
+print(zadacha_4({1: 1j, 2: 2j}))
 
 def zadacha_5(collection: Any) -> dict:
     if type(collection) in [set, dict]:
