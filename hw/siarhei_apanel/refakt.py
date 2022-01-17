@@ -1,6 +1,5 @@
 from datetime import date
 from typing import Any
-from typing import Union
 
 
 def func(a1: float, back: float, cill: float) -> list:
@@ -124,12 +123,11 @@ def dateday(yer: Any) -> Any:
 
 
 @decor_data
-def happybithday(yer: Any) -> Any:
-
+def happybithday(yer: Any) -> dict[str, list[str]]:
     if isinstance(yer, dict) is False:
         return {"errors": ["TypeError"]}
-    value = min(yer, key=lambda t: yer[t])
-    return value
+
+    return min(yer, key=lambda t: yer[t])
 
 
 @decor_data
