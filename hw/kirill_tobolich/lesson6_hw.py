@@ -199,8 +199,8 @@ def zip_collections_to_dict(keys: Any, values: Any) -> dict:
     errors: list = []
     types = (list, str, tuple)
     unhashable_types = (list, set, dict)
-    error_txt1 = ERROR_NOT_LIST_STR_TUPLE
-    error_txt2 = ERROR_NOT_LIST_STR_TUPLE
+    error_txt1 = "given argument with keys is not a list, str or tuple"
+    error_txt2 = "given argument with values is not a list, str or tuple"
     error_txt3 = [ERROR_UNHASHABLE_TYPE]
     if type(keys) not in types:
         errors.append(error_txt1)

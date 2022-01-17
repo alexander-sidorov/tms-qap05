@@ -1,5 +1,6 @@
 from datetime import date
 
+from hw.kirill_tobolich.lesson6_hw import ERROR_NOT_LIST_STR_TUPLE
 from hw.kirill_tobolich.lesson6_hw import ERROR_NOT_STRING
 from hw.kirill_tobolich.lesson6_hw import ERROR_UNHASHABLE_TYPE
 from hw.kirill_tobolich.lesson6_hw import ERROR_WRONG_FORMAT_OF_STR
@@ -89,7 +90,7 @@ def test_get_the_same_elements_in_collection() -> None:
     assert get_the_same_elements_in_collection(c2) == {"data": {}}
     assert get_the_same_elements_in_collection(c3) == {"data": {1: 2}}
     assert get_the_same_elements_in_collection(123) == {
-        "errors": ["given argument with keys is not a list, str or tuple"]
+        "errors": [ERROR_NOT_LIST_STR_TUPLE]
     }
     assert get_the_same_elements_in_collection(c4) == {
         "errors": [ERROR_UNHASHABLE_TYPE]
