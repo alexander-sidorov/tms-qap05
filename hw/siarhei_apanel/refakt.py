@@ -123,11 +123,11 @@ def dateday(yer: Any) -> Any:
 
 
 @decor_data
-def happybithday(yer: Any) -> Any:
+def happybithday(yer: dict[str, date]) -> Any:
     if isinstance(yer, dict) is False:
         return {"errors": ["TypeError"]}
 
-    return min(yer, key=lambda t: yer[t])  # type: ignore
+    return min(yer, key=lambda t: yer[t])
 
 
 @decor_data
