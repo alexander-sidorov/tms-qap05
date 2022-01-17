@@ -1,5 +1,6 @@
 from datetime import date
 
+from hw.kirill_tobolich.lesson6_hw import ERROR_NOT_STRING
 from hw.kirill_tobolich.lesson6_hw import count_chars
 from hw.kirill_tobolich.lesson6_hw import get_formatted_birthday
 from hw.kirill_tobolich.lesson6_hw import get_the_eldest
@@ -21,9 +22,7 @@ def test_palindrome() -> None:
     assert palindrome("xx") == {"data": True}
     assert palindrome("abccba") == {"data": True}
     assert palindrome("xy") == {"data": False}
-    assert palindrome(123321) == {
-        "errors": ["given argument is not string type"]
-    }
+    assert palindrome(123321) == {"errors": [ERROR_NOT_STRING]}
 
 
 def test_multiply() -> None:
@@ -107,9 +106,7 @@ def test_http_query_parser() -> None:
     assert http_query_parser("x=&x=2&q=3") == {
         "data": {"x": ["", "2"], "q": ["3"]}
     }
-    assert http_query_parser(["x=1&x=2&y=3"]) == {
-        "errors": ["given argument is not string type"]
-    }
+    assert http_query_parser(["x=1&x=2&y=3"]) == {"errors": [ERROR_NOT_STRING]}
     assert http_query_parser("x=1&&x=2&q=3") == {
         "errors": ["given query contains wrong format"]
     }
@@ -133,9 +130,7 @@ def test_repeat_chars() -> None:
 def test_count_chars() -> None:
     assert count_chars("aaabb") == {"data": "a3b2"}
     assert count_chars("aaabb111!!") == {"data": "a3b213!2"}
-    assert count_chars(12345) == {
-        "errors": ["given argument is not string type"]
-    }
+    assert count_chars(12345) == {"errors": [ERROR_NOT_STRING]}
     assert count_chars("") == {"data": ""}
     assert count_chars("a") == {"data": "a1"}
     assert count_chars("aba") == {"data": "a1b1a1"}

@@ -5,6 +5,8 @@ from datetime import date
 from typing import Any
 from typing import Callable
 
+ERROR_NOT_STRING = "given argument is not string type"
+
 
 def decorator_dict(func: Callable) -> Callable:
     def wrapper(*a: Any, **kw: Any) -> Any:
@@ -20,7 +22,7 @@ def decorator_dict(func: Callable) -> Callable:
 @decorator_dict
 def palindrome(string: str) -> Any:
     if not isinstance(string, str):
-        return {"errors": ["given argument is not string type"]}
+        return {"errors": [ERROR_NOT_STRING]}
     if string[:] == string[::-1]:
         result = True
     else:
@@ -103,7 +105,7 @@ def get_the_same_elements_in_collection(collection: Any) -> dict:
 @decorator_dict
 def http_query_parser(query: str) -> dict:
     if not isinstance(query, str):
-        return {"errors": ["given argument is not string type"]}
+        return {"errors": [ERROR_NOT_STRING]}
     dict_with_queries = {}
     try:
         split_query = query.split("&")
@@ -118,7 +120,7 @@ def http_query_parser(query: str) -> dict:
                 dict_with_queries[name].append(
                     i[index_of_equals + 1 :]  # noqa: E203
                 )  # noqa: E203
-    except IndexError and ValueError:
+    except (IndexError, ValueError):
         return {"errors": ["given query contains wrong format"]}
     result = dict_with_queries
     return result
@@ -127,7 +129,7 @@ def http_query_parser(query: str) -> dict:
 @decorator_dict
 def repeat_chars(string: str) -> Any:
     if not isinstance(string, str):
-        return {"errors": ["given argument is not string type"]}
+        return {"errors": [ERROR_NOT_STRING]}
     numbers = re.findall(r"\d+", string)
     chars = re.findall(r"\D", string)
     if len(numbers) != len(chars):
@@ -144,7 +146,7 @@ def repeat_chars(string: str) -> Any:
 @decorator_dict
 def count_chars(string: str) -> Any:
     if not isinstance(string, str):
-        return {"errors": ["given argument is not string type"]}
+        return {"errors": [ERROR_NOT_STRING]}
     if len(string) == 0:
         result = ""
         return result
@@ -204,13 +206,13 @@ def zip_collections_to_dict(keys: Any, values: Any) -> dict:
     if errors:
         result["errors"] = errors
     else:
-        if any((isinstance(keys, unhashable_types) for x in keys)):
+        if any((isinstance(keys, unhashable_types) for _ in keys)):
             return {"errors": error_txt3}
         keys = list(keys)
         values = list(values)
         if len(keys) > len(values):
             differance = len(keys) - len(values)
-            values.extend(None for i in range(differance))
+            values.extend(None for _ in range(differance))
             list_of_zipped_collections = list(zip(keys, values))
             result = dict(list_of_zipped_collections)
         elif len(keys) < len(values):
