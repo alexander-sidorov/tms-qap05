@@ -80,3 +80,4 @@ def test_level_7() -> None:
     assert level_7(deco) == {"data": "aaaaaaaaaaabbccc"}
     assert level_7("2b2c1") == {"errors": "wrong input"}
     assert level_7("a2b2c") == {"errors": "wrong input"}
+    assert level_7("***") == {"errors": "wrong input"}
