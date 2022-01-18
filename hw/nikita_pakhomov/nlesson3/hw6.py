@@ -13,7 +13,6 @@ def decorate(func: Any) -> Any:
             return result
 
         return {"data": result}
-
     return xxx
 
 
@@ -74,7 +73,6 @@ def level_3(born: Any) -> Any:
 @decorate
 def level_4_1(age: Dict[Any, date]) -> Result:
     result: Result = {}
-
     if type(age) == dict:
         if type(age["A"]) != date or type(age["B"]) != date:
             result["errors"] = "this is not a date"
