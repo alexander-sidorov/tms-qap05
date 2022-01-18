@@ -296,3 +296,4 @@ def diction(*digit: Any) -> dict:
 
 if __name__ == "__main__":
     aggression(True)
+    aggression(False)
