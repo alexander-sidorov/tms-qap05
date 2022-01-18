@@ -77,7 +77,7 @@ def level_4(age: Any) -> dict:
         a_peremen = age["A"]
         b_peremen = age["B"]
         if type(age["A"]) != date or type(age["B"]) != date:
-            result["errors"] = "this is not a date"
+            result["errors"] = "invalid input"
             return result
         elif a_peremen > b_peremen:
             result = "B"
@@ -87,10 +87,10 @@ def level_4(age: Any) -> dict:
             return result
 
         else:
-            result["errors"] = "dates are equal"
+            result["errors"] = "invalid input"
             return result
     else:
-        result["errors"] = "dates are equal"
+        result["errors"] = "invalid input"
         return result
 
 
