@@ -44,9 +44,9 @@ def test_level_4() -> None:
     }
 
     assert level_4(datys) == {"data": "B"}
-    assert level_4([]) == {"errors": "this is not a date"}
+    assert level_4([]) == {"invalid input"}
     assert level_4(datys_1) == {"data": "A"}
-    assert level_4(datys_2) == {"errors": "dates are equal"}
+    assert level_4(datys_2) == {"invalid input"}
 
 
 def test_level_4_1() -> None:
