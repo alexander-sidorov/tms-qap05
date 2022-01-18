@@ -4,17 +4,16 @@ from typing import Any
 
 def decorator_function(func):
     def wrapper(*args, **kwargs):
-        if isinstance(func(*args, **kwargs), dict) and "errors" in func(
-            *args, **kwargs
-        ):
-            return func(*args, **kwargs)
-        return {"data": func(*args, **kwargs)}
+        solution = func(*args, **kwargs)
+        if isinstance(solution, dict) and "errors" in solution:
+            return solution
+        return {"data": solution}
 
     return wrapper
 
 
 @decorator_function
-def palindrom(slovo: str) -> dict:
+def palindrom(slovo: Any) -> Any:
     if type(slovo) != str:
         return {"errors": ["TypeErrors"]}
 
@@ -28,11 +27,11 @@ def palindrom(slovo: str) -> dict:
         once_letter += 1
         last_letter -= 1
 
-    return True if palindrom else False
+    return palindrom
 
 
 @decorator_function
-def umnogenie(*nums: Any) -> dict:
+def umnogenie(*nums: Any) -> Any:
     count1 = 0
     banka = 1
     for n2 in nums:
@@ -61,6 +60,7 @@ def date_age(b1: date) -> dict:
 
 @decorator_function
 def zadacha_4(day: dict[Any, date]) -> dict:
+
     if isinstance(day, dict) is False:
         return {"errors": ["TypeError"]}
     if len(day) < 1:
@@ -97,7 +97,7 @@ def zadacha_5(collection: Any) -> dict:
 
 
 @decorator_function
-def zadacha_7(sybol_num: str) -> dict:
+def zadacha_7(sybol_num: Any) -> Any:
     if len(sybol_num) == 0:
         return ""
     if type(sybol_num) != str:
