@@ -25,7 +25,7 @@ def task_05(collection: Collection[T1]) -> Union[Data, Errors]:
     if errors := validate(collection):
         return errors
 
-    ctr = Counter(collection)
+    ctr = Counter(iter(collection))
     data = {elem: count for elem, count in ctr.items() if count > 1}
     return data
 
