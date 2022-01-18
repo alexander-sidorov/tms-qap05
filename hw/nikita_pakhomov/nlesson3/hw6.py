@@ -112,7 +112,6 @@ def level_7(stroka: str) -> dict:
     stroch = ""
     otvet = ""
     result = {}
-
     cpisok = []
     otvett = ""
 
