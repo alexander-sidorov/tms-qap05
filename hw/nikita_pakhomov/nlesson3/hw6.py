@@ -6,7 +6,7 @@ Result = Dict[str, Any]
 type_1 = Dict[str, Any]
 
 
-def decorate(func: Any) -> Dict[Any, Any]:
+def decorate(func: Any) -> Any:
     def xxx(*args: Any) -> Any:
         result = func(*args)
         if isinstance(result, dict) and "errors" in result:
@@ -17,7 +17,7 @@ def decorate(func: Any) -> Dict[Any, Any]:
 
 
 @decorate
-def is_palindrome(text: Any) -> Any:
+def is_palindrome(text: Any) -> Dict[Any, Any]:
     result = {}
     if type(text) == str:
         if text[::-1] == text:
