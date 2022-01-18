@@ -1,9 +1,11 @@
 import itertools
 import re
+import urllib.parse
 from datetime import date
 from itertools import groupby
 from itertools import zip_longest
 from typing import Any
+from typing import Collection
 from typing import Dict
 
 Result = Dict[str, Any]
@@ -22,7 +24,7 @@ def decorator(func: Any) -> Any:
 @decorator
 def level_01(string: Any) -> Any:
 
-    if type(string) != str:
+    if not isinstance(string, str):
         return {"errors": ["argument must be string"]}
 
     else:
@@ -40,10 +42,8 @@ def level_02(*arguments: Any) -> Any:
     try:
         if len(arguments) < 1:
             return {"errors": ["no arguments"]}
-
         elif len(arguments) == 1:
             result = arguments[0]
-
         else:
             pr = 1
             for i in arguments:
@@ -93,18 +93,16 @@ def level_04(dic: Any) -> Any:
     result: Result = {}
     errors = []
 
-    if type(dic) != dict:
+    if not isinstance(dic, dict):
         errors.append("must be date")
     if errors:
         result["errors"] = errors
-
     else:
         try:
             res = min(dic, key=lambda n: dic[n])  # type: ignore
 
-        except TypeError:
-            return {"errors": ["TypeError"]}
-
+        except (TypeError, ValueError):
+            return {"errors": ["TypeError or empty sequence"]}
         result = res
 
     return result
@@ -113,7 +111,7 @@ def level_04(dic: Any) -> Any:
 @decorator
 def level_05(lis: Any) -> Any:
 
-    if type(lis) not in [list, tuple, str, set, dict]:
+    if not isinstance(lis, Collection):
         return {"errors": ["argument must be list, tuple, str, set, dict"]}
 
     else:
@@ -131,17 +129,13 @@ def level_05(lis: Any) -> Any:
 
 @decorator
 def level_06(query: Any) -> Any:
-    result: Result = {}
+
     if not isinstance(query, str):
         return {"errors": ["TypeError"]}
-    lis2 = query.split("&")
-    for lis in lis2:
-        for el in range(len(lis.split("="))):
-            if lis.split("=")[el] != lis.split("=")[-1]:
-                result.setdefault(lis.split("=")[el], []).append(
-                    lis.split("=")[el + 1]
-                )
-    return result
+
+    res = urllib.parse.parse_qs(query, keep_blank_values=True)
+
+    return res
 
 
 @decorator
@@ -170,7 +164,7 @@ def level_07(string: Any) -> Any:
 @decorator
 def level_08(string: Any) -> Any:
 
-    if type(string) != str:
+    if not isinstance(string, str):
         return {"errors": [f"argument ({string=!r}) must be string"]}
     if not string:
         return ""
@@ -215,24 +209,25 @@ def level_09(dic: Any) -> Any:
 @decorator
 def level_10(arg1: Any, arg2: Any) -> Any:
 
-    if type(arg1) not in (list, str, tuple):
+    if isinstance(arg1, (dict, set, frozenset)) or isinstance(
+        arg2, (dict, set, frozenset)
+    ):
         return {"errors": ["unhashable type"]}
-
-    else:
-        if any((isinstance(arg1, (list, set, dict)) for el in arg1)):
-            return {"errors": ["unhashable type"]}
+    try:
         key = list(arg1)
         val = list(arg2)  # noqa: VNE002
         if len(key) >= len(val):
-            dic = dict(zip_longest(key, val))
+            dic = dict(zip_longest(arg1, arg2))
         else:
             val_no_key = val[len(key) :]  # noqa: E203
             key_with_value = val[: len(key)]
             res = list(zip(key, key_with_value))
             res.append((..., val_no_key))
             dic = dict(res)
+        return dic
 
-    return dic
+    except TypeError:
+        return {"errors": ["TypeError unhashable type"]}
 
 
 @decorator

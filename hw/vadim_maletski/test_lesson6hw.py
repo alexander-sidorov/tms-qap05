@@ -74,7 +74,7 @@ def test() -> None:
     assert (level_04([[], []])) == {"errors": ["must be date"]}
 
     got = level_04({1: [], 2: {}, 3: [], 4: set()})
-    assert got == {"errors": ["TypeError"]}
+    assert got == {"errors": ["TypeError or empty sequence"]}
 
     assert (level_05([])) == {"data": {}}
     assert (level_05({})) == {"data": {}}
@@ -191,7 +191,10 @@ def test() -> None:
         "errors": ["TypeError unhashable type"]
     }
 
-    assert (level_10(None, None)) == {"errors": ["unhashable type"]}
+    assert (level_10({1: 100, 2: 100}, {1: 100})) == {  # noqa: JS101
+        "errors": ["unhashable type"]
+    }
+    assert (level_10(None, None)) == {"errors": ["TypeError unhashable type"]}
     assert (level_10("abc", [1, 2])) == {"data": {"a": 1, "b": 2, "c": None}}
     assert (level_10("1234", "ab")) == {
         "data": {"1": "a", "2": "b", "3": None, "4": None}
@@ -199,7 +202,7 @@ def test() -> None:
     assert (level_10("ab", [1, 2, 3])) == {"data": {"a": 1, "b": 2, ...: [3]}}
     assert (level_10("ab", "cd")) == {"data": {"a": "c", "b": "d"}}
     assert (level_10("", "")) == {"data": {}}
-    assert (level_10([[]], "a")) == {"errors": ["unhashable type"]}
+    assert (level_10([[]], "a")) == {"errors": ["TypeError unhashable type"]}
     assert (level_10("ab", "1234")) == {
         "data": {"a": "1", "b": "2", ...: ["3", "4"]}
     }
