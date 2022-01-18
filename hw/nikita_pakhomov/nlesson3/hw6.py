@@ -17,7 +17,7 @@ def decorate(func: Any) -> Any:
 
 
 @decorate
-def is_palindrome(text: Any) -> Dict[bool]:
+def is_palindrome(text: Any) -> type_1:
     result = {}
     if type(text) == str:
         if text[::-1] == text:
