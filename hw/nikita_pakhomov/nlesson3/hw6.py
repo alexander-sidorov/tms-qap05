@@ -2,6 +2,7 @@ from datetime import date
 from typing import Any
 from typing import Dict
 
+Result = Dict[str, Any]
 type_1 = Dict[str, Any]
 
 
@@ -17,7 +18,7 @@ def decorate(func: Any) -> Any:
 
 
 @decorate
-def is_palindrome(text: str) -> type_1:
+def is_palindrome(text: Any) -> Any:
     result = {}
     if type(text) == str:
         if text[::-1] == text:
@@ -30,7 +31,7 @@ def is_palindrome(text: str) -> type_1:
 
 
 @decorate
-def level_2(*args: Any) -> dict:
+def level_2(*args: Any) -> Any:
     result = {}
 
     nakopitel = 1
@@ -42,7 +43,7 @@ def level_2(*args: Any) -> dict:
 
 
 @decorate
-def level_3(born: Any) -> dict:
+def level_3(born: Any) -> Any:
     result = {}
 
     today = date.today()
@@ -71,8 +72,9 @@ def level_3(born: Any) -> dict:
 
 
 @decorate
-def level_4_1(age: Dict[Any, date]) -> dict:
-    result = {}
+def level_4_1(age: Dict[Any, date]) -> Result:
+    result: Result = {}
+
     if type(age) == dict:
         if type(age["A"]) != date or type(age["B"]) != date:
             result["errors"] = "this is not a date"
