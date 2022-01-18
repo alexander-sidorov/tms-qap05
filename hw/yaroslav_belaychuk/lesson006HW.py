@@ -4,10 +4,14 @@ from typing import Any
 
 def decorator_function(func):
     def wrapper(*args, **kwargs):
-        if isinstance(func(*args, **kwargs), dict) and "errors" in func(*args, **kwargs):
+        if isinstance(func(*args, **kwargs), dict) and "errors" in func(
+            *args, **kwargs
+        ):
             return func(*args, **kwargs)
         return {"data": func(*args, **kwargs)}
+
     return wrapper
+
 
 @decorator_function
 def palindrom(slovo: str) -> dict:
@@ -39,6 +43,7 @@ def umnogenie(*nums: Any) -> dict:
         banka *= n2
     return banka
 
+
 @decorator_function
 def date_age(b1: date) -> dict:
     if type(b1) != date:
@@ -46,15 +51,16 @@ def date_age(b1: date) -> dict:
     segodnya = date.today()
     delta = segodnya - b1
     result = {
-            "year": b1.year,
-            "month": b1.month,
-            "day": b1.day,
-            "age": int(delta.days // 365),
-        }
+        "year": b1.year,
+        "month": b1.month,
+        "day": b1.day,
+        "age": int(delta.days // 365),
+    }
     return result
 
+
 @decorator_function
-def zadacha_4(day: dict) -> dict:
+def zadacha_4(day: dict[Any, date]) -> dict:
     if isinstance(day, dict) is False:
         return {"errors": ["TypeError"]}
     if len(day) < 1:
@@ -63,11 +69,8 @@ def zadacha_4(day: dict) -> dict:
         if isinstance(value, complex):
             return {"errors": ["TypeError"]}
 
-
     name = min(day, key=lambda e: day[e])
     return name
-
-
 
 
 @decorator_function
