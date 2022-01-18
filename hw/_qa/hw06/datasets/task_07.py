@@ -7,6 +7,7 @@ happy_data = [
     for name, (arg, expected) in {
         "empty-x": (azaza("", bs=[str]), ""),
         "empty": ("", ""),
+        "v-a0": ("a0", ""),
         "v-a1-x": (azaza("a1", bs=[str]), "a"),
         "v-a1": ("a1", "a"),
         "v-a11": ("a11", "aaaaaaaaaaa"),

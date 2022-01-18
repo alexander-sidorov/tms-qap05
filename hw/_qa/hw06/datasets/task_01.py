@@ -6,6 +6,7 @@ happy_data = [
     pytest.param(arg, expected, id=name)
     for name, (arg, expected) in {
         "empty": ["", True],
+        "v-a": ["a", True],
         "v-Aa_a": ["Aa a", False],
         "v-aa-x": [azaza("aa", bs=[str]), True],
         "v-Aa": ["Aa", False],
@@ -21,6 +22,8 @@ happy_data = [
 unhappy_data = [
     pytest.param(arg, id=name)
     for name, arg in {
-        "type": azaza(),
+        "type-int": 1,
+        "type-none": None,
+        "type-x": azaza(),
     }.items()
 ]

@@ -19,6 +19,9 @@ happy_data = [
 unhappy_data = [
     pytest.param(arg, id=name)
     for name, arg in {
-        "type": azaza(),
+        "type-e": ...,
+        "type-i": 1,
+        "type-n": None,
+        "type-x": azaza(),
     }.items()
 ]
