@@ -71,30 +71,6 @@ def level_3(born: Any) -> dict:
 
 
 @decorate
-def level_4(age: Any) -> dict:
-    result = {}
-    if type(age) == dict:
-        a_peremen = age["A"]
-        b_peremen = age["B"]
-        if type(age["A"]) != date or type(age["B"]) != date:
-            result["errors"] = "invalid input"
-            return result
-        elif a_peremen > b_peremen:
-            result = "B"
-            return result
-        elif age["A"] < age["B"]:
-            result = "A"
-            return result
-
-        else:
-            result["errors"] = "invalid input"
-            return result
-    else:
-        result["errors"] = "invalid input"
-        return result
-
-
-@decorate
 def level_4_1(age: Dict[Any, date]) -> dict:
     result = {}
     if type(age) == dict:
