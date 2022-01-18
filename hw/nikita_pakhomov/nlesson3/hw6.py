@@ -5,18 +5,31 @@ from typing import Dict
 type_1 = Dict[str, Any]
 
 
+def decorate(func: Any) -> Any:
+    def xxx(*args: Any) -> Any:
+        result = func(*args)
+        if isinstance(result, dict) and "errors" in result:
+            return result
+
+        return {"data": result}
+
+    return xxx
+
+
+@decorate
 def is_palindrome(text: str) -> type_1:
     result = {}
     if type(text) == str:
         if text[::-1] == text:
-            result["data"] = True
+            result = True
         else:
-            result["data"] = False
+            result = False
     else:
-        result["errors"] = False
+        result = False
     return result
 
 
+@decorate
 def level_2(*args: Any) -> dict:
     result = {}
 
@@ -24,10 +37,11 @@ def level_2(*args: Any) -> dict:
     for i in args:
         nakopitel *= i
 
-    result["data"] = nakopitel
+    result = nakopitel
     return result
 
 
+@decorate
 def level_3(born: Any) -> dict:
     result = {}
 
@@ -38,7 +52,7 @@ def level_3(born: Any) -> dict:
         birthday = born.replace(year=today.year, month=born.month + 1, day=1)
     if birthday > today:
         age = today.year - born.year - 1
-        result["data"] = {
+        result = {
             "year": born.year,
             "month": born.month,
             "day": born.day,
@@ -47,7 +61,7 @@ def level_3(born: Any) -> dict:
         return result
     else:
         age = today.year - born.year
-        result["data"] = {
+        result = {
             "year": born.year,
             "month": born.month,
             "day": born.day,
@@ -56,6 +70,7 @@ def level_3(born: Any) -> dict:
         return result
 
 
+@decorate
 def level_4(age: Any) -> dict:
     result = {}
     if type(age) == dict:
@@ -65,21 +80,21 @@ def level_4(age: Any) -> dict:
             result["errors"] = "this is not a date"
             return result
         elif a_peremen > b_peremen:
-            result["data"] = "B"
+            result = "B"
             return result
         elif age["A"] < age["B"]:
-            result["data"] = "A"
+            result = "A"
             return result
 
         else:
             result["errors"] = "dates are equal"
             return result
-
     else:
-        result["errors"] = "this is not a date"
+        result["errors"] = "dates are equal"
         return result
 
 
+@decorate
 def level_4_1(age: Dict[Any, date]) -> dict:
     result = {}
     if type(age) == dict:
@@ -87,12 +102,13 @@ def level_4_1(age: Dict[Any, date]) -> dict:
             result["errors"] = "this is not a date"
 
         name = min(age, key=lambda n: age[n])
-        return {"data": name}
+        return name
     else:
         result["errors"] = "dates are equal"
         return result
 
 
+@decorate
 def level_5(spisok: Any) -> dict:
     result: dict = {}
     clovar: dict = {}
@@ -104,47 +120,5 @@ def level_5(spisok: Any) -> dict:
     for yyy in spisok:
         if clovar[yyy] <= 1:
             del clovar[yyy]
-    result["data"] = clovar
+    result = clovar
     return result
-
-
-def level_7(stroka: str) -> dict:
-    stroch = ""
-    otvet = ""
-    result = {}
-    cpisok = []
-    otvett = ""
-
-    if stroka.isalnum():
-
-        stroka = stroka + "="
-        for iii in range(len(stroka)):
-
-            if stroka[iii].isdecimal():
-                stroch = stroch + stroka[iii]
-
-            elif stroka[iii].isalnum():
-
-                otvet = otvet + stroka[iii]
-                if stroch != "":
-                    cpisok.append(stroch)
-                    stroch = ""
-            elif stroka[iii] == "=":
-                if stroch != "":
-                    cpisok.append(stroch)
-                    stroch = ""
-
-        for nnn in cpisok:
-            if nnn == "":
-                del cpisok[int(nnn)]
-
-        if len(cpisok) == len(otvet):
-            for yyy in range(len(otvet)):
-                otvett = otvett + (otvet[yyy] * int(cpisok[yyy]))
-            result["data"] = otvett
-        else:
-            result["errors"] = "wrong input"
-        return result
-    else:
-        result["errors"] = "wrong input"
-        return result
