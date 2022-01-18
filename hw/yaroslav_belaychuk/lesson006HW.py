@@ -1,9 +1,10 @@
 from datetime import date
 from typing import Any
+from typing import Callable
 
 
-def decorator_function(func):
-    def wrapper(*args, **kwargs):
+def decorator_function(func: Callable) -> Callable:
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         solution = func(*args, **kwargs)
         if isinstance(solution, dict) and "errors" in solution:
             return solution

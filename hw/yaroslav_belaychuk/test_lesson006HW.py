@@ -51,4 +51,3 @@ def test_function() -> None:
     assert zadacha_7("a2b2a1") == {"data": "aabba"}
     assert zadacha_7("a") == {"errors": ["NonDigitError"]}
     assert zadacha_7("") == {"data": ""}
-
