@@ -79,6 +79,7 @@ def zadacha_5(collection: Any) -> dict:
         return {}
     if type(collection) not in [list, tuple, str]:
         return {"errors": ["TypeError"]}
+
     banka = {}  # type: ignore
     list_result = []
     if len(collection) == 0:
@@ -91,6 +92,7 @@ def zadacha_5(collection: Any) -> dict:
             return {"errors": ["TypeError"]}
         else:
             banka[n2] = list_result.count(n2)
+
     return banka
 
 
@@ -104,6 +106,7 @@ def zadacha_7(sybol_num: str) -> dict:
         return {"errors": ["NonDigitError"]}
     if sybol_num[0].isdigit():
         return {"errors": ["NonLetterError"]}
+
     list_digit = []
     list_letter = []
     bank = ""
