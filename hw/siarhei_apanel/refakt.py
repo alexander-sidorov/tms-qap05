@@ -92,7 +92,7 @@ def proizvedenie(*args: Any) -> Any:
     product = 1
 
     for dig in args:
-        if isinstance(dig, (dict, set, frozenset)):
+        if isinstance(dig, (dict, set, frozenset, None, complex)):
             return {"errors": ["TypeError"]}
 
         if isinstance(dig, (str, tuple, list)):
