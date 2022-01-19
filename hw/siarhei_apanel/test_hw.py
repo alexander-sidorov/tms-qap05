@@ -16,6 +16,7 @@ from hw.siarhei_apanel.refakt import rever_dict
 
 def test_example() -> None:
     yers = {"a": date(2000, 7, 12), "b": date(2000, 7, 12)}
+    noyer = {"a": 1998, "b": date(1999, 2, 2)}
     dic = {1: 100, 2: 100, 3: 300}
     set1 = {1, 2}
     set2 = {1, 3}
@@ -31,17 +32,20 @@ def test_example() -> None:
     assert proizvedenie(1, 2) == {"data": 2}
     assert proizvedenie("1", 3) == {"data": "111"}
     assert "errors" in proizvedenie("a", "a")
+    assert "errors" in proizvedenie(1, {2})
     assert dateday(dat) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
     assert dateday(1998) == {"errors": ["TypeError"]}
     assert happybithday(da) == {"data": "b"}
     assert happybithday([yers]) == {"errors": ["TypeError"]}
+    assert happybithday(noyer) == {"errors": ["TypeError"]}
     assert repeat([(), "", "", 1]) == {"data": {"": 2}}
-    assert repeat({5: 2, 4: 2, 6: 1, 3: 2}) == {"errors": ["NoRepeatError"]}
-    assert repeat({(), "", "", 1}) == {"errors": ["NoRepeatError"]}
+    assert repeat({5: 2, 4: 2, 6: 1, 3: 2}) == {"data": {}}
+    assert repeat({(), "", "", 1}) == {"data": {}}
     assert repeat("aaabbc") == {"data": {"a": 3, "b": 2}}
-    assert repeat([]) == {"errors": ["NoRepeatError"]}
+    assert repeat([]) == {"data": {}}
+    assert repeat(1) == {"errors": ["TypeError"]}
     assert html_str("x=1&x=2&y=33") == {"data": {"x": ["1", "2"], "y": ["33"]}}
     assert html_str("a=x&b=y&z=") == {
         "data": {"a": ["x"], "b": ["y"], "z": [""]}
@@ -51,6 +55,7 @@ def test_example() -> None:
         "data": {"a": ["x"], "b": ["y"], "z": ["z"]}
     }
     assert decodding("a3b2c1") == {"data": "aaabbc"}
+    assert decodding("") == {"data": ""}
     assert decodding(123) == {"errors": ["TypeError"]}
     assert decodding("a3b2c") == {"errors": ["NonDigitError"]}
     assert decodding("1a3b2c2") == {"errors": ["NonLetterError"]}
@@ -64,9 +69,11 @@ def test_example() -> None:
     assert rever_dict(dic) == {"data": {100: [1, 2], 300: 3}}
     assert rever_dict({"a": "a", "b": "b"}) == {"data": {"a": "a", "b": "b"}}
     assert rever_dict({"a"}) == {"errors": ["TypeError"]}
-    assert new_dict("abc", [1, 2]) == {"data": {"a": 1, "b": 2, "c": None}}
+    assert "data" in new_dict({"a", "b", "c"}, {1, 2})
+    assert new_dict(1, {1, 2}) == {"errors": ["TypeError"]}
+    assert new_dict((1, 3, {4}), {1, 2}) == {"errors": ["HashError"]}
     assert new_dict("ab", [1, 2, 3]) == {"data": {"a": 1, "b": 2, ...: [3]}}
-    assert new_dict("abс", [1, 2, 3]) == {"data": {"a": 1, "b": 2, "с": 3}}
+    assert new_dict("abс", {1, 2, 3}) == {"data": {"a": 1, "b": 2, "с": 3}}
     assert new_set(set1, set2) == {
         "data": {
             "a&b": {1},

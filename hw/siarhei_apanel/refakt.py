@@ -1,5 +1,6 @@
 from datetime import date
 from typing import Any
+from typing import Callable
 
 
 def func(a1: float, back: float, cill: float) -> list:
@@ -63,7 +64,7 @@ def krypto(cod: str, key: str) -> str:
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
 
 
-def decor_data(func: Any) -> Any:
+def decor_data(func: Callable) -> Callable:
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         result = func(*args, **kwargs)
         if isinstance(result, dict) and "errors" in result:
@@ -75,28 +76,26 @@ def decor_data(func: Any) -> Any:
 
 @decor_data
 def palindrom(di1: Any) -> Any:
-    if type(di1) != str:
+    if not isinstance(di1, str):
         return {"errors": ["TypeError"]}
-    i34 = 0
-    j34 = len(di1) - 1
-    is_palindrom = True
-    while i34 < j34:
-        if di1[i34] != di1[j34]:
-            is_palindrom = False
-        i34 += 1
-        j34 -= 1
-    return is_palindrom
+
+    return di1[:] == di1[::-1]
 
 
 @decor_data
-def proizvedenie(*digit: Any) -> Any:
-
+def proizvedenie(*args: Any) -> Any:
+    if not args:
+        return {"errors": ["no argument is given"]}
+    elif len(args) == 1:
+        return args[0]
     verif = 0
     product = 1
 
-    for dig in digit:
+    for dig in args:
+        if isinstance(dig, (dict, set, frozenset)):
+            return {"errors": ["TypeError"]}
 
-        if type(dig) in [str, tuple, list]:
+        if isinstance(dig, (str, tuple, list)):
             verif += 1
             if verif >= 2:
                 return {"errors": ["TypeError"]}
@@ -108,7 +107,7 @@ def proizvedenie(*digit: Any) -> Any:
 @decor_data
 def dateday(yer: Any) -> Any:
 
-    if type(yer) != date:
+    if not isinstance(yer, date):
         return {"errors": ["TypeError"]}
 
     now = date.today()
@@ -124,16 +123,21 @@ def dateday(yer: Any) -> Any:
 
 @decor_data
 def happybithday(yer: dict[Any, date]) -> Any:
-    if isinstance(yer, dict) is False:
+    if not isinstance(yer, dict):
         return {"errors": ["TypeError"]}
-
+    for value in yer.values():
+        if not isinstance(value, date):
+            return {"errors": ["TypeError"]}
     return min(yer, key=lambda t: yer[t])
 
 
 @decor_data
 def repeat(collect: Any) -> dict:
-    if type(collect) not in [list, tuple, str] or len(collect) < 2:
-        return {"errors": ["NoRepeatError"]}
+    types = (set, dict, list, tuple, frozenset, str)
+    if not isinstance(collect, types):
+        return {"errors": ["TypeError"]}
+    if isinstance(collect, (set, dict)) or len(collect) < 2:
+        return {}
     noresult = []
     for digit in collect:
         noresult.append(digit)
@@ -148,7 +152,7 @@ def repeat(collect: Any) -> dict:
 def html_str(query: Any) -> dict:
     result: dict[str, list] = {}
     verif = 0
-    if type(query) != str:
+    if not isinstance(query, str):
         return {"errors": ["TypeError"]}
     for letter in query.split("&"):
         for el in range(len(letter.split("="))):
@@ -167,7 +171,7 @@ def html_str(query: Any) -> dict:
 
 @decor_data
 def decodding(code: Any) -> Any:
-    if type(code) != str:
+    if not isinstance(code, str):
         return {"errors": ["TypeError"]}
     if code == "":
         return ""
@@ -192,7 +196,7 @@ def decodding(code: Any) -> Any:
 
 @decor_data
 def codding(s1: Any) -> Any:
-    if type(s1) != str:
+    if not isinstance(s1, str):
         return {"errors": ["TypeError"]}
 
     i1 = 0
@@ -222,7 +226,7 @@ def codding(s1: Any) -> Any:
 
 @decor_data
 def rever_dict(d1: Any) -> dict:
-    if type(d1) != dict:
+    if not isinstance(d1, dict):
         return {"errors": ["TypeError"]}
 
     result: dict[int, list] = {}
@@ -239,7 +243,25 @@ def rever_dict(d1: Any) -> dict:
 
 
 @decor_data
-def new_dict(key: Any, value: Any) -> dict:
+def new_dict(key: Any, value: Any) -> dict:  # noqa: CCR001
+    typ = (list, str, tuple, set, frozenset)
+    if not isinstance(key, typ) or not isinstance(value, typ):
+        return {"errors": ["TypeError"]}
+    elif isinstance(key, (frozenset, set)):
+        key1 = []
+        for _1 in key:
+            key1.append(_1)
+        key = key1
+    if isinstance(value, (frozenset, set)):
+        value1 = []
+        for _2 in value:
+            value1.append(_2)
+        value = value1
+    try:
+        for _x in key:
+            hash(_x)
+    except TypeError:
+        return {"errors": ["HashError"]}
     result = {}
     if len(key) > len(value):
         len_none = len(key) - len(value)
@@ -256,13 +278,12 @@ def new_dict(key: Any, value: Any) -> dict:
             result[key[z1]] = value[z1]
         for f1 in range(-len_none2, 0):
             result.setdefault(..., []).append(value[f1])
-
     return result
 
 
 @decor_data
 def new_set(set1: Any, set2: Any) -> dict:
-    if type(set1) != set or type(set2) != set:
+    if not isinstance(set1, set) or not isinstance(set2, set):
         return {"errors": ["TypeError"]}
     return {
         "a&b": set1 & set2,
@@ -280,7 +301,7 @@ def diction(*digit: Any) -> dict:
     if len(digit) % 2 != 0:
         return {"errors": ["NoPares"]}
     for er in digit[::2]:
-        if type(er) in [dict, set, list]:
+        if not isinstance(er, (int, str, tuple, frozenset)):
             return {"errors": ["TypeError"]}
     result = {}
     verif = 1
