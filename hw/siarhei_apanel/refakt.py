@@ -88,17 +88,14 @@ def proizvedenie(*args: Any) -> Any:
         return {"errors": ["no argument is given"]}
     elif len(args) == 1:
         return args[0]
-    verif = 0
     product = 1
 
-    for dig in args:
-        if isinstance(dig, (dict, set, frozenset, None, complex)):
+    for verif, dig in enumerate(args, start=1):
+        if not isinstance(dig, (str, tuple, list)):
             return {"errors": ["TypeError"]}
 
-        if isinstance(dig, (str, tuple, list)):
-            verif += 1
-            if verif >= 2:
-                return {"errors": ["TypeError"]}
+        if verif >= 2:
+            return {"errors": ["TypeError"]}
         product *= dig
 
     return product
