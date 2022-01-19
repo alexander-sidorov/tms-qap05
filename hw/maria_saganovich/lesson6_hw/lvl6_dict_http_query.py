@@ -1,11 +1,14 @@
 from typing import Any
 
+from hw.maria_saganovich.lesson6_hw.func_decorator import my_func_decorator
 
+
+@my_func_decorator
 def func6_dict_http_query(query: Any) -> dict:
     result_data: dict = {}
 
     if not isinstance(query, str):
-        return {"errors": ["arg should be str"]}
+        raise Exception(["arg should be str"])
 
     if len(str(query)) > 0:
         data = str(query).split("&")
@@ -17,4 +20,4 @@ def func6_dict_http_query(query: Any) -> dict:
                 else:
                     result_data[tmp[0]] = [tmp[1]]
 
-    return {"data": result_data}
+    return result_data

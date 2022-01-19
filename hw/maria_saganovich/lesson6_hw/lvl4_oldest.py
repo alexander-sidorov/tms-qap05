@@ -1,21 +1,24 @@
-import datetime
+from datetime import date
+from datetime import datetime
 from typing import Any
 
+from hw.maria_saganovich.lesson6_hw.func_decorator import my_func_decorator
 
-def func4_oldest(d1: dict[Any, datetime]) -> dict:
-    oldest = datetime.datetime.today()
+
+@my_func_decorator
+def func4_oldest(d1: dict[Any, date]) -> dict:
+    oldest = datetime.today()
 
     if not isinstance(d1, dict):
-        return {"errors": ["should be dict"]}
+        raise Exception(["should be dict"])
 
     for key, value in d1.items():
-        if not isinstance(value, (datetime.date, datetime.datetime)):
-            return {"errors": ["args should be date"]}
-        if isinstance(value, datetime.date):
-            d1[key] = value = datetime.datetime(value.year, value.month, value.day)
-        if value > oldest:
-            return {"errors": ["is not born"]}
+        if not isinstance(value, (date, datetime)):
+            raise Exception(["args should be date"])
+        if isinstance(value, date):
+            d1[key] = datetime(value.year, value.month, value.day, 0, 0, 0)
 
-    result_data = min(d1, key=lambda name: d1[name])
+        if d1[key] > oldest:
+            raise Exception(["is not born"])
 
-    return {"data": result_data}
+    return min(d1, key=lambda name: d1[name])

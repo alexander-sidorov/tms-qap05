@@ -1,7 +1,10 @@
 from typing import Any
 
+from hw.maria_saganovich.lesson6_hw.func_decorator import my_func_decorator
 
-def func8_duplicate_char_number(arg: Any) -> dict:
+
+@my_func_decorator
+def func8_duplicate_char_number(arg: Any) -> str:
     result_data = ""
     prev_val = ""
     pair_key = ""
@@ -9,11 +12,11 @@ def func8_duplicate_char_number(arg: Any) -> dict:
     counter: dict = {}
 
     if not isinstance(arg, str):
-        return {"errors": ["Invalid argument"]}
+        raise Exception(["Invalid argument"])
 
     for value in arg:
         if value.isdigit():
-            return {"errors": ["Unsupported type 'int'"]}
+            raise Exception(["Unsupported type 'int'"])
 
         if prev_val != value:
             pair_key += value
@@ -27,4 +30,4 @@ def func8_duplicate_char_number(arg: Any) -> dict:
         for key, value in _value.items():
             result_data += str(key) + str(value)
 
-    return {"data": result_data}
+    return result_data
