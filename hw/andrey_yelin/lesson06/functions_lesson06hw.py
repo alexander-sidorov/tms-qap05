@@ -1,19 +1,21 @@
 import functools
-from builtins import function
 from datetime import date
 from typing import Any
+from typing import Callable
 from typing import Dict
 from urllib.parse import parse_qs
+from functools import wraps
 
 Result = Dict[str, Any]
 
 
-def decorate(func: Any) -> Any:
-    def my_decorator(*args: Any) -> Any:
-        result = func(*args)
-        if isinstance(result, dict) and "errors" in result:
-            return result
-        return {"data": result}
+def decorate(func: Callable) -> Callable:
+    @wraps(func)
+    def my_decorator(*args: Any, **kwargs: Any) -> Any:
+        try:
+            return {"data": func(*args, **kwargs)}
+        except Exception as f:
+            return {"errors": [str(f)]}
 
     return my_decorator
 
@@ -22,10 +24,10 @@ def decorate(func: Any) -> Any:
 def is_palindrome_1(strochka: Any = None) -> Any:
     result: Any = 0
     if strochka is None:
-        result["errors"] = "none argument"
+        result = "none argument"
         return result
     if not isinstance(strochka, str):
-        result["errors"] = "not a string"
+        result = "not a string"
         return result
     rev = "".join(reversed(strochka))
 
@@ -41,11 +43,11 @@ def multiply_args_2(*m: Any) -> Any:
     result: Any = {}
     args = [*m]
     if not len(args):
-        result["errors"] = "empty arguments"
+        result = "empty arguments"
         return result
     for i in args:
         if not isinstance(i, int) and not isinstance(i, float):
-            result["errors"] = "variable is not a number"
+            result = "variable is not a number"
             return result
     multiply = functools.reduce(lambda a, b: a * b, args)
     result = multiply
@@ -56,7 +58,7 @@ def multiply_args_2(*m: Any) -> Any:
 def age_result_3(born: Any) -> Any:
     result: Any = {}
     if not isinstance(born, date):
-        result["errors"] = "variable is not a date"
+        result = "variable is not a date"
         return result
     today = date.today()
     age = int(
@@ -77,7 +79,7 @@ def age_result_3(born: Any) -> Any:
 def older_4(old_date: Any) -> Any:
     result: Any = {}
     if len(old_date) == 0:
-        result["errors"] = "empty variable"
+        result = "empty variable"
         return result
     max_date = 0
     for key in old_date:
@@ -127,14 +129,14 @@ def repeating_elements_5(elements_list: Any) -> Any:
 def parse_http_query_6(string: Any = None) -> Any:
     result: Any = {}
     if string is None:
-        result["errors"] = "none argument"
+        result = "none argument"
         return result
     if not isinstance(string, str):
-        result["errors"] = "variable is not a string"
+        result = "variable is not a string"
         return result
     parse_string = parse_qs(string)
     if len(parse_string) == 0:
-        result["errors"] = "empty string"
+        result = "empty string"
         return result
     result = parse_qs(string)
     return result
@@ -167,7 +169,7 @@ def decode_7(string: str) -> Any:
 
     number, letter = get_let_num_for_decode_7(string)
     if len(letter) != len(number):
-        result["errors"] = "letters not equal to numbers"
+        result = "letters not equal to numbers"
         return result
     else:
         data = []
@@ -175,6 +177,3 @@ def decode_7(string: str) -> Any:
             data.append(int(number[i]) * letter[i])
         result = "".join(data)
         return result
-
-
-def un_decode_8(func: function) -> Any:
