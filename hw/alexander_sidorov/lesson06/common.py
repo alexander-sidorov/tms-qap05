@@ -163,9 +163,6 @@ def _validate_arg_type(  # noqa: CCR001 # 21!
         assert isinstance(arg, exp_type), err
 
     elif exp_origin is Union:
-        if Any in exp_args or any(isinstance(t, TypeVar) for t in exp_args):
-            return
-
         exp_args_ = ", ".join(sorted(name(t) for t in exp_args))
         err = f"{param}={arg!r}, {type_arg_} != expected: Union[{exp_args_}]"
         assert isinstance(arg, exp_args), err
@@ -177,19 +174,6 @@ def _validate_arg_type(  # noqa: CCR001 # 21!
             for key, value in arg.items():
                 _validate_arg_type(key, exp_args[0], f"{param} key")
                 _validate_arg_type(value, exp_args[1], f"{param}[{key!r}]")
-        else:
-            if Any in exp_args or any(
-                isinstance(t, TypeVar) for t in exp_args
-            ):
-                return
-            exp_args_ = ", ".join(sorted(name(t) for t in exp_args))
-            for i, elm in enumerate(arg):
-                type_elm_ = name(type(elm))
-                err = (
-                    f"{param}[{i}]={elm!r}, {type_elm_}"
-                    f" - not in {exp_origin_}[{exp_args_}]"
-                )
-                assert isinstance(elm, exp_args), err
 
 
 def name(obj: Any) -> str:
