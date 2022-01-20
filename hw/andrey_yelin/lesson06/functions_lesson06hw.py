@@ -24,10 +24,8 @@ def decorate(func: Callable) -> Callable:
 def is_palindrome_1(strochka: Any = None) -> Any:
     result: Any = 0
     if strochka is None:
-        result = "none argument"
         return result
     if not isinstance(strochka, str):
-        result = "not a string"
         return result
     rev = "".join(reversed(strochka))
 
@@ -43,11 +41,9 @@ def multiply_args_2(*m: Any) -> Any:
     result: Any = {}
     args = [*m]
     if not len(args):
-        result = "empty arguments"
         return result
     for i in args:
         if not isinstance(i, int) and not isinstance(i, float):
-            result = "variable is not a number"
             return result
     multiply = functools.reduce(lambda a, b: a * b, args)
     result = multiply
@@ -58,7 +54,6 @@ def multiply_args_2(*m: Any) -> Any:
 def age_result_3(born: Any) -> Any:
     result: Any = {}
     if not isinstance(born, date):
-        result = "variable is not a date"
         return result
     today = date.today()
     age = int(
@@ -78,9 +73,6 @@ def age_result_3(born: Any) -> Any:
 @decorate
 def older_4(old_date: Any) -> Any:
     result: Any = {}
-    if len(old_date) == 0:
-        result = "empty variable"
-        return result
     max_date = 0
     for key in old_date:
         today_time = date.today()
@@ -95,7 +87,6 @@ def older_4(old_date: Any) -> Any:
 def older_4_v_lambda(old_date: Dict[Any, date]) -> Result:
     result: Result = {}
     if not old_date:
-        result["errors"] = "empty variable"
         return result
 
     res = min(old_date, key=lambda n: old_date[n])
@@ -117,9 +108,6 @@ def repeating_elements_5(elements_list: Any) -> Any:
     for key in zy:
         if zy[key] > 1:
             repeat[key] = zy[key]
-    if len(repeat) == 0:
-        result = "elements are not repeat"
-        return result
     else:
         result = repeat
     return result
@@ -129,14 +117,11 @@ def repeating_elements_5(elements_list: Any) -> Any:
 def parse_http_query_6(string: Any = None) -> Any:
     result: Any = {}
     if string is None:
-        result = "none argument"
         return result
     if not isinstance(string, str):
-        result = "variable is not a string"
         return result
     parse_string = parse_qs(string)
     if len(parse_string) == 0:
-        result = "empty string"
         return result
     result = parse_qs(string)
     return result
@@ -169,7 +154,6 @@ def decode_7(string: str) -> Any:
 
     number, letter = get_let_num_for_decode_7(string)
     if len(letter) != len(number):
-        result = "letters not equal to numbers"
         return result
     else:
         data = []
