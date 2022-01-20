@@ -46,7 +46,9 @@ def test_example() -> None:
     assert repeat("aaabbc") == {"data": {"a": 3, "b": 2}}
     assert repeat([]) == {"data": {}}
     assert "errors" in repeat(1)
-    assert html_str("x=1&x=2&y=33") == {"data": {"x": ["1", "2"], "y": ["33"]}}
+    assert html_str("x=1&x=2&y=33") == {
+        "data": {"x": ["1", ["2"]], "y": ["33"]}
+    }
     assert html_str("a=x&b=y&z=") == {
         "data": {"a": ["x"], "b": ["y"], "z": [""]}
     }
@@ -65,7 +67,7 @@ def test_example() -> None:
     assert codding("aa") == {"data": "a2"}
     assert codding("ab") == {"data": "a1b1"}
     assert codding("") == {"data": ""}
-    assert codding("ccc%") == {"data": "c3%1"}
+    assert "errors" in codding("ccc%")
     assert rever_dict(dic) == {"data": {100: [1, 2], 300: 3}}
     assert rever_dict({"a": "a", "b": "b"}) == {"data": {"a": "a", "b": "b"}}
     assert "errors" in rever_dict({"a"})

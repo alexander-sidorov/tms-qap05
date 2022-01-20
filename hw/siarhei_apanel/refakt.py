@@ -1,10 +1,11 @@
-from functools import reduce
+from collections.abc import Sequence
 from datetime import date
+from functools import reduce
 from functools import wraps
-from re import I
-from typing import Any, Collection
+from typing import Any
 from typing import Callable
-from collections import Counter
+from typing import Collection
+
 
 def func(a1: float, back: float, cill: float) -> list:
     disk = back ** 2 - 4 * a1 * cill
@@ -80,16 +81,16 @@ def decor_data(func: Callable) -> Callable:
 
 @decor_data
 def palindrom(di1: Any) -> Any:
-    assert isinstance(di1, str), "No String" 
+    assert isinstance(di1, str), "No String"
     return di1[:] == di1[::-1]
 
 
 @decor_data
 def proizvedenie(*args: Any) -> Any:
-    assert not args, "No Arguments"
     if len(args) == 1:
+        assert bool(args[0]), "No Arguments"
         return args[0]
-    reduce(lambda x, y: x*y, args)
+    return reduce(lambda x, y: x * y, args)
 
 
 @decor_data
@@ -102,6 +103,8 @@ def dateday(yer: Any) -> Any:
         "day": yer.day,
         "age": int(delta.days // 365),
     }
+
+
 today = date.today()
 ymd = (today.year - 100, today.month, today.day)
 
@@ -114,7 +117,7 @@ def happybithday(yer: dict[Any, date]) -> Any:
 
 @decor_data
 def repeat(collect: Any) -> dict:
-    assert isinstance(collect, Collection),"No Collections"
+    assert isinstance(collect, Collection), "No Collections"
     if isinstance(collect, (set, dict)) or len(collect) < 2:
         return {}
     noresult = []
@@ -125,26 +128,21 @@ def repeat(collect: Any) -> dict:
         for quant in noresult
         if noresult.count(quant) > 1
     }
-    
-print(repeat((None, None)))
+
 
 @decor_data
 def html_str(query: Any) -> dict:
     assert isinstance(query, str), "No String"
+    if len(query) < 3:
+        return {}
     result: dict[str, list] = {}
-    verif = 0
     for letter in query.split("&"):
-        for el in range(len(letter.split("="))):
-            if letter.split("=")[el] != letter.split("=")[-1]:
-                result.setdefault(letter.split("=")[el], []).append(
-                    letter.split("=")[el + 1]
-                )
-                verif = 0
-            elif letter.split("=")[0] == letter.split("=")[1] and verif == 0:
-                result.setdefault(letter.split("=")[el], []).append(
-                    letter.split("=")[el]
-                )
-                verif += 1
+        verif = letter.index("=")
+        new_letter = letter[:verif]
+        if new_letter not in result:
+            result[new_letter] = [letter[verif + 1 :]]  # noqa: E203
+        else:
+            result[new_letter].append([letter[verif + 1 :]])  # noqa: E203
     return result
 
 
@@ -158,24 +156,32 @@ def decodding(code: Any) -> Any:
     list_digit = []
     list_letter = []
     num1 = ""
-    for x1 in code:
-        if x1.isalpha():
-            list_letter.append(x1)
+    for x1 in range(len(code)):
+        if (
+            code[x1].isalpha()
+            and code[x1] != code[-1]  # noqa: W503
+            and code[x1 + 1].isalpha()  # noqa: W503
+        ):
+            raise Exception("None Next Digital")
+        if code[x1].isalpha():
+            list_letter.append(code[x1])
             if num1 != "":
                 list_digit.append(num1)
                 num1 = ""
         else:
-            num1 += x1
+            num1 += code[x1]
     list_digit.append(num1)
-    return "".join(x1 * int(z1) for x1, z1 in zip(list_letter, list_digit))
+    return "".join(x2 * int(z1) for x2, z1 in zip(list_letter, list_digit))
 
 
 @decor_data
 def codding(s1: Any) -> Any:
+    assert isinstance(s1, str), "No String"
     i1 = 0
     num = 0
     result = ""
     for i1 in range(len(s1)):
+        assert s1[i1].isalpha(), "None Letter"
         j1 = i1 + 1
         if len(s1) == 1:
             result += s1[0] + "1"
@@ -199,6 +205,7 @@ def codding(s1: Any) -> Any:
 
 @decor_data
 def rever_dict(d1: Any) -> dict:
+    assert isinstance(d1, dict), "No DictionType"
     result: dict[int, list] = {}
     spisok = []
     for value in d1.values():
@@ -214,6 +221,8 @@ def rever_dict(d1: Any) -> dict:
 
 @decor_data
 def new_dict(key: Any, value: Any) -> dict:  # noqa: CCR001
+    assert isinstance(key, Sequence), "Key No Sequence"
+    assert isinstance(value, Sequence), "Value No Sequence"
     result = {}
     if len(key) > len(value):
         len_none = len(key) - len(value)
@@ -235,6 +244,8 @@ def new_dict(key: Any, value: Any) -> dict:  # noqa: CCR001
 
 @decor_data
 def new_set(set1: Any, set2: Any) -> dict:
+    assert isinstance(set1, (frozenset, set)), "No Set"
+    assert isinstance(set2, (frozenset, set)), "No Set"
     return {
         "a&b": set1 & set2,
         "a|b": set1 | set2,
@@ -248,6 +259,9 @@ def new_set(set1: Any, set2: Any) -> dict:
 
 @decor_data
 def diction(*digit: Any) -> dict:
+    if len(digit) < 2 and not bool(digit[0]):
+        return {}
+    assert len(digit) % 2 == 0, "No Pair"
     result = {}
     verif = 1
     for dig in range(len(digit)):
