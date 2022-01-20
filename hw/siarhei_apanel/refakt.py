@@ -1,8 +1,10 @@
+from functools import reduce
 from datetime import date
 from functools import wraps
-from typing import Any
+from re import I
+from typing import Any, Collection
 from typing import Callable
-
+from collections import Counter
 
 def func(a1: float, back: float, cill: float) -> list:
     disk = back ** 2 - 4 * a1 * cill
@@ -78,17 +80,16 @@ def decor_data(func: Callable) -> Callable:
 
 @decor_data
 def palindrom(di1: Any) -> Any:
+    assert isinstance(di1, str), "No String" 
     return di1[:] == di1[::-1]
 
 
 @decor_data
 def proizvedenie(*args: Any) -> Any:
+    assert not args, "No Arguments"
     if len(args) == 1:
         return args[0]
-    product = 1
-    for dig in args:
-        product *= dig
-    return product
+    reduce(lambda x, y: x*y, args)
 
 
 @decor_data
@@ -101,15 +102,19 @@ def dateday(yer: Any) -> Any:
         "day": yer.day,
         "age": int(delta.days // 365),
     }
+today = date.today()
+ymd = (today.year - 100, today.month, today.day)
 
 
 @decor_data
 def happybithday(yer: dict[Any, date]) -> Any:
+    assert isinstance(yer, dict), "No Match Type"
     return min(yer, key=lambda t: yer[t])
 
 
 @decor_data
 def repeat(collect: Any) -> dict:
+    assert isinstance(collect, Collection),"No Collections"
     if isinstance(collect, (set, dict)) or len(collect) < 2:
         return {}
     noresult = []
@@ -120,10 +125,12 @@ def repeat(collect: Any) -> dict:
         for quant in noresult
         if noresult.count(quant) > 1
     }
-
+    
+print(repeat((None, None)))
 
 @decor_data
 def html_str(query: Any) -> dict:
+    assert isinstance(query, str), "No String"
     result: dict[str, list] = {}
     verif = 0
     for letter in query.split("&"):
@@ -143,6 +150,7 @@ def html_str(query: Any) -> dict:
 
 @decor_data
 def decodding(code: Any) -> Any:
+    assert isinstance(code, str), "No String"
     if code == "":
         return ""
     assert code[-1].isdigit(), "None Digital"
