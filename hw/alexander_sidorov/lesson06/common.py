@@ -1,11 +1,15 @@
 from functools import wraps
 from typing import Any
 from typing import Callable
+from typing import Collection
 from typing import Hashable
 from typing import Iterable
 from typing import Literal
 from typing import Sequence
+from typing import TypeVar
 from typing import Union
+from typing import get_args
+from typing import get_origin
 
 from typing_extensions import ParamSpec
 
@@ -94,10 +98,104 @@ def hashable(arg: Any) -> bool:
 
 def api(func: Callable[Params, Any]) -> Callable[Params, Result]:
     @wraps(func)
-    def new_func(*args: Params.args, **kwargs: Params.kwargs) -> Result:
-        result = func(*args, **kwargs)
-        if isinstance(result, dict) and "errors" in result:
-            return result
-        return {"data": result}
+    def decorated(*args: Params.args, **kwargs: Params.kwargs) -> Result:
+        try:
+            result = func(*args, **kwargs)
+            return {"data": result}
+        except AssertionError as err:
+            return {"errors": [str(err)]}
 
-    return new_func
+    return decorated
+
+
+T1 = TypeVar("T1")
+
+
+def validate_args_types(func: Callable[Params, T1]) -> Callable[Params, T1]:
+    @wraps(func)
+    def decorated(*args: Params.args, **kwargs: Params.kwargs) -> T1:
+        assert not kwargs
+
+        annotations = (
+            (p, t)
+            for (p, t) in func.__annotations__.items()
+            if p not in {"return"}
+        )
+        pos_annos = (
+            next(annotations) for _ in "_" * func.__code__.co_argcount
+        )
+
+        arguments = iter(args)  # type: ignore
+
+        for param, exp_type in pos_annos:
+            arg = next(arguments)
+            _validate_arg_type(arg, exp_type, param)
+
+        if star_annos := list(annotations):
+            star_name, star_type = star_annos[0]
+            for i, arg in enumerate(arguments):
+                _validate_arg_type(arg, star_type, f"*{star_name}[{i}]")
+
+        return func(*args, **kwargs)
+
+    return decorated
+
+
+def _validate_arg_type(  # noqa: CCR001 # 21!
+    arg: Any,
+    exp_type: Any,
+    param: str,
+) -> None:
+    if exp_type is Any or isinstance(exp_type, TypeVar):
+        return
+
+    exp_type_ = name(exp_type)
+
+    exp_origin = get_origin(exp_type)
+    exp_origin_ = name(exp_origin)
+    exp_args = get_args(exp_type)
+
+    type_arg = type(arg)
+    type_arg_ = name(type_arg)
+
+    if exp_origin is None:
+        err = f"{param}={arg!r}, {type_arg_} != expected: {exp_type_}"
+        assert isinstance(arg, exp_type), err
+
+    elif exp_origin is Union:
+        if Any in exp_args or any(isinstance(t, TypeVar) for t in exp_args):
+            return
+
+        exp_args_ = ", ".join(sorted(name(t) for t in exp_args))
+        err = f"{param}={arg!r}, {type_arg_} != expected: Union[{exp_args_}]"
+        assert isinstance(arg, exp_args), err
+
+    elif issubclass(exp_origin, Collection):
+        err = f"{param}={arg!r}, {type_arg_} != expected: {exp_origin_}"
+        assert isinstance(arg, exp_origin), err
+        if issubclass(exp_origin, dict):
+            for key, value in arg.items():
+                _validate_arg_type(key, exp_args[0], f"{param} key")
+                _validate_arg_type(value, exp_args[1], f"{param}[{key!r}]")
+        else:
+            if Any in exp_args or any(
+                isinstance(t, TypeVar) for t in exp_args
+            ):
+                return
+            exp_args_ = ", ".join(sorted(name(t) for t in exp_args))
+            for i, elm in enumerate(arg):
+                type_elm_ = name(type(elm))
+                err = (
+                    f"{param}[{i}]={elm!r}, {type_elm_}"
+                    f" - not in {exp_origin_}[{exp_args_}]"
+                )
+                assert isinstance(elm, exp_args), err
+
+
+def name(obj: Any) -> str:
+    if name := getattr(obj, "__name__", None):
+        assert name
+        return str(name)
+    if name := getattr(obj, "_name", None):
+        return str(name)
+    return repr(obj)

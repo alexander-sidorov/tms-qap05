@@ -12,13 +12,13 @@ def test_task_01() -> None:
         task_01,
         None,
         expected_errors=[
-            "type(arg)=<class 'NoneType'>, MUST be a string",
+            "arg=None, NoneType != expected: str",
         ],
     )
     validate(
         task_01,
         1,
         expected_errors=[
-            "type(arg)=<class 'int'>, MUST be a string",
+            "arg=1, int != expected: str",
         ],
     )

@@ -1,51 +1,40 @@
 from functools import reduce
 from operator import mul
 from typing import Collection
-from typing import Optional
 from typing import Sequence
 from typing import Union
-from typing import get_args
 
 from .common import Errors
-from .common import ErrorsList
 from .common import Multiplicative
 from .common import api
+from .common import validate_args_types
 
 
 @api
+@validate_args_types
 def task_02(*args: Multiplicative) -> Union[Multiplicative, Errors]:
     """
     Multiplies given arguments, from left to right.
     """
 
-    if errors := validate(args):
-        return errors
+    validate(args)
 
     data = reduce(mul, args)
 
     return data
 
 
-def validate(args: Collection) -> Optional[Errors]:
-    messages: ErrorsList = []
+def validate(args: Collection) -> None:
+    assert args, "nothing to multiply"
 
-    if not args:
-        messages.append("nothing to multiply")
-
-    allowed_types = get_args(Multiplicative)
     nr_cols = 0
     nr_non_ints = 0
-    for i, arg in enumerate(args):
-        if not isinstance(arg, allowed_types):
-            messages.append(f"args[{i}]={arg!r} has unsupported type")
-
+    for arg in args:
         nr_cols += isinstance(arg, Sequence)
         nr_non_ints += isinstance(arg, (float, complex))
 
-    if nr_cols > 1:
-        messages.append(f"cannot multiply {nr_cols} sequences")
+    assert nr_cols <= 1, f"cannot multiply {nr_cols} sequences"
 
-    if nr_cols and nr_non_ints:
-        messages.append("cannot multiply sequences and non-ints")
-
-    return {"errors": sorted(messages)} if messages else None
+    assert (
+        not nr_cols or not nr_non_ints
+    ), "cannot multiply sequences and non-ints"

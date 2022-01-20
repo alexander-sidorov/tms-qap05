@@ -28,7 +28,7 @@ def test_task_08() -> None:
         task_08,
         1,
         expected_errors=[
-            "type(flatten_text)=<class 'int'>, MUST be a str",
+            "flatten_text=1, int != expected: str",
         ],
     )
     validate(

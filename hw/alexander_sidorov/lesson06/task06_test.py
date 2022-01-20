@@ -44,6 +44,6 @@ def test_task_06() -> None:
         task_06,
         1,
         expected_errors=[
-            "type(query)=<class 'int'>, MUST be a str",
+            "query=1, int != expected: str",
         ],
     )
