@@ -218,38 +218,26 @@ def test() -> None:
             "b in a": True,
         }
     }
-    assert (level_11(..., ...)) == {
-        "errors": ["argument must be set", "argument must be set"]
-    }
-    assert (level_11(None, ...)) == {
-        "errors": ["argument must be set", "argument must be set"]
-    }
-    assert (level_11(1.0, None)) == {
-        "errors": ["argument must be set", "argument must be set"]
-    }
-    assert (level_11(1j, object)) == {
-        "errors": ["argument must be set", "argument must be set"]
-    }
+    assert (level_11(..., ...)) == {"errors": ["arguments must be set"]}
+    assert (level_11(None, ...)) == {"errors": ["arguments must be set"]}
+    assert (level_11(1.0, None)) == {"errors": ["arguments must be set"]}
+    assert (level_11(1j, object)) == {"errors": ["arguments must be set"]}
     assert (level_11(object(), object())) == {
-        "errors": ["argument must be set", "argument must be set"]
+        "errors": ["arguments must be set"]
     }
-    assert (level_11(object, 1j)) == {
-        "errors": ["argument must be set", "argument must be set"]
-    }
+    assert (level_11(object, 1j)) == {"errors": ["arguments must be set"]}
     assert (level_11(type("_", (), {}), "a")) == {  # noqa: JS101
-        "errors": ["argument must be set", "argument must be set"]
+        "errors": ["arguments must be set"]
     }
-    assert (level_11(type, [])) == {
-        "errors": ["argument must be set", "argument must be set"]
-    }
+    assert (level_11(type, [])) == {"errors": ["arguments must be set"]}
     assert (level_11(level_05, {})) == {  # noqa: JS101
-        "errors": ["argument must be set", "argument must be set"]
+        "errors": ["arguments must be set"]
     }
     assert (level_11(date(1999, 1, 1), {})) == {  # noqa: JS101
-        "errors": ["argument must be set", "argument must be set"]
+        "errors": ["arguments must be set"]
     }
     assert (level_11([[], []], frozenset())) == {
-        "errors": ["argument must be set"]
+        "errors": ["arguments must be set"]
     }
     assert (level_11({1, 2}, {1, 3})) == {  # noqa: JS101
         "data": {

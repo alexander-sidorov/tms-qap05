@@ -13,9 +13,14 @@ Result = Dict[str, Any]
 
 def decorator(func: Any) -> Any:
     def wrapper(*args: Any, **kwargs: Any) -> Any:
-        result = func(*args, **kwargs)
+        try:
+            result = func(*args, **kwargs)
+        except AssertionError as err:
+            return {"errors": [str(err)]}
+
         if isinstance(result, dict) and "errors" in result:
             return result
+
         return {"data": result}
 
     return wrapper
@@ -25,7 +30,7 @@ def decorator(func: Any) -> Any:
 def level_01(string: Any) -> Any:
 
     if not isinstance(string, str):
-        return {"errors": ["argument must be string"]}
+        raise AssertionError("argument must be string")
 
     else:
         if string == string[::-1]:
@@ -58,15 +63,11 @@ def level_02(*arguments: Any) -> Any:
 
 @decorator
 def level_03(bd: Any) -> Any:
-    result: Result = {}
-    errors = []
 
     today = date.today()
 
     if not isinstance(bd, date):
-        errors.append("type must be date")
-    if errors:
-        result["errors"] = errors
+        raise AssertionError("type must be date")
 
     else:
         if (today.year - bd.year) < 0:
@@ -90,13 +91,10 @@ def level_03(bd: Any) -> Any:
 
 @decorator
 def level_04(dic: Any) -> Any:
-    result: Result = {}
-    errors = []
 
     if not isinstance(dic, dict):
-        errors.append("must be date")
-    if errors:
-        result["errors"] = errors
+        raise AssertionError("must be date")
+
     else:
         try:
             res = min(dic, key=lambda n: dic[n])  # type: ignore
@@ -112,7 +110,7 @@ def level_04(dic: Any) -> Any:
 def level_05(lis: Any) -> Any:
 
     if not isinstance(lis, Collection):
-        return {"errors": ["argument must be list, tuple, str, set, dict"]}
+        raise AssertionError("argument must be list, tuple, str, set, dict")
 
     else:
         try:
@@ -131,18 +129,19 @@ def level_05(lis: Any) -> Any:
 def level_06(query: Any) -> Any:
 
     if not isinstance(query, str):
-        return {"errors": ["TypeError"]}
+        raise AssertionError("TypeError")
 
-    res = urllib.parse.parse_qs(query, keep_blank_values=True)
+    result = urllib.parse.parse_qs(query, keep_blank_values=True)
 
-    return res
+    return result
 
 
 @decorator
 def level_07(string: Any) -> Any:
 
     if not isinstance(string, str):
-        return {"errors": [f"argument ({string=!r}) must be string"]}
+        raise AssertionError(f"argument ({string=!r}) must be string")
+
     nums = re.findall(r"\d+", string)
     letters = re.findall(r"\D", string)
     if len(nums) != len(letters):
@@ -157,15 +156,17 @@ def level_07(string: Any) -> Any:
         letter = [el for el in s1 if el.isalpha()]
         number = [int(el) for el in s1 if el.isdigit()]
         s2 = list(map(lambda s_l, s_n: s_l * s_n, letter, number))
-        s3 = "".join(s2)
-        return s3
+        result = "".join(s2)
+
+    return result
 
 
 @decorator
 def level_08(string: Any) -> Any:
 
     if not isinstance(string, str):
-        return {"errors": [f"argument ({string=!r}) must be string"]}
+        raise AssertionError(f"argument ({string=!r}) must be string")
+
     if not string:
         return ""
     if not string.isalpha():
@@ -180,9 +181,9 @@ def level_08(string: Any) -> Any:
             el += 1
         letter = [x[-1] for x in col_letter]
         s1 = list(map(lambda x, y: x + y, letter, num))
-        s2 = "".join(s1)
+        result = "".join(s1)
 
-    return s2
+    return result
 
 
 @decorator
@@ -190,7 +191,8 @@ def level_09(dic: Any) -> Any:
     result: Result = {}
 
     if not isinstance(dic, dict):
-        return {"errors": ["argument must be dict"]}
+        raise AssertionError("argument must be dict")
+
     try:
         spisok = []
         for value in dic.values():
@@ -212,19 +214,20 @@ def level_10(arg1: Any, arg2: Any) -> Any:
     if isinstance(arg1, (dict, set, frozenset)) or isinstance(
         arg2, (dict, set, frozenset)
     ):
-        return {"errors": ["unhashable type"]}
+        raise AssertionError("unhashable type")
+
     try:
         key = list(arg1)
         val = list(arg2)  # noqa: VNE002
         if len(key) >= len(val):
-            dic = dict(zip_longest(arg1, arg2))
+            result = dict(zip_longest(arg1, arg2))
         else:
             val_no_key = val[len(key) :]  # noqa: E203
             key_with_value = val[: len(key)]
             res = list(zip(key, key_with_value))
             res.append((..., val_no_key))
-            dic = dict(res)
-        return dic
+            result = dict(res)
+        return result
 
     except TypeError:
         return {"errors": ["TypeError unhashable type"]}
@@ -232,15 +235,11 @@ def level_10(arg1: Any, arg2: Any) -> Any:
 
 @decorator
 def level_11(s1: Any, s2: Any) -> Any:
-    result: Result = {}
-    errors = []
 
-    if not isinstance(s1, (set, frozenset)):
-        errors.append("argument must be set")
-    if not isinstance(s2, (set, frozenset)):
-        errors.append("argument must be set")
-    if errors:
-        result["errors"] = errors
+    if not isinstance(s1, (set, frozenset)) or not isinstance(
+        s2, (set, frozenset)
+    ):
+        raise AssertionError("arguments must be set")
 
     else:
         dic = {"a": s1, "b": s2}
@@ -269,7 +268,7 @@ def level_11(s1: Any, s2: Any) -> Any:
 def level_12(*arguments: Any) -> Any:
 
     if len(arguments) % 2 != 0:
-        return {"errors": ["no pairs"]}
+        raise AssertionError("no pairs")
 
     else:
         list1 = [

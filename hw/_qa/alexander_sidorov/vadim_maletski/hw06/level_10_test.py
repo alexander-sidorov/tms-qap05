@@ -27,7 +27,7 @@ happy_data = [  # noqa: ECE001
         "v-14-2": ([1, 2], "ab", {1: "a", 2: "b"}),
         "v-15": (azaza("1", bs=[list]), "a", {"1": "a"}),
         "v-16": (azaza("2", bs=[str]), "a", {"2": "a"}),
-        "v-17": (azaza("3", bs=[tuple]), "a", {3: "a"}),
+        "v-17": (azaza((3,), bs=[tuple]), "a", {3: "a"}),
         "v-18": (azaza(bs=[list]), "a", {...: ["a"]}),
         "v-19": (azaza(bs=[str]), "a", {...: ["a"]}),
         "v-20": (azaza(bs=[tuple]), "a", {...: ["a"]}),
