@@ -71,7 +71,7 @@ def decor_data(func: Callable) -> Callable:
         try:
             return {"data": func(*args, **kwargs)}
         except Exception as f:
-            return {"errors": f}
+            return {"errors": str(f)}
 
     return wrapper
 
