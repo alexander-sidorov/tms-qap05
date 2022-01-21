@@ -88,12 +88,15 @@ def palindrom(di1: Any) -> Any:
 @decor_data
 def proizvedenie(*args: Any) -> Any:
     try:
-        if not args:
-            return "no arguments"
-        elif len(args) == 1:
-            return args[0]
-        else:
-            return reduce(lambda x, y: x * y, args)
+        if len(args) == 1:
+            if args[0] in [[], (), {}, set(), frozenset()]:
+                raise TypeError("TypeError")
+            else:
+                return args[0]
+
+        assert not isinstance(args[0], type), "No Class"
+
+        return reduce(lambda x, y: x * y, args)
     except AssertionError:
         raise TypeError("TypeError")
 
