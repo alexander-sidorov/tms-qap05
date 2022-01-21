@@ -266,21 +266,19 @@ def new_set(set1: Any, set2: Any) -> dict:
 
 
 @decor_data
-def diction(*args: Any) -> Any:
-    assert len(args) % 2 == 0, "Quantity of given arguments is not even"
-    keys = []
-    values = []
-    for i in args:
-        if args.index(i) % 2 == 0:
-            keys.append(i)
-        else:
-            values.append(i)
-    try:
-        dictionary_from_arguments = dict(list(zip(keys, values)))
-    except AssertionError:
-        raise TypeError("TypeError")
+def diction(*digit: Any) -> dict:
+    if len(digit) < 2 and not isinstance(digit[0], bool):
+        raise AssertionError("Empty")
+    assert len(digit) % 2 == 0, "No Pair"
+    result = {}
+    verif = 1
+    for dig in range(len(digit)):
+        if dig == verif:
+            verif += 2
+            continue
+        result[digit[dig]] = digit[dig + 1]
 
-    return dictionary_from_arguments
+    return result
 
 
 if __name__ == "__main__":
