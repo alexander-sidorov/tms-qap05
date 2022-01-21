@@ -267,8 +267,6 @@ def new_set(set1: Any, set2: Any) -> dict:
 
 @decor_data
 def diction(*digit: Any) -> dict:
-    if len(digit) < 2 and not isinstance(digit[0], bool):
-        raise AssertionError("Empty")
     assert len(digit) % 2 == 0, "No Pair"
     result = {}
     verif = 1
@@ -276,8 +274,10 @@ def diction(*digit: Any) -> dict:
         if dig == verif:
             verif += 2
             continue
-        result[digit[dig]] = digit[dig + 1]
-
+        try:
+            result[digit[dig]] = digit[dig + 1]
+        except AssertionError:
+            raise TypeError("TypeError")
     return result
 
 
