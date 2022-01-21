@@ -90,7 +90,7 @@ def palindrom(di1: Any) -> Any:
 def proizvedenie(*args: Any) -> Any:
     if len(args) == 1:
         assert not isinstance(args[0], type), "No Class"
-        assert bool(args[0]), "No Arguments"
+        assert args[0] not in [[], (), {}, set(), frozenset()], "No Arguments"
         if not isinstance(args[0], Iterable):
             return args[0]
         for _i in args[0]:
