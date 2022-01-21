@@ -94,7 +94,7 @@ def proizvedenie(*args: Any) -> Any:
         if not isinstance(args[0], Iterable):
             return args[0]
         for _i in args[0]:
-            return _i
+            return args[0]
     return reduce(lambda x, y: x * y, args)
 
 
