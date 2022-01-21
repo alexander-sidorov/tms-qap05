@@ -1,4 +1,3 @@
-from collections.abc import Iterable
 from collections.abc import Sequence
 from datetime import date
 from functools import reduce
@@ -88,20 +87,13 @@ def palindrom(di1: Any) -> Any:
 
 @decor_data
 def proizvedenie(*args: Any) -> Any:
-    if len(args) == 1:
-        if args[0] == "":
-            return ""
-        if not isinstance(args[0], Iterable):
+    try:
+        if not args:
+            return "no arguments"
+        elif len(args) == 1:
             return args[0]
         else:
-            assert len(args[0]) >= 1, "No given arguments"
-        for _i in args[0]:
-            return args[0]
-
-        assert not isinstance(args[0], type), "No Class"
-    try:
-
-        return reduce(lambda x, y: x * y, args)
+            return reduce(lambda x, y: x * y, args)
     except AssertionError:
         raise TypeError("TypeError")
 
