@@ -11,8 +11,9 @@ def decorate(func: Any) -> Any:
         result = func(*args)
         if isinstance(result, dict) and "errors" in result:
             return result
+        else:
+            return {"data": result}
 
-        return {"data": result}
     return xxx
 
 
