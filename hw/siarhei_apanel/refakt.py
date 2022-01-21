@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from collections.abc import Sequence
 from datetime import date
 from functools import reduce
@@ -88,8 +89,12 @@ def palindrom(di1: Any) -> Any:
 @decor_data
 def proizvedenie(*args: Any) -> Any:
     if len(args) == 1:
+        assert not isinstance(args[0], type), "No Class"
         assert bool(args[0]), "No Arguments"
-        return args[0]
+        if not isinstance(args[0], Iterable):
+            return args[0]
+        for _i in args[0]:
+            return _i
     return reduce(lambda x, y: x * y, args)
 
 
@@ -103,10 +108,6 @@ def dateday(yer: Any) -> Any:
         "day": yer.day,
         "age": int(delta.days // 365),
     }
-
-
-today = date.today()
-ymd = (today.year - 100, today.month, today.day)
 
 
 @decor_data
@@ -133,8 +134,10 @@ def repeat(collect: Any) -> dict:
 @decor_data
 def html_str(query: Any) -> dict:
     assert isinstance(query, str), "No String"
-    if len(query) < 3:
+    if len(query) < 2:
         return {}
+    if "=" not in query:
+        return {query: [""]}
     result: dict[str, list] = {}
     for letter in query.split("&"):
         verif = letter.index("=")
@@ -142,7 +145,7 @@ def html_str(query: Any) -> dict:
         if new_letter not in result:
             result[new_letter] = [letter[verif + 1 :]]  # noqa: E203
         else:
-            result[new_letter].append([letter[verif + 1 :]])  # noqa: E203
+            result[new_letter].append(letter[verif + 1 :])  # noqa: E203
     return result
 
 

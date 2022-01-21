@@ -46,9 +46,7 @@ def test_example() -> None:
     assert repeat("aaabbc") == {"data": {"a": 3, "b": 2}}
     assert repeat([]) == {"data": {}}
     assert "errors" in repeat(1)
-    assert html_str("x=1&x=2&y=33") == {
-        "data": {"x": ["1", ["2"]], "y": ["33"]}
-    }
+    assert html_str("x=1&x=2&y=33") == {"data": {"x": ["1", "2"], "y": ["33"]}}
     assert html_str("a=x&b=y&z=") == {
         "data": {"a": ["x"], "b": ["y"], "z": [""]}
     }
