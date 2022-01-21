@@ -15,24 +15,29 @@ ERROR_UNHASHABLE_TYPE = "collections contain values with unhashable type"
 
 def decorator_dict(func: Callable) -> Callable:
     def wrapper(*a: Any, **kw: Any) -> Any:
-        result = func(*a, **kw)
-        if isinstance(result, dict) and "errors" in result:
-            return result
-        else:
+        try:
+            result = func(*a, **kw)
+        # if isinstance(result, dict) and "errors" in result:
+        #     return result
+        # else:
             return {"data": result}
+        except AssertionError as err:
+            return {"errors": [str(err)]}
 
     return wrapper
 
 
 @decorator_dict
 def palindrome(string: str) -> Any:
-    if not isinstance(string, str):
-        return {"errors": [ERROR_NOT_STRING]}
-    if string[:] == string[::-1]:
-        result = True
-    else:
-        result = False
-    return result
+    # if not isinstance(string, str):
+    #     return {"errors": [ERROR_NOT_STRING]}
+
+    # if string[:] == string[::-1]:
+    #     result = True
+    # else:
+    #     result = False
+    assert isinstance(string, str), ERROR_NOT_STRING
+    return string == string[::-1]
 
 
 @decorator_dict
