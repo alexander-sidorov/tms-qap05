@@ -99,8 +99,11 @@ def proizvedenie(*args: Any) -> Any:
             return args[0]
 
         assert not isinstance(args[0], type), "No Class"
+    try:
 
-    return reduce(lambda x, y: x * y, args)
+        return reduce(lambda x, y: x * y, args)
+    except AssertionError:
+        raise TypeError("TypeError")
 
 
 @decor_data
