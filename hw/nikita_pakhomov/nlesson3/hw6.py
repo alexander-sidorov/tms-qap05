@@ -30,8 +30,6 @@ def is_palindrome(text: str) -> Any:
 
 @decorate
 def level_2(*args: Any) -> Any:
-    result = {}
-
     nakopitel = 1
     for i in args:
         nakopitel *= i
