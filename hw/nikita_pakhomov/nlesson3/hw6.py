@@ -68,7 +68,7 @@ def level_3(born: Any) -> Any:
 
 
 @decorate
-def level_4_1(age: Dict[Any, date]) -> Result:
+def level_4_1(age: Dict[Any, date]) -> Any:
     result: Result = {}
     if type(age) == dict:
         if type(age["A"]) != date or type(age["B"]) != date:
