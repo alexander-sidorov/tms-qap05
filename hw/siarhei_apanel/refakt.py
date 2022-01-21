@@ -93,7 +93,8 @@ def proizvedenie(*args: Any) -> Any:
             return ""
         if not isinstance(args[0], Iterable):
             return args[0]
-        assert len(args[0]) >= 1, "No given arguments"
+        else:
+            assert len(args[0]) >= 1, "No given arguments"
         for _i in args[0]:
             return args[0]
 
@@ -265,19 +266,21 @@ def new_set(set1: Any, set2: Any) -> dict:
 
 
 @decor_data
-def diction(*digit: Any) -> dict:
-    if len(digit) < 2 and not bool(digit[0]):
-        return {}
-    assert len(digit) % 2 == 0, "No Pair"
-    result = {}
-    verif = 1
-    for dig in range(len(digit)):
-        if dig == verif:
-            verif += 2
-            continue
-        result[digit[dig]] = digit[dig + 1]
+def diction(*args: Any) -> Any:
+    assert len(args) % 2 == 0, "Quantity of given arguments is not even"
+    keys = []
+    values = []
+    for i in args:
+        if args.index(i) % 2 == 0:
+            keys.append(i)
+        else:
+            values.append(i)
+    try:
+        dictionary_from_arguments = dict(list(zip(keys, values)))
+    except AssertionError:
+        raise TypeError("TypeError")
 
-    return result
+    return dictionary_from_arguments
 
 
 if __name__ == "__main__":
