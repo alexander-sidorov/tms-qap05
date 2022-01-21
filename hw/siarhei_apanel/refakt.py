@@ -89,12 +89,13 @@ def palindrom(di1: Any) -> Any:
 def proizvedenie(*args: Any) -> Any:
     try:
         if len(args) == 1:
-            if args[0] in [[], (), {}, set(), frozenset()]:
-                raise TypeError("TypeError")
-            else:
-                return args[0]
-
-        assert not isinstance(args[0], type), "No Class"
+            assert not isinstance(
+                args[0], (dict, set, frozenset)
+            ), "No Sequence"
+            assert args[0] not in [[], ()], "No Data"
+            return args[0]
+        for _x in args:
+            assert not isinstance(_x, (dict, set, frozenset)), "No Sequence"
 
         return reduce(lambda x, y: x * y, args)
     except AssertionError:
