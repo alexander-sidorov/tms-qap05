@@ -18,13 +18,11 @@ def decorate(func: Any) -> Any:
 
 
 @decorate
-def is_palindrome(text: Any) -> type_1:
-    result = {}
-    if type(text) == str:
-        if text[::-1] == text:
-            result = True
-        else:
-            result = False
+def is_palindrome(text: str) -> type_1:
+    if not isinstance(text, str):
+        result = False
+    if text[:] == text[::-1]:
+        result = True
     else:
         result = False
     return result
