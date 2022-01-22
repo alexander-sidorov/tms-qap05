@@ -2,7 +2,6 @@ from collections.abc import Sequence
 from datetime import date
 from functools import reduce
 from functools import wraps
-from types import NoneType
 from typing import Any
 from typing import Callable
 from typing import Collection
@@ -91,7 +90,7 @@ def proizvedenie(*args: Any) -> Any:
     try:
         if len(args) == 1:
             assert not isinstance(
-                args[0], (dict, set, frozenset, NoneType)
+                args[0], (dict, set, frozenset)
             ), "No Sequence"
             if args[0] == ("",):
                 return ""
