@@ -159,4 +159,3 @@ def decode_7(string: str) -> Any:
             data.append(int(number[i]) * letter[i])
         result = "".join(data)
         return result
-
