@@ -15,12 +15,16 @@ def test_is_palindrome_1() -> None:
     assert is_palindrome_1("x") == {"data": True}
     assert is_palindrome_1("xx") == {"data": True}
     assert is_palindrome_1("xy") == {"data": False}
+    assert is_palindrome_1(None) == {"errors": "none argument"}
+    assert is_palindrome_1(1) == {"errors": "not a string"}
 
 
 def test_multiply_args_2() -> None:
     assert multiply_args_2(1) == {"data": 1}
     assert multiply_args_2(1, 2) == {"data": 2}
     assert multiply_args_2(1, 2, 3) == {"data": 6}
+    assert multiply_args_2() == {"errors": "empty arguments"}
+    assert multiply_args_2(1, "a") == {"errors": "variable is not a number"}
 
 
 def test_age_result_3() -> None:
@@ -28,6 +32,7 @@ def test_age_result_3() -> None:
     assert age_result_3(date_variable) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
+    assert age_result_3(2) == {"errors": "variable is not a date"}
 
 
 def test_older_4() -> None:
@@ -36,6 +41,8 @@ def test_older_4() -> None:
         "B": date(year=1993, month=6, day=27),
     }
     assert older_4(birthday) == {"data": "B"}
+    assert older_4([]) == {"errors": "empty variable"}
+    assert older_4({}) == {"errors": "empty variable"}
 
 
 def test_older_4_v_lambda() -> None:
@@ -44,6 +51,8 @@ def test_older_4_v_lambda() -> None:
         "B": date(year=1993, month=6, day=27),
     }
     assert older_4_v_lambda(birthday) == {"data": "B"}
+    assert older_4_v_lambda([]) == {"errors": "empty variable"}  # type: ignore
+    assert older_4_v_lambda({}) == {"errors": "empty variable"}
 
 
 def test_repeating_elements_5() -> None:
@@ -56,6 +65,9 @@ def test_parse_http_query_6() -> None:
     assert parse_http_query_6(http_query) == {
         "data": {"x": ["1", "2"], "y": ["3"]}
     }
+    assert parse_http_query_6(None) == {"errors": "none argument"}
+    assert parse_http_query_6((1, 2)) == {"errors": "variable is not a string"}
+    assert parse_http_query_6("") == {"errors": "empty string"}
 
 
 def test_decode_7() -> None:
