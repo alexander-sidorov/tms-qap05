@@ -39,6 +39,7 @@ def test_older_4() -> None:
     birthday = {
         "A": date(year=2021, month=7, day=18),
         "B": date(year=1993, month=6, day=27),
+        "C": date(year=2000, month=3, day=22),
     }
     assert older_4(birthday) == {"data": "B"}
     assert older_4([]) == {"errors": "empty variable"}
