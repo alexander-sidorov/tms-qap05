@@ -93,7 +93,8 @@ def proizvedenie(*args: Any) -> Any:
             assert not isinstance(
                 args[0], (dict, set, frozenset, NoneType)
             ), "No Sequence"
-
+            if args[0] == ("",):
+                return ""
             return args[0]
 
         return reduce(lambda x, y: x * y, args)
