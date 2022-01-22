@@ -163,6 +163,7 @@ def decode_7(string: str) -> Any:
 
     number, letter = get_let_num_for_decode_7(string)
     if len(letter) != len(number):
+        result = {"errors": "letters is not equal numbers"}
         return result
     else:
         data = []
