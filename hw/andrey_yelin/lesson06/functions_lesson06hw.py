@@ -127,7 +127,7 @@ def parse_http_query_6(string: Any = None) -> Any:
     return result
 
 
-def get_let_num_for_decode_7(command_str: str) -> tuple:
+def get_let_num_for_decode_7(command_str: str) -> tuple:  # noqa: CCR001
     index, number, letter, symbl = 0, [], [], ""
     for sym in command_str:
         try:
