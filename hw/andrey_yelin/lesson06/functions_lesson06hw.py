@@ -147,8 +147,8 @@ def get_let_num_for_decode_7(command_str: str) -> tuple:
 @decorate
 def decode_7(string: str) -> Any:
     result: Any = {}
-    number: tuple = []
-    letter: tuple = []
+    number: list = []
+    letter: list = []
 
     number, letter = get_let_num_for_decode_7(string)
     if len(letter) != len(number):
@@ -159,3 +159,4 @@ def decode_7(string: str) -> Any:
             data.append(int(number[i]) * letter[i])
         result = "".join(data)
         return result
+
