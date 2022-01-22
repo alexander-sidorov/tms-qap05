@@ -95,11 +95,11 @@ def proizvedenie(*args: Any) -> Any:
             if args[0] == ("",):
                 return ""
             return args[0]
+        for _1 in args:
+            assert isinstance(_1, (Sequence, complex, int, float)), "TrueError"
 
         return reduce(
-            lambda x, y: x * y
-            if (isinstance(x, (Sequence, complex, int, float)))
-            else (str(TypeError("TypeError2"))),
+            lambda x, y: x * y,
             args,
         )
     except AssertionError:
