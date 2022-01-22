@@ -1,10 +1,10 @@
 import functools
 from datetime import date
+from functools import wraps
 from typing import Any
 from typing import Callable
 from typing import Dict
 from urllib.parse import parse_qs
-from functools import wraps
 
 Result = Dict[str, Any]
 
@@ -146,11 +146,9 @@ def get_let_num_for_decode_7(command_str: str) -> tuple:
 
 @decorate
 def decode_7(string: str) -> Any:
-    result, number, letter, = (
-        {},
-        [],
-        [],
-    )
+    result: Any = {}
+    number: tuple = []
+    letter: tuple = []
 
     number, letter = get_let_num_for_decode_7(string)
     if len(letter) != len(number):
