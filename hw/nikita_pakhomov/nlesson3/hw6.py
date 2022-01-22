@@ -115,9 +115,8 @@ def level_7(stroka: str) -> Any:
                 cpisok.append(stroch)
                 stroch = ""
         elif stroka[iii] == "=":
-            if stroch != "":
-                cpisok.append(stroch)
-                stroch = ""
+            cpisok.append(stroch)
+            stroch = ""
     if len(cpisok) != len(otvet):
         return {"errors": ["wrong input"]}
     for yyy in range(len(otvet)):
