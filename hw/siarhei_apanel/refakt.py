@@ -92,7 +92,7 @@ def proizvedenie(*args: Any) -> Any:
             assert not isinstance(
                 args[0], (dict, set, frozenset)
             ), "No Sequence"
-            assert args[0] not in [[], ()], "No Data"
+
             return args[0]
         for _x in args:
             assert not isinstance(_x, (dict, set, frozenset)), "No Sequence"
