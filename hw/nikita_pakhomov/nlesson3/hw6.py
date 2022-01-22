@@ -95,3 +95,31 @@ def level_5(spisok: Any) -> dict:
             del clovar[yyy]
     result = clovar
     return result
+
+
+@decorate
+def level_7(stroka: str) -> Any:
+    stroch = ""
+    otvet = ""
+    cpisok = []
+    otvett = ""
+    if not isinstance(stroka, str):
+        return {"errors": ["wrong input"]}
+    stroka = stroka + "="
+    for iii in range(len(stroka)):
+        if stroka[iii].isdecimal():
+            stroch = stroch + stroka[iii]
+        elif stroka[iii].isalnum():
+            otvet = otvet + stroka[iii]
+            if stroch != "":
+                cpisok.append(stroch)
+                stroch = ""
+        elif stroka[iii] == "=":
+            if stroch != "":
+                cpisok.append(stroch)
+                stroch = ""
+    if len(cpisok) != len(otvet):
+        return {"errors": ["wrong input"]}
+    for yyy in range(len(otvet)):
+        otvett = otvett + (otvet[yyy] * int(cpisok[yyy]))
+    return otvett
