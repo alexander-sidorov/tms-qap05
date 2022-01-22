@@ -101,6 +101,14 @@ def proizvedenie(*args: Any) -> Any:
         raise TypeError("TypeError")
 
 
+class Task02:
+    def __init__(self, *args: Any) -> None:
+        self.args = args
+
+    def multi(self):
+        return proizvedenie(*self.args)
+
+
 @decor_data
 def dateday(yer: Any) -> Any:
     now = date.today()
