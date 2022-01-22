@@ -5,6 +5,7 @@ from hw.nikita_pakhomov.nlesson3.hw6 import level_2
 from hw.nikita_pakhomov.nlesson3.hw6 import level_3
 from hw.nikita_pakhomov.nlesson3.hw6 import level_4_1
 from hw.nikita_pakhomov.nlesson3.hw6 import level_5
+from hw.nikita_pakhomov.nlesson3.hw6 import level_7
 
 
 def test_is_palindrome() -> None:
@@ -51,3 +52,11 @@ def test_level_5() -> None:
     elements = [(), "", "", 1]
     assert level_5(elements) == {"data": {"": 2}}
     assert level_5([]) == {"data": {}}
+
+
+def test_level_7() -> None:
+    assert level_7("a1b1a1") == {"data": "aba"}
+    assert level_7("a3bc") == {"errors": ["wrong input"]}
+    assert level_7("13b2c1") == {"errors": ["wrong input"]}
+    assert level_7("a3b2cv") == {"errors": ["wrong input"]}
+    assert level_7("b5") == {"data": "bbbbb"}
