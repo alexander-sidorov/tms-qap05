@@ -142,5 +142,4 @@ def level_8(string: str) -> Any:
             counter = 1
         ppp = string[iii]
     calo = calo + (ppp + str(counter))
-
     return calo
