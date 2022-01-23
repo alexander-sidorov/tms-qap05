@@ -141,39 +141,126 @@ def validate_args_types(func: Callable[Params, T1]) -> Callable[Params, T1]:
     return decorated
 
 
-def _validate_arg_type(  # noqa: CCR001 # 21!
+def _validate_arg_type(
     arg: Any,
     exp_type: Any,
     param: str,
 ) -> None:
-    if exp_type is Any or isinstance(exp_type, TypeVar):
-        return
+    checks = (
+        _check_special_form,
+        _check_strict_type,
+        _check_callable,
+        _check_collection,
+        _check_generic,
+    )
 
+    approved = False
+    for check in checks:
+        approved = check(arg, exp_type, param)
+        if approved:
+            break
+
+    if not approved:
+        raise AssertionError(
+            f"{param}={arg!r}: type {name(type(arg))!r} != {exp_type=!r}"
+        )
+
+
+def _check_strict_type(
+    arg: Any,
+    exp_type: Any,
+    param: str,
+) -> bool:
+    exp_origin = get_origin(exp_type)
+    if exp_origin is not None:
+        return False
+
+    type_arg_ = name(type(arg))
     exp_type_ = name(exp_type)
+    err = f"{param}={arg!r}, {type_arg_} != expected: {exp_type_}"
+
+    assert isinstance(arg, exp_type), err
+    return True
+
+
+def _check_callable(
+    arg: Any,
+    exp_type: Any,
+    param: str,
+) -> bool:
+    exp_origin = get_origin(exp_type)
+    if exp_origin is None:
+        return False
+
+    try:
+        if not issubclass(exp_origin, Callable):  # type: ignore
+            return False
+    except TypeError:
+        return False
+
+    err = f"{param}={arg!r} is not Callable"
+    assert isinstance(arg, Callable), err  # type: ignore
+    return True
+
+
+def _check_special_form(
+    arg: Any,
+    exp_type: Any,
+    param: str,
+) -> bool:
+    if exp_type is Any or isinstance(exp_type, TypeVar):
+        return True
 
     exp_origin = get_origin(exp_type)
-    exp_origin_ = name(exp_origin)
+    if exp_origin is not Union:
+        return False
+
     exp_args = get_args(exp_type)
+    exp_args_ = ", ".join(sorted(name(t) for t in exp_args))
+    type_arg_ = name(type(arg))
+    err = f"{param}={arg!r}, {type_arg_} != expected: Union[{exp_args_}]"
 
-    type_arg = type(arg)
-    type_arg_ = name(type_arg)
+    assert isinstance(arg, exp_args), err
+    return True
 
-    if exp_origin is None:
-        err = f"{param}={arg!r}, {type_arg_} != expected: {exp_type_}"
-        assert isinstance(arg, exp_type), err
 
-    elif exp_origin is Union:
-        exp_args_ = ", ".join(sorted(name(t) for t in exp_args))
-        err = f"{param}={arg!r}, {type_arg_} != expected: Union[{exp_args_}]"
-        assert isinstance(arg, exp_args), err
+def _check_collection(
+    arg: Any,
+    exp_type: Any,
+    param: str,
+) -> bool:
+    exp_origin = get_origin(exp_type)
+    try:
+        if not issubclass(exp_origin, Collection):  # type: ignore
+            return False
+    except TypeError:
+        return False
 
-    elif issubclass(exp_origin, Collection):
-        err = f"{param}={arg!r}, {type_arg_} != expected: {exp_origin_}"
-        assert isinstance(arg, exp_origin), err
-        if issubclass(exp_origin, dict):
-            for key, value in arg.items():
-                _validate_arg_type(key, exp_args[0], f"{param} key")
-                _validate_arg_type(value, exp_args[1], f"{param}[{key!r}]")
+    _validate_arg_type(arg, exp_origin, param)
+
+    if issubclass(exp_origin, dict):  # type: ignore
+        exp_args = get_args(exp_type)
+        for key, value in arg.items():
+            _validate_arg_type(key, exp_args[0], f"{param} key")
+            _validate_arg_type(value, exp_args[1], f"{param}[{key!r}]")
+
+    return True
+
+
+def _check_generic(
+    arg: Any,
+    exp_type: Any,
+    param: str,
+) -> bool:
+    exp_origin = get_origin(exp_type)
+    if exp_origin is Literal:
+        assert arg in get_args(exp_type)
+        return True
+
+    err = f"{param}={arg!r}: invalid type {name(exp_type)}"
+    assert isinstance(arg, exp_origin), err  # type: ignore
+
+    return True
 
 
 def name(obj: Any) -> str:
