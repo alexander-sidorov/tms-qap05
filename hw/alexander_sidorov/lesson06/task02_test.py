@@ -20,7 +20,8 @@ def test_task_02() -> None:
         None,
         2,
         expected_errors={
-            "args[0]=None has unsupported type",
+            "*args[0]=None, NoneType"
+            " != expected: Union[Sequence, complex, float, int]",
         },
     )
     validate(
@@ -28,7 +29,8 @@ def test_task_02() -> None:
         {},
         2,
         expected_errors={
-            "args[0]={} has unsupported type",
+            "*args[0]={}, dict"
+            " != expected: Union[Sequence, complex, float, int]",
         },
     )
     validate(
@@ -47,17 +49,6 @@ def test_task_02() -> None:
         "c",
         3j,
         expected_errors={
-            "cannot multiply sequences and non-ints",
-        },
-    )
-    validate(
-        task_02,
-        2,
-        "c",
-        3.0,
-        [1],
-        expected_errors={
-            "cannot multiply 2 sequences",
             "cannot multiply sequences and non-ints",
         },
     )

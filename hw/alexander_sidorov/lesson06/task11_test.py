@@ -71,7 +71,7 @@ def test_task_11() -> None:
         None,
         {"ab"},
         expected_errors={
-            "arg 1 is <class 'NoneType'>, MUST be a set",
+            "arg1=None, NoneType != expected: Union[frozenset, set]",
         },
     )
     validate(
@@ -79,15 +79,6 @@ def test_task_11() -> None:
         {"ab"},
         None,
         expected_errors={
-            "arg 2 is <class 'NoneType'>, MUST be a set",
-        },
-    )
-    validate(
-        task_11,
-        None,
-        None,
-        expected_errors={
-            "arg 1 is <class 'NoneType'>, MUST be a set",
-            "arg 2 is <class 'NoneType'>, MUST be a set",
+            "arg2=None, NoneType != expected: Union[frozenset, set]",
         },
     )

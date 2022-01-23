@@ -28,15 +28,14 @@ def test_task_05() -> None:
         task_05,
         None,
         expected_errors={
-            "type(collection)=<class 'NoneType'>, MUST be a collection",
+            "collection=None, NoneType != expected: Collection",
         },
     )
 
     validate(
         task_05,
-        [[], []],
+        [[]],
         expected_errors={
             "collection[0]=[] is not hashable",
-            "collection[1]=[] is not hashable",
         },
     )

@@ -11,7 +11,7 @@ verify_ssl = true
 atomicwrites = { version = "*", sys_platform = "== 'win32'" }
 black = "*"
 coverage = { extras = ["toml"], version = "*" }
-devtools = { extras = ["pygments"], version = "*" }
+devtools = {extras = ["pygments"], version = "*"}
 dlint = "*"
 flake8 = "*"
 flake8-annotations-complexity = "*"

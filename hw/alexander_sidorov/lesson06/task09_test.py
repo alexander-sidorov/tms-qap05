@@ -23,14 +23,13 @@ def test_task_09() -> None:
         task_09,
         1,
         expected_errors=[
-            "type(arg)=<class 'int'>, MUST be a dict",
+            "arg=1, int != expected: dict",
         ],
     )
     validate(
         task_09,
-        {1: {}, 3: []},
+        {1: {}},
         expected_errors=[
-            "value=[] of key=3 cannot be used as a new key",
             "value={} of key=1 cannot be used as a new key",
         ],
     )
