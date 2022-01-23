@@ -131,16 +131,16 @@ def level_8(string: str) -> Any:
     if string == "":
         return ""
     counter = 0
-    p = string[0]
+    ppp = string[0]
     calo = ""
     for iii in range(len(string)):
-        if p == string[iii]:
+        if ppp == string[iii]:
             counter = counter + 1
         else:
 
-            calo = calo + (p + str(counter))
+            calo = calo + (ppp + str(counter))
             counter = 1
-        p = string[iii]
-    calo = calo + (p + str(counter))
+        ppp = string[iii]
+    calo = calo + (ppp + str(counter))
 
     return calo
