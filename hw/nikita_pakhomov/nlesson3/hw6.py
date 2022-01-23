@@ -122,3 +122,25 @@ def level_7(stroka: str) -> Any:
     for yyy in range(len(otvet)):
         otvett = otvett + (otvet[yyy] * int(cpisok[yyy]))
     return otvett
+
+
+@decorate
+def level_8(string: str) -> Any:
+    if not isinstance(string, str):
+        return {"errors": ["wrong input"]}
+    if string == "":
+        return ""
+    counter = 0
+    p = string[0]
+    calo = ""
+    for iii in range(len(string)):
+        if p == string[iii]:
+            counter = counter + 1
+        else:
+
+            calo = calo + (p + str(counter))
+            counter = 1
+        p = string[iii]
+    calo = calo + (p + str(counter))
+
+    return calo
