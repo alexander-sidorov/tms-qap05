@@ -1,6 +1,9 @@
 from datetime import date
 
 from hw.andrey_yelin.lesson06.functions_lesson06hw import age_result_3
+from hw.andrey_yelin.lesson06.functions_lesson06hw import (
+    all_actions_with_two_sets_11,
+)
 from hw.andrey_yelin.lesson06.functions_lesson06hw import code_8
 from hw.andrey_yelin.lesson06.functions_lesson06hw import decode_7
 from hw.andrey_yelin.lesson06.functions_lesson06hw import is_palindrome_1
@@ -9,7 +12,7 @@ from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4
 from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4_v_lambda
 from hw.andrey_yelin.lesson06.functions_lesson06hw import parse_http_query_6
 from hw.andrey_yelin.lesson06.functions_lesson06hw import repeating_elements_5
-from hw.andrey_yelin.lesson06.functions_lesson06hw import reversed_dictionary
+from hw.andrey_yelin.lesson06.functions_lesson06hw import reversed_dictionary_9
 
 
 def test_is_palindrome_1() -> None:
@@ -85,10 +88,41 @@ def test_code_8() -> None:
     assert code_8("") == {"errors": "number of letters = 0"}
 
 
-def test_reversed_dictionary() -> None:
-    assert reversed_dictionary({1: 100, 2: 100, 3: 300}) == {  # noqa: JS101
+def test_reversed_dictionary_9() -> None:
+    assert reversed_dictionary_9({1: 100, 2: 100, 3: 300}) == {  # noqa: JS101
         "data": {100: [1, 2], 300: 3}
     }
-    assert reversed_dictionary("") == {"errors": "argument is not a dict"}
-    assert reversed_dictionary([]) == {"errors": "argument is not a dict"}
-    assert reversed_dictionary(()) == {"errors": "argument is not a dict"}
+    assert reversed_dictionary_9("") == {"errors": "argument is not a dict"}
+    assert reversed_dictionary_9([]) == {"errors": "argument is not a dict"}
+    assert reversed_dictionary_9(()) == {"errors": "argument is not a dict"}
+
+
+def test_all_actions_with_two_sets_11() -> None:
+    assert all_actions_with_two_sets_11({1, 2}, {1, 3}) == {  # noqa: JS101
+        "data": {
+            "a&b": {1},
+            "a|b": {1, 2, 3},
+            "a-b": {2},
+            "b-a": {3},
+            "|a-b|": {2, 3},
+            "a in b": False,
+            "b in a": False,
+        }
+    }
+    assert all_actions_with_two_sets_11({1, 2}, {1, 2, 3}) == {  # noqa: JS101
+        "data": {
+            "a&b": {1, 2},
+            "a|b": {1, 2, 3},
+            "a-b": set(),
+            "b-a": {3},
+            "|a-b|": {3},
+            "a in b": True,
+            "b in a": False,
+        }
+    }
+    assert all_actions_with_two_sets_11(123, {1, 2, 3}) == {  # noqa: JS101
+        "errors": "first argument has not a set type"
+    }
+    assert all_actions_with_two_sets_11({1, 2, 3}, 123) == {  # noqa: JS101
+        "errors": "second argument has not a set type"
+    }

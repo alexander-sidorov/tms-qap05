@@ -211,7 +211,8 @@ def code_8(string: str) -> Any:  # noqa: CCR001
 
 
 @decorate
-def reversed_dictionary(dictionary: dict) -> dict:
+def reversed_dictionary_9(dictionary: dict) -> dict:
+
     if not isinstance(dictionary, dict):
         result = {"errors": "argument is not a dict"}
         return result
@@ -229,3 +230,25 @@ def reversed_dictionary(dictionary: dict) -> dict:
             rev_dict[some_key] = some_value[0]
     result = rev_dict
     return result
+
+
+@decorate
+def all_actions_with_two_sets_11(first_set: set, second_set: set) -> dict:
+
+    if not isinstance(first_set, set):
+        result = {"errors": "first argument has not a set type"}
+        return result
+
+    if not isinstance(second_set, set):
+        result = {"errors": "second argument has not a set type"}
+        return result
+
+    return {
+        "a&b": first_set & second_set,
+        "a|b": first_set | second_set,
+        "a-b": first_set - second_set,
+        "b-a": second_set - first_set,
+        "|a-b|": first_set ^ second_set,
+        "a in b": first_set.issubset(second_set),
+        "b in a": second_set.issubset(first_set),
+    }
