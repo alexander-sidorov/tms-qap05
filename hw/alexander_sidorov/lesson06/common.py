@@ -5,6 +5,7 @@ from typing import Collection
 from typing import Hashable
 from typing import Iterable
 from typing import Literal
+from typing import NewType
 from typing import Sequence
 from typing import TypeVar
 from typing import Union
@@ -191,11 +192,11 @@ def typecheck_arg_strict_type(
     if origin is not None:
         return False
 
-    print(f"XXX {expected!r} / {type(expected)=!r}")
-
     if isinstance(expected, (_SpecialForm, TypeVar)):
         return False
-    if type(expected) == type(typecheck_arg_strict_type):
+
+    function = type(typecheck_arg_strict_type)
+    if type(expected) is function or issubclass_(expected, NewType):
         # covers NewType
         return False
 
