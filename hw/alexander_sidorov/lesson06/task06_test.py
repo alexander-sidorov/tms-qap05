@@ -44,6 +44,6 @@ def test_task_06() -> None:
         task_06,
         1,
         expected_errors=[
-            "query=1, int != expected: str",
+            "query=1, int != str (expected)",
         ],
     )

@@ -4,7 +4,7 @@ from typing import Union
 from .common import AnySet
 from .common import Errors
 from .common import api
-from .common import validate_args_types
+from .common import typecheck
 
 DataKeys = Literal[
     "|a-b|",
@@ -20,7 +20,7 @@ Data = dict[DataKeys, Union[AnySet, bool]]
 
 
 @api
-@validate_args_types
+@typecheck
 def task_11(arg1: AnySet, arg2: AnySet) -> Union[Data, Errors]:
     """
     Displays the common set of operations upon two sets.

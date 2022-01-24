@@ -33,7 +33,7 @@ def test_task_07() -> None:
         task_07,
         1,
         expected_errors=[
-            "folded_text=1, int != expected: str",
+            "folded_text=1, int != str (expected)",
         ],
     )
     validate(

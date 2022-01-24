@@ -2,6 +2,7 @@ from typing import Any
 from typing import Callable
 from typing import Generic
 from typing import Literal
+from typing import NewType
 from typing import Sequence
 from typing import TypeVar
 from typing import Union
@@ -9,65 +10,65 @@ from typing import Union
 import pytest
 
 from .common import name
-from .common import validate_args_types
+from .common import typecheck
+from .common import typecheck_arg_callable
+from .common import typecheck_arg_special_form
+from .common import typecheck_arg_strict_type
 
-T = TypeVar("T")
-
-
-@validate_args_types
-def func_c(arg: Callable) -> None:
-    assert arg
-
-
-@validate_args_types
-def func_any(arg: Any) -> None:
-    assert arg
+T1 = TypeVar("T1")
+T2 = NewType("T2", int)
 
 
-@validate_args_types
-def func_t(arg: T) -> None:
-    assert arg
-
-
-class G(Generic[T]):
+class T3(Generic[T1]):
     pass
 
 
-@validate_args_types
-def func_g(arg: G[int]) -> None:
-    assert arg
+def test_typecheck_invalid_call() -> None:
+    @typecheck
+    def _func(_arg1: Any, _arg2: Any) -> Any:
+        pass  # pragma: no cover
+
+    with pytest.raises(AssertionError) as err:
+        _func(*[1])
+
+    assert str(err.value) == "invalid usage of >>> _arg2 <<<"
 
 
-@validate_args_types
-def func_lc(arg: list[Callable]) -> list:
-    return arg[:]
+def test_typecheck_unknown() -> None:
+    @typecheck
+    def _func(_arg1: T2) -> Any:
+        pass  # pragma: no cover
+
+    with pytest.raises(AssertionError) as err:
+        _func(1)  # type: ignore
+
+    assert str(err.value) == "_arg1=1: type int != T2 (expected)"
 
 
-@validate_args_types
-def func_lit(_arg: Literal[420]) -> None:
-    pass
+def test_typecheck_strict_type() -> None:
+    assert typecheck_arg_strict_type("arg", "", list[str]) is False
+    assert typecheck_arg_strict_type("arg", "", Any) is False
 
 
-@pytest.mark.parametrize(
-    "func,arg,ok",
-    [
-        pytest.param(func_any, ..., True, id="any"),
-        pytest.param(func_c, ..., False, id="callable-fail"),
-        pytest.param(func_c, func_c, True, id="callable-ok"),
-        pytest.param(func_g, ..., False, id="generic-false"),
-        pytest.param(func_g, G(), True, id="generic-true"),
-        pytest.param(func_lc, [], True, id="list-callable-ok"),
-        pytest.param(func_lit, ..., False, id="literal-fail"),
-        pytest.param(func_lit, 420, True, id="literal-ok"),
-        pytest.param(func_t, ..., True, id="typevar"),
-    ],
-)
-def test_validator(func: Callable, arg: Any, ok: bool) -> None:
-    if not ok:
-        with pytest.raises(AssertionError):
-            func(arg)
-    else:
-        func(arg)
+def test_typecheck_arg_callable() -> None:
+    assert typecheck_arg_callable("arg", "", list[str]) is False
+
+    def f() -> None:
+        pass  # pragma: no cover
+
+    assert typecheck_arg_callable("arg", f, Callable[[], int]) is True
+
+    with pytest.raises(AssertionError) as excinfo:
+        typecheck_arg_callable("arg", "", Callable)
+    assert str(excinfo.value) == "arg='' is not Callable"
+
+
+def test_typecheck_arg_special_form() -> None:
+    assert typecheck_arg_special_form("arg", "x", Literal["x"]) is True
+
+    with pytest.raises(AssertionError) as excinfo:
+        typecheck_arg_special_form("arg", 4, Literal["x"])
+    assert str(excinfo.value) == "arg=4, not in Literal['x']"
 
 
 def test_name() -> None:
@@ -75,4 +76,5 @@ def test_name() -> None:
     assert name(Sequence) == "Sequence"
     assert name(list) == "list"
     assert name([]) == "[]"
-    assert name(T) == "T"
+    assert name(T1) == "T1"
+    assert name(T2) == "T2"

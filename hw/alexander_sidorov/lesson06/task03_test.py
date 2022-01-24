@@ -24,6 +24,6 @@ def test_task_03() -> None:
         task_03,
         None,
         expected_errors=[
-            "arg=None, NoneType != expected: date",
+            "arg=None, NoneType != date (expected)",
         ],
     )

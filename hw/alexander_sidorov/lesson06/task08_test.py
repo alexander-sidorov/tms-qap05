@@ -28,7 +28,7 @@ def test_task_08() -> None:
         task_08,
         1,
         expected_errors=[
-            "flatten_text=1, int != expected: str",
+            "flatten_text=1, int != str (expected)",
         ],
     )
     validate(

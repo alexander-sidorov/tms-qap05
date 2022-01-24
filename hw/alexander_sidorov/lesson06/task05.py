@@ -7,7 +7,7 @@ from typing import Union
 from .common import Errors
 from .common import api
 from .common import hashable
-from .common import validate_args_types
+from .common import typecheck
 
 T1 = TypeVar("T1")
 
@@ -16,7 +16,7 @@ Data = dict[T1, int]
 
 
 @api
-@validate_args_types
+@typecheck
 def task_05(collection: Collection[T1]) -> Union[Data, Errors]:
     """
     Calculates count of duplicates in the given collection.
