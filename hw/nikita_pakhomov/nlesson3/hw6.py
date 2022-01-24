@@ -137,7 +137,6 @@ def level_8(string: str) -> Any:
         if ppp == string[iii]:
             counter = counter + 1
         else:
-
             calo = calo + (ppp + str(counter))
             counter = 1
         ppp = string[iii]
