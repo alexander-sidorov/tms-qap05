@@ -104,11 +104,11 @@ def proizvedenie(*args: Any) -> Any:
     )
 
 
-class Task02:
+class Multiplier04:
     def __init__(self, *args: Any) -> None:
         self.args = args
 
-    def multi(self):
+    def add(self):
         return proizvedenie(*self.args)
 
 
