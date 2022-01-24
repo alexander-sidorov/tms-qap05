@@ -191,6 +191,8 @@ def typecheck_arg_strict_type(
     if origin is not None:
         return False
 
+    print(f"XXX {expected!r} / {type(expected)=!r}")
+
     if isinstance(expected, (_SpecialForm, TypeVar)):
         return False
     if type(expected) == type(typecheck_arg_strict_type):
