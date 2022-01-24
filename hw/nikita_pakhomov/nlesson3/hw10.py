@@ -1,11 +1,11 @@
 from typing import Any
 
-from hw.nikita_pakhomov.nlesson3.hw6 import is_palindrome
+from hw.nikita_pakhomov.nlesson3.hw6 import palindrome
 
 
 class Palindrome01:
-    def __init__(self, stroka: Any) -> None:
+    def __init__(self, stroka: Any) -> bool:
         self.stroka = stroka
 
-    def __ccc__(self) -> Any:
-        return is_palindrome(self.stroka)
+    def __bool__(self) -> Any:
+        return palindrome(self.stroka)
