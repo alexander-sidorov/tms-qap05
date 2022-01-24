@@ -15,7 +15,7 @@ def decorator_function(func: Callable) -> Callable:
 
 @decorator_function
 def palindrom(slovo: Any) -> Any:
-    if type(slovo) != str:
+    if not isinstance(slovo, str):
         return {"errors": ["TypeErrors"]}
 
     once_letter = 0
@@ -36,7 +36,7 @@ def umnogenie(*nums: Any) -> Any:
     count1 = 0
     banka = 1
     for n2 in nums:
-        if type(n2) in [str, tuple, list]:
+        if isinstance(n2, (str, tuple, list)) is True:
             count1 += 1
             if count1 >= 2:
                 return {"errors": ["TypeError"]}
@@ -46,7 +46,7 @@ def umnogenie(*nums: Any) -> Any:
 
 @decorator_function
 def date_age(b1: date) -> dict:
-    if type(b1) != date:
+    if not isinstance(b1, date):
         return {"errors": ["TypeError"]}
     segodnya = date.today()
     delta = segodnya - b1
@@ -76,9 +76,9 @@ def zadacha_4(day: dict[Any, date]) -> dict:
 
 @decorator_function
 def zadacha_5(collection: Any) -> dict:
-    if type(collection) in [set, dict]:
+    if isinstance(collection, (set, dict)):
         return {}
-    if type(collection) not in [list, tuple, str]:
+    if not isinstance(collection, (list, tuple, str)):
         return {"errors": ["TypeError"]}
 
     banka = {}  # type: ignore
@@ -89,19 +89,21 @@ def zadacha_5(collection: Any) -> dict:
         if collection.count(n1) >= 2:
             list_result.append(n1)
     for n2 in list_result:
-        if type(n2) in [list, dict]:
+        if isinstance(n2, (list, dict)):
             return {"errors": ["TypeError"]}
         else:
             banka[n2] = list_result.count(n2)
 
     return banka
+print(zadacha_5([], []))
+
 
 
 @decorator_function
 def zadacha_7(sybol_num: Any) -> Any:
     if len(sybol_num) == 0:
         return ""
-    if type(sybol_num) != str:
+    if not isinstance(sybol_num, str):
         return {"errors": ["TypeError"]}
     if sybol_num[-1].isalpha():
         return {"errors": ["NonDigitError"]}
