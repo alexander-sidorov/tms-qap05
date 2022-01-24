@@ -28,6 +28,16 @@ def is_palindrome(text: str) -> Any:
     return result
 
 
+def palindrome(text: str) -> Any:
+    if not isinstance(text, str):
+        result = False
+    if text[:] == text[::-1]:
+        result = True
+    else:
+        result = False
+    return result
+
+
 @decorate
 def level_2(*args: Any) -> Any:
     nakopitel = 1
