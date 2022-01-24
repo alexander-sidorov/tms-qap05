@@ -208,3 +208,24 @@ def code_8(string: str) -> Any:  # noqa: CCR001
             some_obj[letter] = 1
 
     return result
+
+
+@decorate
+def reversed_dictionary(dictionary: dict) -> dict:
+    if not isinstance(dictionary, dict):
+        result = {"errors": "argument is not a dict"}
+        return result
+    rev_dict = {}
+
+    for key, value in dictionary.items():
+        if value not in rev_dict:
+            rev_dict[value] = [key]
+
+        else:
+            rev_dict[value].append(key)
+
+    for some_key, some_value in rev_dict.items():
+        if len(some_value) < 2:
+            rev_dict[some_key] = some_value[0]
+    result = rev_dict
+    return result

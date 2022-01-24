@@ -9,6 +9,7 @@ from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4
 from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4_v_lambda
 from hw.andrey_yelin.lesson06.functions_lesson06hw import parse_http_query_6
 from hw.andrey_yelin.lesson06.functions_lesson06hw import repeating_elements_5
+from hw.andrey_yelin.lesson06.functions_lesson06hw import reversed_dictionary
 
 
 def test_is_palindrome_1() -> None:
@@ -82,3 +83,12 @@ def test_code_8() -> None:
     assert code_8("aaabb") == {"data": "a3b2"}
     assert code_8("aaabba") == {"data": "a3b2a1"}
     assert code_8("") == {"errors": "number of letters = 0"}
+
+
+def test_reversed_dictionary() -> None:
+    assert reversed_dictionary({1: 100, 2: 100, 3: 300}) == {  # noqa: JS101
+        "data": {100: [1, 2], 300: 3}
+    }
+    assert reversed_dictionary("") == {"errors": "argument is not a dict"}
+    assert reversed_dictionary([]) == {"errors": "argument is not a dict"}
+    assert reversed_dictionary(()) == {"errors": "argument is not a dict"}
