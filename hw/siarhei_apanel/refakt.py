@@ -169,9 +169,8 @@ def repeat(collect: Any) -> dict:
 class DupCounter05(Counter):
     def __init__(self, coll: Any) -> None:
         self.coll = coll
-        self.diction: dict[Any, Any] = {}
 
-    def get_dups(self) -> dict:
+    def get_dups(self) -> Any:
         return repeat(self.coll)
 
 
