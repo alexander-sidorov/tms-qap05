@@ -32,7 +32,7 @@ markers = [
 testpaths = [
     "hw",
 ]
-addopts = "--tb=short --cov --cov-report=html --cov-report=xml"
+addopts = "--cov --cov-report=html --cov-report=xml"
 
 
 [tool.mypy]
@@ -54,6 +54,7 @@ warn_unused_ignores = true
 [[tool.mypy.overrides]]
 module = [
     "asyncpg",
+    "devtools",
     "freezegun",
     "uvicorn",
 ]

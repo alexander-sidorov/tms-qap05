@@ -1,12 +1,11 @@
 from datetime import date
-from typing import Any
 from typing import Literal
-from typing import Optional
 from typing import Union
 from typing import get_args
 
 from .common import Errors
 from .common import api
+from .common import typecheck
 
 DataKeys = Literal[
     "age",
@@ -19,6 +18,7 @@ Data = dict[DataKeys, int]
 
 
 @api
+@typecheck
 def task_03(arg: date) -> Union[Data, Errors]:
     """
     Composes a birthday info in the specified format.
@@ -29,10 +29,6 @@ def task_03(arg: date) -> Union[Data, Errors]:
     Calculates an age, in years.
     """
 
-    errors = validate(arg)
-    if errors:
-        return errors
-
     data = {_a: getattr(arg, _a, 0) for _a in get_args(DataKeys)}
 
     diff = date.today() - arg
@@ -41,9 +37,3 @@ def task_03(arg: date) -> Union[Data, Errors]:
     data["age"] = years
 
     return data
-
-
-def validate(arg: Any) -> Optional[Errors]:
-    if not isinstance(arg, date):
-        return {"errors": [f"{type(arg)=}, MUST be a date"]}
-    return None

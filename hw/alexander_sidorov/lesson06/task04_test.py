@@ -20,7 +20,7 @@ def test_task_04() -> None:
         task_04,
         {1, 2, 3},
         expected_errors=[
-            "type(birthdays)=<class 'set'>, MUST be a dict",
+            "birthdays={1, 2, 3}, set != dict (expected)",
         ],
     )
 
@@ -28,12 +28,10 @@ def test_task_04() -> None:
         task_04,
         {
             1: date(year=1987, month=8, day=2),
-            (): None,
             ...: ...,
         },
         expected_errors=[
-            "birthdays[()]=None, MUST be a date",
-            "birthdays[Ellipsis]=Ellipsis, MUST be a date",
+            "birthdays[Ellipsis]=Ellipsis, ellipsis != date (expected)",
         ],
     )
 

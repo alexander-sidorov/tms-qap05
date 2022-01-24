@@ -1,15 +1,16 @@
 import re
-from typing import Any
-from typing import Optional
+from typing import Sequence
 from typing import Union
 
 from .common import Errors
 from .common import api
+from .common import typecheck
 
 RE_PAIR = re.compile(r"(\D\d+)")
 
 
 @api
+@typecheck
 def task_07(folded_text: str) -> Union[str, Errors]:
     """
     Flattens the folded text in format <char><number of reps>.
@@ -17,13 +18,8 @@ def task_07(folded_text: str) -> Union[str, Errors]:
     Example: a1b2a1 => abba
     """
 
-    if errors := validate(folded_text):
-        return errors
-
     folds = RE_PAIR.findall(folded_text)
-    _folded_text = "".join(folds)
-    if folded_text != _folded_text:
-        return {"errors": [f"{folded_text=!r} is malformed"]}
+    validate_folds(folded_text, folds)
 
     chars_counts = ((fold[0], int(fold[1:])) for fold in folds)
 
@@ -32,7 +28,7 @@ def task_07(folded_text: str) -> Union[str, Errors]:
     return flatten_text
 
 
-def validate(folded_text: Any) -> Optional[Errors]:
-    if not isinstance(folded_text, str):
-        return {"errors": [f"{type(folded_text)=!r}, MUST be a str"]}
-    return None
+def validate_folds(folded_text: str, folds: Sequence[str]) -> None:
+    restored = "".join(folds)
+    ok = folded_text == restored
+    assert ok, f"{folded_text=!r} is malformed"
