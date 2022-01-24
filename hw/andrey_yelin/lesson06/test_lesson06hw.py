@@ -1,6 +1,7 @@
 from datetime import date
 
 from hw.andrey_yelin.lesson06.functions_lesson06hw import age_result_3
+from hw.andrey_yelin.lesson06.functions_lesson06hw import code_8
 from hw.andrey_yelin.lesson06.functions_lesson06hw import decode_7
 from hw.andrey_yelin.lesson06.functions_lesson06hw import is_palindrome_1
 from hw.andrey_yelin.lesson06.functions_lesson06hw import multiply_args_2
@@ -75,3 +76,9 @@ def test_decode_7() -> None:
     deco7 = "a11b2c3"
     assert decode_7(deco7) == {"data": "aaaaaaaaaaabbccc"}
     assert decode_7("a1b") == {"errors": "letters is not equal numbers"}
+
+
+def test_code_8() -> None:
+    assert code_8("aaabb") == {"data": "a3b2"}
+    assert code_8("aaabba") == {"data": "a3b2a1"}
+    assert code_8("") == {"errors": "number of letters = 0"}

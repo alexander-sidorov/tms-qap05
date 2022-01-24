@@ -156,12 +156,14 @@ def get_let_num_for_decode_7(command_str: str) -> tuple:  # noqa: CCR001
 
 
 @decorate
-def decode_7(string: str) -> Any:
+def decode_7(string: str, decode: bool = False) -> Any:
     result: Any = {}
     number: list = []
     letter: list = []
 
     number, letter = get_let_num_for_decode_7(string)
+    if decode:
+        return letter
     if len(letter) != len(number):
         result = {"errors": "letters is not equal numbers"}
         return result
@@ -171,3 +173,38 @@ def decode_7(string: str) -> Any:
             data.append(int(number[i]) * letter[i])
         result = "".join(data)
         return result
+
+
+@decorate
+def code_8(string: str) -> Any:  # noqa: CCR001
+    result: Any = ""
+    some_obj: Any = {}
+    imported_string = decode_7(string, True)
+
+    if len(imported_string["data"]) == 0:
+        result = {"errors": "number of letters = 0"}
+        return result
+
+    lk = ""
+    for index, letter in enumerate(imported_string["data"]):
+
+        if index == 0:
+            lk = letter
+
+        if lk != letter and index != 0:
+            for key in some_obj:
+                result += str(key) + str(some_obj[key])
+            lk = letter
+            some_obj = {}
+            if index == len(imported_string["data"]) - 1:
+                result += str(letter) + str(1)
+        elif index == len(imported_string["data"]) - 1:
+            for key in some_obj:
+                result += str(key) + str(some_obj[key] + 1)
+
+        if letter in some_obj:
+            some_obj[letter] += 1
+        else:
+            some_obj[letter] = 1
+
+    return result
