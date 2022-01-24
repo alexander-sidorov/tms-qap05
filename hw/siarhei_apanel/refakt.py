@@ -171,7 +171,7 @@ class DupCounter05(Counter):
         self.coll = coll
         self.diction: dict[Any, Any] = {}
 
-    def get_dups(self):
+    def get_dups(self) -> dict:
         return repeat(self.coll)
 
 
@@ -198,7 +198,7 @@ class HttpQuery03:
         self.text = text
         self.diction: dict[Any, Any] = {}
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: Any) -> Any:
         self.diction = html_str(self.text)["data"]
         return self.diction[key]
 
