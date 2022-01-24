@@ -6,6 +6,9 @@ from hw.andrey_yelin.lesson06.functions_lesson06hw import (
 )
 from hw.andrey_yelin.lesson06.functions_lesson06hw import code_8
 from hw.andrey_yelin.lesson06.functions_lesson06hw import decode_7
+from hw.andrey_yelin.lesson06.functions_lesson06hw import (
+    even_keys_and_odd_values_12,
+)
 from hw.andrey_yelin.lesson06.functions_lesson06hw import is_palindrome_1
 from hw.andrey_yelin.lesson06.functions_lesson06hw import multiply_args_2
 from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4
@@ -125,4 +128,11 @@ def test_all_actions_with_two_sets_11() -> None:
     }
     assert all_actions_with_two_sets_11({1, 2, 3}, 123) == {  # noqa: JS101
         "errors": "second argument has not a set type"
+    }
+
+
+def test_even_keys_and_odd_values_12() -> None:
+    assert even_keys_and_odd_values_12(1, 2) == {"data": {1: 2}}
+    assert even_keys_and_odd_values_12(1, 2, 3, 4, 5) == {
+        "errors": "quantity of arguments is not even"
     }

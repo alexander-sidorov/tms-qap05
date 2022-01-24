@@ -252,3 +252,20 @@ def all_actions_with_two_sets_11(first_set: set, second_set: set) -> dict:
         "a in b": first_set.issubset(second_set),
         "b in a": second_set.issubset(first_set),
     }
+
+
+@decorate
+def even_keys_and_odd_values_12(*args: Any) -> dict:
+    if len(args) % 2 != 0:
+        result = {"errors": "quantity of arguments is not even"}
+        return result
+    keys = []
+    values = []
+    for i in args:
+        if args.index(i) % 2 == 0:
+            keys.append(i)
+        else:
+            values.append(i)
+    crafted_dict = dict(list(zip(keys, values)))
+    result = crafted_dict
+    return result
