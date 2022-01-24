@@ -37,7 +37,7 @@ def test_multiply() -> None:
     assert multiply((1, 2, 3), 2) == {"data": (1, 2, 3, 1, 2, 3)}
     assert multiply() == {"errors": ["no argument is given"]}
     assert multiply("abc", "ab") == {
-        "errors": ["given arguments' types can't be multiplied"]
+        "errors": ["can't multiply sequence by non-int of type 'str'"]
     }
     assert multiply("a", 2) == {"data": "aa"}
     assert multiply(2, [1], 2) == {"data": [1, 1, 1, 1]}
@@ -111,7 +111,7 @@ def test_http_query_parser() -> None:
     }
     assert http_query_parser(["x=1&x=2&y=3"]) == {"errors": [ERROR_NOT_STRING]}
     assert http_query_parser("x=1&&x=2&q=3") == {
-        "errors": ["given query contains wrong format"]
+        "errors": ["substring not found"]
     }
     assert http_query_parser("xxx=&yyy=") == {
         "data": {"xxx": [""], "yyy": [""]}
@@ -146,9 +146,7 @@ def test_inverted_dictionary() -> None:
     assert inverted_dictionary(1234) == {
         "errors": ["given argument is not dict type"]
     }
-    assert inverted_dictionary(d2) == {
-        "errors": ["dictionary value contains unhashable type"]
-    }
+    assert inverted_dictionary(d2) == {"errors": [ERROR_UNHASHABLE_TYPE]}
     assert inverted_dictionary({}) == {"data": {}}
 
 
@@ -163,16 +161,10 @@ def test_zip_collections_to_dict() -> None:
         "data": {"a": 5, "b": 6, "c": 7}
     }
     assert zip_collections_to_dict("abc", 123) == {
-        "errors": ["given argument with values is not a list, str or tuple"]
+        "errors": ["second given argument is not Collection"]
     }
     assert zip_collections_to_dict(123, "abc") == {
-        "errors": ["given argument with keys is not a list, str or tuple"]
-    }
-    assert zip_collections_to_dict(123, 456) == {
-        "errors": [
-            "given argument with keys is not a list, str or tuple",
-            "given argument with values is not a list, str or tuple",
-        ]
+        "errors": ["first given argument is not Sequence"]
     }
     assert zip_collections_to_dict(
         [{1: 2}, 4, 5], [1, 2, 3]
@@ -190,12 +182,6 @@ def test_zip_collections_to_dict() -> None:
 def test_relations_between_two_sets() -> None:
     error1 = {"errors": ["given first argument is not set type"]}
     error2 = {"errors": ["given second argument is not set type"]}
-    error3 = {
-        "errors": [
-            "given first argument is not set type",
-            "given second argument is not set type",
-        ]
-    }
     assert relations_between_two_sets({1, 2}, {1, 3}) == {  # noqa: JS101
         "data": {
             "a&b": {1},
@@ -220,7 +206,6 @@ def test_relations_between_two_sets() -> None:
     }
     assert relations_between_two_sets(123, {1, 2, 3}) == error1
     assert relations_between_two_sets({1, 2, 3}, 123) == error2
-    assert relations_between_two_sets(123, 123) == error3
 
 
 def test_make_dictionary() -> None:
@@ -229,5 +214,5 @@ def test_make_dictionary() -> None:
         "errors": ["Quantity of given arguments is not even"]
     }
     assert make_dictionary({1: 2, 2: 3}, 5) == {  # noqa: JS101
-        "errors": ["odd argument is unhashable type"]
+        "errors": [ERROR_UNHASHABLE_TYPE]
     }

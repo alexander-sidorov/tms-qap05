@@ -4,24 +4,23 @@ from collections import Counter
 from datetime import date
 from typing import Any
 from typing import Callable
+from typing import Collection
+from typing import Sequence
 
 ERROR_NOT_STRING = "given argument is not string type"
 ERROR_NOT_LIST_STR_TUPLE = (
     "given argument with keys is not a list, str or tuple"
 )
 ERROR_WRONG_FORMAT_OF_STR = "wrong format of string"
-ERROR_UNHASHABLE_TYPE = "collections contain values with unhashable type"
+ERROR_UNHASHABLE_TYPE = "unhashable type: 'dict'"
 
 
 def decorator_dict(func: Callable) -> Callable:
     def wrapper(*a: Any, **kw: Any) -> Any:
         try:
             result = func(*a, **kw)
-        # if isinstance(result, dict) and "errors" in result:
-        #     return result
-        # else:
             return {"data": result}
-        except AssertionError as err:
+        except Exception as err:
             return {"errors": [str(err)]}
 
     return wrapper
@@ -29,13 +28,6 @@ def decorator_dict(func: Callable) -> Callable:
 
 @decorator_dict
 def palindrome(string: str) -> Any:
-    # if not isinstance(string, str):
-    #     return {"errors": [ERROR_NOT_STRING]}
-
-    # if string[:] == string[::-1]:
-    #     result = True
-    # else:
-    #     result = False
     assert isinstance(string, str), ERROR_NOT_STRING
     return string == string[::-1]
 
@@ -43,25 +35,25 @@ def palindrome(string: str) -> Any:
 @decorator_dict
 def multiply(*args: Any) -> Any:
     result = 0
-    try:
-        if len(args) < 1:
-            return {"errors": ["no argument is given"]}
-        elif len(args) == 1:
-            result = args[0]
-        else:
-            multiplication_result = 1
-            for i in args:
-                multiplication_result *= i
-                result = multiplication_result
-    except TypeError:
-        return {"errors": ["given arguments' types can't be multiplied"]}
+    assert isinstance(args, (int, float, complex, Sequence)), [
+        "given arguments' types can't be multiplied"
+    ]
+    assert len(args) != 0, "no argument is given"
+    if len(args) == 1:
+        result = args[0]
+    else:
+        multiplication_result = 1
+        for i in args:
+            multiplication_result *= i
+            result = multiplication_result
     return result
 
 
 @decorator_dict
 def get_formatted_birthday(birthday_date: date) -> dict:
-    if not isinstance(birthday_date, date):
-        return {"errors": ["given argument is not object of date type"]}
+    assert isinstance(
+        birthday_date, date
+    ), "given argument is not object of date type"
     today = date.today()
     birthday_this_year = date(
         today.year, birthday_date.month, birthday_date.day
@@ -81,11 +73,9 @@ def get_formatted_birthday(birthday_date: date) -> dict:
 
 @decorator_dict
 def get_the_eldest(dictionary: dict[Any, date]) -> Any:
-    if not isinstance(dictionary, dict):
-        return {"errors": ["Given argument is not a dictionary"]}
+    assert isinstance(dictionary, dict), "Given argument is not a dictionary"
     for _key, value in dictionary.items():
-        if not isinstance(value, date):
-            return {"errors": ["key value is not object of date type"]}
+        assert isinstance(value, date), "key value is not object of date type"
     min_value = min(dictionary, key=lambda k: dictionary[k])
     result = min_value
     return result
@@ -93,13 +83,8 @@ def get_the_eldest(dictionary: dict[Any, date]) -> Any:
 
 @decorator_dict
 def get_the_same_elements_in_collection(collection: Any) -> dict:
-    types = (list, str, tuple, set, dict)
-    if type(collection) not in types:
-        return {"errors": [ERROR_NOT_LIST_STR_TUPLE]}
-    try:
-        counter: Counter = collections.Counter(collection)
-    except TypeError:
-        return {"errors": [ERROR_UNHASHABLE_TYPE]}
+    assert isinstance(collection, Collection), ERROR_NOT_LIST_STR_TUPLE
+    counter: Counter = collections.Counter(collection)
     result_dict = {}
     for key, value in counter.items():
         if value == 1:
@@ -112,49 +97,38 @@ def get_the_same_elements_in_collection(collection: Any) -> dict:
 
 @decorator_dict
 def http_query_parser(query: str) -> dict:
-    if not isinstance(query, str):
-        return {"errors": [ERROR_NOT_STRING]}
+    assert isinstance(query, str), ERROR_NOT_STRING
     dict_with_queries = {}
-    try:
-        split_query = query.split("&")
-        for i in split_query:
-            index_of_equals = i.index("=")
-            name = i[:index_of_equals]
-            if name not in dict_with_queries:
-                dict_with_queries[name] = [
-                    i[index_of_equals + 1 :]  # noqa: E203
-                ]
-            else:
-                dict_with_queries[name].append(
-                    i[index_of_equals + 1 :]  # noqa: E203
-                )  # noqa: E203
-    except (IndexError, ValueError):
-        return {"errors": ["given query contains wrong format"]}
+    split_query = query.split("&")
+    for i in split_query:
+        index_of_equals = i.index("=")
+        name = i[:index_of_equals]
+        if name not in dict_with_queries:
+            dict_with_queries[name] = [i[index_of_equals + 1 :]]  # noqa: E203
+        else:
+            dict_with_queries[name].append(
+                i[index_of_equals + 1 :]  # noqa: E203
+            )  # noqa: E203
     result = dict_with_queries
     return result
 
 
 @decorator_dict
 def repeat_chars(string: str) -> Any:
-    if not isinstance(string, str):
-        return {"errors": [ERROR_NOT_STRING]}
+    assert isinstance(string, str), ERROR_NOT_STRING
     numbers = re.findall(r"\d+", string)
     chars = re.findall(r"\D", string)
-    if len(numbers) != len(chars):
-        return {"errors": [ERROR_WRONG_FORMAT_OF_STR]}
-    else:
-        zipped_lists = list(zip(numbers, chars))
-        result_str = ""
-        for num, char in zipped_lists:
-            result_str += char * int(num)
-        result = result_str
-    return result
+    assert len(numbers) == len(chars), ERROR_WRONG_FORMAT_OF_STR
+    zipped_lists = list(zip(numbers, chars))
+    result_str = ""
+    for num, char in zipped_lists:
+        result_str += char * int(num)
+    return result_str
 
 
 @decorator_dict
 def count_chars(string: str) -> Any:
-    if not isinstance(string, str):
-        return {"errors": [ERROR_NOT_STRING]}
+    assert isinstance(string, str), ERROR_NOT_STRING
     if len(string) == 0:
         result = ""
         return result
@@ -180,17 +154,13 @@ def count_chars(string: str) -> Any:
 
 @decorator_dict
 def inverted_dictionary(dictionary: dict) -> dict:
-    if not isinstance(dictionary, dict):
-        return {"errors": ["given argument is not dict type"]}
+    assert isinstance(dictionary, dict), "given argument is not dict type"
     inverted_dict = {}
-    try:
-        for key, value in dictionary.items():
-            if value not in inverted_dict:
-                inverted_dict[value] = [key]
-            else:
-                inverted_dict[value].append(key)
-    except TypeError:
-        return {"errors": ["dictionary value contains unhashable type"]}
+    for key, value in dictionary.items():
+        if value not in inverted_dict:
+            inverted_dict[value] = [key]
+        else:
+            inverted_dict[value].append(key)
     for new_key, new_value in inverted_dict.items():
         if len(new_value) < 2:
             inverted_dict[new_key] = new_value[0]
@@ -200,52 +170,33 @@ def inverted_dictionary(dictionary: dict) -> dict:
 
 @decorator_dict
 def zip_collections_to_dict(keys: Any, values: Any) -> dict:
-    result: dict = {}
-    errors: list = []
-    types = (list, str, tuple)
-    unhashable_types = (list, set, dict)
-    error_txt1 = "given argument with keys is not a list, str or tuple"
-    error_txt2 = "given argument with values is not a list, str or tuple"
-    error_txt3 = [ERROR_UNHASHABLE_TYPE]
-    if type(keys) not in types:
-        errors.append(error_txt1)
-    if type(values) not in types:
-        errors.append(error_txt2)
-    if errors:
-        result["errors"] = errors
+    assert isinstance(keys, Sequence), "first given argument is not Sequence"
+    assert isinstance(
+        values, Collection
+    ), "second given argument is not Collection"
+    keys = list(keys)
+    values = list(values)
+    if len(keys) > len(values):
+        differance = len(keys) - len(values)
+        values.extend(None for _ in range(differance))
+        list_of_zipped_collections = list(zip(keys, values))
+        result = dict(list_of_zipped_collections)
+    elif len(keys) < len(values):
+        differance_list = values[len(keys) :]  # noqa: E203
+        list_with_the_same_length = values[: len(keys)]
+        list_of_zipped_collections = list(zip(keys, list_with_the_same_length))
+        list_of_zipped_collections.append(("...", differance_list))
+        result = dict(list_of_zipped_collections)
     else:
-        if any((isinstance(keys, unhashable_types) for _ in keys)):
-            return {"errors": error_txt3}
-        keys = list(keys)
-        values = list(values)
-        if len(keys) > len(values):
-            differance = len(keys) - len(values)
-            values.extend(None for _ in range(differance))
-            list_of_zipped_collections = list(zip(keys, values))
-            result = dict(list_of_zipped_collections)
-        elif len(keys) < len(values):
-            differance_list = values[len(keys) :]  # noqa: E203
-            list_with_the_same_length = values[: len(keys)]
-            list_of_zipped_collections = list(
-                zip(keys, list_with_the_same_length)
-            )
-            list_of_zipped_collections.append(("...", differance_list))
-            result = dict(list_of_zipped_collections)
-        else:
-            list_of_zipped_collections = list(zip(keys, values))
-            result = dict(list_of_zipped_collections)
+        list_of_zipped_collections = list(zip(keys, values))
+        result = dict(list_of_zipped_collections)
     return result
 
 
 @decorator_dict
 def relations_between_two_sets(set1: set, set2: set) -> dict:
-    errors: list = []
-    if not isinstance(set1, set):
-        errors.append("given first argument is not set type")
-    if not isinstance(set2, set):
-        errors.append("given second argument is not set type")
-    if errors:
-        return {"errors": errors}
+    assert isinstance(set1, set), "given first argument is not set type"
+    assert isinstance(set2, set), "given second argument is not set type"
     return {
         "a&b": set1 & set2,
         "a|b": set1 | set2,
@@ -259,19 +210,14 @@ def relations_between_two_sets(set1: set, set2: set) -> dict:
 
 @decorator_dict
 def make_dictionary(*args: Any) -> dict:
-    if len(args) % 2 != 0:
-        return {"errors": ["Quantity of given arguments is not even"]}
-    else:
-        keys = []
-        values = []
-        for i in args:
-            if args.index(i) % 2 == 0:
-                keys.append(i)
-            else:
-                values.append(i)
-        try:
-            dictionary_from_arguments = dict(list(zip(keys, values)))
-        except TypeError:
-            return {"errors": ["odd argument is unhashable type"]}
-        result = dictionary_from_arguments
+    assert len(args) % 2 == 0, "Quantity of given arguments is not even"
+    keys = []
+    values = []
+    for i in args:
+        if args.index(i) % 2 == 0:
+            keys.append(i)
+        else:
+            values.append(i)
+    dictionary_from_arguments = dict(list(zip(keys, values)))
+    result = dictionary_from_arguments
     return result
