@@ -5,13 +5,13 @@ from typing import Union
 
 from .common import Errors
 from .common import api
-from .common import validate_args_types
+from .common import typecheck
 
 T1 = TypeVar("T1")
 
 
 @api
-@validate_args_types
+@typecheck
 def task_04(birthdays: dict[T1, date]) -> Union[T1, Errors]:
     """
     Returns the ID of the oldest person.

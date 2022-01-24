@@ -28,7 +28,7 @@ def test_task_05() -> None:
         task_05,
         None,
         expected_errors={
-            "collection=None, NoneType != expected: Collection",
+            "collection=None, NoneType != Collection (expected)",
         },
     )
 

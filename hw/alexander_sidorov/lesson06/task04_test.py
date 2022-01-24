@@ -20,7 +20,7 @@ def test_task_04() -> None:
         task_04,
         {1, 2, 3},
         expected_errors=[
-            "birthdays={1, 2, 3}, set != expected: dict",
+            "birthdays={1, 2, 3}, set != dict (expected)",
         ],
     )
 
@@ -31,7 +31,7 @@ def test_task_04() -> None:
             ...: ...,
         },
         expected_errors=[
-            "birthdays[Ellipsis]=Ellipsis, ellipsis != expected: date",
+            "birthdays[Ellipsis]=Ellipsis, ellipsis != date (expected)",
         ],
     )
 
