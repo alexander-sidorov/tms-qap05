@@ -196,7 +196,11 @@ def typecheck_arg_strict_type(
         return False
 
     function = type(typecheck_arg_strict_type)
-    if type(expected) is function or issubclass_(expected, NewType):
+    if (
+        type(expected) is function
+        or issubclass_(expected, NewType)  # noqa: W503
+        or isinstance_(expected, NewType)  # noqa: W503
+    ):
         # covers NewType
         return False
 
@@ -284,5 +288,12 @@ def name(obj: Any) -> str:
 def issubclass_(arg1: Any, arg2: Any) -> bool:
     try:
         return issubclass(arg1, arg2)
+    except TypeError:
+        return False
+
+
+def isinstance_(arg1: Any, arg2: Any) -> bool:
+    try:
+        return isinstance(arg1, arg2)
     except TypeError:
         return False
