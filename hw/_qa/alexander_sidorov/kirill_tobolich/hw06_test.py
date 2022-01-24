@@ -3,6 +3,8 @@ from string import ascii_letters
 from typing import Any
 from typing import Callable
 
+import pytest
+
 from hw.kirill_tobolich.lesson6_hw import count_chars
 from hw.kirill_tobolich.lesson6_hw import get_formatted_birthday
 from hw.kirill_tobolich.lesson6_hw import get_the_eldest
@@ -51,6 +53,16 @@ def validate(
         data = result.get("data", Undefined)
         assert data is not Undefined
         assert data == xdata
+        return
+
+    raise AssertionError("invalid usage of validate()")
+
+
+def test_xxx() -> None:
+    with pytest.raises(AssertionError):
+        validate(palindrome, "")
+    with pytest.raises(AssertionError):
+        validate(palindrome, "", xdata=Undefined)
 
 
 def test_task_01() -> None:
