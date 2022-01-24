@@ -104,14 +104,6 @@ def proizvedenie(*args: Any) -> Any:
     )
 
 
-class Multiplier04:
-    def __init__(self, *args: Any) -> None:
-        self.args = args
-
-    def add(self):
-        return proizvedenie(*self.args)
-
-
 @decor_data
 def dateday(yer: Any) -> Any:
     now = date.today()
