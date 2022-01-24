@@ -1,3 +1,4 @@
+from collections import Counter
 from collections.abc import Sequence
 from datetime import date
 from functools import reduce
@@ -85,6 +86,14 @@ def palindrom(di1: Any) -> Any:
     return di1[:] == di1[::-1]
 
 
+class Palindrome01:
+    def __init__(self, text: Any) -> None:
+        self.text = text
+
+    def __bool__(self) -> Any:
+        return palindrom(self.text)
+
+
 @decor_data
 def proizvedenie(*args: Any) -> Any:
 
@@ -104,6 +113,18 @@ def proizvedenie(*args: Any) -> Any:
     )
 
 
+class Multiplier04:
+    def __init__(self) -> None:
+        self.arg: list[Any] = []
+
+    def add(self, arg: Any) -> Any:
+        self.arg.append(arg)
+        return self
+
+    def get_result(self) -> Any:
+        return proizvedenie(*self.arg)
+
+
 @decor_data
 def dateday(yer: Any) -> Any:
     now = date.today()
@@ -114,6 +135,14 @@ def dateday(yer: Any) -> Any:
         "day": yer.day,
         "age": int(delta.days // 365),
     }
+
+
+class User02:
+    def __init__(self, datee: Any) -> None:
+        self.datee = datee
+
+    def age(self) -> Any:
+        return dateday(self.datee)["data"]["age"]
 
 
 @decor_data
@@ -137,6 +166,15 @@ def repeat(collect: Any) -> dict:
     }
 
 
+class DupCounter05(Counter):
+    def __init__(self, coll: Any) -> None:
+        self.coll = coll
+        self.diction: dict[Any, Any] = {}
+
+    def get_dups(self):
+        return repeat(self.coll)
+
+
 @decor_data
 def html_str(query: Any) -> dict:
     assert isinstance(query, str), "No String"
@@ -153,6 +191,16 @@ def html_str(query: Any) -> dict:
         else:
             result[new_letter].append(letter[verif + 1 :])  # noqa: E203
     return result
+
+
+class HttpQuery03:
+    def __init__(self, text: Any) -> None:
+        self.text = text
+        self.diction: dict[Any, Any] = {}
+
+    def __getitem__(self, key):
+        self.diction = html_str(self.text)["data"]
+        return self.diction[key]
 
 
 @decor_data
