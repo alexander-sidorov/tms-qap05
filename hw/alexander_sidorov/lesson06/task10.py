@@ -1,7 +1,6 @@
 from itertools import zip_longest
 from typing import Any
 from typing import Dict
-from typing import Hashable
 from typing import Literal
 from typing import Optional
 from typing import Sequence
@@ -11,7 +10,8 @@ from typing import Union
 from .common import Errors
 from .common import Undefined
 from .common import api
-from .common import validate_args_types
+from .common import hashable
+from .common import typecheck
 
 T1 = TypeVar("T1")
 T2 = TypeVar("T2")
@@ -23,7 +23,7 @@ Data = Dict[
 
 
 @api
-@validate_args_types
+@typecheck
 def task_10(keys: Sequence[T1], values: Sequence[T2]) -> Union[Data, Errors]:
     """
     Composes a dict from the given sequences.
@@ -53,4 +53,4 @@ def task_10(keys: Sequence[T1], values: Sequence[T2]) -> Union[Data, Errors]:
 
 def validate(keys: Any) -> None:
     for i, key in enumerate(keys):
-        assert isinstance(key, Hashable), f"keys[{i}]={key!r} is not hashable"
+        assert hashable(key), f"keys[{i}]={key!r} is not hashable"

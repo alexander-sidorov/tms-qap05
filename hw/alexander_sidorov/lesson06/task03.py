@@ -5,7 +5,7 @@ from typing import get_args
 
 from .common import Errors
 from .common import api
-from .common import validate_args_types
+from .common import typecheck
 
 DataKeys = Literal[
     "age",
@@ -18,7 +18,7 @@ Data = dict[DataKeys, int]
 
 
 @api
-@validate_args_types
+@typecheck
 def task_03(arg: date) -> Union[Data, Errors]:
     """
     Composes a birthday info in the specified format.

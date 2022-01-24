@@ -45,7 +45,7 @@ def test_task_10() -> None:
         None,
         "ab",
         expected_errors=[
-            "keys=None, NoneType != expected: Sequence",
+            "keys=None, NoneType != Sequence (expected)",
         ],
     )
     validate(
@@ -53,7 +53,7 @@ def test_task_10() -> None:
         "ab",
         None,
         expected_errors=[
-            "values=None, NoneType != expected: Sequence",
+            "values=None, NoneType != Sequence (expected)",
         ],
     )
     validate(

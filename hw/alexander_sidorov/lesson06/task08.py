@@ -5,13 +5,13 @@ from typing import Union
 
 from .common import Errors
 from .common import api
-from .common import validate_args_types
+from .common import typecheck
 
 RE_INTEGERS = re.compile(r".*\d")
 
 
 @api
-@validate_args_types
+@typecheck
 def task_08(flatten_text: str) -> Union[str, Errors]:
     """
     Folds the given text into the folded format:

@@ -3,13 +3,13 @@ from urllib.parse import parse_qs
 
 from .common import Errors
 from .common import api
-from .common import validate_args_types
+from .common import typecheck
 
 Data = dict[str, list[str]]
 
 
 @api
-@validate_args_types
+@typecheck
 def task_06(query: str) -> Union[Data, Errors]:
     """
     Splits HTTP query into a dict.

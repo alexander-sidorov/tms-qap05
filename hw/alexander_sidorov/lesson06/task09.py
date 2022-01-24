@@ -6,7 +6,7 @@ from typing import Union
 from .common import Errors
 from .common import api
 from .common import hashable
-from .common import validate_args_types
+from .common import typecheck
 
 T1 = TypeVar("T1")
 T2 = TypeVar("T2")
@@ -16,7 +16,7 @@ ReversedDict = dict[T2, Union[T1, List[T1]]]
 
 
 @api
-@validate_args_types
+@typecheck
 def task_09(arg: ForwardDict) -> Union[ReversedDict, Errors]:
     """
     Reverses the dict.

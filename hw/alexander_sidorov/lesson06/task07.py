@@ -4,13 +4,13 @@ from typing import Union
 
 from .common import Errors
 from .common import api
-from .common import validate_args_types
+from .common import typecheck
 
 RE_PAIR = re.compile(r"(\D\d+)")
 
 
 @api
-@validate_args_types
+@typecheck
 def task_07(folded_text: str) -> Union[str, Errors]:
     """
     Flattens the folded text in format <char><number of reps>.

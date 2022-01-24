@@ -23,7 +23,7 @@ def test_task_09() -> None:
         task_09,
         1,
         expected_errors=[
-            "arg=1, int != expected: dict",
+            "arg=1, int != dict (expected)",
         ],
     )
     validate(

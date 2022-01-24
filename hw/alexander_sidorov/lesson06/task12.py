@@ -5,11 +5,11 @@ from .common import Errors
 from .common import api
 from .common import even
 from .common import hashable
-from .common import validate_args_types
+from .common import typecheck
 
 
 @api
-@validate_args_types
+@typecheck
 def task_12(*args: Any) -> Union[dict, Errors]:
     """
     Composes a dict from args.
