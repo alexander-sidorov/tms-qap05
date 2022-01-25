@@ -87,13 +87,14 @@ def palindrom(di1: Any) -> Any:
 
 
 class Palindrome01:
-    palindrom()
-
     def __init__(self, text: Any) -> None:
         self.text = text
 
     def __bool__(self) -> Any:
-        return palindrom(self.text)
+        result = palindrom(self.text)
+        if "errors" in result:
+            return result
+        return result["data"]
 
 
 @decor_data
@@ -124,7 +125,10 @@ class Multiplier04:
         return self
 
     def get_result(self) -> Any:
-        return proizvedenie(*self.arg)["data"]
+        result = proizvedenie(*self.arg)
+        if "errors" in result:
+            return result
+        return result["data"]
 
 
 @decor_data
@@ -144,7 +148,10 @@ class User02:
         self.datee = datee
 
     def age(self) -> Any:
-        return dateday(self.datee)["data"]["age"]
+        result = dateday(self.datee)
+        if "errors" in result:
+            return result
+        return result["data"]["age"]
 
 
 @decor_data
@@ -173,7 +180,10 @@ class DupCounter05(Counter):
         self.coll = coll
 
     def get_dups(self) -> Any:
-        return repeat(self.coll)["data"]
+        result = repeat(self.coll)
+        if "errors" in result:
+            return result
+        return result["data"]
 
 
 @decor_data
@@ -200,8 +210,11 @@ class HttpQuery03:
         self.diction: dict[Any, Any] = {}
 
     def __getitem__(self, key: Any) -> Any:
-        self.diction = html_str(self.text)["data"]
-        return self.diction.get(key)
+        self.diction = html_str(self.text)
+        if "errors" in self.diction:
+            return self.diction
+        result = self.diction["data"]
+        return result.get(key)
 
 
 @decor_data
