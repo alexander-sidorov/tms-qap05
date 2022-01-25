@@ -18,4 +18,8 @@ class User02:
 
     def age(self) -> Any:
         today = date.today()
-        return today.year - self.born.year - ((today.month, today.day) < (self.born.month, self.born.day)) # noqa:
+        return (
+            today.year
+            - self.born.year
+            - ((today.month, today.day) < (self.born.month, self.born.day))
+        )  # noqa:
