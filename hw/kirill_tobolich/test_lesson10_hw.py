@@ -13,8 +13,8 @@ def test_class_palindrome() -> None:
     assert Palindrome("x")
     assert Palindrome("xx")
     assert Palindrome("abccba")
-    assert not Palindrome("xy")
-    assert not Palindrome(123321)  # type: ignore
+    assert not Palindrome("xy") is False
+    assert not Palindrome(123321) is False  # type: ignore
 
 
 def test_class_user02() -> None:
