@@ -339,7 +339,7 @@ def diction(*digit: Any) -> dict:
             continue
         try:
             result[digit[dig]] = digit[dig + 1]
-        except AssertionError:
+        except Exception:
             raise TypeError("TypeError")
     return result
 

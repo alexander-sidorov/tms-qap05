@@ -49,6 +49,7 @@ def test_example() -> None:
     assert palindrom("xy") == {"data": False}
     assert "errors" in palindrom(1)
     assert proizvedenie(1, 2, 3) == {"data": 6}
+    assert proizvedenie(("",)) == {"data": ""}
     assert proizvedenie(1) == {"data": 1}
     assert proizvedenie(1, 2) == {"data": 2}
     assert proizvedenie("1", 3) == {"data": "111"}
@@ -114,6 +115,7 @@ def test_example() -> None:
     assert "errors" in diction({1}, 2)
     assert "errors" in diction([1], 2)
     assert "errors" in diction(1, 2, {}, 4)
+    assert "errors" in diction("a", "b", set(), "c")
     assert pal.__bool__()
     assert not pal2.__bool__()
     assert "errors" in pal3.__bool__()
