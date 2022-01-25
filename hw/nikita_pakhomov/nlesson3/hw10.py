@@ -1,5 +1,5 @@
-from typing import Any
 from datetime import date
+from typing import Any
 
 from hw.nikita_pakhomov.nlesson3.hw6 import palindrome
 
