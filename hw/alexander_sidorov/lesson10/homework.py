@@ -83,7 +83,7 @@ class Multiplier04:
         return result
 
 
-class DupCounter05(Counter):
+class DupCounter05(Counter):  # pylint: disable=abstract-method
     def get_dups(self) -> dict:
         return {k: v for k, v in self.items() if v > 1}
 

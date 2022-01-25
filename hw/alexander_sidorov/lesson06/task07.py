@@ -30,5 +30,5 @@ def task_07(folded_text: str) -> Union[str, Errors]:
 
 def validate_folds(folded_text: str, folds: Sequence[str]) -> None:
     restored = "".join(folds)
-    ok = folded_text == restored
-    assert ok, f"{folded_text=!r} is malformed"
+    correct = folded_text == restored
+    assert correct, f"{folded_text=!r} is malformed"

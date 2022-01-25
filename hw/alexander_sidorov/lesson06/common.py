@@ -143,7 +143,8 @@ def typecheck(func: Callable[Params, T1]) -> Callable[Params, T1]:
             try:
                 arg = next(arguments)
             except StopIteration:
-                raise AssertionError(f"invalid usage of >>> {param} <<<")
+                err = f"invalid usage of >>> {param} <<<"
+                raise AssertionError(err)  # pylint: disable=raise-missing-from
 
             typecheck_arg(param, arg, expected)
 
@@ -197,7 +198,7 @@ def typecheck_arg_strict_type(
 
     function = type(typecheck_arg_strict_type)
     if (
-        type(expected) is function
+        type(expected) is function  # pylint: disable=unidiomatic-typecheck
         or issubclass_(expected, NewType)  # noqa: W503
         or isinstance_(expected, NewType)  # noqa: W503
     ):

@@ -1,3 +1,6 @@
+# pylint: disable=redefined-builtin
+
+
 from functools import partial
 
 import pytest
