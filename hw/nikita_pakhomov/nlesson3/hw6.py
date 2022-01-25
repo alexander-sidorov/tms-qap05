@@ -13,7 +13,6 @@ def decorate(func: Any) -> Any:
             return result
         else:
             return {"data": result}
-
     return xxx
 
 
