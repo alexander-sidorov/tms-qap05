@@ -76,10 +76,10 @@ def test_task_03() -> None:
 def test_task_04() -> None:
     validate_errors(func4_oldest(Typ()))
 
-    d1 = date(2000, 1, 1)
-    d2 = datetime.now().replace(year=1990, month=1, day=1)
+    first_date = date(2000, 1, 1)
+    second_date = datetime.now().replace(year=1990, month=1, day=1)
 
-    data = {(): d1, frozenset(): d2}
+    data = {(): first_date, frozenset(): second_date}
     assert func4_oldest(data) == {"data": frozenset()}
 
     data = defaultdict(None, data)
