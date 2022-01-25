@@ -1,7 +1,7 @@
 from collections import defaultdict
 from datetime import date
 from datetime import datetime
-from random import choice  # noqa: DUO102,S311
+from secrets import choice  # noqa: DUO102,S311
 from string import ascii_letters
 from typing import Any
 from typing import Dict
