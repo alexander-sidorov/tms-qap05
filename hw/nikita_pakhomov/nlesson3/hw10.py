@@ -20,6 +20,8 @@ class User02:
         today = date.today()
         return (
             today.year
-            - self.born.year # noqa:
-            - ((today.month, today.day) < (self.born.month, self.born.day)) # noqa:
-        )
+            - self.born.year  # noqa
+            - (  # noqa
+                (today.month, today.day) < (self.born.month, self.born.day)
+            )  # noqa
+        )  # noqa
