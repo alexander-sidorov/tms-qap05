@@ -13,7 +13,7 @@ from hw.alexander_sidorov.lesson03.homework import true
 
 
 def test_true() -> None:
-    assert true() == True  # noqa: E712
+    assert true() == True  # noqa: E712  # pylint: disable=singleton-comparison
     assert true() is True
 
 
@@ -60,6 +60,7 @@ def test_empty_text() -> None:
         (2, 5, 2, -1 / 2, -2, "square real: axx + bx + c = 0"),
     ],
 )
+# pylint: disable=invalid-name
 def test_quadratic_roots(
     a: Complex,  # noqa: VNE001
     b: Complex,  # noqa: VNE001

@@ -1,3 +1,6 @@
+# pylint: disable=invalid-name,pointless-statement
+
+
 def f() -> None:
     4  # noqa: B018
 

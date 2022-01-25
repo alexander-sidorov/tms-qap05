@@ -28,6 +28,7 @@ devtools[pygments]==0.8.0
 distlib==0.3.4
 dlint==0.12.0
 eradicate==2.0.0
+execnet==1.9.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
 executing==0.8.2
 filelock==3.4.2; python_version >= '3.7'
 flake8-annotations-complexity==0.0.6
@@ -83,6 +84,7 @@ platformdirs==2.4.1; python_version >= '3.7'
 plotly==5.5.0; python_version >= '3.6'
 pluggy==1.0.0; python_version >= '3.6'
 prompt-toolkit==3.0.24; python_full_version >= '3.6.2'
+psutil==5.9.0
 ptyprocess==0.7.0
 pure-eval==0.2.2
 py==1.11.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
@@ -93,7 +95,9 @@ pylint==2.12.2
 pyparsing==3.0.7; python_version >= '3.6'
 pytest-asyncio==0.17.2
 pytest-cov==3.0.0
+pytest-forked==1.4.0; python_version >= '3.6'
 pytest-mock==3.6.1
+pytest-xdist[psutil]==2.5.0
 pytest==6.2.5
 python-dateutil==2.8.2; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 python-dotenv==0.19.2
