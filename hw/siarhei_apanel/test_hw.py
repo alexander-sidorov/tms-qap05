@@ -1,5 +1,10 @@
 from datetime import date
 
+from hw.siarhei_apanel.refakt import DupCounter05
+from hw.siarhei_apanel.refakt import HttpQuery03
+from hw.siarhei_apanel.refakt import Multiplier04
+from hw.siarhei_apanel.refakt import Palindrome01
+from hw.siarhei_apanel.refakt import User02
 from hw.siarhei_apanel.refakt import codding
 from hw.siarhei_apanel.refakt import dateday
 from hw.siarhei_apanel.refakt import decodding
@@ -15,13 +20,22 @@ from hw.siarhei_apanel.refakt import rever_dict
 
 
 def test_example() -> None:
+    d5 = [1, 1, 1, 1, 2, 2, 3]
+    c5 = DupCounter05(d5)
+    obj1 = Multiplier04()
+    obj1.add(2).add(3).add(4)
+    obj = HttpQuery03("x=1&y=2&y=3")
+    pal = Palindrome01("xyx")
+    pal2 = Palindrome01("xyzx")
     yers = {"a": date(2000, 7, 12), "b": date(2000, 7, 12)}
     noyer = {"a": 1998, "b": date(1999, 2, 2)}
     dic = {1: 100, 2: 100, 3: 300}
     set1 = {1, 2}
     set2 = {1, 3}
     da = {"a": date(2000, 7, 12), "b": date(1987, 12, 24)}
+    dat2 = User02(date(year=1987, month=8, day=2))
     dat = date(year=1987, month=8, day=2)
+
     assert palindrom("") == {"data": True}
     assert palindrom("x") == {"data": True}
     assert palindrom("xx") == {"data": True}
@@ -93,3 +107,11 @@ def test_example() -> None:
     assert "errors" in diction({1}, 2)
     assert "errors" in diction([1], 2)
     assert "errors" in diction(1, 2, {}, 4)
+    assert pal.__bool__()
+    assert pal2.__bool__()
+    assert dat2.age() == 34
+    assert obj.__getitem__("x") == ["1"]
+    assert obj.__getitem__("y") == ["2", "3"]
+    assert obj.__getitem__("z") is None
+    assert obj1.get_result() == 24
+    assert c5.get_dups() == {1: 4, 2: 2}

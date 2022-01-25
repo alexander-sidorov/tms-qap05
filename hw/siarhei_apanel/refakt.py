@@ -87,6 +87,8 @@ def palindrom(di1: Any) -> Any:
 
 
 class Palindrome01:
+    palindrom()
+
     def __init__(self, text: Any) -> None:
         self.text = text
 
@@ -122,7 +124,7 @@ class Multiplier04:
         return self
 
     def get_result(self) -> Any:
-        return proizvedenie(*self.arg)
+        return proizvedenie(*self.arg)["data"]
 
 
 @decor_data
@@ -171,7 +173,7 @@ class DupCounter05(Counter):
         self.coll = coll
 
     def get_dups(self) -> Any:
-        return repeat(self.coll)
+        return repeat(self.coll)["data"]
 
 
 @decor_data
@@ -199,7 +201,7 @@ class HttpQuery03:
 
     def __getitem__(self, key: Any) -> Any:
         self.diction = html_str(self.text)["data"]
-        return self.diction[key]
+        return self.diction.get(key)
 
 
 @decor_data
