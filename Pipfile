@@ -47,5 +47,6 @@ pytest = "==6.2.5"
 pytest-asyncio = "==0.17.2"
 pytest-cov = "==3.0.0"
 pytest-mock = "==3.6.1"
+pytest-xdist = {extras = ["psutil"], version = "*"}
 python-dotenv = "==0.19.2"
 typing-extensions = "==4.0.1"

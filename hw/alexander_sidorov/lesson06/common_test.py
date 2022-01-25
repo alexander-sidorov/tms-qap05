@@ -29,7 +29,7 @@ def test_typecheck_invalid_call() -> None:
         pass  # pragma: no cover
 
     with pytest.raises(AssertionError) as err:
-        _func(*[1])
+        _func(*[1])  # pylint: disable=no-value-for-parameter
 
     assert str(err.value) == "invalid usage of >>> _arg2 <<<"
 
@@ -53,7 +53,7 @@ def test_typecheck_strict_type() -> None:
 def test_typecheck_arg_callable() -> None:
     assert typecheck_arg_callable("arg", "", list[str]) is False
 
-    def f() -> None:
+    def f() -> None:  # pylint: disable=invalid-name
         pass  # pragma: no cover
 
     assert typecheck_arg_callable("arg", f, Callable[[], int]) is True
