@@ -11,7 +11,6 @@ from .common import typecheck
 
 T1 = TypeVar("T1")
 
-
 Data = dict[T1, int]
 
 

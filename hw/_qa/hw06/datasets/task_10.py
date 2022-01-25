@@ -33,7 +33,6 @@ happy_data = [  # noqa: ECE001
     }.items()
 ]
 
-
 unhappy_data = [
     pytest.param(arg1, arg2, id=name)
     for name, (arg1, arg2) in {

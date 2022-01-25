@@ -24,7 +24,6 @@ happy_data = [
     }.items()
 ]
 
-
 unhappy_data = [
     pytest.param(arg, id=name)
     for name, arg in {
