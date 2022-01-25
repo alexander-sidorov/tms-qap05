@@ -1,5 +1,10 @@
 from datetime import date
 
+from hw.vadim_maletski.func6 import DupCounter05
+from hw.vadim_maletski.func6 import HttpQuery03
+from hw.vadim_maletski.func6 import Multiplier04
+from hw.vadim_maletski.func6 import Palindrom01
+from hw.vadim_maletski.func6 import User02
 from hw.vadim_maletski.func6 import level_01
 from hw.vadim_maletski.func6 import level_02
 from hw.vadim_maletski.func6 import level_03
@@ -268,3 +273,27 @@ def test() -> None:
     assert (level_12(1, 2, 3, "a", 5, {}, 6, object)) == {  # noqa: JS101
         "data": {1: 2, 3: "a", 5: {}, 6: object}
     }
+
+    pol = Palindrom01("xyx")
+    assert pol.__bool__().get("data") is True
+    pol = Palindrom01("xy x")
+    assert not pol.__bool__().get("data") is True
+    pol = Palindrom01("Yy")
+    assert pol.__bool__().get("data") is False
+
+    db = date(2020, 1, 23)
+    res2 = User02(db)
+    assert (res2.age()).get("data").get("age") == 2
+
+    res3 = HttpQuery03("x=1&y=2&y=3")
+    assert res3.get_res("x") == ["1"]
+    assert res3.get_res("y") == ["2", "3"]
+    assert res3.get_res("z") is None
+
+    obj = Multiplier04()
+    obj.add(2).add(3).add(4)
+    assert (obj.get_res()).get("data") == 24
+
+    lis = [1, 1, 1, 1, 2, 2, 3]
+    res5 = DupCounter05(lis)
+    assert (res5.get_dups().get("data")) == {1: 4, 2: 2}

@@ -1,6 +1,7 @@
 import itertools
 import re
 import urllib.parse
+from collections import Counter
 from datetime import date
 from itertools import groupby
 from itertools import zip_longest
@@ -285,3 +286,51 @@ def level_12(*arguments: Any) -> Any:
         result = list3
 
     return result
+
+
+class Palindrom01:
+    def __init__(self, string: Any) -> None:
+        self.__string = string
+
+    def __bool__(self) -> Any:
+        return level_01(self.__string)
+
+
+class User02:
+    def __init__(self, bd: Any) -> None:
+        self.__bd = bd
+
+    def age(self) -> Any:
+        return level_03(self.__bd)
+
+
+class HttpQuery03:
+    def __init__(self, query: Any) -> None:
+        self.query = query
+
+    def get_res(self, key: Any) -> Any:
+        try:
+            return level_06(self.query)["data"][key]
+        except KeyError:
+            return None
+
+
+class Multiplier04:
+    def __init__(self) -> None:
+        self.arguments: list[Any] = []
+
+    def add(self, arg: Any) -> Any:
+        self.arguments.append(arg)
+        return self
+
+    def get_res(self) -> Any:
+        return level_02(*self.arguments)
+
+
+class DupCounter05(Counter):
+    def __init__(self, lis: Any) -> None:
+        super().__init__()
+        self.lis = lis
+
+    def get_dups(self) -> Any:
+        return level_05(self.lis)
