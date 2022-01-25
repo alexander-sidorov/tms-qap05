@@ -38,6 +38,11 @@ def is_palindrome_1(strochka: Any = None) -> Any:
     return result
 
 
+class Palindrome01:  # noqa: SIM119
+    def __init__(self, text: Any) -> None:
+        self.text = text
+
+
 @decorate
 def multiply_args_2(*m: Any) -> Any:
     args = [*m]
@@ -229,6 +234,38 @@ def reversed_dictionary_9(dictionary: dict) -> dict:
         if len(some_value) < 2:
             rev_dict[some_key] = some_value[0]
     result = rev_dict
+    return result
+
+
+def func_for_creating_diction(
+    arg1: Any, arg2: Any, reverse: bool = False
+) -> dict:
+    res = {}
+    for index, i in enumerate(arg1):
+        if not reverse:
+            res[i] = arg2[index] if len(arg2) - 1 >= index else None
+        else:
+            if len(arg2) - 1 < index:
+                res[...] = i
+            else:
+                res[arg2[index]] = i
+    return res
+
+
+@decorate
+def creating_diction_10(arg1: Any, arg2: Any) -> dict:
+    result = {}
+
+    if not arg2:
+        result = {"errors": "second argument is empty"}
+        return result
+    answer = {}
+    if len(arg1) >= len(arg2):
+        answer = func_for_creating_diction(arg1, arg2)
+    else:
+        answer = func_for_creating_diction(arg2, arg1, True)
+
+    result = answer
     return result
 
 

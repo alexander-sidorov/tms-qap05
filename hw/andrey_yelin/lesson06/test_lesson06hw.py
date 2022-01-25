@@ -5,6 +5,7 @@ from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     all_actions_with_two_sets_11,
 )
 from hw.andrey_yelin.lesson06.functions_lesson06hw import code_8
+from hw.andrey_yelin.lesson06.functions_lesson06hw import creating_diction_10
 from hw.andrey_yelin.lesson06.functions_lesson06hw import decode_7
 from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     even_keys_and_odd_values_12,
@@ -98,6 +99,18 @@ def test_reversed_dictionary_9() -> None:
     assert reversed_dictionary_9("") == {"errors": "argument is not a dict"}
     assert reversed_dictionary_9([]) == {"errors": "argument is not a dict"}
     assert reversed_dictionary_9(()) == {"errors": "argument is not a dict"}
+
+
+def test_creating_diction_10() -> None:
+    assert creating_diction_10("abc", [1, 2]) == {
+        "data": {"a": 1, "b": 2, "c": None}
+    }
+    assert creating_diction_10("ab", [1, 2, 3]) == {
+        "data": {"a": 1, "b": 2, ...: 3}
+    }
+    assert creating_diction_10("ab", []) == {
+        "errors": "second argument is empty"
+    }
 
 
 def test_all_actions_with_two_sets_11() -> None:
