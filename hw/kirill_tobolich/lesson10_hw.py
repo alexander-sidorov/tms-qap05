@@ -14,7 +14,10 @@ class Palindrome:
         self.string = string
 
     def __bool__(self) -> bool:
-        if not palindrome(self.string)["data"]:
+        if (
+            "errors" in palindrome(self.string)
+            or not palindrome(self.string)["data"]  # noqa: W503
+        ):
             return False
         return True
 
