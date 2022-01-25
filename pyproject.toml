@@ -32,7 +32,12 @@ markers = [
 testpaths = [
     "hw",
 ]
-addopts = "--cov --no-cov-on-fail"
+addopts = [
+    "--cov",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "--numprocesses=auto",
+]
 
 
 [tool.mypy]
@@ -40,7 +45,7 @@ check_untyped_defs = true
 disallow_incomplete_defs = true
 disallow_untyped_calls = true
 disallow_untyped_defs = true
-files = ["hw",]
+files = ["hw", ]
 no_implicit_optional = true
 pretty = true
 python_version = "3.9"
@@ -54,6 +59,33 @@ warn_unused_ignores = true
 [[tool.mypy.overrides]]
 module = [
     "asyncpg",
+    "devtools",
+    "freezegun",
     "uvicorn",
 ]
 ignore_missing_imports = true
+
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = [
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "R0801", # similar code
+    "too-many-locals",
+]
+ignore = [
+    ".github",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".run",
+    ".venv",
+    "__pycache__",
+    "htmlcov",
+]
+jobs = 0
+format = "colorized"
+include-naming-hint = true
+max-args = 12
+max-line-length = 79
+min-public-methods = 0

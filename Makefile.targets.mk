@@ -31,7 +31,7 @@ coverage:
 
 code-typing:
 	$(call log, checking code typing)
-	mypy
+	mypy -p hw
 
 
 code-format:
@@ -46,7 +46,12 @@ code-format:
 
 code-linters:
 	$(call log, linting)
-	flake8
+	flake8 hw
+	pylint \
+		hw._qa.alexander_sidorov \
+		hw._qa.hw06 \
+		hw._qa.hw10 \
+		hw.alexander_sidorov \
 
 
 sh:

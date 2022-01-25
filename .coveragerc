@@ -1,12 +1,5 @@
 [run]
 branch = True
-omit =
-    hw/siarhei_apanel/refakt.py
-    hw/siarhei_apanel/test.py
-    hw/siarhei_apanel/Test_APANEL.py
-    hw/vlad_yancharski/func_3.py
-    hw/vlad_yancharski/test.py
-    hw/vlad_yancharski/test3.py
 relative_files = True
 source = hw
 
@@ -20,7 +13,7 @@ exclude_lines =
     if 0:
     if __name__ == .__main__.:
     @(abc\.)?abstractmethod
-fail_under = ${COVERAGE_MIN-100}
+fail_under = ${COVERAGE_MIN-99}
 skip_covered = False
 skip_empty = True
 sort = Cover
