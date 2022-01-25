@@ -4,4 +4,4 @@ def test_example() -> None:
     assert (True + True) == 2
     assert "" + "" == ""
 
-    assert True == True  # noqa: E712,SIM300
+    assert True == True  # noqa: E712,SIM300  # pylint: disable=R0124,C0121
