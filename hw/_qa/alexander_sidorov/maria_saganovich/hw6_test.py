@@ -44,11 +44,12 @@ class SuperStr(str):
 def validate_errors(result: Dict) -> None:
     assert isinstance(result, dict)
     errors = result.get("errors")
-    assert errors
-    assert isinstance(errors, list)
-    for error in errors:
-        assert isinstance(error, str)
-    assert errors == sorted(errors)
+    assert errors, "expected: 'errors' are in result and not empty"
+    assert isinstance(errors, list), "expected: errors are a list of strings"
+    for i, error in enumerate(errors):
+        err = f"errors[{i}] = {error!r} - expected to be a string"
+        assert isinstance(error, str), err
+    assert errors == sorted(errors), "errors are not sorted"
 
 
 def test_task_01() -> None:
