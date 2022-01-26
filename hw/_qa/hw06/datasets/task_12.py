@@ -1,3 +1,6 @@
+# pylint: disable=redefined-builtin
+
+
 from functools import partial
 
 import pytest
@@ -61,7 +64,6 @@ happy_data = [  # type: ignore  # noqa: ECE001
         ],
     }.items()
 ]
-
 
 unhappy_data = [
     pytest.param(args, id=name)
