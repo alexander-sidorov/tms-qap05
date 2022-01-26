@@ -5,6 +5,7 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task07 import task_07 as alexander_sidorov
+from hw.kirill_tobolich.lesson6_hw import repeat_chars as kirill_tobolich
 
 from .common import qual_name
 from .datasets.task_07 import happy_data
@@ -14,6 +15,7 @@ solutions = [
     pytest.param(solution, id=qual_name(solution))
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
+        kirill_tobolich,
     }
 ]
 

@@ -6,9 +6,11 @@ import pytest
 
 from hw._qa.hw10.common import get_class
 from hw.alexander_sidorov.lesson10 import homework as alexander_sidorov
+from hw.kirill_tobolich import lesson10_hw as kirill_tobolich
 
 modules = {
     alexander_sidorov,
+    kirill_tobolich,
 }
 
 
