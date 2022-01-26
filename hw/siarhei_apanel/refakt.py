@@ -146,7 +146,10 @@ def dateday(yer: Any) -> Any:
 class User02:
     def __init__(self, datee: Any) -> None:
         self.datee = dateday(datee)
-        self.age = (
+
+    def age(self) -> Any:
+
+        return (
             self.datee if "errors" in self.datee else self.datee["data"]["age"]
         )
 
@@ -198,6 +201,9 @@ def html_str(query: Any) -> dict:
             result[new_letter] = [letter[verif + 1 :]]  # noqa: E203
         else:
             result[new_letter].append(letter[verif + 1 :])  # noqa: E203
+    for key, value in result.items():
+        if len(value) < 2:
+            result[key] = value[0]
     return result
 
 

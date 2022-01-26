@@ -65,14 +65,10 @@ def test_example() -> None:
     assert repeat("aaabbc") == {"data": {"a": 3, "b": 2}}
     assert repeat([]) == {"data": {}}
     assert "errors" in repeat(1)
-    assert html_str("x=1&x=2&y=33") == {"data": {"x": ["1", "2"], "y": ["33"]}}
-    assert html_str("a=x&b=y&z=") == {
-        "data": {"a": ["x"], "b": ["y"], "z": [""]}
-    }
+    assert html_str("x=1&x=2&y=33") == {"data": {"x": ["1", "2"], "y": "33"}}
+    assert html_str("a=x&b=y&z=") == {"data": {"a": "x", "b": "y", "z": ""}}
     assert "errors" in html_str([])
-    assert html_str("a=x&b=y&z=z") == {
-        "data": {"a": ["x"], "b": ["y"], "z": ["z"]}
-    }
+    assert html_str("a=x&b=y&z=z") == {"data": {"a": "x", "b": "y", "z": "z"}}
     assert decodding("a3b2c1") == {"data": "aaabbc"}
     assert decodding("") == {"data": ""}
     assert "errors" in decodding(123)
@@ -115,9 +111,9 @@ def test_example() -> None:
     assert "errors" in diction("a", "b", set(), "c")
     assert Palindrome01("xyx")
     assert not Palindrome01("xy x")
-    assert User02(dat2).age == 34
-    assert "errors" in User02(nodate).age
-    assert obj["x"] == ["1"]
+    assert User02(dat2).age() == 34
+    assert "errors" in User02(nodate).age()
+    assert obj["x"] == "1"
     assert obj["y"] == ["2", "3"]
     assert obj["z"] is None
     assert "errors" in objer.__getitem__("x")
