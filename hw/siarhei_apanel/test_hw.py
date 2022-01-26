@@ -28,9 +28,6 @@ def test_example() -> None:
     obj1.add(2).add(3).add(4)
     obj = HttpQuery03("x=1&y=2&y=3")
     objer = HttpQuery03(123)
-    pal = Palindrome01("xyx")
-    pal2 = Palindrome01("xyzx")
-    pal3 = Palindrome01(1)
     yers = {"a": date(2000, 7, 12), "b": date(2000, 7, 12)}
     noyer = {"a": 1998, "b": date(1999, 2, 2)}
     dic = {1: 100, 2: 100, 3: 300}
@@ -39,9 +36,9 @@ def test_example() -> None:
     set1 = {1, 2}
     set2 = {1, 3}
     da = {"a": date(2000, 7, 12), "b": date(1987, 12, 24)}
-    dat2 = User02(date(year=1987, month=8, day=2))
+    dat2 = date(year=1987, month=8, day=2)
     dat = date(year=1987, month=8, day=2)
-    nodate = User02(1998)
+    nodate = 1998
 
     assert palindrom("") == {"data": True}
     assert palindrom("x") == {"data": True}
@@ -116,14 +113,13 @@ def test_example() -> None:
     assert "errors" in diction([1], 2)
     assert "errors" in diction(1, 2, {}, 4)
     assert "errors" in diction("a", "b", set(), "c")
-    assert pal.__bool__()
-    assert not pal2.__bool__()
-    assert "errors" in pal3.__bool__()
-    assert dat2.age() == 34
-    assert "errors" in nodate.age()
-    assert obj.__getitem__("x") == ["1"]
-    assert obj.__getitem__("y") == ["2", "3"]
-    assert obj.__getitem__("z") is None
+    assert Palindrome01("xyx")
+    assert not Palindrome01("xy x")
+    assert User02(dat2).age == 34
+    assert "errors" in User02(nodate).age
+    assert obj["x"] == ["1"]
+    assert obj["y"] == ["2", "3"]
+    assert obj["z"] is None
     assert "errors" in objer.__getitem__("x")
     assert obj1.get_result() == 24
     assert "errors" in badobj.get_result()

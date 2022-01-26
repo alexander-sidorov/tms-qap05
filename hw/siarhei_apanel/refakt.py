@@ -145,13 +145,10 @@ def dateday(yer: Any) -> Any:
 
 class User02:
     def __init__(self, datee: Any) -> None:
-        self.datee = datee
-
-    def age(self) -> Any:
-        result = dateday(self.datee)
-        if "errors" in result:
-            return result
-        return result["data"]["age"]
+        self.datee = dateday(datee)
+        self.age = (
+            self.datee if "errors" in self.datee else self.datee["data"]["age"]
+        )
 
 
 @decor_data
@@ -213,8 +210,7 @@ class HttpQuery03:
         self.diction = html_str(self.text)
         if "errors" in self.diction:
             return self.diction
-        result = self.diction["data"]
-        return result.get(key)
+        return self.diction["data"].get(key)
 
 
 @decor_data
