@@ -5,6 +5,9 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task03 import task_03 as alexander_sidorov
+from hw.andrey_yelin.lesson06.functions_lesson06hw import (
+    age_result_3 as andrey_yelin,
+)
 
 from .common import azaza
 from .common import qual_name
@@ -15,6 +18,7 @@ solutions = [
     pytest.param(solution, id=qual_name(solution))
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
+        andrey_yelin,
     }
 ]
 
