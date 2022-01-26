@@ -201,7 +201,6 @@ def html_str(query: Any) -> dict:
             result[new_letter] = [letter[verif + 1 :]]  # noqa: E203
         else:
             result[new_letter].append(letter[verif + 1 :])  # noqa: E203
-
     return result
 
 
