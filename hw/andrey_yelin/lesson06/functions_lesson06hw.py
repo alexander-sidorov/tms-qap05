@@ -26,6 +26,7 @@ def is_palindrome_1(strochka: Any = None) -> Any:
     if strochka is None:
         result = {"errors": "none argument"}
         return result
+
     if not isinstance(strochka, str):
         result = {"errors": "not a string"}
         return result
