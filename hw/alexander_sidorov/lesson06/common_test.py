@@ -40,7 +40,7 @@ def test_typecheck_unknown() -> None:
         pass  # pragma: no cover
 
     with pytest.raises(AssertionError) as err:
-        _func(1)  # type: ignore
+        _func(1)
 
     assert str(err.value) == "_arg1=1: type int != T2 (expected)"
 

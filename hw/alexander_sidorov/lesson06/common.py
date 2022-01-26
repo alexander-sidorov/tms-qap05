@@ -137,7 +137,7 @@ def typecheck(func: Callable[Params, T1]) -> Callable[Params, T1]:
             next(params_types) for _ in "_" * func.__code__.co_argcount
         )
 
-        arguments = iter(args)  # type: ignore
+        arguments = iter(args)
 
         for param, expected in params_args_types:
             try:
