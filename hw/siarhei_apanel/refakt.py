@@ -146,7 +146,10 @@ def dateday(yer: Any) -> Any:
 class User02:
     def __init__(self, datee: Any) -> None:
         self.datee = dateday(datee)
-        self.age = (
+
+    def age(self) -> Any:
+
+        return (
             self.datee if "errors" in self.datee else self.datee["data"]["age"]
         )
 
@@ -210,6 +213,9 @@ class HttpQuery03:
         self.diction = html_str(self.text)
         if "errors" in self.diction:
             return self.diction
+        result = self.diction["data"].get(key)
+        if isinstance(result, list) and len(result) < 2:
+            return result[0]
         return self.diction["data"].get(key)
 
 
