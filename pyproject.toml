@@ -36,7 +36,6 @@ addopts = [
     "--cov",
     "--cov-report=html",
     "--cov-report=xml",
-    "--numprocesses=auto",
 ]
 
 
