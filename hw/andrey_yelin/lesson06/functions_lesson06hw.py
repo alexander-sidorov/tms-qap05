@@ -2,6 +2,8 @@ import functools
 from datetime import date
 from functools import wraps
 from typing import Any
+from typing import Collection
+from typing import Counter
 from typing import Dict
 from urllib.parse import parse_qs
 
@@ -65,6 +67,21 @@ def multiply_args_2(*m: Any) -> Any:
     return result
 
 
+class Multiplier04:
+    def __init__(self) -> None:
+        self.arg: list[Any] = []
+
+    def add(self, arg: Any) -> Any:
+        self.arg.append(arg)
+        return self
+
+    def get_result(self) -> Any:
+        result = multiply_args_2(*self.arg)
+        if "errors" in result:
+            return result
+        return result["data"]
+
+
 @decorate
 def age_result_3(born: Any) -> Any:
     result: Any = {}
@@ -115,6 +132,17 @@ def older_4_v_lambda(old_date: Dict[Any, date]) -> Result:
     return result
 
 
+class User02:
+    def __init__(self, year: Any) -> None:
+        self.year = year
+
+    def age(self):
+        result = older_4(self.year)
+        if "errors" in result:
+            return result
+        return result["data"]["age"]
+
+
 @decorate
 def repeating_elements_5(elements_list: Any) -> Any:
     result: Any = {}
@@ -133,6 +161,17 @@ def repeating_elements_5(elements_list: Any) -> Any:
     return result
 
 
+class DupCounter05(Counter):
+    def __init__(self, coll: Any) -> None:
+        self.coll = coll
+
+    def get_dups(self) -> Any:
+        result = repeating_elements_5(self.coll)
+        if "errors" in result:
+            return result
+        return result["data"]
+
+
 @decorate
 def parse_http_query_6(string: Any = None) -> Any:
     result: Any = {}
@@ -148,6 +187,18 @@ def parse_http_query_6(string: Any = None) -> Any:
         return result
     result = parse_qs(string)
     return result
+
+
+class HttpQuery03:
+    def __init__(self, string: str):
+        self.string = string
+
+    def __getitem__(self, key: str) -> Any:
+        try:
+            parse_http_query_6(self.string)["data"][key]
+        except KeyError:
+            return None
+        return parse_http_query_6(self.string)["data"][key]
 
 
 def get_let_num_for_decode_7(command_str: str) -> tuple:  # noqa: CCR001

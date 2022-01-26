@@ -1,6 +1,10 @@
 from datetime import date
 
+from hw.andrey_yelin.lesson06.functions_lesson06hw import DupCounter05
+from hw.andrey_yelin.lesson06.functions_lesson06hw import HttpQuery03
+from hw.andrey_yelin.lesson06.functions_lesson06hw import Multiplier04
 from hw.andrey_yelin.lesson06.functions_lesson06hw import Palindrome01
+from hw.andrey_yelin.lesson06.functions_lesson06hw import User02
 from hw.andrey_yelin.lesson06.functions_lesson06hw import age_result_3
 from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     all_actions_with_two_sets_11,
@@ -155,3 +159,27 @@ def test_even_keys_and_odd_values_12() -> None:
 def test_Palindrome01() -> None:
     assert Palindrome01("xyx")
     assert not Palindrome01("xy x")
+
+
+def test_User02() -> None:
+    d = date(2020, 1, 23)
+    assert User02(d).age == 2
+
+
+def test_HttpQuery03() -> None:
+    obj = HttpQuery03("x=1&y=2&y=3")
+    assert obj["x"] == "1"
+    assert obj["y"] == ["2", "3"]
+    assert obj["z"] is None
+
+
+def test_Multiplier04() -> None:
+    obj = Multiplier04()
+    obj.add(2).add(3).add(4)
+    assert obj.get_result() == 24
+
+
+def test_DupCounter05() -> None:
+    d = [1, 1, 1, 1, 2, 2, 3]
+    c = DupCounter05(d)
+    assert c.get_dups() == {1: 4, 2: 2}
