@@ -147,6 +147,7 @@ class User02:
     def __init__(self, datee: Any) -> None:
         self.datee = dateday(datee)
 
+    @property
     def age(self) -> Any:
 
         return (

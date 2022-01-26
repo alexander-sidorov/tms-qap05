@@ -115,8 +115,8 @@ def test_example() -> None:
     assert "errors" in diction("a", "b", set(), "c")
     assert Palindrome01("xyx")
     assert not Palindrome01("xy x")
-    assert User02(dat2).age() == 34
-    assert "errors" in User02(nodate).age()
+    assert User02(dat2).age == 34
+    assert "errors" in User02(nodate).age
     assert obj["x"] == "1"
     assert obj["y"] == ["2", "3"]
     assert obj["z"] is None
