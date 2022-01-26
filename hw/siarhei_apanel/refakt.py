@@ -216,7 +216,7 @@ class HttpQuery03:
         result = self.diction["data"].get(key)
         if isinstance(result, list) and len(result) < 2:
             return result[0]
-        return self.diction["data"].get(key)
+        return result
 
 
 @decor_data
@@ -348,4 +348,3 @@ def diction(*digit: Any) -> dict:
 
 if __name__ == "__main__":
     aggression(True)
-    aggression(False)
