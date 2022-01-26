@@ -1,8 +1,10 @@
+from collections import Counter
+from collections.abc import Sequence
 from datetime import date
+from functools import reduce
 from typing import Any
 from typing import Callable
-from collections.abc import Sequence
-from functools import reduce
+
 
 def decorator_function(func: Callable) -> Callable:
     def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -15,31 +17,31 @@ def decorator_function(func: Callable) -> Callable:
     return wrapper
 
 
-
-
 @decorator_function
 def palindrom(slovo: Any) -> Any:
     assert isinstance(slovo, str), "Not string"
-    return slovo == slovo[:: -1]
+    return slovo == slovo[::-1]
+
 
 class Palindrome01:
-    def __init__(self, text):
+    def __init__(self, text: Any) -> None:
         self.__text = text
+
     def __bool__(self):
         return palindrom(self.__text)
-
-
 
 
 @decorator_function
 def umnogenie(*args: Any) -> Any:
     if len(args) < 2:
-        assert isinstance(args[0], (Sequence, complex, int, float)), "No Sequence"
+        assert isinstance(
+            args[0], (Sequence, complex, int, float)
+        ), "No Sequence"
         if args[0] == ("",):
             return ""
         return args[0]
-    for _1 in args:
-        assert isinstance(_1, (Sequence, complex, int, float)), "TrueError"
+    for x_1 in args:
+        assert isinstance(x_1, (Sequence, complex, int, float)), "TrueError"
 
     return reduce(
         lambda x, y: x * y,
@@ -47,9 +49,24 @@ def umnogenie(*args: Any) -> Any:
     )
 
 
+class Multiplier04:
+    def __init__(self) -> None:
+        self.arg: list[Any] = []
+
+    def add(self, arg: Any) -> Any:
+        self.arg.append(arg)
+        return self
+
+    def get_result(self) -> Any:
+        result = umnogenie(*self.arg)
+        if "errors" in result:
+            return result
+        return result["data"]
+
+
 @decorator_function
 def date_age(b1: date) -> dict:
- #   assert not isinstance(b1, date), "Not DateType"
+    assert isinstance(b1, date), "Not DateType"
     segodnya = date.today()
     delta = segodnya - b1
     result = {
@@ -60,17 +77,16 @@ def date_age(b1: date) -> dict:
     }
     return result
 
+
 class User02:
-    def __init__(self, year):
+    def __init__(self, year: Any) -> None:
         self.year = year
+
     def age(self):
-        return date_age(self.year)["data"]["age"]
-d = User02(date(2020, 1, 23))
-
-
-
-
-
+        result = date_age(self.year)
+        if "errors" in result:
+            return result
+        return result["data"]["age"]
 
 
 @decorator_function
@@ -99,19 +115,21 @@ def zadacha_5(collection: Any) -> dict:
         if collection.count(n1) >= 2:
             list_result.append(n1)
     for n2 in list_result:
-        assert not isinstance(n2, (list, dict))
+        assert not isinstance(n2, (list, dict)), "AssertionError"
         banka[n2] = list_result.count(n2)
 
     return banka
 
-class Counter:
-
 
 class DupCounter05(Counter):
-    def __init__(self, a1):
+    def __init__(self, a1: Any) -> None:
         self.a1 = a1
+
     def get_dubs(self):
-        return zadacha_7(self.a1)
+        result = zadacha_5(self.a1)
+        if "errors" in result:
+            return result
+        return result["data"]
 
 
 @decorator_function
