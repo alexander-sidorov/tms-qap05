@@ -116,7 +116,6 @@ def proizvedenie(*args: Any) -> Any:
     )
 
 
-<<<<<<< HEAD
 class Multiplier04:
     def __init__(self) -> None:
         self.arg: list[Any] = []
@@ -130,14 +129,6 @@ class Multiplier04:
         if "errors" in result:
             return result
         return result["data"]
-=======
-class Task02:
-    def __init__(self, *args: Any) -> None:
-        self.args = args
-
-    def multi(self):
-        return proizvedenie(*self.args)
->>>>>>> parent of b8ef34c (TestClass)
 
 
 @decor_data
