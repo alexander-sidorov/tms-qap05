@@ -39,7 +39,6 @@ happy_data = [
     }.items()
 ]
 
-
 aza = azaza(bs=[dict])
 azz = azaza(bs=[set])
 

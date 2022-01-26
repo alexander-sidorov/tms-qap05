@@ -1,15 +1,15 @@
 from typing import Any
-from typing import Optional
 from typing import Union
 
 from .common import Errors
-from .common import ErrorsList
 from .common import api
 from .common import even
 from .common import hashable
+from .common import typecheck
 
 
 @api
+@typecheck
 def task_12(*args: Any) -> Union[dict, Errors]:
     """
     Composes a dict from args.
@@ -17,8 +17,7 @@ def task_12(*args: Any) -> Union[dict, Errors]:
     Odd args are treated as values.
     """
 
-    if errors := validate(args):
-        return errors
+    validate(args)
 
     data = {}
 
@@ -32,18 +31,11 @@ def task_12(*args: Any) -> Union[dict, Errors]:
     return data
 
 
-def validate(args: tuple) -> Optional[Errors]:
-    messages: ErrorsList = []
+def validate(args: tuple) -> None:
+    nr_elms = len(args)
 
-    if (nr_elms := len(args)) % 2 == 1:
-        messages.append(f"odd number of elements ({nr_elms})")
+    assert nr_elms % 2 != 1, f"odd number of elements ({nr_elms})"
 
-    wrong_keys = (
-        (i, arg) for i, arg in enumerate(args) if even(i) and not hashable(arg)
-    )
-
-    messages.extend(
-        f"args[{i}]={key!r} is not hashable" for i, key in wrong_keys
-    )
-
-    return {"errors": sorted(messages)} if messages else None
+    for i, arg in enumerate(args):
+        if even(i):
+            assert hashable(arg), f"args[{i}]={arg!r} is not hashable"

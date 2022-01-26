@@ -28,6 +28,7 @@ Complex = Union[int, float, complex]
 nan = complex("nan")
 
 
+# pylint: disable=invalid-name
 def quadratic_roots(
     a: Complex,  # noqa: VNE001
     b: Complex,  # noqa: VNE001

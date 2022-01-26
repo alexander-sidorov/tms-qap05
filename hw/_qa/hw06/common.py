@@ -1,10 +1,9 @@
 from secrets import choice
 from string import ascii_letters
 from typing import Any
-from typing import Callable
 
 
-def azaza(*args: Any, bs: Any = ()) -> Any:
+def azaza(*args: Any, bs: Any = ()) -> Any:  # pylint: disable=invalid-name
     asda = "".join(choice(ascii_letters) for _ in "x" * 12)
     tyyy = type(asda, tuple(bs), {})
     return tyyy(*args)
@@ -29,7 +28,7 @@ def validate_errors(result: Any) -> None:
         assert isinstance(error, str)
 
 
-def qual_name(func: Callable) -> str:
+def qual_name(func: Any) -> str:
     return ".".join(
         (
             func.__module__,

@@ -12,7 +12,7 @@ from .datasets.task_11 import unhappy_data
 
 solutions = [
     pytest.param(solution, id=qual_name(solution))
-    for solution in {
+    for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
     }
 ]

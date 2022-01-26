@@ -33,7 +33,7 @@ def test_task_07() -> None:
         task_07,
         1,
         expected_errors=[
-            "type(folded_text)=<class 'int'>, MUST be a str",
+            "folded_text=1, int != str (expected)",
         ],
     )
     validate(

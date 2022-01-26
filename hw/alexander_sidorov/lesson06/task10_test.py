@@ -45,7 +45,7 @@ def test_task_10() -> None:
         None,
         "ab",
         expected_errors=[
-            "type(keys)=<class 'NoneType'>, MUST be a sequence",
+            "keys=None, NoneType != Sequence (expected)",
         ],
     )
     validate(
@@ -53,24 +53,22 @@ def test_task_10() -> None:
         "ab",
         None,
         expected_errors=[
-            "type(values)=<class 'NoneType'>, MUST be a sequence",
+            "values=None, NoneType != Sequence (expected)",
         ],
     )
     validate(
         task_10,
-        None,
-        None,
-        expected_errors=[
-            "type(keys)=<class 'NoneType'>, MUST be a sequence",
-            "type(values)=<class 'NoneType'>, MUST be a sequence",
-        ],
-    )
-    validate(
-        task_10,
-        [{}, []],
+        [{}, None],
         "ab",
         expected_errors=[
             "keys[0]={} is not hashable",
+        ],
+    )
+    validate(
+        task_10,
+        [None, []],
+        "ab",
+        expected_errors=[
             "keys[1]=[] is not hashable",
         ],
     )
