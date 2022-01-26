@@ -1,5 +1,6 @@
 from datetime import date
 
+from hw.andrey_yelin.lesson06.functions_lesson06hw import Palindrome01
 from hw.andrey_yelin.lesson06.functions_lesson06hw import age_result_3
 from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     all_actions_with_two_sets_11,
@@ -149,3 +150,8 @@ def test_even_keys_and_odd_values_12() -> None:
     assert even_keys_and_odd_values_12(1, 2, 3, 4, 5) == {
         "errors": "quantity of arguments is not even"
     }
+
+
+def test_Palindrome01() -> None:
+    assert Palindrome01("xyx")
+    assert not Palindrome01("xy x")

@@ -39,8 +39,14 @@ def is_palindrome_1(strochka: Any = None) -> Any:
 
 
 class Palindrome01:  # noqa: SIM119
-    def __init__(self, text: Any) -> None:
-        self.text = text
+    def __init__(self, word: Any) -> None:
+        self.word = word
+
+    def __bool__(self) -> Any:
+        result = is_palindrome_1(self.word)
+        if "errors" in result:
+            return result
+        return result["data"]
 
 
 @decorate
