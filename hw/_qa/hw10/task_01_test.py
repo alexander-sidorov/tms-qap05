@@ -5,9 +5,11 @@ import pytest
 
 from hw._qa.hw10.common import get_class
 from hw.alexander_sidorov.lesson10 import homework as alexander_sidorov
+from hw.nikita_pakhomov.nlesson3 import hw10 as nikita_pakhomov
 
 modules = {
     alexander_sidorov,
+    nikita_pakhomov,
 }
 
 
