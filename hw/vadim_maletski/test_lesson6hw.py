@@ -285,11 +285,11 @@ def test() -> None:
     assert User02(bd).age == 2
 
     obj = HttpQuery03("x=1&y=2&y=3")
-    assert obj["x"] == ["1"]
+    assert obj["x"] == "1"
     assert obj["y"] == ["2", "3"]
     assert obj["z"] is None
     obj = HttpQuery03("x=1&y=2&y=")
-    assert obj["x"] == ["1"]
+    assert obj["x"] == "1"
     assert obj["y"] == ["2", ""]
     assert obj["z"] is None
 

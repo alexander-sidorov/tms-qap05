@@ -309,9 +309,11 @@ class HttpQuery03:
         self.query = query
 
     def __getitem__(self, key: Any) -> Any:
+        res = level_06(self.query)["data"].get(key)
         try:
-            res = level_06(self.query)
-            return res["data"].get(key)
+            if isinstance(res, list) and len(res) < 2:
+                return res[0]
+            return level_06(self.query)["data"].get(key)
         except KeyError:
             return None
 
