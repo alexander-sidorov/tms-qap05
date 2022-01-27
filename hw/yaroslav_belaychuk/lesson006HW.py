@@ -19,7 +19,7 @@ def decorator_function(func: Callable) -> Callable:
 
 @decorator_function
 def palindrom(slovo: Any) -> Any:
-    assert isinstance(slovo, str), "Not string"
+    assert isinstance(slovo, str), "Not string
     return slovo == slovo[::-1]
 
 
