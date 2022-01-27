@@ -286,38 +286,32 @@ def level_12(*arguments: Any) -> Any:
     return result
 
 
-class Palindrom01:
+class Palindrome01:
     def __init__(self, string: Any) -> None:
         self.__string = string
 
     def __bool__(self) -> Any:
         res = level_01(self.__string)
-        if "errors" in res:
-            return res
         return res["data"]
 
 
 class User02:
     def __init__(self, bd: Any) -> None:
-        self.__bd = bd
+        self.bd = level_03(bd)
 
+    @property
     def age(self) -> Any:
-        res = level_03(self.__bd)
-        if "errors" in res:
-            return res
-        return res["data"]["age"]
+        return self.bd["data"]["age"]
 
 
 class HttpQuery03:
     def __init__(self, query: Any) -> None:
         self.query = query
 
-    def get_res(self, key: Any) -> Any:
+    def __getitem__(self, key: Any) -> Any:
         try:
             res = level_06(self.query)
-            if "errors" in res:
-                return res
-            return res["data"][key]
+            return res["data"].get(key)
         except KeyError:
             return None
 
@@ -330,10 +324,8 @@ class Multiplier04:
         self.arguments.append(arg)
         return self
 
-    def get_res(self) -> Any:
+    def get_result(self) -> Any:
         res = level_02(*self.arguments)
-        if "errors" in res:
-            return res
         return res["data"]
 
 
@@ -344,6 +336,4 @@ class DupCounter05(Counter):
 
     def get_dups(self) -> Any:
         res = level_05(self.lis)
-        if "errors" in res:
-            return res
         return res["data"]

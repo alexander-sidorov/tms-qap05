@@ -3,7 +3,7 @@ from datetime import date
 from hw.vadim_maletski.func6 import DupCounter05
 from hw.vadim_maletski.func6 import HttpQuery03
 from hw.vadim_maletski.func6 import Multiplier04
-from hw.vadim_maletski.func6 import Palindrom01
+from hw.vadim_maletski.func6 import Palindrome01
 from hw.vadim_maletski.func6 import User02
 from hw.vadim_maletski.func6 import level_01
 from hw.vadim_maletski.func6 import level_02
@@ -132,7 +132,7 @@ def test() -> None:
     assert (level_06(9)) == {"errors": ["TypeError"]}
     assert (level_06("x=1&x=2&y=3")) == {"data": {"x": ["1", "2"], "y": ["3"]}}
     assert (level_06("")) == {"data": {}}
-    assert {"data": {"value": [""]}}
+    assert (level_06("value=")) == {"data": {"value": [""]}}
     assert (level_06("ab=cd&ef=gh&ef=ij")) == {
         "data": {"ab": ["cd"], "ef": ["gh", "ij"]}
     }
@@ -274,25 +274,24 @@ def test() -> None:
         "data": {1: 2, 3: "a", 5: {}, 6: object}
     }
 
-    pol = Palindrom01("xyx")
+    pol = Palindrome01("xyx")
     assert pol.__bool__() is True
-    pol = Palindrom01("xy x")
+    pol = Palindrome01("xy x")
     assert not pol.__bool__() is True
-    pol = Palindrom01("Yy")
+    pol = Palindrome01("Yy")
     assert pol.__bool__() is False
 
-    db = date(2020, 1, 23)
-    res2 = User02(db)
-    assert res2.age() == 2
+    bd = date(2020, 1, 23)
+    assert User02(bd).age == 2
 
     res3 = HttpQuery03("x=1&y=2&y=3")
-    assert res3.get_res("x") == ["1"]
-    assert res3.get_res("y") == ["2", "3"]
-    assert res3.get_res("z") is None
+    assert res3.__getitem__("x") == ["1"]
+    assert res3.__getitem__("y") == ["2", "3"]
+    assert res3.__getitem__("z") is None
 
     obj = Multiplier04()
     obj.add(2).add(3).add(4)
-    assert obj.get_res() == 24
+    assert obj.get_result() == 24
 
     lis = [1, 1, 1, 1, 2, 2, 3]
     res5 = DupCounter05(lis)
