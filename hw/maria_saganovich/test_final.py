@@ -15,12 +15,12 @@ def test_final() -> None:
 
     birthday = date(2020, 1, 23)
     user_info = User02(birthday)
-    user_info2 = User02("2001-01-02")
     assert user_info.age == 2
+    user_info2 = User02("2001-01-02")
     assert user_info2.age == {"errors": ["should be date"]}
 
     query = HttpQuery03("x=1&y=2&y=3")
-    assert query["x"] == ["1"]
+    assert query["x"] == "1"
     assert query["y"] == ["2", "3"]
     assert query["z"] is None
 

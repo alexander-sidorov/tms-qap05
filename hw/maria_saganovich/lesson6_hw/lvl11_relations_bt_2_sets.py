@@ -5,8 +5,8 @@ from hw.maria_saganovich.lesson6_hw.func_decorator import my_func_decorator
 
 @my_func_decorator
 def func11_relation_bt_2_sets(arg1: Any, arg2: Any) -> dict:
-    if type(arg1) != set or type(arg2) != set:
-        raise Exception(["arg should be set"])
+    assert isinstance(arg1, (frozenset, set)), ["arg1 should be set"]
+    assert isinstance(arg2, (frozenset, set)), ["arg2 should be set"]
 
     return {
         "a&b": arg1 & arg2,

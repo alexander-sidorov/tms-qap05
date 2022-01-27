@@ -1,3 +1,4 @@
+from collections import Counter
 from dataclasses import dataclass
 from typing import Any
 
@@ -26,10 +27,14 @@ class Palindrome01:
 class User02:
     def __init__(self, date: Any) -> None:
         self.user_info = func3_age(date)
-        if "errors" in self.user_info:
-            self.age = self.user_info
-        else:
-            self.age = self.user_info["data"]["age"]
+
+    @property
+    def age(self) -> Any:
+        return (
+            self.user_info
+            if "errors" in self.user_info
+            else self.user_info["data"]["age"]
+        )
 
 
 class HttpQuery03:
@@ -41,7 +46,8 @@ class HttpQuery03:
         self.dict_http_query = func6_dict_http_query(self.text)
         if "errors" in self.dict_http_query:
             return self.dict_http_query
-        return self.dict_http_query["data"].get(key)
+        item = self.dict_http_query["data"].get(key)
+        return item[0] if (isinstance(item, list) and len(item) < 2) else item
 
 
 class Multiplier04:
@@ -56,8 +62,9 @@ class Multiplier04:
         return self.number
 
 
-class DupCounter05:
+class DupCounter05(Counter):
     def __init__(self, data: Any) -> None:
+        super().__init__()
         self.data = data
 
     def get_dups(self) -> Any:

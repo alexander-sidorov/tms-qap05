@@ -7,12 +7,14 @@ from hw.maria_saganovich.lesson6_hw.func_decorator import my_func_decorator
 def func2_product(*args: Any) -> Any:
     product: Any = 1
 
+    assert len(args) > 0, ["No Data"]
+
     for arg in args:
         if not isinstance(arg, (int, float, complex, str, list, tuple)):
             raise Exception(["Unsupported type"])
 
         if isinstance(product, (list, str, tuple)) and isinstance(
-            arg, (list, tuple, str)
+            arg, (list, tuple, str, complex, float)
         ):
             raise Exception(["Can't multiply sequence by non-int of types"])
 

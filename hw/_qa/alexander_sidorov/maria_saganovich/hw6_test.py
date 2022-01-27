@@ -133,8 +133,8 @@ def test_task_08() -> None:
 
 def test_task_09() -> None:
     assert func9_swap_keys_values({}) == {"data": {}}
-    assert func9_swap_keys_values({1: 100}) == {"data": {100: [1]}}
-    assert func9_swap_keys_values({"a": ...}) == {"data": {...: ["a"]}}
+    assert func9_swap_keys_values({1: 100}) == {"data": {100: 1}}
+    assert func9_swap_keys_values({"a": ...}) == {"data": {...: "a"}}
     assert func9_swap_keys_values({"a": ..., "b": ...}) == {  # noqa: JS101
         "data": {...: ["a", "b"]},
     }

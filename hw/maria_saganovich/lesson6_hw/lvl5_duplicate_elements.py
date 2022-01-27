@@ -1,18 +1,16 @@
 from typing import Any
+from typing import Collection
 
 from hw.maria_saganovich.lesson6_hw.func_decorator import my_func_decorator
 
 
 @my_func_decorator
-def func5_duplicate_elements(collection: Any) -> dict:
+def func5_duplicate_elements(elements: Any) -> dict:
     counter: dict = {}
 
-    if not isinstance(collection, (list, dict, tuple, str, set, range)):
-        raise Exception(["Invalid collection type"])
-    if len(collection) == 0:
-        return {}
+    assert isinstance(elements, Collection), ["No Collections"]
 
-    for value in collection:
+    for value in elements:
         if isinstance(value, (list, dict, set, frozenset)):
             raise Exception(["Unhashable type: 'list'"])
 

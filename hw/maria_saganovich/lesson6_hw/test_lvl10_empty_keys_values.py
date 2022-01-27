@@ -20,7 +20,7 @@ def test_func10_empty_keys_values() -> None:
         "data": {"s": None, "d": None, "v": None}
     }
     assert func10_empty_keys_values("sdv", {}) == {  # noqa: JS101
-        "errors": ["Invalid arguments"]
+        "errors": ["Invalid argument: arg2"]
     }
     assert func10_empty_keys_values("", []) == {"data": {}}
     assert func10_empty_keys_values([], []) == {"data": {}}

@@ -7,8 +7,9 @@ from hw.maria_saganovich.lesson6_hw.func_decorator import my_func_decorator
 
 @my_func_decorator
 def func3_age(d1: Any) -> dict:
-    if not isinstance(d1, (datetime.date, datetime.datetime)):
-        raise Exception(["should be date"])
+    assert isinstance(d1, (datetime.date, datetime.datetime)), [
+        "should be date"
+    ]
 
     today = date.today()
     age = date.today().year - d1.year

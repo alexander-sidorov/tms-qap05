@@ -49,8 +49,8 @@ def test_func11_relation_bt_2_sets() -> None:
         }
     }
     assert func11_relation_bt_2_sets([], {""}) == {  # noqa: JS101
-        "errors": ["arg should be set"]
+        "errors": ["arg1 should be set"]
     }
     assert func11_relation_bt_2_sets({""}, []) == {  # noqa: JS101
-        "errors": ["arg should be set"]
+        "errors": ["arg2 should be set"]
     }
