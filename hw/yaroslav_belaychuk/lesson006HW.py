@@ -141,11 +141,11 @@ class DupCounter05(Counter):
 
 @decorator_function
 def zadacha_7(sybol_num: Any) -> Any:
+    assert isinstance(sybol_num, str), "Not String"
     if sybol_num == "":
         return ""
-    assert isinstance(sybol_num, str), "Not String"
-    assert sybol_num[0].isalpha(), "Not Digit"
-    assert sybol_num[-1].isdigit(), "Not Letter"
+    assert sybol_num[-1].isdigit(), "Not Digit"
+    assert sybol_num[0].isalpha(), "Not Letter"
 
     list_digit = []
     list_letter = []
@@ -166,7 +166,4 @@ def zadacha_7(sybol_num: Any) -> Any:
         else:
             bank += sybol_num[x1]
     list_digit.append(bank)
-    for x2, z1 in zip(list_letter, list_digit):
-        bank += x2 * int(z1)
-
-    return bank
+    return "".join(x2 * int(z1) for x2, z1 in zip(list_letter, list_digit))
