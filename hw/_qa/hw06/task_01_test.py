@@ -5,6 +5,7 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task01 import task_01 as alexander_sidorov
+from hw.yaroslav_belaychuk.lesson006HW import palindrom as yaroslav_belaychuk
 
 from .common import qual_name
 from .datasets.task_01 import happy_data
@@ -14,6 +15,7 @@ solutions = [
     pytest.param(solution, id=qual_name(solution))
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
+        yaroslav_belaychuk,
     }
 ]
 
