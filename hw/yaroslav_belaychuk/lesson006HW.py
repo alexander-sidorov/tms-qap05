@@ -4,6 +4,7 @@ from datetime import date
 from functools import reduce
 from typing import Any
 from typing import Callable
+from typing import Collection
 
 
 def decorator_function(func: Callable) -> Callable:
@@ -106,21 +107,23 @@ def zadacha_4(day: dict[Any, date]) -> dict:
 
 
 @decorator_function
-def zadacha_5(collection: Any) -> dict:
-    if isinstance(collection, (set, dict)):
+def zadacha_5(collection1: Any) -> dict:
+    assert isinstance(collection1, Collection), "AssertionError"
+    if (
+        isinstance(collection1, (set, dict, frozenset))
+        and len(collection1) <= 1
+    ):
         return {}
-    assert isinstance(collection, (list, tuple, str)), "TypeError"
 
     banka = {}  # type: ignore
     list_result = []
-    if len(collection) == 0:
+    if len(collection1) == 0:
         return banka
-    for n1 in collection:
-        if collection.count(n1) >= 2:
-            list_result.append(n1)
+    for n1 in collection1:
+        list_result.append(n1)
     for n2 in list_result:
-        assert not isinstance(n2, (list, dict)), "AssertionError"
-        banka[n2] = list_result.count(n2)
+        if list_result.count(n2) > 1:
+            banka[n2] = list_result.count(n2)
 
     return banka
 
@@ -138,26 +141,32 @@ class DupCounter05(Counter):
 
 @decorator_function
 def zadacha_7(sybol_num: Any) -> Any:
-    if len(sybol_num) == 0:
+    if sybol_num == "":
         return ""
     assert isinstance(sybol_num, str), "Not String"
-    assert not sybol_num[-1].isalpha(), "Not Digit"
-    assert not sybol_num[0].isdigit(), "Not Letter"
+    assert sybol_num[0].isalpha(), "Not Digit"
+    assert sybol_num[-1].isdigit(), "Not Letter"
 
     list_digit = []
     list_letter = []
     bank = ""
-    bank2 = ""
-    for x1 in sybol_num:
-        if x1.isalpha():
-            list_letter.append(x1)
+
+    for x1 in range(len(sybol_num)):
+        if (
+            sybol_num[x1].isalpha()
+            and sybol_num[x1] != sybol_num[-1]
+            and sybol_num[x1 + 1].isalpha()
+        ):
+            raise Exception("ErrorLetter")
+        if sybol_num[x1].isalpha():
+            list_letter.append(sybol_num[x1])
             if bank != "":
                 list_digit.append(bank)
                 bank = ""
         else:
-            bank += x1
+            bank += sybol_num[x1]
     list_digit.append(bank)
-    for x1, z1 in zip(list_letter, list_digit):
-        bank2 += x1 * int(z1)
+    for x2, z1 in zip(list_letter, list_digit):
+        bank += x2 * int(z1)
 
-    return bank2
+    return bank
