@@ -21,7 +21,7 @@ tests:
 	rm -f .coverage
 	rm -f coverage.xml
 	rm -rf htmlcov
-	pytest --cov-report=xml
+	pytest
 
 
 coverage:
