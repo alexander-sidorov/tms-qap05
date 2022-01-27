@@ -95,7 +95,7 @@ class User02:
 
 
 @decorator_function
-def zadacha_4(day: dict[Any, date]) -> dict:
+def zadacha_4(day: dict) -> dict:
 
     assert isinstance(day, dict), "Is Not Dict"
     assert len(day) > 1, "Len Error"
