@@ -1,11 +1,5 @@
-from collections import Counter
-from collections.abc import Sequence
 from datetime import date
-from functools import reduce
-from functools import wraps
 from typing import Any
-from typing import Callable
-from typing import Collection
 
 
 def func(a1: float, back: float, cill: float) -> list:
@@ -69,192 +63,131 @@ def krypto(cod: str, key: str) -> str:
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
 
 
-def decor_data(func: Callable) -> Callable:
-    @wraps(func)
-    def wrapper(*args: Any, **kwargs: Any) -> Any:
-        try:
-            return {"data": func(*args, **kwargs)}
-        except Exception as f:
-            return {"errors": [str(f)]}
-
-    return wrapper
-
-
-@decor_data
-def palindrom(di1: Any) -> Any:
-    assert isinstance(di1, str), "No String"
-    return di1[:] == di1[::-1]
-
-
-class Palindrome01:
-    def __init__(self, text: Any) -> None:
-        self.text = text
-
-    def __bool__(self) -> Any:
-        result = palindrom(self.text)
-        if "errors" in result:
-            return result
-        return result["data"]
+def palindrom(di1: Any) -> dict:
+    result = {"errors": Any}
+    if type(di1) != str:
+        result["errors"] = ["TypeError"]
+    else:
+        i34 = 0
+        j34 = len(di1) - 1
+        is_palindrom = True
+        while i34 < j34:
+            if di1[i34] != di1[j34]:
+                is_palindrom = False
+            i34 += 1
+            j34 -= 1
+        result = {"data": True} if is_palindrom else {"data": False}
+    return result
 
 
-@decor_data
-def proizvedenie(*args: Any) -> Any:
+def proizvedenie(*digit: Any) -> dict:
 
-    if len(args) < 2:
-        assert isinstance(
-            args[0], (Sequence, complex, int, float)
-        ), "No Sequence"
-        if args[0] == ("",):
-            return ""
-        return args[0]
-    for _1 in args:
-        assert isinstance(_1, (Sequence, complex, int, float)), "TrueError"
+    verif = 0
+    product = 1
 
-    return reduce(
-        lambda x, y: x * y,
-        args,
-    )
+    for dig in digit:
+        result: dict[str, int] = {}
 
+        if type(dig) in [str, tuple, list]:
+            verif += 1
+            if verif >= 2:
+                return {"errors": ["TypeError"]}
+        product *= dig
 
-class Multiplier04:
-    def __init__(self) -> None:
-        self.arg: list[Any] = []
+        result = {"data": product}
 
-    def add(self, arg: Any) -> Any:
-        self.arg.append(arg)
-        return self
-
-    def get_result(self) -> Any:
-        result = proizvedenie(*self.arg)
-        if "errors" in result:
-            return result
-        return result["data"]
+    return result
 
 
-@decor_data
-def dateday(yer: Any) -> Any:
+def dateday(yer: Any) -> dict:
+
+    if type(yer) != date:
+        return {"errors": ["TypeError"]}
+
+    result: dict[str, dict[str, int]] = {}
     now = date.today()
     delta = now - yer
-    return {
-        "year": yer.year,
-        "month": yer.month,
-        "day": yer.day,
-        "age": int(delta.days // 365),
+
+    result = {
+        "data": {
+            "year": yer.year,
+            "month": yer.month,
+            "day": yer.day,
+            "age": int(delta.days // 365),
+        }
     }
+    return result
 
 
-class User02:
-    def __init__(self, datee: Any) -> None:
-        self.datee = dateday(datee)
+def happybithday(yer: dict) -> dict:
+    age = date(1, 1, 1)
 
-    def age(self) -> Any:
+    for keys, value in yer.items():
+        if value == age:
+            return {"errors": ["EqualError"]}
 
-        return (
-            self.datee if "errors" in self.datee else self.datee["data"]["age"]
-        )
+        if value > age:
+            age = yer[keys]
 
-
-@decor_data
-def happybithday(yer: dict[Any, date]) -> Any:
-    assert isinstance(yer, dict), "No Match Type"
-    return min(yer, key=lambda t: yer[t])
+    return {"data": keys}
 
 
-@decor_data
 def repeat(collect: Any) -> dict:
-    assert isinstance(collect, Collection), "No Collections"
-    if isinstance(collect, (set, dict)) or len(collect) < 2:
-        return {}
+    if type(collect) not in [list, tuple, str] or len(collect) < 2:
+        return {"errors": ["NoRepeatError"]}
     noresult = []
     for digit in collect:
         noresult.append(digit)
-    return {
+    result_dict = {
         quant: noresult.count(quant)
         for quant in noresult
         if noresult.count(quant) > 1
     }
 
-
-class DupCounter05(Counter):
-    def __init__(self, coll: Any) -> None:
-        self.coll = coll
-
-    def get_dups(self) -> Any:
-        result = repeat(self.coll)
-        if "errors" in result:
-            return result
-        return result["data"]
+    return {"data": result_dict}
 
 
-@decor_data
 def html_str(query: Any) -> dict:
-    assert isinstance(query, str), "No String"
-    if len(query) < 2:
-        return {}
-    if "=" not in query:
-        return {query: [""]}
     result: dict[str, list] = {}
+    if type(query) != str:
+        return {"errors": ["TypeError"]}
+
     for letter in query.split("&"):
-        verif = letter.index("=")
-        new_letter = letter[:verif]
-        if new_letter not in result:
-            result[new_letter] = [letter[verif + 1 :]]  # noqa: E203
-        else:
-            result[new_letter].append(letter[verif + 1 :])  # noqa: E203
-    for key, value in result.items():
-        if len(value) < 2:
-            result[key] = value[0]
-    return result
+        for el in range(len(letter.split("="))):
+
+            if letter.split("=")[el] != letter.split("=")[-1]:
+                result.setdefault(letter.split("=")[el], []).append(
+                    letter.split("=")[el + 1]
+                )
+
+            else:
+                continue
+    return {"data": result}
 
 
-class HttpQuery03:
-    def __init__(self, text: Any) -> None:
-        self.text = text
-        self.diction: dict[Any, Any] = {}
-
-    def __getitem__(self, key: Any) -> Any:
-        self.diction = html_str(self.text)
-        if "errors" in self.diction:
-            return self.diction
-        return self.diction["data"].get(key)
-
-
-@decor_data
-def decodding(code: Any) -> Any:
-    assert isinstance(code, str), "No String"
-    if code == "":
-        return ""
-    assert code[-1].isdigit(), "None Digital"
-    assert code[0].isalpha(), "None Letter"
-    list_digit = []
-    list_letter = []
-    num1 = ""
-    for x1 in range(len(code)):
-        if (
-            code[x1].isalpha()
-            and code[x1] != code[-1]  # noqa: W503
-            and code[x1 + 1].isalpha()  # noqa: W503
-        ):
-            raise Exception("None Next Digital")
-        if code[x1].isalpha():
-            list_letter.append(code[x1])
-            if num1 != "":
-                list_digit.append(num1)
-                num1 = ""
-        else:
-            num1 += code[x1]
-    list_digit.append(num1)
-    return "".join(x2 * int(z1) for x2, z1 in zip(list_letter, list_digit))
+def decodding(code: Any) -> dict:
+    if type(code) != str:
+        return {"errors": ["TypeError"]}
+    elif len(code) % 2 != 0:
+        return {"errors": ["NoQualityLetterError"]}
+    else:
+        return {
+            "data": "".join(
+                code[sym] * int(code[sym + 1])
+                for sym in range(len(code))
+                if code[sym].isalpha()
+            )
+        }
 
 
-@decor_data
-def codding(s1: Any) -> Any:
-    assert isinstance(s1, str), "No String"
+def codding(s1: Any) -> dict:
+    if type(s1) != str:
+        return {"errors": ["TypeError"]}
+
     i1 = 0
     num = 0
     result = ""
     for i1 in range(len(s1)):
-        assert s1[i1].isalpha(), "None Letter"
         j1 = i1 + 1
         if len(s1) == 1:
             result += s1[0] + "1"
@@ -273,12 +206,13 @@ def codding(s1: Any) -> Any:
         if s1[i1] != s1[j1]:
             result += s1[i1] + str(num)
             num = 0
-    return result
+    return {"data": result}
 
 
-@decor_data
 def rever_dict(d1: Any) -> dict:
-    assert isinstance(d1, dict), "No DictionType"
+    if type(d1) != dict:
+        return {"errors": ["TypeError"]}
+
     result: dict[int, list] = {}
     spisok = []
     for value in d1.values():
@@ -289,13 +223,10 @@ def rever_dict(d1: Any) -> dict:
         else:
             result[value] = key
 
-    return result
+    return {"data": result}
 
 
-@decor_data
-def new_dict(key: Any, value: Any) -> dict:  # noqa: CCR001
-    assert isinstance(key, Sequence), "Key No Sequence"
-    assert isinstance(value, Sequence), "Value No Sequence"
+def new_dict(key: Any, value: Any) -> dict:
     result = {}
     if len(key) > len(value):
         len_none = len(key) - len(value)
@@ -312,40 +243,43 @@ def new_dict(key: Any, value: Any) -> dict:  # noqa: CCR001
             result[key[z1]] = value[z1]
         for f1 in range(-len_none2, 0):
             result.setdefault(..., []).append(value[f1])
-    return result
+
+    return {"data": result}
 
 
-@decor_data
 def new_set(set1: Any, set2: Any) -> dict:
-    assert isinstance(set1, (frozenset, set)), "No Set"
-    assert isinstance(set2, (frozenset, set)), "No Set"
+    if type(set1) != set or type(set2) != set:
+        return {"errors": ["TypeError"]}
     return {
-        "a&b": set1 & set2,
-        "a|b": set1 | set2,
-        "a-b": set1 - set2,
-        "b-a": set2 - set1,
-        "|a-b|": set1 ^ set2,
-        "a in b": set1.issubset(set2),
-        "b in a": set2.issubset(set1),
+        "data": {
+            "a&b": set1 & set2,
+            "a|b": set1 | set2,
+            "a-b": set1 - set2,
+            "b-a": set2 - set1,
+            "|a-b|": set1 ^ set2,
+            "a in b": set1.issubset(set2),
+            "b in a": set2.issubset(set1),
+        }
     }
 
 
-@decor_data
 def diction(*digit: Any) -> dict:
-    assert len(digit) % 2 == 0, "No Pair"
+    if len(digit) % 2 != 0:
+        return {"errors": ["NoPares"]}
+    for er in digit[::2]:
+        if type(er) in [dict, set, list]:
+            return {"errors": ["TypeError"]}
     result = {}
     verif = 1
     for dig in range(len(digit)):
+
         if dig == verif:
             verif += 2
             continue
-        try:
-            result[digit[dig]] = digit[dig + 1]
-        except Exception:
-            raise TypeError("TypeError")
-    return result
+        result[digit[dig]] = digit[dig + 1]
+
+    return {"data": result}
 
 
 if __name__ == "__main__":
     aggression(True)
-    aggression(False)
