@@ -295,5 +295,5 @@ def test() -> None:
     assert obj.get_res() == 24
 
     lis = [1, 1, 1, 1, 2, 2, 3]
-    res5 = DupCounter05(lis)
-    assert res5.get_dups() == {1: 4, 2: 2}
+    result5 = DupCounter05(lis)
+    assert result5.get_dups() == {1: 4, 2: 2}
