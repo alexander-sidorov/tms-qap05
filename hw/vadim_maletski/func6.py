@@ -316,10 +316,6 @@ class HttpQuery03:
             return None
 
 
-res3 = HttpQuery03("x=1&y=2&y=")
-print(res3["x"])
-
-
 class Multiplier04:
     def __init__(self) -> None:
         self.arguments: list[Any] = []
