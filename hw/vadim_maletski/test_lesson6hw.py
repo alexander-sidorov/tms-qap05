@@ -293,9 +293,9 @@ def test() -> None:
     assert obj["y"] == ["2", ""]
     assert obj["z"] is None
 
-    obj = Multiplier04()
-    obj.add(2).add(3).add(4)
-    assert obj.get_result() == 24
+    res4 = Multiplier04()
+    res4.add(2).add(3).add(4)
+    assert res4.get_result() == 24
 
     lis = [1, 1, 1, 1, 2, 2, 3]
     res5 = DupCounter05(lis)
