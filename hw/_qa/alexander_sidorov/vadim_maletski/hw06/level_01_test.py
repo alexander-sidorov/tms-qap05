@@ -29,7 +29,7 @@ def test_task_01_happy(arg: Any, expected: Any) -> None:
     outcome = level_01(arg)
     validate_data(outcome)
 
-    data = outcome["data"]
+    data = outcome["data"]  # pylint: disable=unsubscriptable-object
     assert data == expected
 
 
