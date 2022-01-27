@@ -103,7 +103,7 @@ def zadacha_4(day: dict[Any, date]) -> dict:
         assert not isinstance(value, complex)
 
     name = min(day, key=lambda e: day[e])
-    return name  # type: ignore
+    return name
 
 
 @decorator_function
