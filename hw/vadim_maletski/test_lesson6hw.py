@@ -284,10 +284,14 @@ def test() -> None:
     bd = date(2020, 1, 23)
     assert User02(bd).age == 2
 
-    res3 = HttpQuery03("x=1&y=2&y=3")
-    assert res3.__getitem__("x") == ["1"]
-    assert res3.__getitem__("y") == ["2", "3"]
-    assert res3.__getitem__("z") is None
+    obj = HttpQuery03("x=1&y=2&y=3")
+    assert obj["x"] == ["1"]
+    assert obj["y"] == ["2", "3"]
+    assert obj["z"] is None
+    obj = HttpQuery03("x=1&y=2&y=")
+    assert obj["x"] == ["1"]
+    assert obj["y"] == ["2", ""]
+    assert obj["z"] is None
 
     obj = Multiplier04()
     obj.add(2).add(3).add(4)
