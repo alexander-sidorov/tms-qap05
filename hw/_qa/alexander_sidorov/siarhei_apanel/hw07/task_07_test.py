@@ -1,5 +1,4 @@
 from typing import Any
-from typing import cast
 
 import pytest
 
@@ -19,10 +18,10 @@ happy_data = [
 
 @pytest.mark.parametrize("income,expected", happy_data)
 def test_task_07_happy_path(income: Any, expected: Any) -> None:
-    outcome: dict = cast(dict, decodding(income))
+    outcome = decodding(income)
     assert isinstance(outcome, dict)
     assert len(outcome) == 1
     assert "data" in outcome
 
-    data = outcome["data"]  # pylint: disable=invalid-sequence-index
+    data = outcome["data"]
     assert data == expected

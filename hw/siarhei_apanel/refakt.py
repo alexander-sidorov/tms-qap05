@@ -147,7 +147,6 @@ class User02:
     def __init__(self, datee: Any) -> None:
         self.datee = dateday(datee)
 
-    @property
     def age(self) -> Any:
 
         return (
@@ -202,6 +201,9 @@ def html_str(query: Any) -> dict:
             result[new_letter] = [letter[verif + 1 :]]  # noqa: E203
         else:
             result[new_letter].append(letter[verif + 1 :])  # noqa: E203
+    for key, value in result.items():
+        if len(value) < 2:
+            result[key] = value[0]
     return result
 
 
@@ -214,9 +216,6 @@ class HttpQuery03:
         self.diction = html_str(self.text)
         if "errors" in self.diction:
             return self.diction
-        result = self.diction["data"].get(key)
-        if isinstance(result, list) and len(result) < 2:
-            return result[0]
         return self.diction["data"].get(key)
 
 
@@ -349,4 +348,4 @@ def diction(*digit: Any) -> dict:
 
 if __name__ == "__main__":
     aggression(True)
-
+    aggression(False)
