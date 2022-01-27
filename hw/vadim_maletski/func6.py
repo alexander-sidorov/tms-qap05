@@ -118,7 +118,7 @@ def level_05(lis: Any) -> Any:
                 items.append(arg)
             res = {el: items.count(el) for el in items if items.count(el) > 1}
         except TypeError:
-            return {"errors": ["TypeError unhashable type"]}
+            return {"errors": ["TypeError"]}
         result = res
 
     return result
@@ -310,12 +310,9 @@ class HttpQuery03:
 
     def __getitem__(self, key: Any) -> Any:
         res = level_06(self.query)["data"].get(key)
-        try:
-            if isinstance(res, list) and len(res) < 2:
-                return res[0]
-            return level_06(self.query)["data"].get(key)
-        except KeyError:
-            return None
+        if isinstance(res, list) and len(res) < 2:
+            return res[0]
+        return level_06(self.query)["data"].get(key)
 
 
 class Multiplier04:

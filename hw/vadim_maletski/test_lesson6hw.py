@@ -121,12 +121,12 @@ def test() -> None:
     assert (level_05(date(1999, 1, 1))) == {
         "errors": ["argument must be list, tuple, str, set, dict"]
     }
-    assert (level_05([[], []])) == {"errors": ["TypeError unhashable type"]}
+    assert (level_05([[], []])) == {"errors": ["TypeError"]}
     assert (level_05("aa")) == {"data": {"a": 2}}
     assert (level_05({1: 2, 2: 2})) == {"data": {}}
     assert (level_05({1, 2})) == {"data": {}}
     assert (level_05([[], [], {}, {}])) == {  # noqa: JS101
-        "errors": ["TypeError unhashable type"]
+        "errors": ["TypeError"]
     }
 
     assert (level_06(9)) == {"errors": ["TypeError"]}
