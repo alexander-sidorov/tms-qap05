@@ -27,8 +27,11 @@ class Palindrome01:
     def __init__(self, text: Any) -> None:
         self.__text = text
 
-    def __bool__(self):
-        return palindrom(self.__text)
+    def __bool__(self) -> Any:
+        result = palindrom(self.__text)
+        if "errors" in result:
+            return result
+        return result["data"]
 
 
 @decorator_function
@@ -82,7 +85,8 @@ class User02:
     def __init__(self, year: Any) -> None:
         self.year = year
 
-    def age(self):
+    @property
+    def age(self) -> Any:
         result = date_age(self.year)
         if "errors" in result:
             return result
@@ -125,7 +129,7 @@ class DupCounter05(Counter):
     def __init__(self, a1: Any) -> None:
         self.a1 = a1
 
-    def get_dubs(self):
+    def get_dups(self) -> Any:
         result = zadacha_5(self.a1)
         if "errors" in result:
             return result

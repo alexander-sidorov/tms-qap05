@@ -2,6 +2,7 @@ from datetime import date
 
 from hw.yaroslav_belaychuk.lesson006HW import DupCounter05
 from hw.yaroslav_belaychuk.lesson006HW import Multiplier04
+from hw.yaroslav_belaychuk.lesson006HW import Palindrome01
 from hw.yaroslav_belaychuk.lesson006HW import User02
 from hw.yaroslav_belaychuk.lesson006HW import date_age
 from hw.yaroslav_belaychuk.lesson006HW import palindrom
@@ -17,11 +18,11 @@ def test_function() -> None:
     d1 = date(year=1987, month=8, day=2)
     d2 = (1987, 8, 2)
     f1 = {"nik": date(1988, 8, 2), "vika": date(1953, 5, 9)}
-    d = "[1, 1, 1, 1, 2, 2, 3]"
+    d6 = "[1, 1, 1, 1, 2, 2, 3]"
     d3 = 123
     d4 = [1, 1, 1, 1, 2, 2, 3]
     d5 = {1, 2, 3, 4}
-    c = DupCounter05(d)
+    c5 = DupCounter05(d6)
     c1 = DupCounter05(d3)
     c3 = DupCounter05(d4)
     c4 = DupCounter05(d5)
@@ -69,13 +70,12 @@ def test_function() -> None:
     assert zadacha_7("a2b2a1") == {"data": "aabba"}
     assert "errors" in zadacha_7("a")
     assert zadacha_7("") == {"data": ""}
-    assert (c.get_dubs()) == {"1": 4, ",": 6, " ": 6, "2": 2}
-    assert (c3.get_dubs()) == {1: 4, 2: 2}
-    assert (c4.get_dubs()) == {}
-    assert "errors" in c1.get_dubs()
-    assert y1.age() == 2
-    assert "errors" in b2.age()
+    assert (c5.get_dups()) == {"1": 4, ",": 6, " ": 6, "2": 2}
+    assert (c3.get_dups()) == {1: 4, 2: 2}
+    assert (c4.get_dups()) == {}
+    assert "errors" in c1.get_dups()
+    assert y1.age == 2
+    assert "errors" in b2.age
     assert obj.get_result() == "xxxx"
-
-
-
+    assert Palindrome01("xyx")
+    assert not Palindrome01("xy x")
