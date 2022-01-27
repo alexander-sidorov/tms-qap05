@@ -111,7 +111,7 @@ def zadacha_5(collection1: Any) -> dict:
     assert isinstance(collection1, Collection), "AssertionError"
     if (
         isinstance(collection1, (set, dict, frozenset))
-        and len(collection1) <= 1
+        and len(collection1) <= 1  # noqa: W503
     ):
         return {}
 
@@ -154,8 +154,8 @@ def zadacha_7(sybol_num: Any) -> Any:
     for x1 in range(len(sybol_num)):
         if (
             sybol_num[x1].isalpha()
-            and sybol_num[x1] != sybol_num[-1]
-            and sybol_num[x1 + 1].isalpha()
+            and sybol_num[x1] != sybol_num[-1]  # noqa: W503
+            and sybol_num[x1 + 1].isalpha()  # noqa: W503
         ):
             raise Exception("ErrorLetter")
         if sybol_num[x1].isalpha():
@@ -166,4 +166,41 @@ def zadacha_7(sybol_num: Any) -> Any:
         else:
             bank += sybol_num[x1]
     list_digit.append(bank)
+
     return "".join(x2 * int(z1) for x2, z1 in zip(list_letter, list_digit))
+
+
+@decorator_function
+def zadacha_6(query: Any) -> dict:
+    assert isinstance(query, str), "Not String"
+    if len(query) < 2:
+        return {}
+    if "=" not in query:
+        return {query: [""]}
+    result: dict[str, list] = {}
+    for letter in query.split("&"):
+        verif = letter.index("=")
+        new_letter = letter[:verif]
+        if new_letter not in result:
+            result[new_letter] = [letter[verif + 1 :]]  # noqa: E203
+        else:
+            result[new_letter].append(letter[verif + 1 :])  # noqa: E203
+
+    return result
+
+
+class HttpQuery03:
+    def __init__(self, string_text: Any) -> None:
+        self.string_text = string_text
+        self.dict_empty: dict[Any, Any] = {}
+
+    def __getitem__(self, item: Any) -> Any:
+        self.dict_empty = zadacha_6(self.string_text)
+        if "errors" in self.dict_empty:
+            return self.dict_empty
+        if (
+            isinstance(self.dict_empty["data"].get(item), list)
+            and len(self.dict_empty["data"].get(item)) == 1  # noqa: W503
+        ):
+            return self.dict_empty["data"].get(item)[0]
+        return self.dict_empty["data"].get(item)

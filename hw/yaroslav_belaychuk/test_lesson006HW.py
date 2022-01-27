@@ -1,6 +1,7 @@
 from datetime import date
 
 from hw.yaroslav_belaychuk.lesson006HW import DupCounter05
+from hw.yaroslav_belaychuk.lesson006HW import HttpQuery03
 from hw.yaroslav_belaychuk.lesson006HW import Multiplier04
 from hw.yaroslav_belaychuk.lesson006HW import Palindrome01
 from hw.yaroslav_belaychuk.lesson006HW import User02
@@ -9,6 +10,7 @@ from hw.yaroslav_belaychuk.lesson006HW import palindrom
 from hw.yaroslav_belaychuk.lesson006HW import umnogenie
 from hw.yaroslav_belaychuk.lesson006HW import zadacha_4
 from hw.yaroslav_belaychuk.lesson006HW import zadacha_5
+from hw.yaroslav_belaychuk.lesson006HW import zadacha_6
 from hw.yaroslav_belaychuk.lesson006HW import zadacha_7
 
 
@@ -28,6 +30,8 @@ def test_function() -> None:
     c4 = DupCounter05(d5)
     obj = Multiplier04()
     obj.add(4).add("x")
+    obj2 = HttpQuery03("x=1&y=2&y=3")
+    obj3 = HttpQuery03("x=1&y=2&y=")
     assert palindrom("") == {"data": True}
     assert palindrom("x") == {"data": True}
     assert palindrom("xx") == {"data": True}
@@ -79,3 +83,10 @@ def test_function() -> None:
     assert obj.get_result() == "xxxx"
     assert Palindrome01("xyx")
     assert not Palindrome01("xy x")
+    assert zadacha_6("x=1&x=2&y=3") == {"data": {"x": ["1", "2"], "y": ["3"]}}
+    assert obj2["x"] == "1"
+    assert obj2["y"] == ["2", "3"]
+    assert obj2["z"] is None
+    assert obj3["x"] == "1"
+    assert obj3["y"] == ["2", ""]
+    assert obj3["z"] is None
