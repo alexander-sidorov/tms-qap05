@@ -345,7 +345,7 @@ class DupCounter05(Counter):
         self.lis = lis
 
     def get_dups(self) -> Any:
-        result = level_05(self.lis)
-        if "errors" in result:
-            return result
-        return result["data"]
+        res = level_05(self.lis)
+        if "errors" in res:
+            return res
+        return res["data"]
