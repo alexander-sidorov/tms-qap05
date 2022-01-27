@@ -44,12 +44,10 @@ def level_01(string: Any) -> Any:
 
 @decorator
 def level_02(*arguments: Any) -> Any:
-
+    result = 0
     try:
-        if len(arguments) < 1:
+        if len(arguments) == 0:
             return {"errors": ["no arguments"]}
-        elif len(arguments) == 1:
-            result = arguments[0]
         else:
             pr = 1
             for i in arguments:
