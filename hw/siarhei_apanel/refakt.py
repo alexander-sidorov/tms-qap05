@@ -246,9 +246,6 @@ def decodding(code: Any) -> Any:
     return "".join(x2 * int(z1) for x2, z1 in zip(list_letter, list_digit))
 
 
-print(decodding("a3cb2c2"))
-
-
 @decor_data
 def codding(s1: Any) -> Any:
     assert isinstance(s1, str), "No String"
