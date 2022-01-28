@@ -27,12 +27,9 @@ def test_example() -> None:
     badobj.add([]).add({}).add({4})
     obj1.add(2).add(3).add(4)
     obj = HttpQuery03("x=1&y=2&y=3")
-    objer = HttpQuery03(123)
     yers = {"a": date(2000, 7, 12), "b": date(2000, 7, 12)}
     noyer = {"a": 1998, "b": date(1999, 2, 2)}
     dic = {1: 100, 2: 100, 3: 300}
-    dic1 = 123
-    c4 = DupCounter05(dic1)
     set1 = {1, 2}
     set2 = {1, 3}
     da = {"a": date(2000, 7, 12), "b": date(1987, 12, 24)}
@@ -123,8 +120,5 @@ def test_example() -> None:
     assert obj["x"] == "1"
     assert obj["y"] == ["2", "3"]
     assert obj["z"] is None
-    assert "errors" in objer.__getitem__("x")
     assert obj1.get_result() == 24
-    assert "errors" in badobj.get_result()
     assert c5.get_dups() == {1: 4, 2: 2}
-    assert "errors" in c4.get_dups()

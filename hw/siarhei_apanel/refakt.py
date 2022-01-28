@@ -90,7 +90,7 @@ class Palindrome01:
     def __init__(self, text: Any) -> None:
         self.text = text
 
-    def __bool__(self) -> Any:
+    def __bool__(self) -> bool:
         result = palindrom(self.text)
         return result["data"]
 
@@ -124,8 +124,8 @@ class Multiplier04:
 
     def get_result(self) -> Any:
         result = proizvedenie(*self.arg)
-        if "errors" in result:
-            return result
+        assert "errors" not in result, str(result["errors"])
+
         return result["data"]
 
 
@@ -180,8 +180,7 @@ class DupCounter05(Counter):
 
     def get_dups(self) -> Any:
         result = repeat(self.coll)
-        if "errors" in result:
-            return result
+        assert "errors" not in result, str(result["errors"])
         return result["data"]
 
 
@@ -210,8 +209,7 @@ class HttpQuery03:
 
     def __getitem__(self, key: Any) -> Any:
         self.diction = html_str(self.text)
-        if "errors" in self.diction:
-            return self.diction
+        assert "errors" not in self.diction, str(self.diction["errors"])
         result = self.diction["data"].get(key)
         if isinstance(result, list) and len(result) < 2:
             return result[0]
