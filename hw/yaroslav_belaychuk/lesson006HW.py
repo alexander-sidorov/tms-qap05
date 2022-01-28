@@ -98,10 +98,6 @@ class User02:
 def zadacha_4(day: dict[Any, date]) -> dict:
 
     assert isinstance(day, dict), "Is Not Dict"
-    assert len(day) > 1, "Len Error"
-    for value in day.values():
-        assert not isinstance(value, complex)
-
     return min(day, key=lambda e: day[e])
 
 
