@@ -25,9 +25,4 @@ def func12_even_keys_odd_values(*args: Any) -> dict:
         if index < len(even_args):
             result_data[value] = even_args[index]
 
-    if len(odd_args) < len(even_args):
-        result_data[...] = even_args[
-            len(odd_args) : len(even_args) + 1  # noqa: E203
-        ]
-
     return result_data

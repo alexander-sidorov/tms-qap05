@@ -23,7 +23,6 @@ class Palindrome01:
         return result["data"]
 
 
-@dataclass(unsafe_hash=True)
 class User02:
     def __init__(self, date: Any) -> None:
         self.user_info = func3_age(date)

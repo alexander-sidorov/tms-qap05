@@ -7,7 +7,6 @@ from hw.maria_saganovich.lesson6_hw.func_decorator import my_func_decorator
 
 @my_func_decorator
 def func4_oldest(d1: dict[Any, date]) -> dict:
-    oldest = datetime.today()
 
     assert isinstance(d1, dict), ["should be dict"]
     assert len(d1) > 0, ["Empty Data"]
@@ -17,8 +16,5 @@ def func4_oldest(d1: dict[Any, date]) -> dict:
 
         if isinstance(value, date):
             d1[key] = datetime(value.year, value.month, value.day, 0, 0, 0)
-
-        if d1[key] > oldest:
-            raise Exception(["is not born"])
 
     return min(d1, key=lambda name: d1[name])
