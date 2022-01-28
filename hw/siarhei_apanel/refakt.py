@@ -92,8 +92,6 @@ class Palindrome01:
 
     def __bool__(self) -> Any:
         result = palindrom(self.text)
-        if "errors" in result:
-            return result
         return result["data"]
 
 
