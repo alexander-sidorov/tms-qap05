@@ -1,5 +1,4 @@
 from collections import Counter
-from dataclasses import dataclass
 from typing import Any
 
 from hw.maria_saganovich.lesson6_hw.lvl1_palindrome import func1_palindrome
