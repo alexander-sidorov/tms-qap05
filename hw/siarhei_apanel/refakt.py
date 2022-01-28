@@ -81,7 +81,7 @@ def decor_data(func: Callable) -> Callable:
 
 
 @decor_data
-def palindrom(di1: Any) -> Any:
+def palindrom(di1: Any) -> bool:
     assert isinstance(di1, str), "No String"
     return di1[:] == di1[::-1]
 
