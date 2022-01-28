@@ -80,7 +80,7 @@ def test_example() -> None:
     assert "errors" in decodding(123)
     assert "errors" in decodding("a3b2c")
     assert "errors" in decodding("1a3b2c2")
-    assert "errors" in decodding("1a3cb2c2")
+    assert "errors" in decodding("a3cb2c2")
     assert codding("aaabb") == {"data": "a3b2"}
     assert "errors" in codding(123)
     assert codding("a") == {"data": "a1"}
