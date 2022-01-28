@@ -101,7 +101,7 @@ def zadacha_4(day: dict[Any, date]) -> dict:
 
 
 @decorator_function
-def zadacha_5(collection1: Any) -> dict
+def zadacha_5(collection1: Any) -> dict:
     assert isinstance(collection1, Collection), "AssertionError"
     if (
         isinstance(collection1, (set, dict, frozenset))
