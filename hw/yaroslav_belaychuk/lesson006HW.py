@@ -96,7 +96,6 @@ class User02:
 
 @decorator_function
 def zadacha_4(day: dict[Any, date]) -> dict:
-
     assert isinstance(day, dict), "Is Not Dict"
     return min(day, key=lambda e: day[e])
 
