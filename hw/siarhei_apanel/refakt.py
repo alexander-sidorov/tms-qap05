@@ -81,7 +81,7 @@ def decor_data(func: Callable) -> Callable:
 
 
 @decor_data
-def palindrom(di1: Any) -> bool:
+def palindrom(di1: Any) -> Any:
     assert isinstance(di1, str), "No String"
     return di1[:] == di1[::-1]
 
@@ -90,7 +90,7 @@ class Palindrome01:
     def __init__(self, text: Any) -> None:
         self.text = text
 
-    def __bool__(self) -> bool:
+    def __bool__(self) -> Any:
         result = palindrom(self.text)
         return result["data"]
 
