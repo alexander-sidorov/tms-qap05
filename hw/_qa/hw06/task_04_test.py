@@ -8,9 +8,6 @@ from hw.alexander_sidorov.lesson06.task04 import task_04 as alexander_sidorov
 from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     older_4 as andrey_yelin_1,
 )
-from hw.andrey_yelin.lesson06.functions_lesson06hw import (
-    older_4_v_lambda as andrey_yelin_2,
-)
 
 from .common import qual_name
 from .datasets.task_04 import happy_data
@@ -21,7 +18,6 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         andrey_yelin_1,
-        andrey_yelin_2,
     }
 ]
 

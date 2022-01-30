@@ -7,6 +7,8 @@ from typing import Counter
 from typing import Dict
 from urllib.parse import parse_qs
 
+from hw.andrey_yelin.Lesson_05.yelin_lesson05 import aggression
+
 Result = Dict[str, Any]
 
 
@@ -26,11 +28,11 @@ def decorate(func: Any) -> Any:
 def is_palindrome_1(strochka: Any = None) -> Any:
     result: Any = Any
     if strochka is None:
-        result = {"errors": "none argument"}
+        result = {"errors": ["none argument"]}
         return result
 
     if not isinstance(strochka, str):
-        result = {"errors": "not a string"}
+        result = {"errors": ["not a string"]}
         return result
     rev = "".join(reversed(strochka))
 
@@ -55,14 +57,17 @@ class Palindrome01:  # noqa: SIM119
 @decorate
 def multiply_args_2(*m: Any) -> Any:
     args = [*m]
+
     if not len(args):
-        result = {"errors": "empty arguments"}
+        result = {"errors": ["empty arguments"]}
         return result
-    for i in args:
-        if not isinstance(i, int) and not isinstance(i, float):
-            result = {"errors": "variable is not a number"}
-            return result
-    multiply = functools.reduce(lambda a, b: a * b, args)
+    try:
+        if len(args) == 1:
+            args.append(1)
+        multiply = functools.reduce(lambda a, b: a * b, args)
+    except TypeError:
+        result = {"errors": ["TypeError"]}
+        return result
     result = multiply
     return result
 
@@ -86,7 +91,7 @@ class Multiplier04:
 def age_result_3(born: Any) -> Any:
     result: Any = {}
     if not isinstance(born, date):
-        result = {"errors": "variable is not a date"}
+        result = {"errors": ["variable is not a date"]}
         return result
     today = date.today()
     age = int(
@@ -106,29 +111,23 @@ def age_result_3(born: Any) -> Any:
 @decorate
 def older_4(old_date: Any) -> Any:
     result: Any = {}
-    if len(old_date) == 0:
-        result = {"errors": "empty variable"}
-        return result
-    max_date = 0
-    for key in old_date:
-        today_time = date.today()
-        ma = today_time - old_date[key]
-        dd = str(ma)
-        if int(dd.split()[0]) > max_date:
-            max_date = int(dd.split()[0])
-            result = key
-    return result
-
-
-def older_4_v_lambda(old_date: Dict[Any, date]) -> Result:
-    result: Result = {}
-    if not old_date:
-        result = {"errors": "empty variable"}
-        return result
-
-    res = min(old_date, key=lambda n: old_date[n])
-    result["data"] = res
-
+    try:
+        if len(old_date) == 0:
+            result = {"errors": ["empty variable"]}
+            return result
+        max_date = 0
+        for key in old_date:
+            if isinstance(old_date[key], date):
+                today_time = date.today()
+                ma = today_time - old_date[key]
+                dd = str(ma)
+                if int(dd.split()[0]) > max_date:
+                    max_date = int(dd.split()[0])
+                    result = key
+    except TypeError:
+        result = {"errors": ["TypeError"]}
+    if result == {}:
+        result = {"errors": ["empty variable"]}
     return result
 
 
@@ -148,16 +147,19 @@ def repeating_elements_5(elements_list: Any) -> Any:
     result: Any = {}
     zy: dict = {}
     repeat: dict = {}
-    for elem in elements_list:
-        if elem in zy:
-            zy[elem] = zy[elem] + 1
+    try:
+        for elem in elements_list:
+            if elem in zy:
+                zy[elem] = zy[elem] + 1
+            else:
+                zy[elem] = 1
+        for key in zy:
+            if zy[key] > 1:
+                repeat[key] = zy[key]
         else:
-            zy[elem] = 1
-    for key in zy:
-        if zy[key] > 1:
-            repeat[key] = zy[key]
-    else:
-        result = repeat
+            result = repeat
+    except TypeError:
+        result = {"errors": ["TypeError"]}
     return result
 
 
@@ -176,16 +178,16 @@ class DupCounter05(Counter):
 def parse_http_query_6(string: Any = None) -> Any:
     result: Any = {}
     if string is None:
-        result = {"errors": "none argument"}
+        result = {"errors": ["none argument"]}
         return result
     if not isinstance(string, str):
-        result = {"errors": "variable is not a string"}
+        result = {"errors": ["variable is not a string"]}
         return result
-    parse_string = parse_qs(string)
+    parse_string = parse_qs(string, keep_blank_values=True)
     if len(parse_string) == 0:
-        result = {"errors": "empty string"}
+        result = {}
         return result
-    result = parse_qs(string)
+    result = parse_qs(string, keep_blank_values=True)
     return result
 
 
@@ -228,7 +230,7 @@ def decode_7(string: str, decode: bool = False) -> Any:
     if decode:
         return letter
     if len(letter) != len(number):
-        result = {"errors": "letters is not equal numbers"}
+        result = {"errors": ["letters is not equal numbers"]}
         return result
     else:
         data = []
@@ -245,7 +247,7 @@ def code_8(string: str) -> Any:  # noqa: CCR001
     imported_string = decode_7(string, True)
 
     if len(imported_string["data"]) == 0:
-        result = {"errors": "number of letters = 0"}
+        result = {"errors": ["number of letters = 0"]}
         return result
 
     lk = ""
@@ -277,7 +279,7 @@ def code_8(string: str) -> Any:  # noqa: CCR001
 def reversed_dictionary_9(dictionary: dict) -> dict:
 
     if not isinstance(dictionary, dict):
-        result = {"errors": "argument is not a dict"}
+        result = {"errors": ["argument is not a dict"]}
         return result
     rev_dict = {}
 
@@ -315,7 +317,7 @@ def creating_diction_10(arg1: Any, arg2: Any) -> dict:
     result = {}
 
     if not arg2:
-        result = {"errors": "second argument is empty"}
+        result = {"errors": ["second argument is empty"]}
         return result
     answer = {}
     if len(arg1) >= len(arg2):
@@ -331,11 +333,11 @@ def creating_diction_10(arg1: Any, arg2: Any) -> dict:
 def all_actions_with_two_sets_11(first_set: set, second_set: set) -> dict:
 
     if not isinstance(first_set, set):
-        result = {"errors": "first argument has not a set type"}
+        result = {"errors": ["first argument has not a set type"]}
         return result
 
     if not isinstance(second_set, set):
-        result = {"errors": "second argument has not a set type"}
+        result = {"errors": ["second argument has not a set type"]}
         return result
 
     return {
@@ -352,7 +354,7 @@ def all_actions_with_two_sets_11(first_set: set, second_set: set) -> dict:
 @decorate
 def even_keys_and_odd_values_12(*args: Any) -> dict:
     if len(args) % 2 != 0:
-        result = {"errors": "quantity of arguments is not even"}
+        result = {"errors": ["quantity of arguments is not even"]}
         return result
     keys = []
     values = []

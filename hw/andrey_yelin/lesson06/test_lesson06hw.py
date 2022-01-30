@@ -1,5 +1,6 @@
 from datetime import date
 
+from hw._qa.hw06.common import azaza
 from hw.andrey_yelin.lesson06.functions_lesson06hw import DupCounter05
 from hw.andrey_yelin.lesson06.functions_lesson06hw import HttpQuery03
 from hw.andrey_yelin.lesson06.functions_lesson06hw import Multiplier04
@@ -18,7 +19,6 @@ from hw.andrey_yelin.lesson06.functions_lesson06hw import (
 from hw.andrey_yelin.lesson06.functions_lesson06hw import is_palindrome_1
 from hw.andrey_yelin.lesson06.functions_lesson06hw import multiply_args_2
 from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4
-from hw.andrey_yelin.lesson06.functions_lesson06hw import older_4_v_lambda
 from hw.andrey_yelin.lesson06.functions_lesson06hw import parse_http_query_6
 from hw.andrey_yelin.lesson06.functions_lesson06hw import repeating_elements_5
 from hw.andrey_yelin.lesson06.functions_lesson06hw import reversed_dictionary_9
@@ -29,16 +29,16 @@ def test_is_palindrome_1() -> None:
     assert is_palindrome_1("x") == {"data": True}
     assert is_palindrome_1("xx") == {"data": True}
     assert is_palindrome_1("xy") == {"data": False}
-    assert is_palindrome_1(None) == {"errors": "none argument"}
-    assert is_palindrome_1(1) == {"errors": "not a string"}
+    assert is_palindrome_1(None) == {"errors": ["none argument"]}
+    assert is_palindrome_1(1) == {"errors": ["not a string"]}
 
 
 def test_multiply_args_2() -> None:
     assert multiply_args_2(1) == {"data": 1}
     assert multiply_args_2(1, 2) == {"data": 2}
     assert multiply_args_2(1, 2, 3) == {"data": 6}
-    assert multiply_args_2() == {"errors": "empty arguments"}
-    assert multiply_args_2(1, "a") == {"errors": "variable is not a number"}
+    assert multiply_args_2() == {"errors": ["empty arguments"]}
+    assert multiply_args_2("b", "a") == {"errors": ["TypeError"]}
 
 
 def test_age_result_3() -> None:
@@ -46,7 +46,7 @@ def test_age_result_3() -> None:
     assert age_result_3(date_variable) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
     }
-    assert age_result_3(2) == {"errors": "variable is not a date"}
+    assert age_result_3(2) == {"errors": ["variable is not a date"]}
 
 
 def test_older_4() -> None:
@@ -56,18 +56,9 @@ def test_older_4() -> None:
         "C": date(year=2000, month=3, day=22),
     }
     assert older_4(birthday) == {"data": "B"}
-    assert older_4([]) == {"errors": "empty variable"}
-    assert older_4({}) == {"errors": "empty variable"}
-
-
-def test_older_4_v_lambda() -> None:
-    birthday = {
-        "A": date(year=2021, month=7, day=18),
-        "B": date(year=1993, month=6, day=27),
-    }
-    assert older_4_v_lambda(birthday) == {"data": "B"}
-    assert older_4_v_lambda([]) == {"errors": "empty variable"}  # type: ignore
-    assert older_4_v_lambda({}) == {"errors": "empty variable"}
+    assert older_4([]) == {"errors": ["empty variable"]}
+    assert older_4({}) == {"errors": ["empty variable"]}
+    assert older_4(azaza()) == {"errors": ["TypeError"]}
 
 
 def test_repeating_elements_5() -> None:
@@ -80,30 +71,32 @@ def test_parse_http_query_6() -> None:
     assert parse_http_query_6(http_query) == {
         "data": {"x": ["1", "2"], "y": ["3"]}
     }
-    assert parse_http_query_6(None) == {"errors": "none argument"}
-    assert parse_http_query_6((1, 2)) == {"errors": "variable is not a string"}
-    assert parse_http_query_6("") == {"errors": "empty string"}
+    assert parse_http_query_6(None) == {"errors": ["none argument"]}
+    assert parse_http_query_6((1, 2)) == {
+        "errors": ["variable is not a string"]
+    }
+    assert parse_http_query_6("") == {"errors": ["empty string"]}
 
 
 def test_decode_7() -> None:
     deco7 = "a11b2c3"
     assert decode_7(deco7) == {"data": "aaaaaaaaaaabbccc"}
-    assert decode_7("a1b") == {"errors": "letters is not equal numbers"}
+    assert decode_7("a1b") == {"errors": ["letters is not equal numbers"]}
 
 
 def test_code_8() -> None:
     assert code_8("aaabb") == {"data": "a3b2"}
     assert code_8("aaabba") == {"data": "a3b2a1"}
-    assert code_8("") == {"errors": "number of letters = 0"}
+    assert code_8("") == {"errors": ["number of letters = 0"]}
 
 
 def test_reversed_dictionary_9() -> None:
     assert reversed_dictionary_9({1: 100, 2: 100, 3: 300}) == {  # noqa: JS101
         "data": {100: [1, 2], 300: 3}
     }
-    assert reversed_dictionary_9("") == {"errors": "argument is not a dict"}
-    assert reversed_dictionary_9([]) == {"errors": "argument is not a dict"}
-    assert reversed_dictionary_9(()) == {"errors": "argument is not a dict"}
+    assert reversed_dictionary_9("") == {"errors": ["argument is not a dict"]}
+    assert reversed_dictionary_9([]) == {"errors": ["argument is not a dict"]}
+    assert reversed_dictionary_9(()) == {"errors": ["argument is not a dict"]}
 
 
 def test_creating_diction_10() -> None:
@@ -114,7 +107,7 @@ def test_creating_diction_10() -> None:
         "data": {"a": 1, "b": 2, ...: 3}
     }
     assert creating_diction_10("ab", []) == {
-        "errors": "second argument is empty"
+        "errors": ["second argument is empty"]
     }
 
 
@@ -142,17 +135,17 @@ def test_all_actions_with_two_sets_11() -> None:
         }
     }
     assert all_actions_with_two_sets_11(123, {1, 2, 3}) == {  # noqa: JS101
-        "errors": "first argument has not a set type"
+        "errors": ["first argument has not a set type"]
     }
     assert all_actions_with_two_sets_11({1, 2, 3}, 123) == {  # noqa: JS101
-        "errors": "second argument has not a set type"
+        "errors": ["second argument has not a set type"]
     }
 
 
 def test_even_keys_and_odd_values_12() -> None:
     assert even_keys_and_odd_values_12(1, 2) == {"data": {1: 2}}
     assert even_keys_and_odd_values_12(1, 2, 3, 4, 5) == {
-        "errors": "quantity of arguments is not even"
+        "errors": ["quantity of arguments is not even"]
     }
 
 
