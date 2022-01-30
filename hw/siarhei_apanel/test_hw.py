@@ -35,7 +35,6 @@ def test_example() -> None:
     da = {"a": date(2000, 7, 12), "b": date(1987, 12, 24)}
     dat2 = date(year=1987, month=8, day=2)
     dat = date(year=1987, month=8, day=2)
-    nodate = 1998
 
     assert palindrom("") == {"data": True}
     assert palindrom("x") == {"data": True}
@@ -43,12 +42,9 @@ def test_example() -> None:
     assert palindrom("xy") == {"data": False}
     assert "errors" in palindrom(1)
     assert proizvedenie(1, 2, 3) == {"data": 6}
-    assert (
-        proizvedenie(
-            "",
-        )
-        == {"data": ""}
-    )
+    assert proizvedenie("",) == {
+        "data": ""
+    }  # noqa W503
     assert proizvedenie(1) == {"data": 1}
     assert proizvedenie(1, 2) == {"data": 2}
     assert proizvedenie("1", 3) == {"data": "111"}
