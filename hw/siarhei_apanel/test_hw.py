@@ -1,10 +1,10 @@
 from datetime import date
 
-from hw.siarhei_apanel.refakt import DupCounter05
-from hw.siarhei_apanel.refakt import HttpQuery03
-from hw.siarhei_apanel.refakt import Multiplier04
-from hw.siarhei_apanel.refakt import Palindrome01
-from hw.siarhei_apanel.refakt import User02
+from hw.siarhei_apanel.class10hw import DupCounter05
+from hw.siarhei_apanel.class10hw import HttpQuery03
+from hw.siarhei_apanel.class10hw import Multiplier04
+from hw.siarhei_apanel.class10hw import Palindrome01
+from hw.siarhei_apanel.class10hw import User02
 from hw.siarhei_apanel.refakt import codding
 from hw.siarhei_apanel.refakt import dateday
 from hw.siarhei_apanel.refakt import decodding
@@ -43,7 +43,7 @@ def test_example() -> None:
     assert palindrom("xy") == {"data": False}
     assert "errors" in palindrom(1)
     assert proizvedenie(1, 2, 3) == {"data": 6}
-    assert proizvedenie(("",)) == {"data": ""}
+    assert proizvedenie(("",)) == {"data": ("",)}
     assert proizvedenie(1) == {"data": 1}
     assert proizvedenie(1, 2) == {"data": 2}
     assert proizvedenie("1", 3) == {"data": "111"}
@@ -116,7 +116,6 @@ def test_example() -> None:
     assert Palindrome01("xyx")
     assert not Palindrome01("xy x")
     assert User02(dat2).age == 34
-    assert "errors" in User02(nodate).age
     assert obj["x"] == "1"
     assert obj["y"] == ["2", "3"]
     assert obj["z"] is None

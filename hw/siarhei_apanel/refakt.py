@@ -1,11 +1,10 @@
-from collections import Counter
 from collections.abc import Sequence
 from datetime import date
 from functools import reduce
-from functools import wraps
 from typing import Any
-from typing import Callable
 from typing import Collection
+
+from hw.siarhei_apanel.decorator07 import decor_data
 
 
 def func(a1: float, back: float, cill: float) -> list:
@@ -69,42 +68,20 @@ def krypto(cod: str, key: str) -> str:
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
 
 
-def decor_data(func: Callable) -> Callable:
-    @wraps(func)
-    def wrapper(*args: Any, **kwargs: Any) -> Any:
-        try:
-            return {"data": func(*args, **kwargs)}
-        except Exception as f:
-            return {"errors": [str(f)]}
-
-    return wrapper
-
-
 @decor_data
 def palindrom(di1: Any) -> Any:
     assert isinstance(di1, str), "No String"
-    return di1[:] == di1[::-1]
-
-
-class Palindrome01:
-    def __init__(self, text: Any) -> None:
-        self.text = text
-
-    def __bool__(self) -> Any:
-        result = palindrom(self.text)
-        return result["data"]
+    return di1 == di1[::-1]
 
 
 @decor_data
 def proizvedenie(*args: Any) -> Any:
-
+    assert len(args) > 0, ["No Data"]
     if len(args) < 2:
         assert isinstance(
             args[0], (Sequence, complex, int, float)
         ), "No Sequence"
-        if args[0] == ("",):
-            return ""
-        return args[0]
+        assert args[0], "no arguments"
     for _1 in args:
         assert isinstance(_1, (Sequence, complex, int, float)), "TrueError"
 
@@ -112,21 +89,6 @@ def proizvedenie(*args: Any) -> Any:
         lambda x, y: x * y,
         args,
     )
-
-
-class Multiplier04:
-    def __init__(self) -> None:
-        self.arg: list[Any] = []
-
-    def add(self, arg: Any) -> Any:
-        self.arg.append(arg)
-        return self
-
-    def get_result(self) -> Any:
-        result = proizvedenie(*self.arg)
-        assert "errors" not in result, str(result["errors"])
-
-        return result["data"]
 
 
 @decor_data
@@ -141,18 +103,6 @@ def dateday(yer: Any) -> Any:
     }
 
 
-class User02:
-    def __init__(self, datee: Any) -> None:
-        self.datee = dateday(datee)
-
-    @property
-    def age(self) -> Any:
-
-        return (
-            self.datee if "errors" in self.datee else self.datee["data"]["age"]
-        )
-
-
 @decor_data
 def happybithday(yer: dict[Any, date]) -> Any:
     assert isinstance(yer, dict), "No Match Type"
@@ -164,24 +114,12 @@ def repeat(collect: Any) -> dict:
     assert isinstance(collect, Collection), "No Collections"
     if isinstance(collect, (set, dict)) or len(collect) < 2:
         return {}
-    noresult = []
-    for digit in collect:
-        noresult.append(digit)
+    noresult = list(collect)
     return {
         quant: noresult.count(quant)
         for quant in noresult
         if noresult.count(quant) > 1
     }
-
-
-class DupCounter05(Counter):
-    def __init__(self, coll: Any) -> None:
-        self.coll = coll
-
-    def get_dups(self) -> Any:
-        result = repeat(self.coll)
-        assert "errors" not in result, str(result["errors"])
-        return result["data"]
 
 
 @decor_data
@@ -202,20 +140,6 @@ def html_str(query: Any) -> dict:
     return result
 
 
-class HttpQuery03:
-    def __init__(self, text: Any) -> None:
-        self.text = text
-        self.diction: dict[Any, Any] = {}
-
-    def __getitem__(self, key: Any) -> Any:
-        self.diction = html_str(self.text)
-        assert "errors" not in self.diction, str(self.diction["errors"])
-        result = self.diction["data"].get(key)
-        if isinstance(result, list) and len(result) < 2:
-            return result[0]
-        return self.diction["data"].get(key)
-
-
 @decor_data
 def decodding(code: Any) -> Any:
     assert isinstance(code, str), "No String"
@@ -227,12 +151,11 @@ def decodding(code: Any) -> Any:
     list_letter = []
     num1 = ""
     for x1 in range(len(code)):
-        if (
+        assert not (
             code[x1].isalpha()
             and code[x1] != code[-1]  # noqa: W503
             and code[x1 + 1].isalpha()  # noqa: W503
-        ):
-            raise Exception("None Next Digital")
+        ), "Not Next Digital"
         if code[x1].isalpha():
             list_letter.append(code[x1])
             if num1 != "":
@@ -290,7 +213,7 @@ def rever_dict(d1: Any) -> dict:
 
 
 @decor_data
-def new_dict(key: Any, value: Any) -> dict:  # noqa: CCR001
+def new_dict(key: Any, value: Any) -> dict:
     assert isinstance(key, Sequence), "Key No Sequence"
     assert isinstance(value, Sequence), "Value No Sequence"
     result = {}
@@ -338,8 +261,8 @@ def diction(*digit: Any) -> dict:
             continue
         try:
             result[digit[dig]] = digit[dig + 1]
-        except Exception:
-            raise TypeError("TypeError")
+        except Exception as f:
+            raise f
     return result
 
 
