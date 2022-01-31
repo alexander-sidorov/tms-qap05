@@ -8,6 +8,8 @@ from hw.alexander_sidorov.lesson06.task11 import task_11 as alexander_sidorov
 from hw.maksim_ptitski.lesson6_hw import (
     relations_between_two_sets as maksim_ptitski,
 )
+from hw.siarhei_apanel.refakt import new_set as siarhei_apanel
+from hw.vadim_maletski.func6 import level_11 as vadim_maletski
 
 from .common import qual_name
 from .datasets.task_11 import happy_data
@@ -18,6 +20,8 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         maksim_ptitski,
+        siarhei_apanel,
+        vadim_maletski,
     }
 ]
 

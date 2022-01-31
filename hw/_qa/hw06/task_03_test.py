@@ -8,6 +8,8 @@ from hw.alexander_sidorov.lesson06.task03 import task_03 as alexander_sidorov
 from hw.maksim_ptitski.lesson6_hw import (
     get_formatted_birthday as maksim_ptitski,
 )
+from hw.siarhei_apanel.refakt import dateday as siarhei_apanel
+from hw.vadim_maletski.func6 import level_03 as vadim_maletski
 
 from .common import azaza
 from .common import qual_name
@@ -19,6 +21,8 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         maksim_ptitski,
+        siarhei_apanel,
+        vadim_maletski,
     }
 ]
 

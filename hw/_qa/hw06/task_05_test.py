@@ -8,6 +8,8 @@ from hw.alexander_sidorov.lesson06.task05 import task_05 as alexander_sidorov
 from hw.maksim_ptitski.lesson6_hw import (
     get_the_same_elements_in_collection as maksim_ptitski,
 )
+from hw.siarhei_apanel.refakt import repeat as siarhei_apanel
+from hw.vadim_maletski.func6 import level_05 as vadim_maletski
 
 from .common import qual_name
 from .datasets.task_05 import happy_data
@@ -18,6 +20,8 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         maksim_ptitski,
+        siarhei_apanel,
+        vadim_maletski,
     }
 ]
 

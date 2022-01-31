@@ -6,6 +6,8 @@ from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task06 import task_06 as alexander_sidorov
 from hw.maksim_ptitski.lesson6_hw import http_query_parser as maksim_ptitski
+from hw.siarhei_apanel.refakt import html_str as siarhei_apanel
+from hw.vadim_maletski.func6 import level_06 as vadim_maletski
 
 from .common import qual_name
 from .datasets.task_06 import happy_data
@@ -16,6 +18,8 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         maksim_ptitski,
+        siarhei_apanel,
+        vadim_maletski,
     }
 ]
 
