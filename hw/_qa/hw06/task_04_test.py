@@ -8,6 +8,8 @@ from hw.alexander_sidorov.lesson06.task04 import task_04 as alexander_sidorov
 from hw.maria_saganovich.lesson6_hw.lvl4_oldest import (
     func4_oldest as maria_saganovich,
 )
+from hw.siarhei_apanel.refakt import happybithday as siarhei_apanel
+from hw.vadim_maletski.func6 import level_04 as vadim_maletski
 
 from .common import qual_name
 from .datasets.task_04 import happy_data
@@ -18,6 +20,8 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         maria_saganovich,
+        siarhei_apanel,
+        vadim_maletski,
     }
 ]
 
