@@ -5,6 +5,8 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task03 import task_03 as alexander_sidorov
+from hw.siarhei_apanel.refakt import dateday as siarhei_apanel
+from hw.vadim_maletski.func6 import level_03 as vadim_maletski
 from hw.nikita_pakhomov.nlesson3.hw6 import level_3 as nikita_pakhomov
 
 from .common import azaza
@@ -17,6 +19,8 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         nikita_pakhomov,
+        siarhei_apanel,
+        vadim_maletski,
     }
 ]
 
