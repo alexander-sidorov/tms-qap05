@@ -8,6 +8,8 @@ from hw.alexander_sidorov.lesson06.task02 import task_02 as alexander_sidorov
 from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     multiply_args_2 as andrey_yelin,
 )
+from hw.siarhei_apanel.refakt import proizvedenie as siarhei_apanel
+from hw.vadim_maletski.func6 import level_02 as vadim_maletski
 
 from .common import qual_name
 from .datasets.task_02 import happy_data
@@ -18,6 +20,8 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         andrey_yelin,
+        siarhei_apanel,
+        vadim_maletski,
     }
 ]
 

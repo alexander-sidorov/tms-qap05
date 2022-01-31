@@ -6,9 +6,15 @@ import pytest
 
 from hw._qa.hw10.common import get_class
 from hw.alexander_sidorov.lesson10 import homework as alexander_sidorov
+from hw.andrey_yelin.lesson06 import functions_lesson06hw as andrey_yelin
+from hw.siarhei_apanel import class10hw as siarhei_apanel
+from hw.vadim_maletski import func6 as vadim_maletski
 
 modules = {
     alexander_sidorov,
+    andrey_yelin,
+    siarhei_apanel,
+    vadim_maletski,
 }
 
 
