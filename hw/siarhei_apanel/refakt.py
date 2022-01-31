@@ -1,5 +1,10 @@
+from collections.abc import Sequence
 from datetime import date
+from functools import reduce
 from typing import Any
+from typing import Collection
+
+from hw.siarhei_apanel.decorator07 import decor_data
 
 
 def func(a1: float, back: float, cill: float) -> list:
@@ -63,131 +68,114 @@ def krypto(cod: str, key: str) -> str:
     return "".join(i1 if i1 == " " else alphavit[key.find(i1)] for i1 in cod)
 
 
-def palindrom(di1: Any) -> dict:
-    result = {"errors": Any}
-    if type(di1) != str:
-        result["errors"] = ["TypeError"]
-    else:
-        i34 = 0
-        j34 = len(di1) - 1
-        is_palindrom = True
-        while i34 < j34:
-            if di1[i34] != di1[j34]:
-                is_palindrom = False
-            i34 += 1
-            j34 -= 1
-        result = {"data": True} if is_palindrom else {"data": False}
-    return result
+@decor_data
+def palindrom(di1: Any) -> Any:
+    assert isinstance(di1, str), "No String"
+    return di1 == di1[::-1]
 
 
-def proizvedenie(*digit: Any) -> dict:
+@decor_data
+def proizvedenie(*args: Any) -> Any:
+    assert len(args) > 0, ["No Data"]
+    if len(args) < 2:
+        assert isinstance(
+            args[0], (Sequence, complex, int, float)
+        ), "No Sequence"
+        if args[0]:
+            return args[0]
+    for _1 in args:
+        assert isinstance(_1, (Sequence, complex, int, float)), "TrueError"
 
-    verif = 0
-    product = 1
-
-    for dig in digit:
-        result: dict[str, int] = {}
-
-        if type(dig) in [str, tuple, list]:
-            verif += 1
-            if verif >= 2:
-                return {"errors": ["TypeError"]}
-        product *= dig
-
-        result = {"data": product}
-
-    return result
+    return reduce(
+        lambda x, y: x * y,
+        args,
+    )
 
 
-def dateday(yer: Any) -> dict:
-
-    if type(yer) != date:
-        return {"errors": ["TypeError"]}
-
-    result: dict[str, dict[str, int]] = {}
+@decor_data
+def dateday(yer: Any) -> Any:
     now = date.today()
     delta = now - yer
-
-    result = {
-        "data": {
-            "year": yer.year,
-            "month": yer.month,
-            "day": yer.day,
-            "age": int(delta.days // 365),
-        }
+    return {
+        "year": yer.year,
+        "month": yer.month,
+        "day": yer.day,
+        "age": int(delta.days // 365),
     }
-    return result
 
 
-def happybithday(yer: dict) -> dict:
-    age = date(1, 1, 1)
-
-    for keys, value in yer.items():
-        if value == age:
-            return {"errors": ["EqualError"]}
-
-        if value > age:
-            age = yer[keys]
-
-    return {"data": keys}
+@decor_data
+def happybithday(yer: dict[Any, date]) -> Any:
+    assert isinstance(yer, dict), "No Match Type"
+    return min(yer, key=lambda t: yer[t])
 
 
+@decor_data
 def repeat(collect: Any) -> dict:
-    if type(collect) not in [list, tuple, str] or len(collect) < 2:
-        return {"errors": ["NoRepeatError"]}
-    noresult = []
-    for digit in collect:
-        noresult.append(digit)
-    result_dict = {
+    assert isinstance(collect, Collection), "No Collections"
+    if isinstance(collect, (set, dict)) or len(collect) < 2:
+        return {}
+    noresult = list(collect)
+    return {
         quant: noresult.count(quant)
         for quant in noresult
         if noresult.count(quant) > 1
     }
 
-    return {"data": result_dict}
 
-
+@decor_data
 def html_str(query: Any) -> dict:
+    assert isinstance(query, str), "No String"
+    if len(query) < 2:
+        return {}
+    if "=" not in query:
+        return {query: [""]}
     result: dict[str, list] = {}
-    if type(query) != str:
-        return {"errors": ["TypeError"]}
-
     for letter in query.split("&"):
-        for el in range(len(letter.split("="))):
-
-            if letter.split("=")[el] != letter.split("=")[-1]:
-                result.setdefault(letter.split("=")[el], []).append(
-                    letter.split("=")[el + 1]
-                )
-
-            else:
-                continue
-    return {"data": result}
+        verif = letter.index("=")
+        new_letter = letter[:verif]
+        if new_letter not in result:
+            result[new_letter] = [letter[verif + 1 :]]  # noqa: E203
+        else:
+            result[new_letter].append(letter[verif + 1 :])  # noqa: E203
+    return result
 
 
-def decodding(code: Any) -> dict:
-    if type(code) != str:
-        return {"errors": ["TypeError"]}
-    elif len(code) % 2 != 0:
-        return {"errors": ["NoQualityLetterError"]}
-    else:
-        return {
-            "data": "".join(
-                code[sym] * int(code[sym + 1])
-                for sym in range(len(code))
-                if code[sym].isalpha()
-            )
-        }
+@decor_data
+def decodding(code: Any) -> Any:
+    assert isinstance(code, str), "No String"
+    if code == "":
+        return ""
+    assert code[-1].isdigit(), "None Digital"
+    assert code[0].isalpha(), "None Letter"
+    list_digit = []
+    list_letter = []
+    num1 = ""
+    for x1 in range(len(code)):
+        assert not (
+            code[x1].isalpha()
+            and code[x1] != code[-1]  # noqa: W503
+            and code[x1 + 1].isalpha()  # noqa: W503
+        ), "Not Next Digital"
+        if code[x1].isalpha():
+            list_letter.append(code[x1])
+            if num1 != "":
+                list_digit.append(num1)
+                num1 = ""
+        else:
+            num1 += code[x1]
+    list_digit.append(num1)
+    return "".join(x2 * int(z1) for x2, z1 in zip(list_letter, list_digit))
 
 
-def codding(s1: Any) -> dict:
-    if type(s1) != str:
-        return {"errors": ["TypeError"]}
-
+@decor_data
+def codding(s1: Any) -> Any:
+    assert isinstance(s1, str), "No String"
     i1 = 0
     num = 0
     result = ""
     for i1 in range(len(s1)):
+        assert s1[i1].isalpha(), "None Letter"
         j1 = i1 + 1
         if len(s1) == 1:
             result += s1[0] + "1"
@@ -206,13 +194,12 @@ def codding(s1: Any) -> dict:
         if s1[i1] != s1[j1]:
             result += s1[i1] + str(num)
             num = 0
-    return {"data": result}
+    return result
 
 
+@decor_data
 def rever_dict(d1: Any) -> dict:
-    if type(d1) != dict:
-        return {"errors": ["TypeError"]}
-
+    assert isinstance(d1, dict), "No DictionType"
     result: dict[int, list] = {}
     spisok = []
     for value in d1.values():
@@ -223,10 +210,13 @@ def rever_dict(d1: Any) -> dict:
         else:
             result[value] = key
 
-    return {"data": result}
+    return result
 
 
+@decor_data
 def new_dict(key: Any, value: Any) -> dict:
+    assert isinstance(key, Sequence), "Key No Sequence"
+    assert isinstance(value, Sequence), "Value No Sequence"
     result = {}
     if len(key) > len(value):
         len_none = len(key) - len(value)
@@ -243,43 +233,40 @@ def new_dict(key: Any, value: Any) -> dict:
             result[key[z1]] = value[z1]
         for f1 in range(-len_none2, 0):
             result.setdefault(..., []).append(value[f1])
+    return result
 
-    return {"data": result}
 
-
+@decor_data
 def new_set(set1: Any, set2: Any) -> dict:
-    if type(set1) != set or type(set2) != set:
-        return {"errors": ["TypeError"]}
+    assert isinstance(set1, (frozenset, set)), "No Set"
+    assert isinstance(set2, (frozenset, set)), "No Set"
     return {
-        "data": {
-            "a&b": set1 & set2,
-            "a|b": set1 | set2,
-            "a-b": set1 - set2,
-            "b-a": set2 - set1,
-            "|a-b|": set1 ^ set2,
-            "a in b": set1.issubset(set2),
-            "b in a": set2.issubset(set1),
-        }
+        "a&b": set1 & set2,
+        "a|b": set1 | set2,
+        "a-b": set1 - set2,
+        "b-a": set2 - set1,
+        "|a-b|": set1 ^ set2,
+        "a in b": set1.issubset(set2),
+        "b in a": set2.issubset(set1),
     }
 
 
+@decor_data
 def diction(*digit: Any) -> dict:
-    if len(digit) % 2 != 0:
-        return {"errors": ["NoPares"]}
-    for er in digit[::2]:
-        if type(er) in [dict, set, list]:
-            return {"errors": ["TypeError"]}
+    assert len(digit) % 2 == 0, "No Pair"
     result = {}
     verif = 1
     for dig in range(len(digit)):
-
         if dig == verif:
             verif += 2
             continue
-        result[digit[dig]] = digit[dig + 1]
-
-    return {"data": result}
+        try:
+            result[digit[dig]] = digit[dig + 1]
+        except Exception as f:
+            raise f
+    return result
 
 
 if __name__ == "__main__":
     aggression(True)
+    aggression(False)

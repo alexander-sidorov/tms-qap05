@@ -8,6 +8,8 @@ from hw.alexander_sidorov.lesson06.task09 import task_09 as alexander_sidorov
 from hw.kirill_tobolich.lesson6_hw import (
     inverted_dictionary as kirill_tobolich,
 )
+from hw.siarhei_apanel.refakt import rever_dict as siarhei_apanel
+from hw.vadim_maletski.func6 import level_09 as vadim_maletski
 
 from .common import qual_name
 from .datasets.task_09 import happy_data
@@ -18,6 +20,8 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         kirill_tobolich,
+        siarhei_apanel,
+        vadim_maletski,
     }
 ]
 
