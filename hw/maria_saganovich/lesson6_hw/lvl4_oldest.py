@@ -14,7 +14,8 @@ def func4_oldest(d1: dict[Any, date]) -> dict:
     for key, value in d1.items():
         assert isinstance(value, (date, datetime)), ["args should be date"]
 
-        if isinstance(value, date):
-            d1[key] = datetime(value.year, value.month, value.day, 0, 0, 0)
+        d1[key] = datetime.now().replace(
+            year=value.year, month=value.month, day=value.day
+        )
 
     return min(d1, key=lambda name: d1[name])
