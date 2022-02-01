@@ -1,6 +1,6 @@
-from datetime import date
 from typing import Any
 
+from hw.nikita_pakhomov.nlesson3.hw6 import level_3
 from hw.nikita_pakhomov.nlesson3.hw6 import palindrome
 
 
@@ -13,15 +13,9 @@ class Palindrome01:
 
 
 class User02:
-    def __init__(self, born: date) -> None:
-        self.born = born
+    def __init__(self, bd: Any) -> None:
+        self.bd = level_3(bd)
 
+    @property
     def age(self) -> Any:
-        today = date.today()
-        return (
-            today.year
-            - self.born.year  # noqa
-            - (  # noqa
-                (today.month, today.day) < (self.born.month, self.born.day)
-            )  # noqa
-        )  # noqa
+        return self.bd["data"]["age"]

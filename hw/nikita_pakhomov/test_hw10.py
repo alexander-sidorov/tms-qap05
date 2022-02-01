@@ -11,4 +11,4 @@ def test_is_palindrome01() -> None:
 
 def test_is_user02() -> None:
     ddd = date(2020, 1, 23)
-    assert User02(ddd).age() == 2
+    assert User02(ddd).age == 2

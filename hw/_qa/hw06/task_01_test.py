@@ -5,9 +5,9 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task01 import task_01 as alexander_sidorov
+from hw.nikita_pakhomov.nlesson3.hw6 import is_palindrome as nikita_pakhomov
 from hw.siarhei_apanel.refakt import palindrom as siarhei_apanel
 from hw.vadim_maletski.func6 import level_01 as vadim_maletski
-from hw.nikita_pakhomov.nlesson3.hw6 import is_palindrome as nikita_pakhomov
 
 from .common import qual_name
 from .datasets.task_01 import happy_data

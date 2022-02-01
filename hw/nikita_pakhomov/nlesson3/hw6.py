@@ -9,8 +9,8 @@ type_1 = Dict[str, Any]
 def decorate(func: Any) -> Any:
     def xxx(*args: Any) -> Any:
         result = func(*args)
-        if result == 'invalid input':
-            return {"errors": result}
+        if result == "invalid input":  # noqa
+            return {"errors": [result]}
         else:
             return {"data": result}
 
@@ -22,7 +22,7 @@ def is_palindrome(text: Any) -> Any:
     if not isinstance(text, str):
         result = "invalid input"
         return result
-    if text[:] == text[::-1]:
+    if text[:] == text[::-1]:  # noqa
         return True
     else:
         return False
@@ -50,7 +50,6 @@ def level_2(*args: Any) -> Any:
         nakopitel *= i
 
     return nakopitel
-
 
 
 @decorate
@@ -84,16 +83,11 @@ def level_3(born: Any) -> Any:
 
 
 @decorate
-def level_4_1(age: Dict[Any, date]) -> Any:
-    result: Result = {}
-    if type(age) == dict:
-        if type(age["A"]) != date or type(age["B"]) != date:
-            return "invalid input"
-
-        name = min(age, key=lambda n: age[n])
-        return name
-    else:
+def level_4_1(age: Any) -> Any:
+    if not isinstance(age, dict):
         return "invalid input"
+    name = min(age, key=lambda n: age[n])  # noqa
+    return name
 
 
 @decorate

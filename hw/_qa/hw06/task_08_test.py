@@ -5,9 +5,9 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task08 import task_08 as alexander_sidorov
+from hw.nikita_pakhomov.nlesson3.hw6 import level_8 as nikita_pakhomov
 from hw.siarhei_apanel.refakt import codding as siarhei_apanel
 from hw.vadim_maletski.func6 import level_08 as vadim_maletski
-from hw.nikita_pakhomov.nlesson3.hw6 import level_8 as nikita_pakhomov
 
 from .common import qual_name
 from .datasets.task_08 import happy_data
