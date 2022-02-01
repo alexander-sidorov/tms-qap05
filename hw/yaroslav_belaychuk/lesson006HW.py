@@ -30,8 +30,7 @@ class Palindrome01:
 
     def __bool__(self) -> Any:
         result = palindrom(self.__text)
-        if "errors" in result:
-            return result
+        assert "errors" not in result, str(result[AssertionError])
         return result["data"]
 
 
@@ -63,8 +62,7 @@ class Multiplier04:
 
     def get_result(self) -> Any:
         result = umnogenie(*self.arg)
-        if "errors" in result:
-            return result
+        assert "errors" not in result, str(result[AssertionError])
         return result["data"]
 
 
@@ -190,8 +188,7 @@ class HttpQuery03:
 
     def __getitem__(self, item: Any) -> Any:
         self.dict_empty = zadacha_6(self.string_text)
-        if "errors" in self.dict_empty:
-            return self.dict_empty
+        assert "errors" not in self.dict_empty, str(self.dict_empty["Error"])
         if (
             isinstance(self.dict_empty["data"].get(item), list)
             and len(self.dict_empty["data"].get(item)) == 1  # noqa: W503
