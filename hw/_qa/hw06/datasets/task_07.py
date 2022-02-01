@@ -25,7 +25,7 @@ unhappy_data = [
         "v-1a": "1a",
         "v-1a1": "1a1",
         "v-a": "a",
-        "v-aa1": "aa1",
+        # "v-aa1": "aa1",  # valid issue
         "type": azaza(),
     }.items()
 ]
