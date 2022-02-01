@@ -15,12 +15,14 @@ def test_is_palindrome() -> None:
     assert is_palindrome("xx") == {"data": True}
     assert is_palindrome("xy") == {"data": False}
     assert is_palindrome("xX") == {"data": False}
+    assert is_palindrome(123) == {'errors': 'invalid input'}
 
 
 def test_level_2() -> None:
     assert level_2(1) == {"data": 1}
     assert level_2(1, 2) == {"data": 2}
     assert level_2(1, 2, 3) == {"data": 6}
+    assert level_2(1, 2, 'j') == {'errors': 'invalid input'}
 
 
 def test_level_3() -> None:
@@ -57,15 +59,15 @@ def test_level_5() -> None:
 
 def test_level_7() -> None:
     assert level_7("a1b1a1") == {"data": "aba"}
-    assert level_7("a3bc") == {"errors": ["wrong input"]}
-    assert level_7("13b2c1") == {"errors": ["wrong input"]}
-    assert level_7("a3b2cv") == {"errors": ["wrong input"]}
+    assert level_7("a3bc") == {'errors': 'invalid input'}
+    assert level_7("13b2c1") == {'errors': 'invalid input'}
+    assert level_7("a3b2cv") == {'errors': 'invalid input'}
     assert level_7("b5") == {"data": "bbbbb"}
 
 
 def test_level_8() -> None:
     assert level_8("aaabb") == {"data": "a3b2"}
     assert level_8("aaabb111!!") == {"data": "a3b213!2"}
-    assert level_8(12345) == {"errors": ["wrong input"]}
+    assert level_8(12345) == {'errors': 'invalid input'}
     assert level_8("") == {"data": ""}
     assert level_8("a") == {"data": "a1"}

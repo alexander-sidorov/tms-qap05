@@ -9,8 +9,8 @@ type_1 = Dict[str, Any]
 def decorate(func: Any) -> Any:
     def xxx(*args: Any) -> Any:
         result = func(*args)
-        if isinstance(result, dict) and "errors" in result:
-            return result
+        if result == 'invalid input':
+            return {"errors": result}
         else:
             return {"data": result}
 
@@ -18,19 +18,20 @@ def decorate(func: Any) -> Any:
 
 
 @decorate
-def is_palindrome(text: str) -> Any:
+def is_palindrome(text: Any) -> Any:
     if not isinstance(text, str):
-        result = False
+        result = "invalid input"
+        return result
     if text[:] == text[::-1]:
-        result = True
+        return True
     else:
-        result = False
-    return result
+        return False
 
 
 def palindrome(text: str) -> Any:
     if not isinstance(text, str):
         result = False
+        return result
     if text[:] == text[::-1]:
         result = True
     else:
@@ -41,17 +42,22 @@ def palindrome(text: str) -> Any:
 @decorate
 def level_2(*args: Any) -> Any:
     nakopitel = 1
+
     for i in args:
+        if not isinstance(i, int):
+            result = "invalid input"
+            return result
         nakopitel *= i
 
-    result = nakopitel
-    return result
+    return nakopitel
+
 
 
 @decorate
 def level_3(born: Any) -> Any:
     result = {}
-
+    if not isinstance(born, date):
+        return "invalid input"
     today = date.today()
     try:
         birthday = born.replace(year=today.year)
@@ -82,19 +88,20 @@ def level_4_1(age: Dict[Any, date]) -> Any:
     result: Result = {}
     if type(age) == dict:
         if type(age["A"]) != date or type(age["B"]) != date:
-            result["errors"] = "this is not a date"
+            return "invalid input"
 
         name = min(age, key=lambda n: age[n])
         return name
     else:
-        result["errors"] = "dates are equal"
-        return result
+        return "invalid input"
 
 
 @decorate
-def level_5(spisok: Any) -> dict:
+def level_5(spisok: Any) -> Any:
     result: dict = {}
     clovar: dict = {}
+    if not isinstance(spisok, list):
+        return "invalid input"
     for iii in spisok:
         if iii in clovar:
             clovar[iii] = clovar[iii] + 1
@@ -108,13 +115,13 @@ def level_5(spisok: Any) -> dict:
 
 
 @decorate
-def level_7(stroka: str) -> Any:
+def level_7(stroka: Any) -> Any:
     stroch = ""
     otvet = ""
     cpisok = []
     otvett = ""
     if not isinstance(stroka, str):
-        return {"errors": ["wrong input"]}
+        return "invalid input"
     stroka = stroka + "="
     for iii in range(len(stroka)):
         if stroka[iii].isdecimal():
@@ -128,16 +135,16 @@ def level_7(stroka: str) -> Any:
             cpisok.append(stroch)
             stroch = ""
     if len(cpisok) != len(otvet):
-        return {"errors": ["wrong input"]}
+        return "invalid input"
     for yyy in range(len(otvet)):
         otvett = otvett + (otvet[yyy] * int(cpisok[yyy]))
     return otvett
 
 
 @decorate
-def level_8(string: str) -> Any:
+def level_8(string: Any) -> Any:
     if not isinstance(string, str):
-        return {"errors": ["wrong input"]}
+        return "invalid input"
     if string == "":
         return ""
     counter = 0
