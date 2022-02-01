@@ -75,7 +75,6 @@ def test_parse_http_query_6() -> None:
     assert parse_http_query_6((1, 2)) == {
         "errors": ["variable is not a string"]
     }
-    assert parse_http_query_6("") == {"errors": ["empty string"]}
 
 
 def test_decode_7() -> None:
@@ -161,7 +160,7 @@ def test_User02() -> None:
 
 def test_HttpQuery03() -> None:
     obj = HttpQuery03("x=1&y=2&y=3")
-    assert obj["x"] == "1"
+    assert obj["x"] == ["1"]
     assert obj["y"] == ["2", "3"]
     assert obj["z"] is None
 

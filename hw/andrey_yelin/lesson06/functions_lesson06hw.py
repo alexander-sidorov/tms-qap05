@@ -132,13 +132,13 @@ def older_4(old_date: Any) -> Any:
 
 
 class User02:
-    def __init__(self, year: Any) -> None:
-        self.year = year
+    def __init__(self, born: Any) -> None:
+        self.born = born
 
-    def age(self):
-        result = older_4(self.year)
-        if "errors" in result:
-            return result
+    @property
+    def age(self) -> Any:
+        result = age_result_3(self.born)
+        assert "errors" not in result, str(result["errors"])
         return result["data"]["age"]
 
 
