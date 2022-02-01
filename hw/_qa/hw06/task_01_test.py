@@ -8,6 +8,9 @@ from hw.alexander_sidorov.lesson06.task01 import task_01 as alexander_sidorov
 from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     is_palindrome_1 as andrey_yelin,
 )
+from hw.maria_saganovich.lesson6_hw.lvl1_palindrome import (
+    func1_palindrome as maria_saganovich,
+)
 from hw.siarhei_apanel.refakt import palindrom as siarhei_apanel
 from hw.vadim_maletski.func6 import level_01 as vadim_maletski
 
@@ -20,6 +23,7 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         andrey_yelin,
+        maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
     }

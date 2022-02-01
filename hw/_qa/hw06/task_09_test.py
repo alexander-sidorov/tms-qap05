@@ -8,6 +8,9 @@ from hw.alexander_sidorov.lesson06.task09 import task_09 as alexander_sidorov
 from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     reversed_dictionary_9 as andrey_yelin,
 )
+from hw.maria_saganovich.lesson6_hw.lvl9_swap_keys_values import (
+    func9_swap_keys_values as maria_saganovich,
+)
 from hw.siarhei_apanel.refakt import rever_dict as siarhei_apanel
 from hw.vadim_maletski.func6 import level_09 as vadim_maletski
 
@@ -20,6 +23,7 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         andrey_yelin,
+        maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
     }

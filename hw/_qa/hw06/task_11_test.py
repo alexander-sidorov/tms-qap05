@@ -8,6 +8,9 @@ from hw.alexander_sidorov.lesson06.task11 import task_11 as alexander_sidorov
 from hw.andrey_yelin.lesson06.functions_lesson06hw import (
     all_actions_with_two_sets_11 as andrey_yelin,
 )
+from hw.maria_saganovich.lesson6_hw.lvl11_relations_bt_2_sets import (
+    func11_relation_bt_2_sets as maria_saganovich,
+)
 from hw.siarhei_apanel.refakt import new_set as siarhei_apanel
 from hw.vadim_maletski.func6 import level_11 as vadim_maletski
 
@@ -20,6 +23,7 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         andrey_yelin,
+        maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
     }
