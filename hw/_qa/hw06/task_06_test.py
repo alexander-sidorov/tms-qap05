@@ -6,6 +6,9 @@ from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task06 import task_06 as alexander_sidorov
 from hw.maksim_ptitski.lesson6_hw import http_query_parser as maksim_ptitski
+from hw.maria_saganovich.lesson6_hw.lvl6_dict_http_query import (
+    func6_dict_http_query as maria_saganovich,
+)
 from hw.siarhei_apanel.refakt import html_str as siarhei_apanel
 from hw.vadim_maletski.func6 import level_06 as vadim_maletski
 
@@ -18,6 +21,7 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         maksim_ptitski,
+        maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
     }
