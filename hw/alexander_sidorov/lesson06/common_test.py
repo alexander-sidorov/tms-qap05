@@ -23,17 +23,6 @@ class T3(Generic[T1]):
     pass
 
 
-def test_typecheck_invalid_call() -> None:
-    @typecheck
-    def _func(_arg1: Any, _arg2: Any) -> Any:
-        pass  # pragma: no cover
-
-    with pytest.raises(AssertionError) as err:
-        _func(*[1])  # pylint: disable=no-value-for-parameter
-
-    assert str(err.value) == "invalid usage of >>> _arg2 <<<"
-
-
 def test_typecheck_unknown() -> None:
     @typecheck
     def _func(_arg1: T2) -> Any:
