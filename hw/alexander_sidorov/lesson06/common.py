@@ -1,4 +1,7 @@
+import inspect
 from functools import wraps
+from numbers import Number
+from types import FunctionType
 from typing import Any
 from typing import Callable
 from typing import Collection
@@ -10,6 +13,7 @@ from typing import Sequence
 from typing import TypeVar
 from typing import Union
 from typing import _SpecialForm
+from typing import cast
 from typing import get_args
 from typing import get_origin
 
@@ -35,7 +39,7 @@ class Approves(CheckState):
 AnySet = Union[set, frozenset]
 ErrorsList = list[str]
 Errors = dict[Literal["errors"], ErrorsList]
-Multiplicative = Union[Sequence, int, float, complex]
+Multiplicative = Union[Sequence, Number]
 Params = ParamSpec("Params")
 Result = dict[Literal["data", "errors"], Any]
 T1 = TypeVar("T1")
@@ -74,33 +78,49 @@ def validate(
     assert ("errors" in result) or ("data" in result)
 
     if expected_data is not Undefined:
-        assert "errors" not in result
-        assert "data" in result
+        err = "happy path requires 'data' to be in result"
+        assert "errors" not in result, err
+
+        err = "happy path requires 'errors' not to be in result"
+        assert "data" in result, err
 
         got = result["data"]
         assert got == expected_data
 
     if expected_errors is not Undefined:
         assert isinstance(expected_errors, Iterable)
-        assert "errors" in result
-        assert "data" not in result
+
+        err = "unhappy path requires 'errors' to be in result"
+        assert "errors" in result, err
+
+        err = "unhappy path requires 'data' not to be in result"
+        assert "data" not in result, err
 
         errors: ErrorsList = result["errors"]
-        assert isinstance(errors, list)
-        assert errors
-        for _i, error in enumerate(errors):
-            assert isinstance(error, str)
+
+        err = f"{errors=!r}: not a list"
+        assert isinstance(errors, list), err
+        assert errors, "unhappy path requires non-empty errors"
+
+        for i, error in enumerate(errors):
+            err = f"errors[{i}]={error!r} is not a str"
+            assert isinstance(error, str), err
+
+            err = f"errors[{i}]={error!r}: must be descriptive"
+            assert error, err
+
         missing_errors = set(expected_errors) - set(errors)
 
-        _e = (
+        err = (
             f"(unhappy path)\n"
             f" expected errors: {sorted(expected_errors)}\n"
             f" errors:          {sorted(errors)}\n"
             f" missing errors:  {sorted(missing_errors)}\n"
         )
-        assert not missing_errors, _e
+        assert not missing_errors, err
 
-        assert errors == sorted(errors)
+        err = "errors are not sorted"
+        assert errors == sorted(errors), err
 
 
 def hashable(arg: Any) -> bool:
@@ -124,38 +144,50 @@ def api(func: Callable[Params, Any]) -> Callable[Params, Result]:
 
 
 def typecheck(func: Callable[Params, T1]) -> Callable[Params, T1]:
+    """
+    Checks arguments types using function annotations.
+    """
+
     @wraps(func)
     def typechecked(*args: Params.args, **kwargs: Params.kwargs) -> T1:
-        assert not kwargs
+        err = f"{func.__name__}() is intended to accept positional-only args"
+        assert not kwargs, err
 
-        params_types = (
-            (_param, _type)
-            for (_param, _type) in func.__annotations__.items()
-            if _param not in {"return"}
-        )
-        params_args_types = (
-            next(params_types) for _ in "_" * func.__code__.co_argcount
-        )
+        arguments = iter(cast(tuple[Any], args))
 
-        arguments = iter(args)  # type: ignore
+        signature = inspect.signature(func)
+        parameters = iter(signature.parameters.values())
+        variative = None
 
-        for param, expected in params_args_types:
-            try:
-                arg = next(arguments)
-            except StopIteration:
-                err = f"invalid usage of >>> {param} <<<"
-                raise AssertionError(err)  # pylint: disable=raise-missing-from
+        for param in parameters:
+            if not is_positional(param):
+                variative = param
+                break
 
-            typecheck_arg(param, arg, expected)
+            arg = next(arguments)
+            typecheck_arg(param.name, arg, param.annotation)
 
-        if params_stars_types := list(params_types):
-            param, expected = params_stars_types[0]
+        if variative:
             for i, arg in enumerate(arguments):
-                typecheck_arg(f"*{param}[{i}]", arg, expected)
+                typecheck_arg(
+                    f"*{variative.name}[{i}]",
+                    arg,
+                    variative.annotation,
+                )
 
         return func(*args, **kwargs)
 
     return typechecked
+
+
+POSITIONAL_KINDS = {
+    inspect.Parameter.POSITIONAL_ONLY,
+    inspect.Parameter.POSITIONAL_OR_KEYWORD,
+}
+
+
+def is_positional(parameter: inspect.Parameter) -> bool:
+    return parameter.kind in POSITIONAL_KINDS
 
 
 def typecheck_arg(
@@ -193,12 +225,8 @@ def typecheck_arg_strict_type(
     if origin is not None:
         return False
 
-    if isinstance(expected, (_SpecialForm, TypeVar)):
-        return False
-
-    function = type(typecheck_arg_strict_type)
     if (
-        type(expected) is function  # pylint: disable=unidiomatic-typecheck
+        isinstance_(expected, (FunctionType, _SpecialForm, TypeVar))
         or issubclass_(expected, NewType)  # noqa: W503
         or isinstance_(expected, NewType)  # noqa: W503
     ):
