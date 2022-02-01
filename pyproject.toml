@@ -70,6 +70,7 @@ disable = [
     "missing-class-docstring",
     "missing-function-docstring",
     "missing-module-docstring",
+    "no-name-in-module",
     "R0801", # similar code
     "too-many-locals",
 ]

@@ -42,11 +42,12 @@ isort = "==5.10.1"
 mypy = "==0.931"
 numpy = "==1.22.1"
 pep8-naming = "==0.12.1"
+pydantic = {extras = ["dotenv"], version = "==1.9.0"}
 pylint = "==2.12.2"
 pytest = "==6.2.5"
 pytest-asyncio = "==0.17.2"
 pytest-cov = "==3.0.0"
 pytest-mock = "==3.6.1"
-pytest-xdist = {extras = ["psutil"], version = "*"}
+pytest-xdist = {extras = ["psutil"], version = "==2.5.0"}
 python-dotenv = "==0.19.2"
 typing-extensions = "==4.0.1"

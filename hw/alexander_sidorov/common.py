@@ -17,23 +17,20 @@ from typing import cast
 from typing import get_args
 from typing import get_origin
 
+from pydantic import BaseModel
+from pydantic import Field
 from typing_extensions import ParamSpec
 
 
-class UndefinedType:
-    pass
+class Singleton(type):
+    _instances: dict[Any, Any] = {}
 
-
-class CheckState(RuntimeError):
-    pass
-
-
-class WontCheck(CheckState):
-    pass
-
-
-class Approves(CheckState):
-    pass
+    def __call__(cls, *args: Any, **kwargs: Any) -> Any:
+        instance = cls._instances.get(cls)
+        if instance is None:  # pragma: no cover
+            instance = super(Singleton, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = instance
+        return instance
 
 
 AnySet = Union[set, frozenset]
@@ -44,7 +41,30 @@ Params = ParamSpec("Params")
 Result = dict[Literal["data", "errors"], Any]
 T1 = TypeVar("T1")
 
-Undefined = UndefinedType()
+
+class Undefined(metaclass=Singleton):
+    def __str__(self) -> str:
+        return "undefined"
+    __repr__ = __str__
+
+
+undefined = Undefined()
+
+
+class ApiResult(BaseModel):
+    data: Any = Field(default=undefined)
+    errors: Union[ErrorsList, Undefined] = Field(default=undefined)
+
+    def dict(self, **kwargs: Any) -> dict[str, Any]:  # noqa: A003
+        kwargs["exclude_unset"] = True
+        return super().dict(**kwargs)
+
+    def json(self, **kwargs: Any) -> str:
+        kwargs["exclude_unset"] = True
+        return super().json(**kwargs)
+
+    class Config:
+        arbitrary_types_allowed = True
 
 
 def even(arg: int) -> bool:
@@ -58,8 +78,8 @@ def even(arg: int) -> bool:
 def validate(
     func: Callable,
     *args: Any,
-    expected_data: Any = Undefined,
-    expected_errors: Union[Iterable[str], UndefinedType] = Undefined,
+    expected_data: Any = undefined,
+    expected_errors: Union[Iterable[str], Undefined] = undefined,
 ) -> None:
     """
     Does a full validation of function call.
@@ -68,16 +88,21 @@ def validate(
     Either "data" or "errors" keys must be present in this dict.
     """
 
-    assert (expected_data is Undefined) ^ (expected_errors is Undefined)
+    err = "only one expectation is allowed"
+    assert (expected_data is undefined) ^ (expected_errors is undefined), err
 
     result = func(*args)
 
-    assert isinstance(result, dict)
-    assert len(result) == 1
+    err = f"{result=!r}, must be a dict"
+    assert isinstance(result, dict), err
 
-    assert ("errors" in result) or ("data" in result)
+    err = f"{result=!r} must have only one key"
+    assert len(result) == 1, err
 
-    if expected_data is not Undefined:
+    err = f"{result=!r} must contain either 'data' or 'errors' key"
+    assert ("errors" in result) or ("data" in result), err
+
+    if expected_data is not undefined:
         err = "happy path requires 'data' to be in result"
         assert "errors" not in result, err
 
@@ -87,7 +112,7 @@ def validate(
         got = result["data"]
         assert got == expected_data
 
-    if expected_errors is not Undefined:
+    if expected_errors is not undefined:
         assert isinstance(expected_errors, Iterable)
 
         err = "unhappy path requires 'errors' to be in result"
@@ -100,7 +125,9 @@ def validate(
 
         err = f"{errors=!r}: not a list"
         assert isinstance(errors, list), err
-        assert errors, "unhappy path requires non-empty errors"
+
+        err = "unhappy path requires non-empty errors"
+        assert errors, err
 
         for i, error in enumerate(errors):
             err = f"errors[{i}]={error!r} is not a str"
@@ -112,10 +139,10 @@ def validate(
         missing_errors = set(expected_errors) - set(errors)
 
         err = (
-            f"(unhappy path)\n"
-            f" expected errors: {sorted(expected_errors)}\n"
-            f" errors:          {sorted(errors)}\n"
-            f" missing errors:  {sorted(missing_errors)}\n"
+            f"unhappy path:\n"
+            f"\terrors:          {sorted(errors)}\n"
+            f"\texpected errors: {sorted(expected_errors)}\n"
+            f"\tmissing errors:  {sorted(missing_errors)}\n"
         )
         assert not missing_errors, err
 
@@ -136,9 +163,12 @@ def api(func: Callable[Params, Any]) -> Callable[Params, Result]:
     def decorated(*args: Params.args, **kwargs: Params.kwargs) -> Result:
         try:
             result = func(*args, **kwargs)
-            return {"data": result}
+            res = ApiResult(data=result)
         except AssertionError as err:
-            return {"errors": [str(err)]}
+            res = ApiResult(errors=[str(err)])
+
+        dct = cast(Result, res.dict())
+        return dct
 
     return decorated
 

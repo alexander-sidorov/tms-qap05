@@ -1,6 +1,7 @@
 from typing import Any
 
-from .common import validate
+from hw.alexander_sidorov.common import validate
+
 from .task12 import task_12
 
 

@@ -1,9 +1,9 @@
 from typing import Union
 from urllib.parse import parse_qs
 
-from .common import Errors
-from .common import api
-from .common import typecheck
+from hw.alexander_sidorov.common import Errors
+from hw.alexander_sidorov.common import api
+from hw.alexander_sidorov.common import typecheck
 
 Data = dict[str, list[str]]
 

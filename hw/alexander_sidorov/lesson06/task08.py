@@ -3,9 +3,9 @@ from itertools import groupby
 from typing import Any
 from typing import Union
 
-from .common import Errors
-from .common import api
-from .common import typecheck
+from hw.alexander_sidorov.common import Errors
+from hw.alexander_sidorov.common import api
+from hw.alexander_sidorov.common import typecheck
 
 RE_INTEGERS = re.compile(r".*\d")
 
