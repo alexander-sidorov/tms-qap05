@@ -7,12 +7,14 @@ import pytest
 from hw._qa.hw10.common import get_class
 from hw.alexander_sidorov.lesson10 import homework as alexander_sidorov
 from hw.kirill_tobolich import lesson10_hw as kirill_tobolich
+from hw.maria_saganovich import final as maria_saganovich
 from hw.siarhei_apanel import class10hw as siarhei_apanel
 from hw.vadim_maletski import func6 as vadim_maletski
 
 modules = {
     alexander_sidorov,
     kirill_tobolich,
+    maria_saganovich,
     siarhei_apanel,
     vadim_maletski,
 }

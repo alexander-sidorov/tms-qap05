@@ -6,6 +6,9 @@ from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task08 import task_08 as alexander_sidorov
 from hw.kirill_tobolich.lesson6_hw import count_chars as kirill_tobolich
+from hw.maria_saganovich.lesson6_hw.lvl8_duplicate_char_number import (
+    func8_duplicate_char_number as maria_saganovich,
+)
 from hw.siarhei_apanel.refakt import codding as siarhei_apanel
 from hw.vadim_maletski.func6 import level_08 as vadim_maletski
 
@@ -18,6 +21,7 @@ solutions = [
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
         kirill_tobolich,
+        maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
     }
