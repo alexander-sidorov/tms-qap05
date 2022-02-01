@@ -20,8 +20,7 @@ def test_task_02() -> None:
         None,
         2,
         expected_errors={
-            "*args[0]=None, NoneType"
-            " != expected: Union[Sequence, complex, float, int]",
+            "*args[0]=None, NoneType != expected: Union[Number, Sequence]",
         },
     )
     validate(
@@ -29,8 +28,7 @@ def test_task_02() -> None:
         {},
         2,
         expected_errors={
-            "*args[0]={}, dict"
-            " != expected: Union[Sequence, complex, float, int]",
+            "*args[0]={}, dict != expected: Union[Number, Sequence]",
         },
     )
     validate(
