@@ -21,8 +21,6 @@ def func12_even_keys_odd_values(*args: Any) -> dict:
         if isinstance(value, (list, dict, set, frozenset)):
             raise Exception(["Unhashable type: 'list'"])
 
-        result_data[value] = None
-        if index < len(even_args):
-            result_data[value] = even_args[index]
+        result_data[value] = even_args[index]
 
     return result_data
