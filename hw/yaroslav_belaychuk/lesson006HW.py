@@ -40,9 +40,8 @@ def umnogenie(*args: Any) -> Any:
         assert isinstance(
             args[0], (Sequence, complex, int, float)
         ), "No Sequence"
-        if args[0] == ("",):
-            return ""
-        return args[0]
+        if args[0]:
+            return args[0]
     for x_1 in args:
         assert isinstance(x_1, (Sequence, complex, int, float)), "TrueError"
 
