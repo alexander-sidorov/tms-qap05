@@ -47,6 +47,9 @@ def test_function() -> None:
     assert umnogenie(2, "a") == {"data": "aa"}
     assert umnogenie(2, [2]) == {"data": [2, 2]}
     assert umnogenie(2, [2], 2) == {"data": [2, 2, 2, 2]}
+    assert umnogenie("",) == {
+        "data": ""
+    }  # noqa W503
     assert "errors" in umnogenie(2, [2], 2, [2])
     assert date_age(d1) == {
         "data": {"year": 1987, "month": 8, "day": 2, "age": 34}
@@ -74,6 +77,7 @@ def test_function() -> None:
     assert zadacha_7("a2b2a1") == {"data": "aabba"}
     assert "errors" in zadacha_7("a")
     assert zadacha_7("") == {"data": ""}
+    assert "errors" in zadacha_7("ab2c2")
     assert (c5.get_dups()) == {"1": 4, ",": 6, " ": 6, "2": 2}
     assert (c3.get_dups()) == {1: 4, 2: 2}
     assert (c4.get_dups()) == {}
@@ -84,6 +88,8 @@ def test_function() -> None:
     assert Palindrome01("xyx")
     assert not Palindrome01("xy x")
     assert zadacha_6("x=1&x=2&y=3") == {"data": {"x": ["1", "2"], "y": ["3"]}}
+    assert zadacha_6("y") == {"data": {}}
+    assert zadacha_6("yx") == {"data": {"yx": [""]}}
     assert obj2["x"] == "1"
     assert obj2["y"] == ["2", "3"]
     assert obj2["z"] is None
