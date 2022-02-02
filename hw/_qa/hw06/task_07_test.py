@@ -10,6 +10,7 @@ from hw.maria_saganovich.lesson6_hw.lvl7_str_duplicate_char import (
 )
 from hw.siarhei_apanel.refakt import decodding as siarhei_apanel
 from hw.vadim_maletski.func6 import level_07 as vadim_maletski
+from hw.yaroslav_belaychuk.lesson006HW import zadacha_7 as yaroslav_belaychuk
 
 from .common import qual_name
 from .datasets.task_07 import happy_data
@@ -22,6 +23,7 @@ solutions = [
         maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
+        yaroslav_belaychuk,
     }
 ]
 
