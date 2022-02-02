@@ -10,6 +10,7 @@ from hw.maria_saganovich.lesson6_hw.lvl3_age import (
 )
 from hw.siarhei_apanel.refakt import dateday as siarhei_apanel
 from hw.vadim_maletski.func6 import level_03 as vadim_maletski
+from hw.yaroslav_belaychuk.lesson006HW import date_age as yaroslav_belaychuk
 
 from .common import azaza
 from .common import qual_name
@@ -23,6 +24,7 @@ solutions = [
         maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
+        yaroslav_belaychuk,
     }
 ]
 
