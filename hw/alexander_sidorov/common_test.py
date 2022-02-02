@@ -15,6 +15,7 @@ from .common import typecheck
 from .common import typecheck_arg_callable
 from .common import typecheck_arg_special_form
 from .common import typecheck_arg_strict_type
+from .common import undefined
 
 T1 = TypeVar("T1")
 T2 = NewType("T2", int)
@@ -86,3 +87,7 @@ def test_api_result() -> None:
     obj = ApiResult(data=1, errors=["x"])
     assert obj.dict() == {"data": 1, "errors": ["x"]}
     assert obj.json(sort_keys=True) == '{"data": 1, "errors": ["x"]}'
+
+
+def test_undefined() -> None:
+    assert str(undefined) == "undefined"

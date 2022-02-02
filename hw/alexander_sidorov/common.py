@@ -42,9 +42,10 @@ Result = dict[Literal["data", "errors"], Any]
 T1 = TypeVar("T1")
 
 
-class Undefined(metaclass=Singleton):
+class Undefined(metaclass=Singleton):  # noqa: SIM119
     def __str__(self) -> str:
         return "undefined"
+
     __repr__ = __str__
 
 
