@@ -9,11 +9,13 @@ from typing import Union
 
 import pytest
 
+from .common import ApiResult
 from .common import name
 from .common import typecheck
 from .common import typecheck_arg_callable
 from .common import typecheck_arg_special_form
 from .common import typecheck_arg_strict_type
+from .common import undefined
 
 T1 = TypeVar("T1")
 T2 = NewType("T2", int)
@@ -67,3 +69,25 @@ def test_name() -> None:
     assert name([]) == "[]"
     assert name(T1) == "T1"
     assert name(T2) == "T2"
+
+
+def test_api_result() -> None:
+    obj = ApiResult()
+    assert obj.dict() == {}
+    assert obj.json() == "{}"
+
+    obj = ApiResult(data=1)
+    assert obj.dict() == {"data": 1}
+    assert obj.json() == '{"data": 1}'
+
+    obj = ApiResult(errors=["x"])
+    assert obj.dict() == {"errors": ["x"]}
+    assert obj.json() == '{"errors": ["x"]}'
+
+    obj = ApiResult(data=1, errors=["x"])
+    assert obj.dict() == {"data": 1, "errors": ["x"]}
+    assert obj.json(sort_keys=True) == '{"data": 1, "errors": ["x"]}'
+
+
+def test_undefined() -> None:
+    assert str(undefined) == "undefined"

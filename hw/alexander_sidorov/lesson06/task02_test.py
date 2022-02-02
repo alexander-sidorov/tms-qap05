@@ -1,4 +1,5 @@
-from .common import validate
+from hw.alexander_sidorov.common import validate
+
 from .task02 import task_02
 
 

@@ -1,5 +1,6 @@
-from .common import AnySet
-from .common import validate
+from hw.alexander_sidorov.common import AnySet
+from hw.alexander_sidorov.common import validate
+
 from .task11 import task_11
 
 
