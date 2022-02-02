@@ -5,6 +5,9 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task05 import task_05 as alexander_sidorov
+from hw.kirill_tobolich.lesson6_hw import (
+    get_the_same_elements_in_collection as kirill_tobolich,
+)
 from hw.maria_saganovich.lesson6_hw.lvl5_duplicate_elements import (
     func5_duplicate_elements as maria_saganovich,
 )
@@ -20,6 +23,7 @@ solutions = [
     pytest.param(solution, id=qual_name(solution))
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
+        kirill_tobolich,
         maria_saganovich,
         siarhei_apanel,
         vadim_maletski,

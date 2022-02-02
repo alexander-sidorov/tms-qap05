@@ -5,6 +5,7 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task12 import task_12 as alexander_sidorov
+from hw.kirill_tobolich.lesson6_hw import make_dictionary as kirill_tobolich
 from hw.maria_saganovich.lesson6_hw.lvl12_even_keys_odd_values import (
     func12_even_keys_odd_values as maria_saganovich,
 )
@@ -19,6 +20,7 @@ solutions = [
     pytest.param(solution, id=qual_name(solution))
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
+        kirill_tobolich,
         maria_saganovich,
         siarhei_apanel,
         vadim_maletski,

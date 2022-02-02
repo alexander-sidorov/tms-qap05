@@ -12,7 +12,7 @@ def func2() -> float:
 
 def func3() -> int:
     num5 = 10
-    result2 = num5 ** 10
+    result2 = num5**10
     return result2
 
 

@@ -5,6 +5,7 @@ import pytest
 from hw._qa.hw06.common import validate_data
 from hw._qa.hw06.common import validate_errors
 from hw.alexander_sidorov.lesson06.task06 import task_06 as alexander_sidorov
+from hw.kirill_tobolich.lesson6_hw import http_query_parser as kirill_tobolich
 from hw.maria_saganovich.lesson6_hw.lvl6_dict_http_query import (
     func6_dict_http_query as maria_saganovich,
 )
@@ -19,6 +20,7 @@ solutions = [
     pytest.param(solution, id=qual_name(solution))
     for solution in {  # pylint: disable=use-sequence-for-iteration
         alexander_sidorov,
+        kirill_tobolich,
         maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
