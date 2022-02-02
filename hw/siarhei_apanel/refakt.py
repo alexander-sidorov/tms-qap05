@@ -8,8 +8,8 @@ from hw.siarhei_apanel.decorator07 import decor_data
 
 
 def func(a1: float, back: float, cill: float) -> list:
-    disk = back ** 2 - 4 * a1 * cill
-    sqrt = disk ** 0.5
+    disk = back**2 - 4 * a1 * cill
+    sqrt = disk**0.5
     x1 = (-back + sqrt) / 2 * a1
     x2 = (-back - sqrt) / 2 * a1
     return [x1, x2]
