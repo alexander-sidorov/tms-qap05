@@ -10,6 +10,7 @@ from hw.maria_saganovich.lesson6_hw.lvl2_product import (
 )
 from hw.siarhei_apanel.refakt import proizvedenie as siarhei_apanel
 from hw.vadim_maletski.func6 import level_02 as vadim_maletski
+from hw.yaroslav_belaychuk.lesson006HW import umnogenie as yaroslav_belaychuk
 
 from .common import qual_name
 from .datasets.task_02 import happy_data
@@ -22,6 +23,7 @@ solutions = [
         maria_saganovich,
         siarhei_apanel,
         vadim_maletski,
+        yaroslav_belaychuk,
     }
 ]
 
