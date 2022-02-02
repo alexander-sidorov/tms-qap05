@@ -1,8 +1,11 @@
+from typing import Any
+
 import httpx
 import pytest
 from fastapi import status
 
 from hw.alexander_sidorov.common import ApiResult
+from hw.alexander_sidorov.lesson11.util import get_localhost
 
 
 @pytest.mark.asyncio
@@ -39,3 +42,15 @@ async def test_service_api_10_04(asgi_client: httpx.AsyncClient) -> None:
     assert resp.status_code == status.HTTP_400_BAD_REQUEST
     result = ApiResult.parse_obj(resp.json())
     assert result.errors == ["no value given"]
+
+
+def test_requests_mock(mocker: Any) -> None:
+    mock_resp = mocker.Mock()
+    mock_resp.text = "xxx"
+    mock_httpx_get = mocker.patch(
+        "hw.alexander_sidorov.lesson11.util.httpx.get"
+    )
+    mock_httpx_get.return_value = mock_resp
+
+    assert get_localhost() == "xxx"
+    mock_httpx_get.assert_called_once()
